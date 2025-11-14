@@ -7,7 +7,6 @@ import { connectDB } from "@/lib/mongodb";
 export async function GET(req: NextRequest) {
   try {
     await connectDB();
-
     const bookings = await Booking.find({}).sort({ createdAt: -1 });
 
     // Fetch related room and user info manually
