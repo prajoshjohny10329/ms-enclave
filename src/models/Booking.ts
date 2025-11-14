@@ -8,6 +8,17 @@ const BookingSchema = new Schema(
     toDate: { type: Date, required: true },
     guests: { type: Number, required: true },
     totalPrice: { type: Number, required: true },
+    status: { type: String, enum: ["pending", "paid", "cancelled"], default: "pending" },
+    
+    paymentMethod: { type: String },
+    // Razorpay fields
+    razorpayPaymentId: { type: String },
+    razorpayOrderId: { type: String },
+    razorpaySignature: { type: String },
+
+    // Stripe fields
+    stripePaymentId: { type: String },
+    stripeSessionId: { type: String },
   },
   { timestamps: true }
 );

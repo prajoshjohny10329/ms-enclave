@@ -2,12 +2,11 @@ import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Booking from "@/models/Booking";
 
-export async function GET(request: Request, { params }: { params: Promise<{ userId: string }> }) {
-  const { userId } = await params;
+export async function GET(request: Request, context: { params: Promise<{ userId: string }> }) {
+  const { userId } = await context.params;
 
   try {
     await connectDB();
-
     const bookings = await Booking.find({ userId })
       .populate({
         path: "roomId",
