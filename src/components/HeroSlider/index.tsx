@@ -23,14 +23,13 @@ export default function HeroSlider() {
         pagination={{
           clickable: true,
         }}
-        navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
         <SwiperSlide>
           <section
             style={{
-              backgroundImage: "url('/images/home/ms-slider.jpeg')",
+              backgroundImage: "url('/images/home/ms-slider-2.webp')",
               backgroundSize: "cover",
               backgroundPosition: "center",
               height: "100vh", // optional, controls height
@@ -214,7 +213,7 @@ export default function HeroSlider() {
             </div>
           </section>
         </SwiperSlide>
-        <SwiperSlide>
+        {/* <SwiperSlide>
             <section className="bg-white h-screen flex items-center">
     <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div className="mr-auto place-self-center lg:col-span-7">
@@ -233,7 +232,7 @@ export default function HeroSlider() {
         </div>                
     </div>
 </section>
-        </SwiperSlide>
+        </SwiperSlide> */}
       </Swiper>
     </>
   );

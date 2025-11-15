@@ -6,7 +6,7 @@ import { Menu, X, User } from "lucide-react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 
-export default function Header() {
+export default function AdminHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const { data: session } = useSession();
@@ -19,7 +19,7 @@ export default function Header() {
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="text-2xl font-bold text-blue-700">
-          M.S. Enclave Resort
+          M.S. Enclave Resort Admin
         </Link>
 
         {/* Desktop Menu */}

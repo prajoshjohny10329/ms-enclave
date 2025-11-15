@@ -1,13 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, DM_Sans } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/common/Header";
 import Providers from "@/providers";
 import Script from "next/script";
+
+
+// Import custom font
+import { audreyFont } from "./fonts";
+import { Header } from "../components/common/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+});
+
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-dm-sans",
 });
 
 const geistMono = Geist_Mono({
@@ -27,14 +38,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${audreyFont.variable} ${dmSans.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
           <Header />
           {children}
         </Providers>
 
         {/* Razorpay script */}
-        <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="beforeInteractive" />
+        <Script
+          src="https://checkout.razorpay.com/v1/checkout.js"
+          strategy="beforeInteractive"
+        />
       </body>
     </html>
   );

@@ -1,17 +1,20 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Booking from "@/models/Booking";
+import Room from "@/models/Room";   // ✅ ADD THIS IMPORT
+import User from "@/models/User";   // (Optional but recommended)
 
 export async function GET(request: Request, context: { params: Promise<{ userId: string }> }) {
   const { userId } = await context.params;
 
   try {
     await connectDB();
+
     const bookings = await Booking.find({ userId })
       .populate({
         path: "roomId",
-        model: "Room",
-        select: "name images price", // IMPORTANT
+        model: Room,   // ✅ use model reference, not string
+        select: "name images price",
       });
 
     return NextResponse.json(bookings, { status: 200 });

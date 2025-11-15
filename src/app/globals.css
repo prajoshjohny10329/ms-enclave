@@ -3,13 +3,19 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* custom font variable from layout */
+  --font-audrey: var(--font-audrey);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* Keep your existing Tailwind fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-dm: var(--font-dm-sans);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +25,15 @@
   }
 }
 
+/* GLOBAL BODY STYLING */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+  /* APPLY YOUR CUSTOM FONT */
+  font-family: var(--font-audrey), Arial, Helvetica;
+
+  /* Smooth text */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
