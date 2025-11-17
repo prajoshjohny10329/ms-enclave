@@ -15,7 +15,7 @@ export default function TopHeader() {
           <div className="w-10 h-10 rounded-full border flex items-center justify-center ">
             <FontAwesomeIcon icon={faPhone} className="text-lg text-black" />
           </div>
-          <div className="text-sm font-dm">
+          <div className="text-[13px] font-dm font-semibold">
             <p className="text-black">
               <Link
                 href="tel:+918589996642"
@@ -48,7 +48,7 @@ export default function TopHeader() {
 
         {/* RIGHT SECTION */}
         <div className="hidden md:flex items-center gap-3 text-right">
-          <div className="text-right text-sm font-dm">
+          <div className="text-right text-[13px] font-dm font-semibold">
             <Link
               href="https://www.google.com/maps/search/?api=1&query=Mannuparambil,+Paruthipully,+Palakkad,+Kerala"
               target="_blank"

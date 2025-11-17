@@ -12,7 +12,7 @@ export default function RestaurantVideoSection() {
       {/* Background Section */}
       <section
         className="relative h-[60vh] w-full bg-cover bg-center flex items-center justify-center"
-        style={{ backgroundImage: "url('/images/home/ms-slider.jpeg')" }} // <-- change image
+        style={{ backgroundImage: "url('/images/home/ms-slider-1.webp')" }} // <-- change image
       >
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/50"></div>
