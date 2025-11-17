@@ -5,11 +5,13 @@ import { useState } from "react";
 import { Menu, X, User } from "lucide-react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
+import { menuData } from "./menu";
 
 export default function SecondHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [roomsOpen, setRoomsOpen] = useState(false);
+  const [roomsOpen, setRoomsOpen] = useState<number | null>(null);
+
   const { data: session } = useSession();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -17,85 +19,56 @@ export default function SecondHeader() {
 
   return (
     <header className="sticky top-0 w-full bg-white shadow-md z-50">
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-
+      <div className="container mx-auto py-4 flex justify-between items-center px-10">
         {/* Logo */}
         <Link href="/" className="text-2xl font-bold text-black">
-          M.S. 
+          a
         </Link>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-8 text-black font-medium relative">
+  {menuData.map((item) => (
+    <div key={item.id} className="group relative">
 
-          <Link href="/" className="hover:text-blue-600">
-            Home
-          </Link>
+      {/* Main Link */}
+      <Link
+        href={item.path}
+        target={item.newTab ? "_blank" : "_self"}
+        className="hover:text-blue-600"
+      >
+        {item.title} {item.submenu ? " ▾" : ""}
+      </Link>
 
-          {/* ROOMS DROPDOWN — FIXED */}
-          <div className="group relative cursor-pointer">
-            <span className="hover:text-blue-600">Rooms ▾</span>
+      {item.submenu && (
+        <>
+          {/* FIX: Invisible hover buffer to fill mt-5 gap */}
+          <div className="absolute left-0 top-full w-full h-5"></div>
 
-            {/* FIXED DROPDOWN */}
-            <div
-              className="
-                absolute left-0 top-full
-                w-40 bg-white shadow-lg  rounded-lg
-                hidden group-hover:flex flex-col
-              "
-            >
+          {/* Dropdown */}
+          <div
+            className="
+              absolute left-0 top-full mt-5
+              w-48 bg-white shadow-lg rounded-lg
+              hidden group-hover:flex flex-col
+            "
+          >
+            {item.submenu.map((sub) => (
               <Link
-                href="/admin/add-room"
+                key={sub.id}
+                href={sub.path}
+                target={sub.newTab ? "_blank" : "_self"}
                 className="px-4 py-2 hover:bg-gray-100"
               >
-                Add Room
+                {sub.title}
               </Link>
-              <Link
-                href="/rooms"
-                className="px-4 py-2 hover:bg-gray-100"
-              >
-                View Rooms
-              </Link>
-            </div>
+            ))}
           </div>
-          {/* ROOMS DROPDOWN — FIXED */}
-          <div className="group relative cursor-pointer">
-            <span className="hover:text-blue-600">Rooms ▾</span>
+        </>
+      )}
+    </div>
+  ))}
+</nav>
 
-            {/* FIXED DROPDOWN */}
-            <div
-              className="
-                absolute left-0 top-full
-                w-40 bg-white shadow-lg  rounded-lg
-                hidden group-hover:flex flex-col
-              "
-            >
-              <Link
-                href="/admin/add-room"
-                className="px-4 py-2 hover:bg-gray-100"
-              >
-                Add Room
-              </Link>
-              <Link
-                href="/rooms"
-                className="px-4 py-2 hover:bg-gray-100"
-              >
-                View Rooms
-              </Link>
-            </div>
-          </div>
-
-          <Link href="/bookings" className="hover:text-blue-600">
-            Booking
-          </Link>
-
-          <Link href="/gallery" className="hover:text-blue-600">
-            Gallery
-          </Link>
-
-          <Link href="/contact" className="hover:text-blue-600">
-            Contact
-          </Link>
-        </nav>
 
         {/* User Section */}
         <div className="flex items-center gap-4">
@@ -165,62 +138,46 @@ export default function SecondHeader() {
       {menuOpen && (
         <nav className="md:hidden bg-white border-t border-gray-200">
           <div className="flex flex-col items-center py-3 space-y-2">
+            {menuData.map((item) => (
+              <div key={item.id} className="w-full text-center">
+                {/* Toggle if submenu exists */}
+                {item.submenu ? (
+                  <>
+                    <button
+                      onClick={() =>
+                        setRoomsOpen(roomsOpen === item.id ? null : item.id)
+                      }
+                      className="text-black hover:text-blue-600 w-full"
+                    >
+                      {item.title} ▾
+                    </button>
 
-            <Link href="/" onClick={toggleMenu} className="hover:text-blue-600">
-              Home
-            </Link>
-
-            {/* Rooms Expandable */}
-            <button
-              onClick={() => setRoomsOpen(!roomsOpen)}
-              className="hover:text-blue-600"
-            >
-              Rooms ▾
-            </button>
-
-            {roomsOpen && (
-              <div className="flex flex-col items-center space-y-2">
-                <Link
-                  href="/admin/add-room"
-                  onClick={toggleMenu}
-                  className="hover:text-blue-600 text-sm"
-                >
-                  Add Room
-                </Link>
-
-                <Link
-                  href="/rooms"
-                  onClick={toggleMenu}
-                  className="hover:text-blue-600 text-sm"
-                >
-                  View Rooms
-                </Link>
+                    {roomsOpen === item.id && (
+                      <div className="flex flex-col items-center space-y-2">
+                        {item.submenu.map((sub) => (
+                          <Link
+                            key={sub.id}
+                            href={sub.path}
+                            onClick={toggleMenu}
+                            className="text-black hover:text-blue-600  text-sm"
+                          >
+                            {sub.title}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link
+                    href={item.path}
+                    onClick={toggleMenu}
+                    className="text-black hover:text-blue-600"
+                  >
+                    {item.title}
+                  </Link>
+                )}
               </div>
-            )}
-
-            <Link
-              href="/bookings"
-              onClick={toggleMenu}
-              className="hover:text-blue-600"
-            >
-              Booking
-            </Link>
-
-            <Link
-              href="/gallery"
-              onClick={toggleMenu}
-              className="hover:text-blue-600"
-            >
-              Gallery
-            </Link>
-
-            <Link
-              href="/contact"
-              onClick={toggleMenu}
-              className="hover:text-blue-600"
-            >
-              Contact
-            </Link>
+            ))}
           </div>
         </nav>
       )}
