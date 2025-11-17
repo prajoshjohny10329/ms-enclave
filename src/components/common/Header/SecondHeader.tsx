@@ -110,6 +110,13 @@ export default function SecondHeader() {
                   >
                     Profile
                   </Link>
+                  <Link
+                    href="/bookings"
+                    className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
+                    onClick={() => setProfileOpen(false)}
+                  >
+                    Your Bookings
+                  </Link>
                   <button
                     onClick={() => {
                       signOut();

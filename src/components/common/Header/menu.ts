@@ -78,6 +78,13 @@ export const menuData: Menu[] = [
     ],
   },
   {
+    id: 6,
+    title: "Packages",
+    newTab: false,
+    path: "/rooms",
+    
+  },
+  {
     id: 5,
     title: "Contact",
     newTab: false,
