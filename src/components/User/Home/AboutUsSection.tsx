@@ -15,8 +15,7 @@ const fadeLeft = {
   visible: { x: 0, opacity: 1 },
 };
 
-const MotionLink = motion(Link)
-
+const MotionLink = motion(Link);
 
 export default function AboutSection() {
   const imgRef = useRef(null);
@@ -34,7 +33,6 @@ export default function AboutSection() {
   return (
     <section className="w-full bg-white py-20">
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-
         {/* Left Image */}
         <motion.div
           ref={imgRef}
@@ -57,7 +55,6 @@ export default function AboutSection() {
 
         {/* Right Content */}
         <div className="space-y-6">
-
           {/* Title */}
           <motion.h2
             ref={titleRef}
@@ -101,19 +98,16 @@ export default function AboutSection() {
           {/* List */}
 
           <MotionLink
-  href="/about-us"
-  ref={lintRef}
-  variants={fadeRight}
-  initial="hidden"
-  animate={lintInView ? "visible" : "hidden"}
-  transition={{ duration: 1.4 }}
-  className="mt-6 inline-block px-6 py-3 bg-gray-950 text-white rounded-md"
->
-  GET STARTED FOR YOUR EVENT
-</MotionLink>
-
-
-          
+            href="/about-us"
+            ref={lintRef}
+            variants={fadeRight}
+            initial="hidden"
+            animate={lintInView ? "visible" : "hidden"}
+            transition={{ duration: 1.4 }}
+            className="mt-6 inline-block px-6 py-3 bg-gray-950 text-white rounded-md"
+          >
+            GET STARTED FOR YOUR EVENT
+          </MotionLink>
         </div>
       </div>
     </section>
