@@ -44,9 +44,9 @@ export default function GalleryWithThumbs() {
 
   return (
     <section className="py-20 px-25 bg-white">
-      <div className="flex ">
+      <div className="flex flex-col lg:flex-row">
         <div className="flex items-center">
-          <div>
+          <div >
             <h2 className="text-4xl font-bold text-gray-900">
             PERFECT PLACE <br /> FOR PRIVATE EVENTS
           </h2>
@@ -57,7 +57,7 @@ export default function GalleryWithThumbs() {
           </p>
           </div>
         </div>
-        <div className="max-w-5xl mx-auto px-4">
+        <div className="lg:max-w-5xl lg:mx-auto px-4">
           {/* Main Slider */}
           <Swiper
             spaceBetween={10}
