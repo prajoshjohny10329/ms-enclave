@@ -9,6 +9,9 @@ export async function GET(req: NextRequest) {
     await connectDB();
     const bookings = await Booking.find({}).sort({ createdAt: -1 });
 
+    console.log(bookings);
+    
+
     // Fetch related room and user info manually
     const detailedBookings = await Promise.all(
       bookings.map(async (b) => {

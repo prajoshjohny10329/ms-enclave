@@ -4,16 +4,14 @@ import "./globals.css";
 import Providers from "@/providers";
 import Script from "next/script";
 
-
 // Import custom font
 import { audreyFont } from "./fonts";
-import { Header } from "../components/common/Header";
+import LayoutWrapper from "@/components/common/LayoutWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
-
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -38,10 +36,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${audreyFont.variable} ${dmSans.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${audreyFont.variable} ${dmSans.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <Providers>
-          <Header />
-          {children}
+          <LayoutWrapper>{children}</LayoutWrapper>
         </Providers>
 
         {/* Razorpay script */}

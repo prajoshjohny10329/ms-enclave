@@ -41,7 +41,7 @@ export default function Breadcrumb({ heading, items, bgImage }: BreadcrumbProps)
         </h1>
         {/* Breadcrumb */}
         <nav className="text-sm text-gray-200 flex items-center justify-center mt-3 space-x-1 mb-3">
-          <Link href="/" className="hover:text-white uppercase">Home</Link>
+          <Link href="/" className="hover:text-white ">Home</Link>
 
           {items.map((item, index) => (
             <span key={index} className="flex items-center space-x-1">

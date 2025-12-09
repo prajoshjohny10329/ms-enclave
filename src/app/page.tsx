@@ -1,3 +1,4 @@
+import { Header } from "@/components/common/Header";
 import HeroSlider from "@/components/HeroSlider";
 import AboutUsSection from "@/components/User/Home/AboutUsSection";
 import BookNowSection from "@/components/User/Home/BookNowSection";
@@ -14,8 +15,6 @@ export default function Home() {
    <RestaurantVideoSection />
    <GallerySection />
    <RestaurantVideoSection />
-   <RestaurantVideoSection />
-   <h1>Hi</h1>
    </> 
   );
 }
