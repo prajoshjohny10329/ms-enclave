@@ -31,4 +31,19 @@ export const menuData: Menu[] = [
     newTab: false,
     path: "/",
   },
+  
+  {
+    id: 6,
+    title: "View Package",
+    newTab: false,
+    path: "/admin/packages/",
+    submenu: [
+      {
+        id: 61,
+      title: "Add Package",
+      newTab: false,
+      path: "/admin/packages/add-package",
+      },
+    ],
+  },
 ];
