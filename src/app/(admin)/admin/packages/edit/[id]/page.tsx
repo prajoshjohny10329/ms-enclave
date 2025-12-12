@@ -26,9 +26,9 @@ export default function EditPackagePage() {
     imagePublicId: "",
   });
 
-  // ----------------------------
-  // 1️⃣ Fetch Package by ID
-  // ----------------------------
+  // ------------------------------------
+  // 1️⃣ Fetch package by ID
+  // ------------------------------------
   useEffect(() => {
     const fetchPackage = async () => {
       try {
@@ -59,9 +59,9 @@ export default function EditPackagePage() {
     fetchPackage();
   }, [id]);
 
-  // ----------------------------
-  // 2️⃣ Handle Input Changes
-  // ----------------------------
+  // ------------------------------------
+  // 2️⃣ Handle Input
+  // ------------------------------------
   const handleChange = (e: any) => {
     const { name, value, type, checked } = e.target;
 
@@ -71,28 +71,32 @@ export default function EditPackagePage() {
     }));
   };
 
-  // ----------------------------
-  // 3️⃣ Upload Image to /api/upload
-  // ----------------------------
-  const uploadImage = async () => {
-    if (!image) return null;
-
+  // ------------------------------------
+  // 3️⃣ Auto Upload Image
+  // ------------------------------------
+  const uploadImage = async (selectedImage: File) => {
     const body = new FormData();
-    body.append("file", image);
+    body.append("file", selectedImage);
 
     setUploading(true);
-    const res = await fetch("/api/upload", {
-      method: "POST",
-      body,
-    });
-    setUploading(false);
 
-    return res.json();
+    try {
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body,
+      });
+
+      const data = await res.json();
+      setUploading(false);
+
+      return data;
+    } catch (error) {
+      console.log("Image upload failed", error);
+      setUploading(false);
+      return null;
+    }
   };
 
-  // ----------------------------
-  // 4️⃣ Handle Image Input
-  // ----------------------------
   const handleImageChange = async (e: any) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -100,8 +104,7 @@ export default function EditPackagePage() {
     setImage(file);
     setImagePreview(URL.createObjectURL(file));
 
-    // upload instantly
-    const uploaded = await uploadImage();
+    const uploaded = await uploadImage(file);
 
     if (uploaded) {
       setFormData((prev) => ({
@@ -112,9 +115,9 @@ export default function EditPackagePage() {
     }
   };
 
-  // ----------------------------
-  // 5️⃣ Submit Update
-  // ----------------------------
+  // ------------------------------------
+  // 4️⃣ Submit Update
+  // ------------------------------------
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -132,16 +135,29 @@ export default function EditPackagePage() {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p className="p-10">Loading...</p>;
 
-  // ----------------------------
-  //  UI
-  // ----------------------------
+  // ------------------------------------
+  // 5️⃣ Form Validation
+  // ------------------------------------
+  const isFormValid =
+    formData.packageName &&
+    formData.description &&
+    formData.indianPrice &&
+    formData.foreignPrice &&
+    formData.maxAdults &&
+    formData.maxChildren &&
+    formData.image &&
+    !uploading;
+
+  // ------------------------------------
+  // UI
+  // ------------------------------------
   return (
-    <div className="p-6 max-w-3xl mx-auto">
+    <div className="p-6 max-w-3xl mx-auto text-black">
       <h2 className="text-2xl font-semibold mb-4">Edit Package</h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4 text-black">
+      <form onSubmit={handleSubmit} className="space-y-4">
 
         <div>
           <label>Package Name</label>
@@ -150,7 +166,7 @@ export default function EditPackagePage() {
             name="packageName"
             value={formData.packageName}
             onChange={handleChange}
-            className="input"
+            className="input w-full p-2 border rounded"
           />
         </div>
 
@@ -161,7 +177,7 @@ export default function EditPackagePage() {
             rows={3}
             value={formData.description}
             onChange={handleChange}
-            className="textarea"
+            className="textarea w-full p-2 border rounded"
           />
         </div>
 
@@ -173,7 +189,7 @@ export default function EditPackagePage() {
               name="indianPrice"
               value={formData.indianPrice}
               onChange={handleChange}
-              className="input"
+              className="input w-full p-2 border rounded"
             />
           </div>
 
@@ -184,7 +200,7 @@ export default function EditPackagePage() {
               name="foreignPrice"
               value={formData.foreignPrice}
               onChange={handleChange}
-              className="input"
+              className="input w-full p-2 border rounded"
             />
           </div>
         </div>
@@ -197,7 +213,7 @@ export default function EditPackagePage() {
               name="maxAdults"
               value={formData.maxAdults}
               onChange={handleChange}
-              className="input"
+              className="input w-full p-2 border rounded"
             />
           </div>
 
@@ -208,7 +224,7 @@ export default function EditPackagePage() {
               name="maxChildren"
               value={formData.maxChildren}
               onChange={handleChange}
-              className="input"
+              className="input w-full p-2 border rounded"
             />
           </div>
         </div>
@@ -220,7 +236,7 @@ export default function EditPackagePage() {
             name="amenities"
             value={formData.amenities}
             onChange={handleChange}
-            className="input"
+            className="input w-full p-2 border rounded"
           />
         </div>
 
@@ -235,22 +251,33 @@ export default function EditPackagePage() {
         </div>
 
         <div>
-          <label>Image</label>
-          <input type="file" onChange={handleImageChange} />
+          <label>Package Image</label>
+          <input type="file" accept="image/*" onChange={handleImageChange} />
 
-          {uploading && <p className="text-blue-500">Uploading image...</p>}
+          {uploading && (
+            <p className="text-blue-600 mt-2">Uploading image...</p>
+          )}
 
           {imagePreview && (
             <img
               src={imagePreview}
               alt="preview"
-              className="w-32 h-32 object-cover mt-2 rounded"
+              className="w-40 h-40 object-cover mt-3 rounded shadow"
             />
           )}
         </div>
 
-        <button className="bg-black text-white px-6 py-2 rounded">
-          Update Package
+        {/* UPDATE BUTTON */}
+        <button
+          type="submit"
+          disabled={!isFormValid}
+          className={`px-6 py-2 rounded text-white transition ${
+            !isFormValid
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-black hover:bg-gray-800"
+          }`}
+        >
+          {uploading ? "Uploading..." : "Update Package"}
         </button>
       </form>
     </div>

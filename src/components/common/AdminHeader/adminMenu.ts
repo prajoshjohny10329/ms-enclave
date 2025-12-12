@@ -42,7 +42,7 @@ export const menuData: Menu[] = [
         id: 61,
       title: "Add Package",
       newTab: false,
-      path: "/admin/packages/add-package",
+      path: "/admin/packages/add",
       },
     ],
   },
