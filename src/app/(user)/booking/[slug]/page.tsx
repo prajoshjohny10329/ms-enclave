@@ -415,7 +415,7 @@ export default function BookingPage() {
                 <input
                   type="number"
                   min="1"
-                  max="30"
+                  max="5"
                   value={nights}
                   onChange={handleNightChange}
                   className="w-full p-3 border rounded"

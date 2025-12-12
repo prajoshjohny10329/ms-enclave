@@ -8,8 +8,6 @@ export async function POST(req: Request) {
 
     const body = await req.json();
 
-    console.log("Received package:", body);
-
     // Destructure image object into two strings
     const imageUrl = body.image?.url;
     const imagePublicId = body.image?.public_id;
@@ -39,7 +37,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true, data: newPackage });
   } catch (error) {
-    console.log("Package creation error:", error);
     return NextResponse.json(
       { error: "Failed to create package" },
       { status: 500 }

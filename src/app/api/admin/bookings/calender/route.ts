@@ -12,9 +12,6 @@ export async function GET() {
       .populate("roomId", "name price images")
       .populate("userId", "name email phone nationality")
       .sort({ fromDate: 1 });
-    console.log(bookings);
-    
-
     return NextResponse.json(bookings, { status: 200 });
 
   } catch (error) {

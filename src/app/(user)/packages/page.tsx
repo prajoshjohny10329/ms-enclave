@@ -12,12 +12,9 @@ export default function PackagesPage() {
     const loadPackages = async () => {
       try {
         const res = await axios.get("/api/packages");
-        console.log(res.data.data);
-        
         setPackages(res.data.data);
         setLoading(false);
       } catch (err) {
-        console.log(err);
         setLoading(false);
       }
     };
@@ -51,10 +48,10 @@ export default function PackagesPage() {
             {/* Prices */}
             <div className="mt-4">
               <p className="text-gray-800">
-                <span className="font-medium">Indian Price:</span> ₹{pkg.indianPrice}
+                <span className="font-medium">Indian Price:</span> ₹ {pkg.indianPrice}
               </p>
               <p className="text-gray-800">
-                <span className="font-medium">Foreign Price:</span> ₹{pkg.foreignPrice}
+                <span className="font-medium">Foreign Price:</span> $ {pkg.foreignPrice}
               </p>
             </div>
 

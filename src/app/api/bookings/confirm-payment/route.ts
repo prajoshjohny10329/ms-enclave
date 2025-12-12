@@ -5,15 +5,10 @@ import { connectDB } from "@/lib/mongodb";
 export async function POST(req: NextRequest) {
   try {
     const { bookingId, paymentMethod, razorpayPaymentId, razorpayOrderId, razorpaySignature, stripePaymentId, stripeSessionId } = await req.json();
-    console.log('called');
-    console.log(bookingId, paymentMethod);
-
     
     if (!bookingId || !paymentMethod) {
       return NextResponse.json({ error: "Missing booking ID or payment method" }, { status: 400 });
     }
-
-    
 
     await connectDB();
 
@@ -24,9 +19,7 @@ export async function POST(req: NextRequest) {
 
     // Update booking status
     booking.status = "paid";
-      console.log(paymentMethod);
-
-
+    
     if (paymentMethod === "razorpay") {
       
       booking.paymentMethod = "razorpay"

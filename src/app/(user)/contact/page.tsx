@@ -34,7 +34,6 @@ export default function ContactPage() {
       alert("Failed to submit message.");
     }
   } catch (err) {
-    console.log(err);
     alert("Something went wrong.");
   }
 };

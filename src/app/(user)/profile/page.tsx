@@ -117,7 +117,6 @@ export default function ProfilePage() {
   value={form.nationality}
   onChange={(label) => {
     setForm({ ...form, nationality: label });
-    console.log("Selected nationality:", label);
   }}
 />
 

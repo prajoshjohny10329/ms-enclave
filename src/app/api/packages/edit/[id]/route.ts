@@ -56,11 +56,9 @@ export async function DELETE(
 ) {
   try {
     const { id } = await context.params; // ✅ FIXED
-    console.log(id, 'delet called');
     
-    // await connectDB();
-
-    // await Package.findByIdAndDelete(id);
+    await connectDB();
+    await Package.findByIdAndDelete(id);
 
     return NextResponse.json({
       success: true,

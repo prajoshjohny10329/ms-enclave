@@ -6,12 +6,7 @@ export async function POST(req: Request) {
   try {
     await connectDB();
     const data = await req.json();
-    console.log(data);
-    
-
     const booking = await Booking.create(data);
-    console.log(booking);
-    
     return NextResponse.json(booking, { status: 201 });
   } catch (error) {
     console.error("Error creating booking:", error);

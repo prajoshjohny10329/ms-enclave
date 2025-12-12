@@ -91,7 +91,6 @@ export default function EditPackagePage() {
 
       return data;
     } catch (error) {
-      console.log("Image upload failed", error);
       setUploading(false);
       return null;
     }

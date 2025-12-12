@@ -9,7 +9,6 @@ export default function PaymentCancelPage() {
 
   useEffect(() => {
     if (bookingId) {
-      console.log("Payment cancelled for booking:", bookingId);
     }
   }, [bookingId]);
 

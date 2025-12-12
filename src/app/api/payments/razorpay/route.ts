@@ -9,8 +9,6 @@ const razorpay = new Razorpay({
 export async function POST(req: NextRequest) {
   const { amount, currency, bookingId, user } = await req.json();
 
-  console.log(amount,currency,bookingId);
-  
 
   const options = {
     amount: amount * 100, // in paise

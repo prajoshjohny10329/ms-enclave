@@ -74,7 +74,6 @@ export default function AddPackage() {
     });
 
     const result = await res.json();
-    console.log(result);
     alert("Package Created!");
   };
 

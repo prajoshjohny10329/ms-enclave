@@ -5,14 +5,8 @@ import Package from "@/models/Package";
 export async function GET(req: Request, context: { params: Promise<{ slug: string }> }) {
   try {
     await connectDB();
-console.log(context.params);
-
     const { slug } = await context.params; // ✅ FIX
-
-    console.log("Slug from URL:", slug);
-
     const pkg = await Package.findOne({ slug });
-
     if (!pkg) {
       return NextResponse.json(
         { success: false, message: "Package not found" },

@@ -14,17 +14,28 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [loadingPayment, setLoadingPayment] = useState<string | null>(null);
 
+  console.log(status);
+  
+
   // Fetch user bookings
   useEffect(() => {
+  const fetchBookings = async () => {
     if (status === "authenticated" && session?.user?.id) {
-      const userId = session.user.id;
-      axios
-        .get(`/api/bookings/user/${userId}`)
-        .then((res) => setBookings(res.data))
-        .catch((err) => console.error("Failed to load bookings:", err))
-        .finally(() => setLoading(false));
+      try {
+        const res = await axios.get(`/api/bookings/user/${session.user.id}`);
+        setBookings(res.data);
+        
+      } catch (err) {
+        console.error("Failed to load bookings:", err);
+      } finally {
+        setLoading(false);
+      }
     }
-  }, []);
+  };
+
+  fetchBookings();
+}, [status, session?.user?.id]); // ✅ only include the user id
+
 
   // Handle payment for a booking
   const handlePayment = async (booking: any) => {
@@ -109,8 +120,8 @@ export default function ProfilePage() {
             className="p-4 border rounded-xl shadow-sm bg-white flex gap-4 items-center"
           >
             <Image
-              src={booking.roomId?.images?.[0] || "/default-room.jpg"}
-              alt={booking.roomId?.name || "Room"}
+              src={booking.packageId?.image || "/default-room.jpg"}
+              alt={booking.packageId.packageName || "Room"}
               width={120}
               height={80}
               className="rounded-lg"
@@ -150,6 +161,13 @@ export default function ProfilePage() {
                   {loadingPayment === booking._id ? "Processing..." : "Pay Now"}
                 </button>
               )}
+              <button
+  onClick={() => router.push(`/my-bookings/${booking._id}`)}
+  className="mt-2 ml-2 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+>
+  View
+</button>
+
             </div>
           </div>
         ))}

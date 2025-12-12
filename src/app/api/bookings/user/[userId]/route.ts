@@ -3,6 +3,7 @@ import { connectDB } from "@/lib/mongodb";
 import Booking from "@/models/Booking";
 import Room from "@/models/Room";   // ✅ ADD THIS IMPORT
 import User from "@/models/User";   // (Optional but recommended)
+import Package from "@/models/Package";   // (Optional but recommended)
 
 export async function GET(request: Request, context: { params: Promise<{ userId: string }> }) {
   const { userId } = await context.params;
@@ -12,10 +13,13 @@ export async function GET(request: Request, context: { params: Promise<{ userId:
 
     const bookings = await Booking.find({ userId })
       .populate({
-        path: "roomId",
-        model: Room,   // ✅ use model reference, not string
-        select: "name images price",
+        path: "packageId",
+        model: Package,   // ✅ use model reference, not string
+        select: "packageName image",
       });
+
+      console.log(bookings);
+      
 
     return NextResponse.json(bookings, { status: 200 });
   } catch (error) {
