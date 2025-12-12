@@ -8,6 +8,12 @@ export const menuData: Menu[] = [
     path: "/",
   },
   {
+    id: 12,
+    title: "Packages",
+    newTab: false,
+    path: "/packages",
+  },
+  {
     id: 0,
     title: "Admin",
     newTab: false,

@@ -2,11 +2,18 @@ import mongoose, { Schema, models } from "mongoose";
 
 const BookingSchema = new Schema(
   {
-    userId: { type: String, required: true },
-    roomId: { type: String, required: true },
-    fromDate: { type: Date, required: true },
-    toDate: { type: Date, required: true },
-    guests: { type: Number, required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    packageId: { type: mongoose.Schema.Types.ObjectId, ref: "Package" },
+    roomId: { type: String },
+    adults: { type: Number },
+    children: { type: Number },
+    date: { type: Date },
+    roomsNeeded: { type: Number },
+    
+    fromDate: { type: Date },
+    toDate: { type: Date },
+    guests: { type: Number, },
+    nights: { type: Number, },
     totalPrice: { type: Number, required: true },
     status: { type: String, enum: ["pending", "paid", "cancelled"], default: "pending" },
     

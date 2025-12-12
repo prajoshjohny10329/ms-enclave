@@ -32,8 +32,8 @@ export default function ProfilePage() {
     setLoadingPayment(booking._id);
 
     try {
-      const nationality = session.user.nationality?.toLowerCase();
-      if (nationality === "indian") {
+      const nationality = session.user.nationality;
+      if (nationality === "India") {
         // Razorpay flow
         const res = await axios.post("/api/payments/razorpay", {
           amount: booking.totalPrice,
