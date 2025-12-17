@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { ChevronDown } from "lucide-react";
 
 export default function HeroSlider() {
   return (
@@ -72,6 +73,10 @@ export default function HeroSlider() {
           </svg>
           Watch video
         </a>
+        {/* ⬇ Scroll Indicator */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 animate-bounce text-white">
+        <ChevronDown size={30} />
+      </div>
 
       </div>
     </div>

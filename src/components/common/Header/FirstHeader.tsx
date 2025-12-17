@@ -37,14 +37,14 @@ export default function TopHeader() {
         </div>
 
         {/* CENTER LOGO */}
-        <div className="text-center w-full md:max-w-96">
+        <Link href='/' className="text-center w-full md:max-w-96">
           <h1 className="text-[28px] text-black tracking-widest  font-semibold uppercase">
             M.S. Enclave
           </h1>
           <p className="text-[8px] uppercase  tracking-[0.25em] text-black">
             Heritage Home stay
           </p>
-        </div>
+        </Link>
 
         {/* RIGHT SECTION */}
         <div className="hidden md:flex items-center gap-3 text-right">

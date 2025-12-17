@@ -43,17 +43,15 @@ export default function GalleryWithThumbs() {
   ];
 
   return (
-    <section className="py-20 px-25 bg-white">
+    <section className="py-20 px-0 md:px-25 bg-white">
       <div className="flex flex-col lg:flex-row">
         <div className="flex items-center">
-          <div >
-            <h2 className="text-4xl font-bold text-gray-900">
-            PERFECT PLACE <br /> FOR PRIVATE EVENTS
+          <div className="px-6 mb-5">
+            <h2 className="text-4xl font-bold text-blue-900 uppercase text-shadow-lg">
+            Comfortable  Spacious Rooms
           </h2>
-          <p className="text-gray-800 leading-relaxed mt-4">
-            Whether you're hosting a corporate event, cocktail party, luncheon,
-            wedding reception, or rehearsal dinner — we offer beautiful private
-            spaces that can accommodate up to 180 guests.
+          <p className="text-black leading-relaxed mt-4">
+            Experience comfort in our thoughtfully designed rooms that reflect Kerala’s heritage style while offering modern amenities for a relaxing stay.
           </p>
           </div>
         </div>

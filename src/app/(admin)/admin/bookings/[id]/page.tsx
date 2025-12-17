@@ -19,6 +19,8 @@ export default function AdminBookingPage() {
       try {
         const res = await axios.get(`/api/admin/bookings/${id}`);
         setBooking(res.data);
+        console.log(res.data);
+
       } catch (err) {
         console.error(err);
         alert("Failed to fetch booking");
@@ -57,13 +59,13 @@ export default function AdminBookingPage() {
       <section className="mb-4">
         <h2 className="font-semibold text-lg">Room Details</h2>
         <Image
-          src={booking.room?.images?.[0] || "/default-room.jpg"}
-          alt={booking.room?.name || "Room"}
+          src={booking.package?.image || "/default-room.jpg"}
+          alt={booking.package?.packageName || "Room"}
           width={600}
           height={400}
           className="rounded-lg mt-2"
         />
-        <p className="mt-2"><strong>Name:</strong> {booking.room?.name}</p>
+        <p className="mt-2"><strong>Name:</strong> {booking.package?.packageName}</p>
         <p><strong>Price per night:</strong> ₹{booking.room?.price}</p>
       </section>
 

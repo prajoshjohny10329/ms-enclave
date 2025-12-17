@@ -2,10 +2,30 @@ import { Menu } from "@/types/Menu";
 
 export const menuData: Menu[] = [
   {
+    id: 0,
+    title: "Admin",
+    newTab: false,
+    path: "/admin",
+  },
+  {
     id: 1,
     title: "Home",
     newTab: false,
     path: "/",
+  },
+  {
+    id: 2,
+    title: "About Us",
+    newTab: false,
+    path: "/about-us",
+    submenu: [
+      {
+        id: 21,
+        title: "Explore Near",
+        newTab: false,
+        path: "/amenities",
+      }
+    ]
   },
   {
     id: 12,
@@ -14,93 +34,67 @@ export const menuData: Menu[] = [
     path: "/packages",
   },
   {
-    id: 121,
-    title: "my-bookings",
-    newTab: false,
-    path: "/my-bookings",
-  },
-  {
-    id: 0,
-    title: "Admin",
-    newTab: false,
-    path: "/admin",
-  },
-  {
-    id: 2,
-    title: "About Us",
-    newTab: false,
-    path: "/about-us",
-  },
-  {
     id: 3,
     title: "Amenities",
     newTab: false,
-    path: "/about-us",
+    path: "/amenities",
     submenu: [
       {
-        id: 30,
-        title: "Swimming Pool",
+        id: 31,
+        title: "A/C Rooms",
         newTab: false,
-        path: "/shop-with-sidebar",
+        path: "/amenities",
       },
       {
-        id: 31,
-        title: "Fishing Zone",
+        id: 36,
+        title: "Party hall",
         newTab: false,
-        path: "/shop-with-sidebar",
+        path: "/amenities",
+      },
+      {
+        id: 39,
+        title: "Swimming Pool",
+        newTab: false,
+        path: "/amenities",
       },
       {
         id: 32,
-        title: "Garden & Park",
+        title: "Photo shooting locations",
         newTab: false,
-        path: "/shop-with-sidebar",
+        path: "/amenities",
       },
       {
         id: 33,
-        title: "Photo Shooting Spots",
+        title: "Dining area",
         newTab: false,
-        path: "/shop-with-sidebar",
+        path: "/amenities",
+      },
+      {
+        id: 34,
+        title: "Play area",
+        newTab: false,
+        path: "/amenities",
+      },
+      {
+        id: 35,
+        title: "Fishing zone",
+        newTab: false,
+        path: "/amenities",
+      },
+      
+      {
+        id: 37,
+        title: "Balcony views",
+        newTab: false,
+        path: "/amenities",
+      },
+      {
+        id: 38,
+        title: "Indoor games",
+        newTab: false,
+        path: "/amenities",
       },
     ],
-  },
-  {
-    id: 4,
-    title: "Experience",
-    newTab: false,
-    path: "/about-us",
-    submenu: [
-      {
-        id: 40,
-        title: "Village Experience",
-        newTab: false,
-        path: "/shop-with-sidebar",
-      },
-      {
-        id: 41,
-        title: "Nature Walk",
-        newTab: false,
-        path: "/shop-with-sidebar",
-      },
-      {
-        id: 42,
-        title: "Fishing Experience",
-        newTab: false,
-        path: "/shop-with-sidebar",
-      },
-      {
-        id: 43,
-        title: "Photo Shooting Spots",
-        newTab: false,
-        path: "/shop-with-sidebar",
-      },
-    ],
-  },
-  {
-    id: 6,
-    title: "Packages",
-    newTab: false,
-    path: "/rooms",
-    
   },
   {
     id: 5,
