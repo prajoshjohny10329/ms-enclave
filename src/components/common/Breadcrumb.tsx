@@ -36,7 +36,7 @@ export default function Breadcrumb({ heading, items, bgImage }: BreadcrumbProps)
         
 
         {/* Heading */}
-        <h1 className="text-4xl md:text-5xl text-center font-bold text-white text-shadow-lg">
+        <h1 className="text-4xl md:text-5xl text-center font-bold text-white text-shadow-lg font-playfair">
           {heading}
         </h1>
         {/* Breadcrumb */}

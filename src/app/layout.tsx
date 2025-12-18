@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, DM_Sans } from "next/font/google";
+import { Geist, Geist_Mono, DM_Sans, Playfair_Display, Montserrat } from "next/font/google";
 import "./globals.css";
 import Providers from "@/providers";
 import Script from "next/script";
@@ -11,6 +11,19 @@ import LayoutWrapper from "@/components/common/LayoutWrapper";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  style: ["italic"],
+  weight: ["400", "500", "600"],
+  variable: "--font-playfair",
+});
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-montserrat",
 });
 
 const dmSans = DM_Sans({
@@ -37,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${audreyFont.variable} ${dmSans.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${audreyFont.variable} ${dmSans.variable} ${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${montserrat.variable} antialiased`}
       >
         <Providers>
           <LayoutWrapper>{children}</LayoutWrapper>

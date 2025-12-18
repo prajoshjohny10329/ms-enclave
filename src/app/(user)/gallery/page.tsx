@@ -144,8 +144,16 @@ export default function GallerySection() {
         items={[{ label: "Gallery", href: "/gallery" }]}
       />
       <div className="py-20 ">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 ">
           {/* Section Heading */}
+
+          <h2 className=" p-4 font-montserrat text-2xl md:text-4xl text-black text-center">
+  Five Reasons Why It’s Worth Going  <br />
+  <span className="font-playfair italic">
+    to journey with us
+  </span>
+</h2>
+
 
           {/* Gallery Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

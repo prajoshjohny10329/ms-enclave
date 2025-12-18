@@ -16,6 +16,8 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-dm: var(--font-dm-sans);
+  --font-playfair: var(--font-playfair);
+  --font-montserrat: var(--font-montserrat);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,6 +26,8 @@
     --foreground: #ededed;
   }
 }
+
+
 
 /* GLOBAL BODY STYLING */
 body {
@@ -51,4 +55,39 @@ body {
 
 .animate-fadeIn {
   animation: fadeIn 1.2s ease-out forwards;
+}
+
+/* preloader  */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes borderDraw {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.9s ease-out forwards;
+}
+
+.animate-fade-up-delay {
+  animation: fadeUp 0.9s ease-out forwards;
+  animation-delay: 0.25s;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fadeUp 0.9s ease-out forwards;
+  animation-delay: 0.45s;
 }
