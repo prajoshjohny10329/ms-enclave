@@ -142,6 +142,29 @@ export default function BookingPage() {
     }
   };
 
+  const fetchAvailability = async (date: string, nights: number) => {
+    if (!pkg?._id) return;
+
+    const res = await axios.get("/api/bookings/availability", {
+      params: {
+        packageId: pkg._id,
+        checkIn: date,
+        nights,
+      },
+    });
+
+    console.log(res.data);
+    
+
+    setMaxAvailableRooms(res.data.availableRooms);
+  };
+
+  const getCheckoutDate = (checkIn: string, nights: number) => {
+    const date = new Date(checkIn);
+    date.setDate(date.getDate() + nights);
+    return date.toISOString();
+  };
+
   // ---------- INPUT CHANGE ----------
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -163,6 +186,13 @@ export default function BookingPage() {
         "Maximum room availability reached. Please contact M.S. Enclave."
       );
       return;
+    }
+
+    if (name === "date") {
+      console.log("called");
+      console.log(value, nights);
+
+      fetchAvailability(value, nights);
     }
 
     setWarning("");
@@ -214,6 +244,13 @@ export default function BookingPage() {
     const value = Number(e.target.value);
     setNights(value);
 
+    console.log("handleNightChange");
+    console.log(form.date, value);
+
+    if (form.date) {
+      fetchAvailability(form.date, value);
+    }
+
     // 🔥 Avoid null error
     if (!session?.user) return;
 
@@ -259,6 +296,12 @@ export default function BookingPage() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setMessage("");
+    const checkInDate = new Date(form.date);
+    const checkOutDate = new Date(checkInDate);
+    checkOutDate.setDate(checkOutDate.getDate() + nights);
+
+    console.log("checkInDate,checkOutDate");
+    console.log(checkInDate, checkOutDate);
 
     if (!session?.user?.id) return router.push("/login");
 
@@ -270,6 +313,8 @@ export default function BookingPage() {
         roomsNeeded,
         totalPrice,
         nights,
+        checkInDate,
+        checkOutDate,
         status: "pending",
       });
 
@@ -325,10 +370,19 @@ export default function BookingPage() {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="p-6 border rounded-xl shadow bg-white">
+        <div className="p-6  rounded-xl shadow-lg bg-white">
           <h2 className="text-2xl font-semibold mb-4">Booking Form</h2>
 
           <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              name="date"
+              type="date"
+              value={form.date}
+              onChange={handleChange}
+              required
+              className="w-full p-3 border rounded"
+            />
+
             <input
               name="fullName"
               value={form.fullName}
@@ -348,6 +402,7 @@ export default function BookingPage() {
               value={form.phone}
               disabled
               className="w-full p-3 border rounded bg-gray-100 cursor-not-allowed"
+              required
             />
 
             <input
@@ -368,15 +423,6 @@ export default function BookingPage() {
               value={form.children}
               onChange={handleChange}
               placeholder="Children"
-              className="w-full p-3 border rounded"
-            />
-
-            <input
-              name="date"
-              type="date"
-              value={form.date}
-              onChange={handleChange}
-              required
               className="w-full p-3 border rounded"
             />
 
@@ -412,14 +458,23 @@ export default function BookingPage() {
                 <label className="block font-semibold mb-1">
                   Number of Nights
                 </label>
+
                 <input
                   type="number"
                   min="1"
                   max="5"
                   value={nights}
                   onChange={handleNightChange}
-                  className="w-full p-3 border rounded"
+                  disabled={!form.date} // ✅ ONLY ENABLE AFTER DATE SELECT
+                  className={`w-full p-3 border rounded
+        ${!form.date ? "bg-gray-100 cursor-not-allowed" : ""}`}
                 />
+
+                {!form.date && (
+                  <p className="text-sm text-red-500 mt-1">
+                    Please select a check-in date first
+                  </p>
+                )}
               </div>
             )}
 

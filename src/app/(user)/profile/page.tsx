@@ -26,7 +26,6 @@ export default function ProfilePage() {
     address: "",
   });
 
-
   const [isEditing, setIsEditing] = useState(true);
 
   useEffect(() => {
@@ -114,13 +113,11 @@ export default function ProfilePage() {
                 Nationality
               </label>
               <NationalitySelector
-  value={form.nationality}
-  onChange={(label) => {
-    setForm({ ...form, nationality: label });
-  }}
-/>
-
-
+                value={form.nationality}
+                onChange={(label) => {
+                  setForm({ ...form, nationality: label });
+                }}
+              />
             </div>
 
             <input

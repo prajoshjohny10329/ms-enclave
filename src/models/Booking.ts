@@ -7,6 +7,8 @@ const BookingSchema = new Schema(
     adults: { type: Number },
     children: { type: Number },
     date: { type: Date },
+    checkInDate: { type: Date },
+    checkOutDate: { type: Date },
     roomsNeeded: { type: Number },
     nights: { type: Number, },
     totalPrice: { type: Number, required: true },

@@ -5,7 +5,7 @@ export default function AmenitiesPage() {
     <>
       <Breadcrumb
         heading="Discover Our Amenities"
-        bgImage="/images/common/ms-enclave-17.webp" // ⭐ background image
+        bgImage="/images/common/ms-enclave-17.webp" 
         items={[{ label: "Our Amenities", href: "/amenities" }]}
       />
 

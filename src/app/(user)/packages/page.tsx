@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import Breadcrumb from "@/components/common/Breadcrumb";
 
 export default function PackagesPage() {
   const [packages, setPackages] = useState([]);
@@ -25,9 +26,13 @@ export default function PackagesPage() {
   if (loading) return <p className="p-10">Loading Packages...</p>;
 
   return (
-    <div className="max-w-6xl mx-auto py-10 px-4 text-black">
-      <h1 className="text-3xl font-semibold mb-8 text-center">Our Packages</h1>
-
+    <section>
+      <Breadcrumb
+              heading="Discover Our Packages"
+              bgImage="/images/common/ms-enclave-26.webp" 
+              items={[{ label: "Our Packages", href: "/packages" }]}
+        />
+      <div className="max-w-6xl mx-auto py-10 px-4 text-black">
       <div className="grid md:grid-cols-3 gap-6">
         {packages.map((pkg: any) => (
           <div key={pkg._id} className="border rounded-xl shadow p-4 bg-white">
@@ -65,6 +70,7 @@ export default function PackagesPage() {
           </div>
         ))}
       </div>
-    </div>
+      </div>
+    </section>
   );
 }
