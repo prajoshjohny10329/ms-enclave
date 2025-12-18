@@ -13,14 +13,13 @@ export default function Preloader() {
 
         <h1 className="text-black text-5xl font-semibold tracking-widest">
           {title}
-          <span className="ml-1 animate-pulse">|</span>
         </h1>
 
-        <p className="text-black/80 text-md tracking-wide uppercase">
+        <p className="text-black/80 text-xl tracking-wide uppercase text-center">
           {subtitle}
         </p>
 
-        <p className="text-black/60 text-lg tracking-wide">
+        <p className="text-black/80 text-lg tracking-wide">
           {location}
         </p>
 

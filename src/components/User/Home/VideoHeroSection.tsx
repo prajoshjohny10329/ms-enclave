@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX, ChevronDown } from "lucide-react";
+import Link from "next/link";
 
 export default function VideoHeroSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -75,22 +76,40 @@ export default function VideoHeroSection() {
       <div className="absolute inset-0 bg-black/10" />
 
       {/* ✨ Content */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
-        <h1 className="text-white text-4xl md:text-6xl font-bold tracking-wide">
-          Experience Timeless Luxury
-        </h1>
+      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4 mt-20">
+        <h2 className="text-white text-4xl md:text-6xl font-bold tracking-wide text-shadow-lg">
+          Step Into Kerala ’ s  Heritage Paradise
+        </h2>
 
-        <p className="mt-4 text-lg md:text-xl text-gray-200 max-w-2xl">
-          Discover heritage hospitality, peaceful stays, and unforgettable
-          moments at M.S. Enclave Heritage Resort.
+        <p className="mt-4 text-md text-white font-medium text-shadow-lg max-w-5xl font-dm ">
+          Watch our short video to immerse yourself in the serene beauty of M.S. Enclave Heritage Resort.
+From lush green landscapes and traditional Kerala architecture to modern comforts and leisure amenities, our resort offers the perfect escape for families, couples, and nature lovers.
         </p>
 
-        <a
-          href="#rooms"
-          className="mt-8 px-8 py-3 bg-blue-900 text-white rounded-md font-semibold hover:bg-blue-800 transition"
+        <div className="flex flex-col mb-8 md:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4 mt-4">
+        
+        <Link
+          href="/packages"
+          className="inline-flex justify-center items-center py-3 px-6 text-base font-semibold text-black rounded-lg  bg-white/60 backdrop-blur-sm hover:bg-white  shadow-gray-400/40 transition"
         >
-          Explore Rooms
-        </a>
+          Book Your Stay Now
+          <svg className="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fillRule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            ></path>
+          </svg>
+        </Link>
+
+        
+        {/* ⬇ Scroll Indicator */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 animate-bounce text-white">
+        <ChevronDown size={30} />
+      </div>
+
+      </div>
+        
       </div>
 
       {/* 🔊 Sound Toggle */}

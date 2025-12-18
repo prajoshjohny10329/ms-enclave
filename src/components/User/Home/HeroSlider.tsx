@@ -9,8 +9,12 @@ import "swiper/css/navigation";
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { ChevronDown } from "lucide-react";
+import { useState } from "react";
+import Link from "next/link";
 
 export default function HeroSlider() {
+    const [open, setOpen] = useState(false);
+  
   return (
     <>
       <Swiper
@@ -50,8 +54,8 @@ export default function HeroSlider() {
 
       <div className="flex flex-col mb-8 md:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
         
-        <a
-          href="#"
+        <Link
+          href="/packages"
           className="inline-flex justify-center items-center py-3 px-6 text-base font-semibold text-black rounded-lg border border-black/20 bg-white/60 backdrop-blur-sm hover:bg-white shadow-lg shadow-gray-400/40 transition"
         >
           Book Your Stay
@@ -62,17 +66,17 @@ export default function HeroSlider() {
               clipRule="evenodd"
             ></path>
           </svg>
-        </a>
+        </Link>
 
-        <a
-          href="#"
+        <button
+          onClick={() => setOpen(true)}
           className="inline-flex justify-center items-center py-3 px-6 text-base font-semibold text-black rounded-lg border border-black/20 bg-white/60 backdrop-blur-sm hover:bg-white shadow-lg shadow-gray-400/40 transition"
         >
           <svg className="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
             <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
           </svg>
           Watch video
-        </a>
+        </button>
         {/* ⬇ Scroll Indicator */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 animate-bounce text-white">
         <ChevronDown size={30} />
@@ -86,6 +90,28 @@ export default function HeroSlider() {
         
         
       </Swiper>
+      {/* Video Popup */}
+      {open && (
+        <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4">
+          <div className="relative w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden">
+            <iframe
+              className="w-full h-full"
+              src="https://www.youtube.com/embed/V-9kJAyMFco?autoplay=1"
+              title="M.S. Enclave Experience"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+            ></iframe>
+
+            {/* Close Button */}
+            <button
+              onClick={() => setOpen(false)}
+              className="absolute top-3 right-3 bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl hover:bg-black"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }

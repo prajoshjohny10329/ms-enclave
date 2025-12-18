@@ -96,7 +96,6 @@ export default function GalleryHome() {
                   className="
                     rounded-2xl
                     object-cover
-                    
                     shadow-xl
                     transition-transform
                     duration-300

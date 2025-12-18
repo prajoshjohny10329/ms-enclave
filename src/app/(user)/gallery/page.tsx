@@ -9,119 +9,119 @@ import Breadcrumb from "@/components/common/Breadcrumb";
 const galleryImages = [
   {
     src: "/images/common/ms-enclave-1.webp",
-    alt: "MS Enclave Luxury Resort Palakad exterior Sky view",
+    alt: "MS Enclave Luxury Resort Palakkad exterior Sky view",
   },
   {
     src: "/images/common/ms-enclave-2.webp",
-    alt: "MS Enclave Luxury Resort Palakad exterior Sky view 2",
+    alt: "MS Enclave Luxury Resort Palakkad exterior Sky view 2",
   },
   {
     src: "/images/common/ms-enclave-3.webp",
-    alt: "MS Enclave Luxury Resort Palakad exterior Sky view 3",
+    alt: "MS Enclave Luxury Resort Palakkad exterior Sky view 3",
   },
   {
     src: "/images/common/ms-enclave-4.webp",
-    alt: "MS Enclave Luxury Resort Palakad exterior Sky view 4",
+    alt: "MS Enclave Luxury Resort Palakkad exterior Sky view 4",
   },
   {
     src: "/images/common/ms-enclave-5.webp",
-    alt: "MS Enclave Luxury Resort Palakad exterior Sky view 5",
+    alt: "MS Enclave Luxury Resort Palakkad exterior Sky view 5",
   },
   {
     src: "/images/common/ms-enclave-6.webp",
-    alt: "MS Enclave Luxury Resort Palakad exterior Sky view 6",
+    alt: "MS Enclave Luxury Resort Palakkad exterior Sky view 6",
   },
   {
     src: "/images/common/ms-enclave-17.webp",
-    alt: "MS Enclave Luxury Resort Palakad Swimming Poll view 17",
+    alt: "MS Enclave Luxury Resort Palakkad Swimming Poll view 17",
   },
   {
     src: "/images/common/ms-enclave-7.webp",
-    alt: "MS Enclave Luxury Resort Palakad Swimming Poll view 7",
+    alt: "MS Enclave Luxury Resort Palakkad Swimming Poll view 7",
   },
   {
     src: "/images/common/ms-enclave-8.webp",
-    alt: "MS Enclave Luxury Resort Palakad Swimming Poll view 8",
+    alt: "MS Enclave Luxury Resort Palakkad Swimming Poll view 8",
   },
   {
     src: "/images/common/ms-enclave-9.webp",
-    alt: "MS Enclave Luxury Resort Palakad Swimming Poll view 9",
+    alt: "MS Enclave Luxury Resort Palakkad Swimming Poll view 9",
   },
   {
     src: "/images/common/ms-enclave-10.webp",
-    alt: "MS Enclave Luxury Resort Palakad Swimming Poll view 10",
+    alt: "MS Enclave Luxury Resort Palakkad Swimming Poll view 10",
   },
   {
     src: "/images/common/ms-enclave-11.webp",
-    alt: "MS Enclave Luxury Resort Palakad Swimming Poll view",
+    alt: "MS Enclave Luxury Resort Palakkad Swimming Poll view",
   },
   {
     src: "/images/common/ms-enclave-12.webp",
-    alt: "MS Enclave Luxury Resort Palakad Garden view",
+    alt: "MS Enclave Luxury Resort Palakkad Garden view",
   },
   {
     src: "/images/common/ms-enclave-13.webp",
-    alt: "MS Enclave Luxury Resort Palakad Interior view",
+    alt: "MS Enclave Luxury Resort Palakkad Interior view",
   },
   {
     src: "/images/common/ms-enclave-14.webp",
-    alt: "MS Enclave Luxury Resort Palakad Interior view ",
+    alt: "MS Enclave Luxury Resort Palakkad Interior view ",
   },
   {
     src: "/images/common/ms-enclave-15.webp",
-    alt: "MS Enclave Luxury Resort Palakad Exterior view ",
+    alt: "MS Enclave Luxury Resort Palakkad Exterior view ",
   },
   {
     src: "/images/common/ms-enclave-18.webp",
-    alt: "MS Enclave Luxury Resort Palakad Exterior view ",
+    alt: "MS Enclave Luxury Resort Palakkad Exterior view ",
   },
   {
     src: "/images/common/ms-enclave-16.webp",
-    alt: "MS Enclave Luxury Resort Palakad Garden view",
+    alt: "MS Enclave Luxury Resort Palakkad Garden view",
   },
   {
     src: "/images/common/ms-enclave-19.webp",
-    alt: "MS Enclave Luxury Resort Palakad Garden view",
+    alt: "MS Enclave Luxury Resort Palakkad Garden view",
   },
   {
     src: "/images/common/ms-enclave-20.webp",
-    alt: "MS Enclave Luxury Resort Palakad Garden view",
+    alt: "MS Enclave Luxury Resort Palakkad Garden view",
   },
   {
     src: "/images/common/ms-enclave-29.webp",
-    alt: "MS Enclave Luxury Resort Palakad Garden view",
+    alt: "MS Enclave Luxury Resort Palakkad Garden view",
   },
   {
     src: "/images/common/ms-enclave-28.webp",
-    alt: "MS Enclave Luxury Resort Palakad Garden view",
+    alt: "MS Enclave Luxury Resort Palakkad Garden view",
   },
   {
     src: "/images/common/ms-enclave-21.webp",
-    alt: "MS Enclave Luxury Resort Palakad Interior Rain view",
+    alt: "MS Enclave Luxury Resort Palakkad Interior Rain view",
   },
   {
     src: "/images/common/ms-enclave-22.webp",
-    alt: "MS Enclave Luxury Resort Palakad Interior Rain view",
+    alt: "MS Enclave Luxury Resort Palakkad Interior Rain view",
   },
   {
     src: "/images/common/ms-enclave-23.webp",
-    alt: "MS Enclave Luxury Resort Palakad Garden view",
+    alt: "MS Enclave Luxury Resort Palakkad Garden view",
   },
   {
     src: "/images/common/ms-enclave-24.webp",
-    alt: "MS Enclave Luxury Resort Palakad Room view",
+    alt: "MS Enclave Luxury Resort Palakkad Room view",
   },
   {
     src: "/images/common/ms-enclave-25.webp",
-    alt: "MS Enclave Luxury Resort Palakad Room view",
+    alt: "MS Enclave Luxury Resort Palakkad Room view",
   },
   {
     src: "/images/common/ms-enclave-26.webp",
-    alt: "MS Enclave Luxury Resort Palakad Room view",
+    alt: "MS Enclave Luxury Resort Palakkad Room view",
   },
   {
     src: "/images/common/ms-enclave-27.webp",
-    alt: "MS Enclave Luxury Resort Palakad Room view",
+    alt: "MS Enclave Luxury Resort Palakkad Room view",
   },
 ];
 
