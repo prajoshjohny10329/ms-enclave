@@ -42,8 +42,5 @@ export async function GET(req: Request) {
     };
   }
 
-  console.log(days);
-  
-
   return NextResponse.json(days);
 }

@@ -9,16 +9,9 @@ export async function GET(req: Request) {
     await connectDB();
 
     const { searchParams } = new URL(req.url);
-
-    console.log(searchParams);
-    
-
     const packageId = searchParams.get("packageId");
     const checkIn = searchParams.get("checkIn");
     const nights = Number(searchParams.get("nights") || 1);
-
-    console.log(packageId, checkIn, nights);
-    
 
     if (!packageId || !checkIn) {
       return NextResponse.json(
@@ -51,10 +44,6 @@ export async function GET(req: Request) {
         },
       ],
     });
-
-    console.log(bookings);
-    
-
     const bookedRooms = bookings.reduce(
       (sum, b) => sum + b.roomsNeeded,
       0

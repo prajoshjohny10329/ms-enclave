@@ -19,8 +19,6 @@ export default function AdminBookingPage() {
       try {
         const res = await axios.get(`/api/admin/bookings/${id}`);
         setBooking(res.data);
-        console.log(res.data);
-
       } catch (err) {
         console.error(err);
         alert("Failed to fetch booking");

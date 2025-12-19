@@ -13,21 +13,12 @@ export async function PUT(req: Request) {
   try {
     await connectDB();
     const body = await req.json();
-
-    console.log(body);
-    
-
     const updated = await RoomSettings.findOneAndUpdate({}, body, {
       new: true,
       upsert: true,
     });
-
-    console.log(updated);
-    
-
     return NextResponse.json(updated);
   } catch (err) {
-    console.log("Update error:", err);
     return NextResponse.json({ error: "Failed to update" }, { status: 500 });
   }
 }

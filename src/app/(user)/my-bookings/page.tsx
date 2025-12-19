@@ -9,13 +9,9 @@ import { useRouter } from "next/navigation";
 export default function ProfilePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
-
   const [bookings, setBookings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadingPayment, setLoadingPayment] = useState<string | null>(null);
-
-  console.log(status);
-  
 
   // Fetch user bookings
   useEffect(() => {

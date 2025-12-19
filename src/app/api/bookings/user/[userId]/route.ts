@@ -18,9 +18,6 @@ export async function GET(request: Request, context: { params: Promise<{ userId:
         select: "packageName image",
       });
 
-      console.log(bookings);
-      
-
     return NextResponse.json(bookings, { status: 200 });
   } catch (error) {
     console.error("Error fetching user bookings:", error);

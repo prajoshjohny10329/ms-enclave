@@ -152,10 +152,6 @@ export default function BookingPage() {
         nights,
       },
     });
-
-    console.log(res.data);
-    
-
     setMaxAvailableRooms(res.data.availableRooms);
   };
 
@@ -189,9 +185,6 @@ export default function BookingPage() {
     }
 
     if (name === "date") {
-      console.log("called");
-      console.log(value, nights);
-
       fetchAvailability(value, nights);
     }
 
@@ -243,9 +236,6 @@ export default function BookingPage() {
   const handleNightChange = (e: any) => {
     const value = Number(e.target.value);
     setNights(value);
-
-    console.log("handleNightChange");
-    console.log(form.date, value);
 
     if (form.date) {
       fetchAvailability(form.date, value);
@@ -299,10 +289,7 @@ export default function BookingPage() {
     const checkInDate = new Date(form.date);
     const checkOutDate = new Date(checkInDate);
     checkOutDate.setDate(checkOutDate.getDate() + nights);
-
-    console.log("checkInDate,checkOutDate");
-    console.log(checkInDate, checkOutDate);
-
+    
     if (!session?.user?.id) return router.push("/login");
 
     try {
