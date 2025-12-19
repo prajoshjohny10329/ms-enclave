@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Breadcrumb from "@/components/common/Breadcrumb";
 import NationalitySelector from "@/components/common/NationalitySelector";
+import toast from "react-hot-toast";
 
 interface Profile {
   name: string;
@@ -56,7 +57,8 @@ export default function ProfilePage() {
     e.preventDefault();
     if (!session?.user?.email) return;
 
-    await axios.post("/api/profile", {
+    try {
+      await axios.post("/api/profile", {
       email: session.user.email,
       ...form,
     });
@@ -64,6 +66,11 @@ export default function ProfilePage() {
     setProfile(form);
     setIsEditing(false);
     router.push("/profile");
+    toast.success("Profile Edited successfully" );
+    } catch (error) {
+      toast.loading("Profile Edited Error" );
+    }
+
   };
 
   const handleEdit = () => {
