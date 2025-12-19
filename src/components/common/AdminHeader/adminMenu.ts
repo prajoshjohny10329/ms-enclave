@@ -23,7 +23,7 @@ export const menuData: Menu[] = [
     id: 3,
     title: "Calendar",
     newTab: false,
-    path: "/admin/calendar",
+    path: "/admin/calendar-availability",
   },
   {
     id: 4,

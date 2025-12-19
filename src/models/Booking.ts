@@ -2,7 +2,7 @@ import mongoose, { Schema, models } from "mongoose";
 
 const BookingSchema = new Schema(
   {
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: false },
     packageId: { type: mongoose.Schema.Types.ObjectId, ref: "Package" },
     adults: { type: Number },
     children: { type: Number },
@@ -13,6 +13,10 @@ const BookingSchema = new Schema(
     nights: { type: Number, },
     totalPrice: { type: Number, required: true },
     status: { type: String, enum: ["pending", "paid", "cancelled"], default: "pending" },
+
+    // Razorpay fields
+    clientName: { type: String },
+    phone: { type: String },
     
     paymentMethod: { type: String },
     // Razorpay fields
