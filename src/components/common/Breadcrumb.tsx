@@ -25,7 +25,7 @@ export default function Breadcrumb({ heading, items, bgImage }: BreadcrumbProps)
         alt={heading}
         fill
         priority
-        className="object-cover brightness-75 rounded-[0_0_15px_15px] drop-shadow-xl"
+        className="object-cover brightness-90 rounded-[0_0_15px_15px] drop-shadow-md"
       />
 
       {/* Overlay */}
@@ -36,16 +36,17 @@ export default function Breadcrumb({ heading, items, bgImage }: BreadcrumbProps)
         
 
         {/* Heading */}
-        <h1 className="text-4xl md:text-5xl text-center font-bold text-white text-shadow-sm font-playfair">
+        {/* <h1 className="text-4xl md:text-5xl text-center font-bold text-white text-shadow-sm font-playfair"> */}
+        <h1 className="text-4xl md:text-5xl text-center font-bold text-white text-shadow-lg">
           {heading}
         </h1>
         {/* Breadcrumb */}
-        <nav className="text-sm text-gray-200 flex items-center justify-center mt-3 space-x-1 mb-3">
-          <Link href="/" className="hover:text-white ">Home</Link>
+        <nav className="text-md text-white flex items-center justify-center mt-3 space-x-1 mb-3 font-dm text-shadow-md">
+          <Link href="/" className="hover:text-lg font-semibold text-white">Home</Link>
 
           {items.map((item, index) => (
             <span key={index} className="flex items-center space-x-1">
-              <ChevronRight className="w-4 h-4 text-gray-300" />
+              <ChevronRight className="w-4 h-4 text-white" />
 
               {index === items.length - 1 ? (
                 <span className="text-white font-semibold">
