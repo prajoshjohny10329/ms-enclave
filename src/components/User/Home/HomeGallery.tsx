@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Navigation, Autoplay } from "swiper/modules";
+import { Autoplay, EffectCoverflow, Navigation } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
+import Link from "next/link";
 
 const images = [
   "/images/home/ms-slider-0.webp",
@@ -18,25 +19,30 @@ const images = [
   "/images/home/ms-slider-2.webp",
 ];
 
-export default function GalleryHome() {
+export default function HomeGallery() {
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [shuffledImages, setShuffledImages] = useState<string[]>([]);
 
-  // 🔀 Shuffle once
   useEffect(() => {
     setShuffledImages([...images].sort(() => Math.random() - 0.5));
   }, []);
 
   return (
-    <section className="py-24 bg-white overflow-visible">
+    <section className="py-24 bg-white relative">
       {/* HEADER */}
-      <div className="max-w-7xl mx-auto px-4 text-center">
-        <h2 className="text-4xl font-bold text-gray-900">
-          My Visual Diary
+      <div className="max-w-7xl mx-auto px-4 text-center relative">
+        <h2 className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm">
+          Explore Our Resort
         </h2>
-        <p className="text-gray-500 mt-3 max-w-xl mx-auto">
-          A curated collection of moments, places, and experiences.
+        <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
+          A glimpse into the beauty and serenity of M.S. Enclave Heritage Resort.
         </p>
+        <Link
+            href="/gallery"
+            className="mt-6 inline-block px-6 py-3 bg-gray-950 text-white "
+          >
+            Explore Our Gallery
+          </Link>
       </div>
 
       {/* GALLERY */}
@@ -46,8 +52,8 @@ export default function GalleryHome() {
           effect="coverflow"
           centeredSlides
           grabCursor
+        //   navigation
           loop
-          navigation
           slideToClickedSlide
           autoplay={{
             delay: 2500,
@@ -56,8 +62,8 @@ export default function GalleryHome() {
           }}
           coverflowEffect={{
             rotate: 0,
-            stretch: 120,
-            depth: 300,
+            stretch: 90,   // 🔽 reduced
+            depth: 260,
             modifier: 1,
             slideShadows: false,
           }}
@@ -66,24 +72,18 @@ export default function GalleryHome() {
             768: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
-          className="max-w-6xl mx-auto !overflow-visible"
+          className="max-w-6xl mx-auto overflow-visible"
         >
           {shuffledImages.map((src, i) => (
             <SwiperSlide
               key={i}
-              className="!overflow-visible flex justify-center"
+              className="flex justify-center overflow-visible pointer-events-auto"
             >
               <div
                 onClick={() => setLightbox(src)}
-                className="
-                  relative
-                  cursor-pointer
-                  transition-transform
-                  duration-300
-                  hover:scale-105
-                  hover:z-30
-                "
+                className="relative cursor-pointer"
               >
+                {/* SCALE IMAGE ONLY */}
                 <Image
                   src={src}
                   alt="Gallery image"
@@ -92,11 +92,10 @@ export default function GalleryHome() {
                   className="
                     rounded-2xl
                     object-cover
-                    w-[320px]
-                    h-[360px]
-                    md:w-[380px]
-                    md:h-[420px]
                     shadow-xl
+                    transition-transform
+                    duration-300
+                    hover:scale-[1.009]
                   "
                 />
               </div>
@@ -111,10 +110,7 @@ export default function GalleryHome() {
           onClick={() => setLightbox(null)}
           className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center px-4"
         >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative"
-          >
+          <div onClick={(e) => e.stopPropagation()} className="relative">
             <button
               onClick={() => setLightbox(null)}
               className="absolute -top-12 right-0 text-white text-4xl"
@@ -132,6 +128,15 @@ export default function GalleryHome() {
           </div>
         </div>
       )}
+      {/* ================= SEO (Hidden) ================= */}
+      <div className="sr-only">
+        <h3>Luxury Resort Gallery Kerala</h3>
+        <p>
+          Photo gallery of rooms, swimming pool, garden, dining area,
+          outdoor spaces and scenic views at M.S. Enclave Heritage Resort,
+          Palakkad, Kerala.
+        </p>
+      </div>
     </section>
   );
 }

@@ -31,6 +31,7 @@ const handler = NextAuth({
         dbUser = await User.create({
           email: user.email,
           name: user.name,
+          nationality: 'India',
           image: user.image,
         });
       }
@@ -57,7 +58,7 @@ const handler = NextAuth({
       if (dbUser && session.user) {
         session.user.id = dbUser._id.toString();
         session.user.phone = dbUser.phone || "";
-        session.user.nationality = dbUser.nationality || "";
+        session.user.nationality = dbUser.nationality || "India";
         session.user.address = dbUser.address || "";
         session.user.isAdmin = token.isAdmin as boolean;
       }

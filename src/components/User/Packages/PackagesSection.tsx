@@ -13,8 +13,10 @@ import {
   faUtensils,
   faBathtub,
 } from "@fortawesome/free-solid-svg-icons";
+import { useSession } from "next-auth/react";
 
 export default function PackagesSection() {
+  const { data: session, status } = useSession();
   const [packages, setPackages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -36,63 +38,75 @@ export default function PackagesSection() {
   if (loading) return <p className="p-10">Loading Packages...</p>;
 
   return (
-      <div className="max-w-6xl mx-auto py-10 px-4">
-        <div className="grid md:grid-cols-3 gap-8">
-          {packages.map((pkg) => (
-            <div
-              key={pkg._id}
-              className="group bg-[#f3faf8] rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition"
-            >
-              {/* IMAGE */}
-              <div className="relative h-72 overflow-hidden">
-                <Image
-                  src={pkg.image}
-                  alt={pkg.packageName}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110 rounded-2xl"
-                />
+    <div className="max-w-6xl mx-auto py-10 px-4">
+      <div className="grid md:grid-cols-3 gap-8">
+        {packages.map((pkg) => (
+          <div
+            key={pkg._id}
+            className="group bg-[#f3faf8] rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition"
+          >
+            {/* IMAGE */}
+            <div className="relative h-72 overflow-hidden">
+              <Image
+                src={pkg.image}
+                alt={pkg.packageName}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-110 rounded-2xl"
+              />
 
-                {/* HOVER ICONS */}
-                <div className="absolute bottom-0 left-0 right-0 p-3 flex justify-center gap-1 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                  <Amenity icon={faSnowflake} />
-                  <Amenity icon={faBed} />
-                  <Amenity icon={faWifi} />
-                  <Amenity icon={faTv} />
-                  <Amenity icon={faUtensils} />
-                  <Amenity icon={faBathtub} />
-                </div>
+              {/* HOVER ICONS */}
+              <div className="absolute bottom-0 left-0 right-0 p-3 flex justify-center gap-1 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <Amenity icon={faSnowflake} />
+                <Amenity icon={faBed} />
+                <Amenity icon={faWifi} />
+                <Amenity icon={faTv} />
+                <Amenity icon={faUtensils} />
+                <Amenity icon={faBathtub} />
               </div>
+            </div>
 
-              {/* CONTENT */}
-              <div className="p-5 text-black">
-                <h2 className="text-xl font-semibold mb-2">
-                  {pkg.packageName}
-                </h2>
+            {/* CONTENT */}
+            <div className="p-5 text-black">
+              <h2 className="text-xl font-semibold mb-2">{pkg.packageName}</h2>
 
-                <p className="text-gray-600 text-sm mb-4 line-clamp-2 font-dm">
-                  {pkg.description}
-                </p>
+              <p className="text-gray-600 text-sm mb-4 line-clamp-2 font-dm">
+                {pkg.description}
+              </p>
 
-                <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between">
+                {session?.user ? (
                   <p className="text-lg font-bold">
-                    ₹{pkg.indianPrice}
+                    {session.user.nationality === "India" ? "₹" : "$"}
+                    {session.user.nationality === "India"
+                      ? pkg.indianPrice
+                      : pkg.foreignPrice}{" "}
                     <span className="text-sm font-normal text-gray-500">
                       /Night
                     </span>
                   </p>
+                ) : (
+                  <div>
+                    <p className="text-lg font-bold">
+                      {pkg.indianPrice}{" "}
+                      <span className="text-sm font-normal text-gray-500">
+                        /Night
+                      </span>
+                    </p>
+                  </div>
+                )}
 
-                  <Link
-                    href={`/booking/${pkg.slug}`}
-                    className="bg-black hover:bg-yellow-500 text-white px-4 py-2 rounded-full text-sm transition"
-                  >
-                    Room Details
-                  </Link>
-                </div>
+                <Link
+                  href={`/booking/${pkg.slug}`}
+                  className="bg-black hover:bg-yellow-500 text-white px-4 py-2 rounded-full text-sm transition"
+                >
+                  Room Details
+                </Link>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
+    </div>
   );
 }
 

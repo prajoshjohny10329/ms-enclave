@@ -75,7 +75,7 @@ export default function SecondHeader() {
           {!session ? (
             <button
               onClick={() => signIn("google")}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+              className="bg-black text-white text-md px-9 py-2 font-extrabold rounded-sm shadow hover:bg-red-700"
             >
               Login
             </button>

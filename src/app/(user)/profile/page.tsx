@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Breadcrumb from "@/components/common/Breadcrumb";
@@ -18,6 +18,10 @@ interface Profile {
 export default function ProfilePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
+
+
 
   const [profile, setProfile] = useState<Profile | null>(null);
   const [form, setForm] = useState<Profile>({
@@ -58,14 +62,21 @@ export default function ProfilePage() {
     if (!session?.user?.email) return;
 
     try {
-      await axios.post("/api/profile", {
+     const {data} =  await axios.post("/api/profile", {
       email: session.user.email,
       ...form,
     });
 
+    session.user.id = data.user._id.toString();
+    session.user.phone = data.user.phone || "";
+    session.user.nationality = data.user.nationality || "India";
+    session.user.address = data.user.address || "";
+
+
     setProfile(form);
     setIsEditing(false);
-    router.push("/profile");
+    router.push(callbackUrl || "/profile");
+
     toast.success("Profile Edited successfully" );
     } catch (error) {
       toast.loading("Profile Edited Error" );

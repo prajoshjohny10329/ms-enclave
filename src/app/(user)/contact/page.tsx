@@ -52,29 +52,32 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-5">
           {/* Left Side – Contact Info */}
           <div className="space-y-6">
-            <h3 className="text-2xl font-semibold text-black">Get in Touch</h3>
+            <div>
+<h2 className="text-3xl md:text-3xl font-semibold text-black leading-tight text-shadow-sm">Get in Touch</h2>
 
-            <p className="text-black">
+            <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
               We’d love to hear from you. Reach out for bookings, questions, or
               resort-related inquiries.
             </p>
+            </div>
+            
 
             <div>
-              <p className="font-semibold text-black">📍 Address</p>
-              <p className="text-black">
+              <h2 className="text-2xl  font-semibold text-black leading-tight text-shadow-sm"> Address</h2>
+              <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
                 Mannuparambil, Paruthipully <br />
                 Palakkad, Kerala 678573
               </p>
             </div>
 
             <div>
-              <p className="font-semibold text-black">📞 Phone</p>
-              <p className="text-black">
+              <p className="text-2xl  font-semibold text-black leading-tight text-shadow-sm">Contact Number</p>
+              <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
                 <Link href="tel:+918589996642" className="hover:text-blue-600">
                   +91 858 999 6642
                 </Link>
               </p>
-              <p className="text-black">
+              <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
                 <Link href="tel:+919945004857" className="hover:text-blue-600">
                   +91 994 500 4857
                 </Link>
@@ -82,8 +85,8 @@ export default function ContactPage() {
             </div>
 
             <div>
-              <p className="font-semibold text-black">📧 Email</p>
-              <p className="text-black">
+              <p className="text-2xl  font-semibold text-black leading-tight text-shadow-sm">Email</p>
+              <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
                 <Link
                   href="mailto:contact@msenclave.com"
                   className="hover:text-blue-600"

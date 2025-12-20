@@ -2,7 +2,7 @@ import { Header } from "@/components/common/Header";
 import AboutUsSection from "@/components/User/Home/AboutUsSection";
 import AmenitiesSlider from "@/components/User/Home/AmenitiesHighlights";
 import BookNowSection from "@/components/User/Home/BookNowSection";
-import GalleryHome from "@/components/User/Home/GalleryHome";
+import GalleryHome from "@/components/User/Home/HomeGallery";
 import GallerySection from "@/components/User/Home/GallerySection";
 import HeroSlider from "@/components/User/Home/HeroSlider";
 import HomeAboutSection from "@/components/User/Home/HomeAboutSection";
@@ -13,6 +13,8 @@ import PreviewSection from "@/components/User/Home/PreviewSection";
 import SecondGallery from "@/components/User/Home/SecondGallery";
 import VideoHeroSection from "@/components/User/Home/VideoHeroSection";
 import RoomsPreviewSection from "@/components/User/Home/RoomsPreviewSection";
+import HomeGallery from "@/components/User/Home/HomeGallery";
+import PhotoGalleryPreview from "@/components/User/Home/PhotoGalleryPreview";
 
 export default function Home() {
   return (
@@ -22,14 +24,13 @@ export default function Home() {
    <VideoHeroSection />
    <AmenitiesSlider />
    <RoomsPreviewSection />
+   <HomeGallery />
    <PreviewSection />
    <AboutUsSection />
    <ReasonsTimeline />
-   <GalleryHome />
    <BookNowSection />
    <RestaurantVideoSection />
    <GallerySection />
-   <RestaurantVideoSection />
    <SecondGallery />
    </> 
   );
