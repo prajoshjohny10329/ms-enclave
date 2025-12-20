@@ -1,4 +1,5 @@
 import Breadcrumb from "@/components/common/Breadcrumb";
+import AmenitiesSection from "../hi/page";
 
 export default function AboutUsPage() {
   return (
@@ -11,9 +12,8 @@ export default function AboutUsPage() {
         ]}
       />
 
-      <div className="max-w-6xl mx-auto px-6 py-16">
-        {/* Page content here */}
-      </div>
+         <AmenitiesSection />
+      
     </>
   );
 }

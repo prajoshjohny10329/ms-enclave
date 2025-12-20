@@ -22,7 +22,7 @@ export default function Breadcrumb({ heading, items, bgImage }: BreadcrumbProps)
       {/* Background Image */}
       <Image
         src={bgImage}
-        alt="Breadcrumb Background"
+        alt={heading}
         fill
         priority
         className="object-cover brightness-75 rounded-[0_0_15px_15px] drop-shadow-xl"
@@ -36,7 +36,7 @@ export default function Breadcrumb({ heading, items, bgImage }: BreadcrumbProps)
         
 
         {/* Heading */}
-        <h1 className="text-4xl md:text-5xl text-center font-bold text-white text-shadow-xl font-playfair">
+        <h1 className="text-4xl md:text-5xl text-center font-bold text-white text-shadow-sm font-playfair">
           {heading}
         </h1>
         {/* Breadcrumb */}
