@@ -13,11 +13,13 @@ import {
   faUtensils,
   faBathtub,
 } from "@fortawesome/free-solid-svg-icons";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
 import { useSession } from "next-auth/react";
 import { Bars } from "react-loader-spinner";
 
 
-export default function PackagesSection() {
+export default function PackagesSectionNew() {
   const { data: session, status } = useSession();
   const [packages, setPackages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -54,13 +56,32 @@ export default function PackagesSection() {
 
   );
 
-
-
   return (
-    <div className="max-w-6xl mx-auto py-10 px-4">
-      <div className="grid md:grid-cols-3 gap-8">
-        {packages.map((pkg) => (
-          <div
+    <section className="py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4">
+        {/* Heading */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-black text-blue-900 text-shadow-md">
+            Explore Our Gallery
+          </h2>
+          <p className="mt-4 text-black text-shadow-md">
+            A glimpse of comfort, elegance, and unforgettable moments
+          </p>
+        </div>
+
+        {/* Swiper */}
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          spaceBetween={20}
+          autoplay={{ delay: 3000 }}
+          breakpoints={{
+            0: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+        >
+          {packages.map((pkg, i) => (
+              <SwiperSlide
             key={pkg._id}
             className="group bg-[#f3faf8] rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition"
           >
@@ -119,12 +140,15 @@ export default function PackagesSection() {
                 </Link>
               </div>
             </div>
-          </div>
-        ))}
+          </SwiperSlide>
+          ))}
+        </Swiper>
+
+        
       </div>
-    </div>
+    </section>
   );
-}
+};
 
 /* ================= AMENITY ICON ================= */
 

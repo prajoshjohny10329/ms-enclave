@@ -19,7 +19,7 @@ import "swiper/css/thumbs";
 import "swiper/css/free-mode";
 import Link from "next/link";
 
-export default function RoomsPreviewSection() {
+export default function RoomsGallerySection() {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
   const images = [
@@ -43,16 +43,16 @@ export default function RoomsPreviewSection() {
         <div className="flex items-center">
           <div className="px-6 mb-5">
             <h2 className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm">
-            Comfortable  Spacious Rooms
+            Comfortable & Spacious Accommodations
           </h2>
           <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
-            Experience comfort in our thoughtfully designed rooms that reflect Kerala’s heritage style while offering modern amenities for a relaxing stay.
+            Whether you are traveling with family, friends, or as a couple, our rooms are designed to suit every need. Spacious interiors, soothing surroundings, and modern conveniences ensure a comfortable stay in the heart of nature.
           </p>
           <Link
-            href="/amenities/rooms"
+            href="/gallery"
             className="mt-6 inline-block px-6 py-3 bg-gray-950 text-white "
           >
-            View All Rooms
+            View All Gallery
           </Link>
           </div>
         </div>

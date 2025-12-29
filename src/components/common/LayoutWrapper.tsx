@@ -6,6 +6,7 @@ import { AdminHeader } from "./AdminHeader";
 import { useEffect, useState } from "react";
 import Preloader from "@/components/common/Preloader";
 import { Toaster } from "react-hot-toast";
+import Footer from "./Footer";
 
 export default function LayoutWrapper({
   children,
@@ -48,6 +49,7 @@ export default function LayoutWrapper({
         <>
           {isAdmin ? <AdminHeader /> : <Header />}
           {children}
+          <Footer />
         </>
       )}
     </>

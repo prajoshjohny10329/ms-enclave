@@ -99,20 +99,20 @@ export default function SecondHeader() {
               </button>
 
               {profileOpen && (
-                <div className="absolute right-0 mt-2 w-44 bg-white shadow-lg border rounded-lg overflow-hidden">
-                  <div className="px-4 py-2 text-gray-800 text-sm">
+                <div  className="absolute right-0 mt-2 w-44 bg-white shadow-lg  border rounded-lg overflow-hidden">
+                  <div className="px-4 py-2 text-black">
                     {session.user?.name}
                   </div>
                   <Link
                     href="/profile"
-                    className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
+                    className="block px-4 py-2 text-gray-900 hover:bg-gray-100"
                     onClick={() => setProfileOpen(false)}
                   >
                     Profile
                   </Link>
                   <Link
                     href="/my-bookings"
-                    className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
+                    className="block px-4 py-2 text-gray-900 hover:bg-gray-100"
                     onClick={() => setProfileOpen(false)}
                   >
                     Your Bookings
@@ -122,7 +122,7 @@ export default function SecondHeader() {
                       signOut();
                       setProfileOpen(false);
                     }}
-                    className="w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100"
+                    className="w-full text-left px-4 py-2 text-gray-900 hover:bg-gray-100"
                   >
                     Logout
                   </button>

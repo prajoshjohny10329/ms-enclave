@@ -43,7 +43,7 @@ export const menuData: Menu[] = [
         id: 31,
         title: "A/C Rooms",
         newTab: false,
-        path: "/amenities",
+        path: "/amenities/rooms",
       },
       {
         id: 36,

@@ -56,14 +56,13 @@ export default function BookingSection() {
   //     if (status === "unauthenticated") router.push("/login");
   //   }, [status, router]);
 
-
   useEffect(() => {
     const loadData = async () => {
       try {
         const res = await axios.get(`/api/packages/${slug}`);
         setPkg(res.data.data);
-        if (pkg?._id || form.date || nights){
-            fetchAvailability(form.date, Number(nights));
+        if (pkg?._id || form.date || nights) {
+          fetchAvailability(form.date, Number(nights));
         }
 
         setLoading(false);
@@ -110,7 +109,7 @@ export default function BookingSection() {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
         amount: order.amount,
         currency: order.currency,
-        name: "Your Hotel Name",
+        name: "MS Enclave Resort Palakkad",
         description: `Booking #${booking._id}`,
         order_id: order.id,
         prefill: {
@@ -126,8 +125,9 @@ export default function BookingSection() {
             razorpayOrderId: response.razorpay_order_id,
             razorpaySignature: response.razorpay_signature,
           });
-          alert("Payment successful!");
-          router.push("/bookings");
+          toast.success("Payment successful!");
+
+          router.push("/my-bookings");
         },
         theme: { color: "#3399cc" },
       };
@@ -136,7 +136,13 @@ export default function BookingSection() {
       rzp.open();
     } catch (err) {
       console.error(err);
-      alert("Failed to initiate payment.");
+      toast.error(
+        "Failed to initiate payment.Please Wait for Redirect Booking Then Retry to Pay"
+      );
+      setTimeout(() => {
+        router.push("/my-bookings");
+      }, 2000);
+      // alert("Failed to initiate payment.");
     }
   };
 
@@ -169,6 +175,8 @@ export default function BookingSection() {
       },
     });
     setMaxAvailableRooms(res.data.availableRooms);
+    console.log(res.data.availableRooms);
+    
   };
 
   const getCheckoutDate = (checkIn: string, nights: number) => {
@@ -238,8 +246,8 @@ export default function BookingSection() {
     if (!session?.user) return;
 
     // 🔥 Select price based on nationality
-    const price =
-      session.user.nationality === "India" ? pkg.indianPrice : pkg.foreignPrice;
+    // const price =
+    const price = pkg.indianPrice
 
     // 🔥 Calculate base price using nights
     const baseAmount = rooms * price * nights;
@@ -265,10 +273,7 @@ export default function BookingSection() {
 
     if (roomsNeeded > 0) {
       // 🔥 Choose price based on nationality
-      const price =
-        session.user.nationality === "India"
-          ? pkg.indianPrice
-          : pkg.foreignPrice;
+      const price = pkg.indianPrice
 
       // 🔥 Calculate base amount with nights
       const baseAmount = roomsNeeded * price * value;
@@ -341,7 +346,8 @@ export default function BookingSection() {
       if (session.user.nationality === "India") {
         await handleRazorpayPayment(booking);
       } else {
-        await handleStripePayment(booking);
+        await handleRazorpayPayment(booking);
+        // await handleStripePayment(booking);
       }
     } catch (err) {
       console.error(err);
@@ -361,16 +367,12 @@ export default function BookingSection() {
         </h1>
         {session?.user ? (
           <p className="text-gray-800 text-2xl text-shadow-sm">
-            {session.user.nationality === "India" ? "₹" : "$"}
-            {session.user.nationality === "India"
-              ? pkg.indianPrice
-              : pkg.foreignPrice}{" "}
-            / Night
+            ₹{pkg.indianPrice} / Night
           </p>
         ) : (
           <div>
             <p className="text-gray-800 text-2xl text-shadow-sm">
-              {pkg.indianPrice} / Night
+              ₹{pkg.indianPrice} / Night
             </p>
             <p className=" text-red-500 pl-1  text-lg  font-dm font-medium ">
               Login to Book You Room
@@ -472,8 +474,8 @@ export default function BookingSection() {
               />
 
               <p className="text-lg font-bold mt-4 font-dm ">
-                  Add Your Booking Details
-                </p>
+                Add Your Booking Details
+              </p>
 
               <input
                 name="adults"
@@ -564,7 +566,8 @@ export default function BookingSection() {
 
                   {/* Determine price & currency */}
                   {(() => {
-                    const isIndian = session.user.nationality === "India";
+                    // const isIndian = session.user.nationality === "India";
+                    const isIndian = true
                     const price = isIndian ? pkg.indianPrice : pkg.foreignPrice;
                     const currency = isIndian ? "₹" : "$";
                     const baseAmount = roomsNeeded * price * nights;
