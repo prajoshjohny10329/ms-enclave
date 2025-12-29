@@ -14,6 +14,7 @@ export default function AdminBookingsPage() {
       try {
         const res = await axios.get("/api/admin/bookings");
         setBookings(res.data);
+        console.log(res.data);
       } catch (err) {
         console.error("Failed to load bookings:", err);
       } finally {
@@ -51,10 +52,50 @@ export default function AdminBookingsPage() {
                 {booking.packageId?.packageName || "Room"}
               </h2>
               <p>
-                {new Date(booking.fromDate).toLocaleDateString()} →{" "}
-                {new Date(booking.toDate).toLocaleDateString()}
+                {new Date(booking.checkInDate).toLocaleDateString()} →{" "}
+                {new Date(booking.checkOutDate).toLocaleDateString()} {"  "}
+                {`( ${booking.nights} Nights )`}
               </p>
-              <p>Guests: {booking.guests}</p>
+              <p>Guests: {booking.adults+booking.children}</p>
+              <p>Total: ₹{booking.totalPrice}</p>
+              <p>
+                Status:{" "}
+                <span
+                  className={`font-semibold ${
+                    booking.status === "pending"
+                      ? "text-orange-500"
+                      : booking.status === "paid"
+                      ? "text-green-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  {booking.status.toUpperCase()}
+                </span>
+              </p>
+              <p>
+                User: {booking.userId?.name || booking.userId} | Email:{" "}
+                {booking.userId?.email}
+              </p>
+              <p>
+                Payment Method:{booking.paymentMethod}
+              </p>
+              <Link
+                href={`/admin/bookings/${booking._id}`}
+                className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
+              >
+                View
+              </Link>
+            </div>
+            <div className="flex-1">
+              <h2 className="font-semibold text-lg">
+                {booking.packageId?.packageName || "Room"}
+              </h2>
+              <p>
+                {new Date(booking.checkInDate).toLocaleDateString()} →{" "}
+                {new Date(booking.checkOutDate).toLocaleDateString()} {"  "}
+                {`( ${booking.nights} Nights )`}
+              </p>
+              <p>Guests: {booking.guests+booking.children}</p>
               <p>Total: ₹{booking.totalPrice}</p>
               <p>
                 Status:{" "}
@@ -82,12 +123,6 @@ export default function AdminBookingsPage() {
                   ? "Stripe"
                   : "N/A"}
               </p>
-              <Link
-                href={`/admin/bookings/${booking._id}`}
-                className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
-              >
-                View
-              </Link>
             </div>
           </div>
         ))}
