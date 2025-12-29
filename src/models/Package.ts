@@ -6,6 +6,7 @@ export interface IPackage extends Document {
   description: string;
   image: string;
   imagePublicId: string;
+  images: { url: string; publicId: string }[]; // ✅ NEW
   indianPrice: number;
   foreignPrice: number;
   maxAdults: number;
@@ -18,64 +19,33 @@ export interface IPackage extends Document {
 
 const PackageSchema = new Schema<IPackage>(
   {
-    packageName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+    packageName: { type: String, required: true, trim: true },
 
-    slug: {
-      type: String,
-      unique: true,
-      trim: true,
-    },
+    slug: { type: String, unique: true, trim: true },
 
-    description: {
-      type: String,
-      required: true,
-    },
+    description: { type: String, required: true },
 
-    // Cloudinary image URL
-    image: {
-      type: String,
-      required: true,
-    },
+    image: { type: String, required: true },
 
-    // Cloudinary public ID (used for deleting/updating)
-    imagePublicId: {
-      type: String,
-      required: true,
-    },
+    imagePublicId: { type: String, required: true },
 
-    indianPrice: {
-      type: Number,
-      required: true,
-    },
-
-    foreignPrice: {
-      type: Number,
-      required: true,
-    },
-
-    maxAdults: {
-      type: Number,
-      required: true,
-    },
-
-    maxChildren: {
-      type: Number,
-      required: true,
-    },
-
-    amenities: {
-      type: [String],
+    // ✅ GALLERY IMAGES
+    images: {
+      type: [
+        {
+          url: String,
+          publicId: String,
+        },
+      ],
       default: [],
     },
 
-    availability: {
-      type: Boolean,
-      default: true,
-    },
+    indianPrice: { type: Number, required: true },
+    foreignPrice: { type: Number, required: true },
+    maxAdults: { type: Number, required: true },
+    maxChildren: { type: Number, required: true },
+    amenities: { type: [String], default: [] },
+    availability: { type: Boolean, default: true },
 
     category: {
       type: String,
@@ -83,18 +53,14 @@ const PackageSchema = new Schema<IPackage>(
       default: "General",
     },
 
-    isActive: {
-      type: Boolean,
-      default: true,
-    },
+    isActive: { type: Boolean, default: true },
   },
   { timestamps: true }
 );
 
-// Create SEO-friendly slug automatically
 PackageSchema.pre("save", function (next) {
   if (this.isModified("packageName")) {
-    this.slug = this.packageName.toLowerCase().trim().replace(/\s+/g, "-");
+    this.slug = this.packageName.toLowerCase().replace(/\s+/g, "-");
   }
   next();
 });

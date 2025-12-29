@@ -4,14 +4,23 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 
+type GalleryImage = {
+  url: string;
+  publicId: string;
+};
+
 export default function EditPackagePage() {
   const { id } = useParams();
   const router = useRouter();
 
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
-  const [image, setImage] = useState<File | null>(null);
+
   const [imagePreview, setImagePreview] = useState("");
+  const [gallery, setGallery] = useState<GalleryImage[]>([]);
+  const [newGalleryFiles, setNewGalleryFiles] = useState<File[]>([]);
+  const [galleryPreview, setGalleryPreview] = useState<string[]>([]);
+  const [removedImages, setRemovedImages] = useState<string[]>([]);
 
   const [formData, setFormData] = useState({
     packageName: "",
@@ -27,44 +36,39 @@ export default function EditPackagePage() {
   });
 
   // ------------------------------------
-  // 1️⃣ Fetch package by ID
+  // FETCH PACKAGE
   // ------------------------------------
   useEffect(() => {
     const fetchPackage = async () => {
-      try {
-        const res = await axios.get(`/api/packages/edit/${id}`);
-        const p = res.data;
+      const res = await axios.get(`/api/packages/edit/${id}`);
+      const p = res.data;
 
-        setFormData({
-          packageName: p.packageName,
-          description: p.description,
-          indianPrice: p.indianPrice,
-          foreignPrice: p.foreignPrice,
-          maxAdults: p.maxAdults,
-          maxChildren: p.maxChildren,
-          amenities: p.amenities.join(", "),
-          availability: p.availability,
-          image: p.image,
-          imagePublicId: p.imagePublicId,
-        });
+      setFormData({
+        packageName: p.packageName,
+        description: p.description,
+        indianPrice: p.indianPrice,
+        foreignPrice: p.foreignPrice,
+        maxAdults: p.maxAdults,
+        maxChildren: p.maxChildren,
+        amenities: p.amenities.join(", "),
+        availability: p.availability,
+        image: p.image,
+        imagePublicId: p.imagePublicId,
+      });
 
-        setImagePreview(p.image);
-        setLoading(false);
-      } catch (err) {
-        console.error(err);
-        setLoading(false);
-      }
+      setImagePreview(p.image);
+      setGallery(p.images || []);
+      setLoading(false);
     };
 
     fetchPackage();
   }, [id]);
 
   // ------------------------------------
-  // 2️⃣ Handle Input
+  // INPUT HANDLER
   // ------------------------------------
   const handleChange = (e: any) => {
     const { name, value, type, checked } = e.target;
-
     setFormData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
@@ -72,211 +76,214 @@ export default function EditPackagePage() {
   };
 
   // ------------------------------------
-  // 3️⃣ Auto Upload Image
+  // IMAGE UPLOAD (CLOUDINARY)
   // ------------------------------------
-  const uploadImage = async (selectedImage: File) => {
+  const uploadImage = async (file: File) => {
     const body = new FormData();
-    body.append("file", selectedImage);
+    body.append("file", file);
 
-    setUploading(true);
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      body,
+    });
 
-    try {
-      const res = await fetch("/api/upload", {
-        method: "POST",
-        body,
-      });
-
-      const data = await res.json();
-      setUploading(false);
-
-      return data;
-    } catch (error) {
-      setUploading(false);
-      return null;
-    }
+    return res.json();
   };
 
-  const handleImageChange = async (e: any) => {
+  // ------------------------------------
+  // MAIN IMAGE CHANGE
+  // ------------------------------------
+  const handleMainImageChange = async (e: any) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    setImage(file);
-    setImagePreview(URL.createObjectURL(file));
-
+    setUploading(true);
     const uploaded = await uploadImage(file);
+    setUploading(false);
 
-    if (uploaded) {
-      setFormData((prev) => ({
-        ...prev,
-        image: uploaded.secure_url,
-        imagePublicId: uploaded.public_id,
-      }));
-    }
+    setImagePreview(uploaded.secure_url);
+    setFormData((prev) => ({
+      ...prev,
+      image: uploaded.secure_url,
+      imagePublicId: uploaded.public_id,
+    }));
   };
 
   // ------------------------------------
-  // 4️⃣ Submit Update
+  // DRAG & DROP GALLERY
+  // ------------------------------------
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const files = Array.from(e.dataTransfer.files);
+    setNewGalleryFiles(files);
+    setGalleryPreview(files.map((f) => URL.createObjectURL(f)));
+  };
+
+  // ------------------------------------
+  // SUBMIT UPDATE
   // ------------------------------------
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setUploading(true);
 
-    try {
-      await axios.put(`/api/packages/edit/${id}`, {
-        ...formData,
-        amenities: formData.amenities.split(",").map((a) => a.trim()),
+    let uploadedGallery: GalleryImage[] = [];
+
+    for (const file of newGalleryFiles) {
+      const img = await uploadImage(file);
+      uploadedGallery.push({
+        url: img.secure_url,
+        publicId: img.public_id,
       });
-
-      alert("Package Updated Successfully!");
-      router.push("/admin/packages");
-    } catch (error) {
-      console.error(error);
-      alert("Failed to update package");
     }
+
+    await axios.put(`/api/packages/edit/${id}`, {
+      ...formData,
+      amenities: formData.amenities.split(",").map((a) => a.trim()),
+      images: [...gallery, ...uploadedGallery], // ✅ updated gallery
+      removedImages, // ✅ send removed images
+    });
+
+    setUploading(false);
+    alert("Package Updated Successfully!");
+    router.push("/admin/packages");
   };
 
   if (loading) return <p className="p-10">Loading...</p>;
 
-  // ------------------------------------
-  // 5️⃣ Form Validation
-  // ------------------------------------
-  const isFormValid =
-    formData.packageName &&
-    formData.description &&
-    formData.indianPrice &&
-    formData.foreignPrice &&
-    formData.maxAdults &&
-    formData.maxChildren &&
-    formData.image &&
-    !uploading;
-
-  // ------------------------------------
-  // UI
-  // ------------------------------------
   return (
     <div className="p-6 max-w-3xl mx-auto text-black">
       <h2 className="text-2xl font-semibold mb-4">Edit Package</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          name="packageName"
+          value={formData.packageName}
+          onChange={handleChange}
+          className="w-full p-2 border"
+          placeholder="Package Name"
+        />
 
-        <div>
-          <label>Package Name</label>
-          <input
-            type="text"
-            name="packageName"
-            value={formData.packageName}
-            onChange={handleChange}
-            className="input w-full p-2 border rounded"
-          />
-        </div>
+        <textarea
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+          className="w-full p-2 border"
+        />
 
-        <div>
-          <label>Description</label>
-          <textarea
-            name="description"
-            rows={3}
-            value={formData.description}
-            onChange={handleChange}
-            className="textarea w-full p-2 border rounded"
-          />
-        </div>
+        <input
+          type="number"
+          name="indianPrice"
+          value={formData.indianPrice}
+          onChange={handleChange}
+          className="w-full p-2 border"
+        />
 
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label>Indian Price</label>
-            <input
-              type="number"
-              name="indianPrice"
-              value={formData.indianPrice}
-              onChange={handleChange}
-              className="input w-full p-2 border rounded"
-            />
-          </div>
+        <input
+          type="number"
+          name="foreignPrice"
+          value={formData.foreignPrice}
+          onChange={handleChange}
+          className="w-full p-2 border"
+        />
 
-          <div>
-            <label>Foreign Price</label>
-            <input
-              type="number"
-              name="foreignPrice"
-              value={formData.foreignPrice}
-              onChange={handleChange}
-              className="input w-full p-2 border rounded"
-            />
-          </div>
-        </div>
+        <input
+          type="number"
+          name="maxAdults"
+          value={formData.maxAdults}
+          onChange={handleChange}
+          className="w-full p-2 border"
+        />
 
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label>Max Adults</label>
-            <input
-              type="number"
-              name="maxAdults"
-              value={formData.maxAdults}
-              onChange={handleChange}
-              className="input w-full p-2 border rounded"
-            />
-          </div>
+        <input
+          type="number"
+          name="maxChildren"
+          value={formData.maxChildren}
+          onChange={handleChange}
+          className="w-full p-2 border"
+        />
 
-          <div>
-            <label>Max Children</label>
-            <input
-              type="number"
-              name="maxChildren"
-              value={formData.maxChildren}
-              onChange={handleChange}
-              className="input w-full p-2 border rounded"
-            />
-          </div>
-        </div>
+        <input
+          name="amenities"
+          value={formData.amenities}
+          onChange={handleChange}
+          className="w-full p-2 border"
+          placeholder="Amenities"
+        />
 
-        <div>
-          <label>Amenities (comma separated)</label>
-          <input
-            type="text"
-            name="amenities"
-            value={formData.amenities}
-            onChange={handleChange}
-            className="input w-full p-2 border rounded"
-          />
-        </div>
-
-        <div className="flex gap-4 items-center">
-          <label>Availability</label>
+        <label className="flex gap-2 items-center">
           <input
             type="checkbox"
             name="availability"
             checked={formData.availability}
             onChange={handleChange}
           />
-        </div>
+          Available
+        </label>
 
+        {/* MAIN IMAGE */}
         <div>
-          <label>Package Image</label>
-          <input type="file" accept="image/*" onChange={handleImageChange} />
-
-          {uploading && (
-            <p className="text-blue-600 mt-2">Uploading image...</p>
-          )}
-
+          <label>Main Image</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleMainImageChange}
+          />
           {imagePreview && (
-            <img
-              src={imagePreview}
-              alt="preview"
-              className="w-40 h-40 object-cover mt-3 rounded shadow"
-            />
+            <img src={imagePreview} className="w-40 h-40 mt-2 object-cover" />
           )}
         </div>
 
-        {/* UPDATE BUTTON */}
-        <button
-          type="submit"
-          disabled={!isFormValid}
-          className={`px-6 py-2 rounded text-white transition ${
-            !isFormValid
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-black hover:bg-gray-800"
-          }`}
+        {/* EXISTING GALLERY */}
+        <div>
+          <label className="font-medium">Existing Gallery</label>
+
+          <div className="flex gap-3 flex-wrap mt-3">
+            {gallery.map((img, i) => (
+              <div key={i} className="relative">
+                <img
+                  src={img.url}
+                  className="w-24 h-24 object-cover rounded border"
+                />
+
+                {/* REMOVE BUTTON */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setGallery((prev) => prev.filter((_, idx) => idx !== i));
+                    setRemovedImages((prev) => [...prev, img.publicId]);
+                  }}
+                  className="absolute -top-2 -right-2 bg-red-600 text-white
+             text-xs rounded-full w-6 h-6 flex items-center justify-center"
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* DRAG & DROP */}
+        <div
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={handleDrop}
+          className="border-2 border-dashed p-6 text-center rounded"
         >
-          {uploading ? "Uploading..." : "Update Package"}
+          Drag & Drop New Gallery Images
+        </div>
+
+        <div className="flex gap-2 flex-wrap">
+          {galleryPreview.map((img, i) => (
+            <img key={i} src={img} className="w-24 h-24 object-cover" />
+          ))}
+        </div>
+
+        
+
+        <button
+          disabled={uploading}
+          className="bg-black text-white px-6 py-2 rounded"
+        >
+          {uploading ? "Updating..." : "Update Package"}
         </button>
       </form>
     </div>

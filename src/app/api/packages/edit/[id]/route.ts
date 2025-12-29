@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Package from "@/models/Package";
+import cloudinary from "@/lib/cloudinary";
 
 export async function GET(
   req: Request,
@@ -28,25 +29,39 @@ export async function PUT(
   context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await context.params; // ✅ FIXED
+    const { id } = await context.params;
     await connectDB();
 
     const body = await req.json();
+    const { removedImages, images, ...rest } = body;
+
+    // 🔥 DELETE FROM CLOUDINARY
+    if (removedImages && removedImages.length > 0) {
+      for (const publicId of removedImages) {
+        await cloudinary.uploader.destroy(publicId);
+      }
+    }
 
     const updatedPackage = await Package.findByIdAndUpdate(
       id,
-      { ...body },
+      {
+        ...rest,
+        images: images || [],
+      },
       { new: true }
     );
 
     return NextResponse.json({
       success: true,
-      message: "Package updated successfully",
+      message: "Package updated & images deleted",
       data: updatedPackage,
     });
   } catch (err) {
-    console.error("PUT Package Error:", err);
-    return NextResponse.json({ error: "Failed to update package" }, { status: 500 });
+    console.error("Cloudinary Delete Error:", err);
+    return NextResponse.json(
+      { error: "Failed to update package" },
+      { status: 500 }
+    );
   }
 }
 

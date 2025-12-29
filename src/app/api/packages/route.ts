@@ -5,26 +5,15 @@ import Package from "@/models/Package";
 export async function POST(req: Request) {
   try {
     await connectDB();
-
     const body = await req.json();
-
-    // Destructure image object into two strings
-    const imageUrl = body.image?.url;
-    const imagePublicId = body.image?.public_id;
-
-    if (!imageUrl || !imagePublicId) {
-      return NextResponse.json(
-        { error: "Image URL and Public ID are required" },
-        { status: 400 }
-      );
-    }
 
     const newPackage = await Package.create({
       packageName: body.packageName,
       description: body.description,
       slug: body.packageName.toLowerCase().replace(/\s+/g, "-"),
-      image: imageUrl,
-      imagePublicId: imagePublicId,
+      image: body.image.url,
+      imagePublicId: body.image.public_id,
+      images: body.images || [], // ✅ NEW
       indianPrice: Number(body.indianPrice),
       foreignPrice: Number(body.foreignPrice),
       maxAdults: Number(body.maxAdults),
@@ -36,7 +25,7 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ success: true, data: newPackage });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to create package" },
       { status: 500 }
@@ -45,12 +34,7 @@ export async function POST(req: Request) {
 }
 
 export async function GET() {
-  try {
-    await connectDB();
-    const packages = await Package.find().sort({ createdAt: -1 });
-    return NextResponse.json({ success: true, data: packages });
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ success: false, error: "Failed to fetch" }, { status: 500 });
-  }
+  await connectDB();
+  const packages = await Package.find().sort({ createdAt: -1 });
+  return NextResponse.json({ success: true, data: packages });
 }
