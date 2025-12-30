@@ -7,6 +7,7 @@ import axios from "axios";
 import Breadcrumb from "@/components/common/Breadcrumb";
 import NationalitySelector from "@/components/common/NationalitySelector";
 import toast from "react-hot-toast";
+import { Bars } from "react-loader-spinner";
 
 interface Profile {
   name: string;
@@ -20,8 +21,6 @@ export default function ProfilePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
-
-
 
   const [profile, setProfile] = useState<Profile | null>(null);
   const [form, setForm] = useState<Profile>({
@@ -62,26 +61,24 @@ export default function ProfilePage() {
     if (!session?.user?.email) return;
 
     try {
-     const {data} =  await axios.post("/api/profile", {
-      email: session.user.email,
-      ...form,
-    });
+      const { data } = await axios.post("/api/profile", {
+        email: session.user.email,
+        ...form,
+      });
 
-    session.user.id = data.user._id.toString();
-    session.user.phone = data.user.phone || "";
-    session.user.nationality = data.user.nationality || "India";
-    session.user.address = data.user.address || "";
+      session.user.id = data.user._id.toString();
+      session.user.phone = data.user.phone || "";
+      session.user.nationality = data.user.nationality || "India";
+      session.user.address = data.user.address || "";
 
+      setProfile(form);
+      setIsEditing(false);
+      router.push(callbackUrl || "/profile");
 
-    setProfile(form);
-    setIsEditing(false);
-    router.push(callbackUrl || "/profile");
-
-    toast.success("Profile Edited successfully" );
+      toast.success("Profile Edited successfully");
     } catch (error) {
-      toast.loading("Profile Edited Error" );
+      toast.loading("Profile Edited Error");
     }
-
   };
 
   const handleEdit = () => {
@@ -90,7 +87,20 @@ export default function ProfilePage() {
   };
 
   if (status === "loading")
-    return <p className="text-center mt-10">Loading...</p>;
+    return (
+      <div className="min-h-[500px] flex flex-col items-center justify-center gap-4">
+        <Bars
+          height="80"
+          width="80"
+          color="#000"
+          ariaLabel="bars-loading"
+          visible={true}
+        />
+        <p className="text-md text-black text-shadow-md animate-pulse">
+          Please wait, loading...
+        </p>
+      </div>
+    );
 
   return (
     <>
@@ -101,10 +111,11 @@ export default function ProfilePage() {
       />
 
       <div className="max-w-lg mx-auto mt-10 bg-white p-6 rounded-xl shadow">
-        <h1 className="text-2xl font-semibold mb-4">Your Profile</h1>
-
         {isEditing ? (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-4 text-black"
+          >
             <input
               type="text"
               name="name"

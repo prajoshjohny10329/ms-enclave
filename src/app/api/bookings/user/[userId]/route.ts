@@ -11,7 +11,7 @@ export async function GET(request: Request, context: { params: Promise<{ userId:
   try {
     await connectDB();
 
-    const bookings = await Booking.find({ userId })
+    const bookings = await Booking.find({ userId }).sort({ createdAt: -1 })
       .populate({
         path: "packageId",
         model: Package,   // ✅ use model reference, not string

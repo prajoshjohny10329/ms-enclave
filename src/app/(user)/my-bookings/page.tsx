@@ -15,23 +15,22 @@ export default function ProfilePage() {
 
   // Fetch user bookings
   useEffect(() => {
-  const fetchBookings = async () => {
-    if (status === "authenticated" && session?.user?.id) {
-      try {
-        const res = await axios.get(`/api/bookings/user/${session.user.id}`);
-        setBookings(res.data);
-        
-      } catch (err) {
-        console.error("Failed to load bookings:", err);
-      } finally {
-        setLoading(false);
+    const fetchBookings = async () => {
+      if (status === "authenticated" && session?.user?.id) {
+        try {
+          const res = await axios.get(`/api/bookings/user/${session.user.id}`);
+          setBookings(res.data);
+          console.log(res.data);
+        } catch (err) {
+          console.error("Failed to load bookings:", err);
+        } finally {
+          setLoading(false);
+        }
       }
-    }
-  };
+    };
 
-  fetchBookings();
-}, [status, session?.user?.id]); // ✅ only include the user id
-
+    fetchBookings();
+  }, [status, session?.user?.id]); // ✅ only include the user id
 
   // Handle payment for a booking
   const handlePayment = async (booking: any) => {
@@ -40,7 +39,7 @@ export default function ProfilePage() {
 
     try {
       const nationality = session.user.nationality;
-      if (nationality === "India") {
+      if (nationality) {
         // Razorpay flow
         const res = await axios.post("/api/payments/razorpay", {
           amount: booking.totalPrice,
@@ -59,7 +58,7 @@ export default function ProfilePage() {
           key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
           amount: order.amount,
           currency: order.currency,
-          name: "Your Hotel Name",
+          name: "MS Enclave Resort Palakkad",
           description: `Booking #${booking._id}`,
           order_id: order.id,
           prefill: {
@@ -84,6 +83,7 @@ export default function ProfilePage() {
 
         const rzp = new (window as any).Razorpay(options);
         rzp.open();
+        router.push("/my-bookings");
       } else {
         // Stripe flow
         const res = await axios.post("/api/payments/stripe", {
@@ -103,7 +103,8 @@ export default function ProfilePage() {
   };
 
   if (loading) return <p className="text-center mt-10">Loading bookings...</p>;
-  if (bookings.length === 0) return <p className="text-center mt-10">No bookings yet.</p>;
+  if (bookings.length === 0)
+    return <p className="text-center mt-10">No bookings yet.</p>;
 
   return (
     <div className="max-w-4xl mx-auto mt-10 text-black">
@@ -158,12 +159,11 @@ export default function ProfilePage() {
                 </button>
               )}
               <button
-  onClick={() => router.push(`/my-bookings/${booking._id}`)}
-  className="mt-2 ml-2 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
->
-  View
-</button>
-
+                onClick={() => router.push(`/my-bookings/${booking._id}`)}
+                className="mt-2 ml-2 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+              >
+                View
+              </button>
             </div>
           </div>
         ))}

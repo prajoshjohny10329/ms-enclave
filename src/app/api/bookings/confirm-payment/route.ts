@@ -11,11 +11,15 @@ export async function POST(req: NextRequest) {
     }
 
     await connectDB();
+    console.log('confirm payemnt loades');
+
 
     const booking = await Booking.findById(bookingId);
     if (!booking) {
       return NextResponse.json({ error: "Booking not found" }, { status: 404 });
     }
+
+    
 
     // Update booking status
     booking.status = "paid";
@@ -33,6 +37,9 @@ export async function POST(req: NextRequest) {
     }
 
     await booking.save();
+
+    console.log(booking);
+    
 
     return NextResponse.json({ message: "Payment confirmed successfully", booking });
   } catch (err) {
