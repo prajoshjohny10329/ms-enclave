@@ -64,10 +64,10 @@ export default function ContactPage() {
 
             <div>
               <h2 className="text-2xl  font-semibold text-black leading-tight text-shadow-sm"> Address</h2>
-              <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
+              <Link href={'https://maps.app.goo.gl/MvrRJ2aN9SZZsFHL7'} className="text-gray-950 font-medium text-md leading-relaxed font-dm">
                 Mannuparambil, Paruthipully <br />
                 Palakkad, Kerala 678573
-              </p>
+              </Link>
             </div>
 
             <div>
@@ -98,13 +98,14 @@ export default function ContactPage() {
 
             <div className="pt-5">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d250870.55126711767!2d76.51275540454441!3d10.745859619633723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba8750079d44dc5%3A0x5290675a530ee53c!2sMS%20ENCLAVE%20HERITAGE%20RESORT!5e0!3m2!1sen!2sin!4v1765262313361!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2076.4752035927186!2d76.51303615225527!3d10.745094795833834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba8750079d44dc5%3A0x5290675a530ee53c!2sMS%20ENCLAVE%20HERITAGE%20RESORT!5e0!3m2!1sen!2sin!4v1767093445007!5m2!1sen!2sin"
                 width="100%"
                 height="300"
                 allowFullScreen
                 loading="lazy"
                 className="rounded-xl border"
               ></iframe>
+              
             </div>
           </div>
 

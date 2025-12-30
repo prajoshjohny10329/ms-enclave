@@ -50,7 +50,7 @@ export default function TopHeader() {
         <div className="hidden md:flex items-center gap-3 text-right">
           <div className="text-right text-[13px] font-dm font-semibold">
             <Link
-              href="https://www.google.com/maps/search/?api=1&query=Mannuparambil,+Paruthipully,+Palakkad,+Kerala"
+              href="https://maps.app.goo.gl/MvrRJ2aN9SZZsFHL7"
               target="_blank"
               className="text-black hover:underline"
             >

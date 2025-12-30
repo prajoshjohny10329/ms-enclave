@@ -91,3 +91,22 @@ body {
   animation: fadeUp 0.9s ease-out forwards;
   animation-delay: 0.45s;
 }
+
+.cursor-splash {
+  position: fixed;
+  width: 16px;
+  height: 16px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+  animation: splash 500ms ease-out;
+  z-index: 9999;
+}
+
+@keyframes splash {
+  to {
+    transform: translate(-50%, -50%) scale(7);
+    opacity: 0;
+  }
+}

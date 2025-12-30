@@ -62,10 +62,10 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Contact</h4>
             <ul className="space-y-3 text-gray-300  text-sm font-dm">
-                <li><p className="text-gray-300 hover:font-bold hover:text-white text-sm leading-relaxed font-dm">
+                <li><Link href={'https://maps.app.goo.gl/MvrRJ2aN9SZZsFHL7'} className="text-gray-300 hover:font-bold hover:text-white text-sm leading-relaxed font-dm">
               Mannuparambil, Paruthipully<br />
               Palakkad, Kerala – 678573
-            </p></li>
+            </Link></li>
             <li><Link href={'tel:+91 858 999 6642'} className="text-gray-300 hover:font-bold hover:text-white text-sm mt-3 font-dm">
               📞 +91 858 999 6642
             </Link></li>

@@ -48,28 +48,32 @@ const amenities = [
       "/images/common/ms-enclave-15.webp",
     ],
   },
+  
 ];
 
 export default function AmenitiesSection() {
   const [activeAmenityIndex, setActiveAmenityIndex] = useState(0);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const activeAmenity = amenities[activeAmenityIndex];
 
-  /* AUTO SLIDE (amenities) */
+  /* AUTO SLIDE AMENITIES */
   useEffect(() => {
     if (paused) return;
 
+    if (intervalRef.current) clearInterval(intervalRef.current);
+
     intervalRef.current = setInterval(() => {
       setActiveAmenityIndex((prev) => (prev + 1) % amenities.length);
-      setActiveImageIndex(0); // reset image
+      setActiveImageIndex(0);
     }, 5000);
 
-    // return () => {
-    //   if (intervalRef.current) clearInterval(intervalRef.current);
-    // };
+    return () => {
+      // if (intervalRef.current) clearInterval(intervalRef.current);
+    };
   }, [paused]);
 
   const selectAmenity = (index: number) => {
@@ -80,12 +84,17 @@ export default function AmenitiesSection() {
 
   const selectImage = (index: number) => {
     setPaused(true);
+
+    if (!activeAmenity.images[index]) {
+      setActiveImageIndex(0);
+      return;
+    }
+
     setActiveImageIndex(index);
   };
 
   return (
-    <section className="py-20 bg-white">
-
+    <section className="py-20 bg-gray-100">
       <div className="grid grid-cols-1 lg:grid-cols-2">
         {/* LEFT CONTENT */}
         <div className="px-6 lg:px-24 flex flex-col justify-center gap-6">
@@ -98,31 +107,31 @@ export default function AmenitiesSection() {
           </p>
 
           {/* THUMBNAILS */}
-          <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-            {activeAmenity.images.map((img, index) => (
-              <motion.button
-                key={index}
-                onClick={() => selectImage(index)}
-                whileHover={{ scale: 1.05 }}
-                className={`relative min-w-[90px] h-[60px] rounded-md overflow-hidden border
-                  ${
-                    index === activeImageIndex
-                      ? "border-black ring-2 ring-black"
-                      : "border-gray-300"
-                  }`}
-              >
-                <Image
-                  src={img}
-                  alt="Amenity thumbnail"
-                  fill
-                  className="object-cover"
-                />
+          <div className="flex gap-4 overflow-x-auto pb-2 overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            {activeAmenity.images.map((img, index) => {
+              if (!img) return null;
 
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition flex items-center justify-center text-white text-xs font-semibold">
-                </div>
-              </motion.button>
-            ))}
+              return (
+                <motion.button
+                  key={index}
+                  onClick={() => selectImage(index)}
+                  whileHover={{ scale: 1.05 }}
+                  className={`relative min-w-[90px] h-[60px] rounded-md overflow-hidden border
+                    ${
+                      index === activeImageIndex
+                        ? "border-black ring-2 "
+                        : "border-gray-300"
+                    }`}
+                >
+                  <Image
+                    src={img}
+                    alt="Amenity thumbnail"
+                    fill
+                    className="object-cover"
+                  />
+                </motion.button>
+              );
+            })}
           </div>
 
           {/* AMENITY TITLES */}
@@ -133,20 +142,21 @@ export default function AmenitiesSection() {
                   <button
                     onClick={() => selectAmenity(index)}
                     className={`text-left text-md transition border-b-2 pb-1 font-dm
-                    ${
-                      index === activeAmenityIndex
-                        ? "text-black border-black font-semibold"
-                        : "text-gray-400 border-transparent hover:text-black"
-                    }`}
+                      ${
+                        index === activeAmenityIndex
+                          ? "text-black border-black font-semibold"
+                          : "text-gray-400 border-transparent hover:text-black"
+                      }`}
                   >
                     {amenity.title}
                   </button>
                 </li>
               ))}
             </ul>
+
             <Link
               href="/amenities"
-              className="mt-6 inline-block px-6 py-3 bg-gray-950 text-white "
+              className="mt-6 inline-block px-6 py-3 bg-gray-950 text-white"
             >
               Know More Amenities
             </Link>
@@ -154,7 +164,7 @@ export default function AmenitiesSection() {
         </div>
 
         {/* RIGHT IMAGE */}
-        <div className="relative h-[450px] lg:h-[520px] w-full">
+        <div className="relative h-[450px] lg:h-[600px] w-full">
           <AnimatePresence mode="wait">
             <motion.div
               key={`${activeAmenityIndex}-${activeImageIndex}`}
@@ -165,15 +175,18 @@ export default function AmenitiesSection() {
               className="absolute inset-0"
             >
               <Image
-                src={activeAmenity.images[activeImageIndex]}
+                src={
+                  activeAmenity.images[activeImageIndex] ||
+                  activeAmenity.images[0]
+                }
                 alt={activeAmenity.title}
                 fill
-                className="object-cover"
+                className="object-cover rounded-tl-[35px] rounded-bl-[35px] shadow-md pb-2 pl-2"
                 priority
               />
 
               {/* Overlay Title */}
-              <div className="absolute font-dm bottom-6 left-6  text-shadow-lg text-white px-5 py-3 text-2xl font-bold rounded-md">
+              <div className="absolute font-dm bottom-6 left-6 text-white px-5 py-3 text-2xl font-bold">
                 {activeAmenity.title}
               </div>
             </motion.div>
