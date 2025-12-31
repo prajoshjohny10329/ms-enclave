@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCoverflow, Navigation } from "swiper/modules";
+import { motion, useInView } from "framer-motion";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -19,18 +20,37 @@ const images = [
   "/images/home/ms-slider-2.webp",
 ];
 
+const fadeUp = {
+  hidden: { y: 60, opacity: 0 },
+  visible: { y: 0, opacity: 1 },
+};
+
 export default function HomeGallery() {
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [shuffledImages, setShuffledImages] = useState<string[]>([]);
+
+  const headerRef = useRef(null);
+  const sliderRef = useRef(null);
+
+  const headerInView = useInView(headerRef, { amount: 0.3 });
+  const sliderInView = useInView(sliderRef, { amount: 0.2 });
 
   useEffect(() => {
     setShuffledImages([...images].sort(() => Math.random() - 0.5));
   }, []);
 
   return (
-    <section className="py-24 bg-white relative">
+    <section className="py-15 bg-white relative">
+
       {/* HEADER */}
-      <div className="max-w-7xl mx-auto px-4 text-center relative">
+      <motion.div
+        ref={headerRef}
+        variants={fadeUp}
+        initial="hidden"
+        animate={headerInView ? "visible" : "hidden"}
+        transition={{ duration: 1 }}
+        className="max-w-7xl mx-auto px-4 text-center relative"
+      >
         <h2 className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm">
           Explore Our Resort
         </h2>
@@ -38,31 +58,37 @@ export default function HomeGallery() {
           A glimpse into the beauty and serenity of M.S. Enclave Heritage Resort.
         </p>
         <Link
-            href="/gallery"
-            className="mt-6 inline-block px-6 py-3 bg-gray-950 text-white "
-          >
-            Explore Our Gallery
-          </Link>
-      </div>
+          href="/gallery"
+          className="mt-6 inline-block px-6 py-3 bg-gray-950 text-white "
+        >
+          Explore Our Gallery
+        </Link>
+      </motion.div>
 
       {/* GALLERY */}
-      <div className="mt-14 relative">
+      <motion.div
+        ref={sliderRef}
+        variants={fadeUp}
+        initial="hidden"
+        animate={sliderInView ? "visible" : "hidden"}
+        transition={{ duration: 1.1, delay: 0.15 }}
+        className="mt-14 relative"
+      >
         <Swiper
           modules={[EffectCoverflow, Navigation, Autoplay]}
           effect="coverflow"
           centeredSlides
           grabCursor
-        //   navigation
           loop
           slideToClickedSlide
           autoplay={{
             delay: 2500,
             disableOnInteraction: false,
-            pauseOnMouseEnter: true, // ✅ IMPORTANT
+            pauseOnMouseEnter: true,
           }}
           coverflowEffect={{
             rotate: 0,
-            stretch: 90,   // 🔽 reduced
+            stretch: 90,
             depth: 260,
             modifier: 1,
             slideShadows: false,
@@ -83,7 +109,6 @@ export default function HomeGallery() {
                 onClick={() => setLightbox(src)}
                 className="relative cursor-pointer"
               >
-                {/* SCALE IMAGE ONLY */}
                 <Image
                   src={src}
                   alt="Gallery image"
@@ -102,7 +127,7 @@ export default function HomeGallery() {
             </SwiperSlide>
           ))}
         </Swiper>
-      </div>
+      </motion.div>
 
       {/* LIGHTBOX */}
       {lightbox && (
@@ -128,7 +153,8 @@ export default function HomeGallery() {
           </div>
         </div>
       )}
-      {/* ================= SEO (Hidden) ================= */}
+
+      {/* SEO (Hidden) */}
       <div className="sr-only">
         <h3>Luxury Resort Gallery Kerala</h3>
         <p>

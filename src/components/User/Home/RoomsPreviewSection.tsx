@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   Navigation,
@@ -11,16 +11,35 @@ import {
 } from "swiper/modules";
 import Image from "next/image";
 import type { Swiper as SwiperType } from "swiper";
+import { motion, useInView } from "framer-motion";
+import Link from "next/link";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/thumbs";
 import "swiper/css/free-mode";
-import Link from "next/link";
+
+const fadeLeft = {
+  hidden: { x: -60, opacity: 0 },
+  visible: { x: 0, opacity: 1 },
+};
+
+const fadeRight = {
+  hidden: { x: 60, opacity: 0 },
+  visible: { x: 0, opacity: 1 },
+};
+
+const MotionLink = motion(Link);
 
 export default function RoomsPreviewSection() {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
+
+  const contentRef = useRef(null);
+  const sliderRef = useRef(null);
+
+  const contentInView = useInView(contentRef, { amount: 0.3 });
+  const sliderInView = useInView(sliderRef, { amount: 0.3 });
 
   const images = [
     "/images/common/ms-enclave-24.webp",
@@ -38,25 +57,49 @@ export default function RoomsPreviewSection() {
   ];
 
   return (
-    <section className="py-20 px-0 md:px-25 bg-white">
+    <section className="py-15 px-0 md:px-25 bg-white">
       <div className="flex flex-col lg:flex-row">
-        <div className="flex items-center">
+
+        {/* LEFT CONTENT */}
+        <motion.div
+          ref={contentRef}
+          variants={fadeLeft}
+          initial="hidden"
+          animate={contentInView ? "visible" : "hidden"}
+          transition={{ duration: 1 }}
+          className="flex items-center"
+        >
           <div className="px-6 mb-5">
             <h2 className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm">
-            Comfortable  Spacious Rooms
-          </h2>
-          <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
-            Experience comfort in our thoughtfully designed rooms that reflect Kerala’s heritage style while offering modern amenities for a relaxing stay.
-          </p>
-          <Link
-            href="/amenities/rooms"
-            className="mt-6 inline-block px-6 py-3 bg-gray-950 text-white "
-          >
-            View All Rooms
-          </Link>
+              Comfortable Spacious Rooms
+            </h2>
+
+            <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
+              Experience comfort in our thoughtfully designed rooms that reflect Kerala’s heritage style while offering modern amenities for a relaxing stay.
+            </p>
+
+            <MotionLink
+              href="/amenities/rooms"
+              variants={fadeLeft}
+              initial="hidden"
+              animate={contentInView ? "visible" : "hidden"}
+              transition={{ duration: 1.3 }}
+              className="mt-6 inline-block px-6 py-3 bg-gray-950 text-white "
+            >
+              View All Rooms
+            </MotionLink>
           </div>
-        </div>
-        <div className="lg:max-w-5xl lg:mx-auto px-4">
+        </motion.div>
+
+        {/* RIGHT SLIDER */}
+        <motion.div
+          ref={sliderRef}
+          variants={fadeRight}
+          initial="hidden"
+          animate={sliderInView ? "visible" : "hidden"}
+          transition={{ duration: 1 }}
+          className="lg:max-w-5xl lg:mx-auto px-4"
+        >
           {/* Main Slider */}
           <Swiper
             spaceBetween={10}
@@ -107,7 +150,8 @@ export default function RoomsPreviewSection() {
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
+        </motion.div>
+
       </div>
     </section>
   );

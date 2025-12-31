@@ -24,7 +24,7 @@ const amenities = [
 
 export default function AmenitiesSlider() {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-15 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 text-center">
         <h2 className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm">
           Discover Our World-Class Amenities
