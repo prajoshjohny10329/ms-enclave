@@ -81,7 +81,7 @@ export default function RoomsWhyChooseUs() {
           className="relative w-full h-full rounded-md min-h-[500px] max-h-[500px] pb-5"
         >
           <Image
-            src="/images/common/ms-enclave-25.webp"
+            src="/images/common/ms-enclave-24.webp"
             alt="M.S. Enclave Heritage Resort Palakkad"
             fill
             className="object-cover rounded-tl-[35px] rounded-br-[35px] shadow-md pb-2 pl-2"

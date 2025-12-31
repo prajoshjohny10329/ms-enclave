@@ -6,6 +6,8 @@ import { Menu, X, User } from "lucide-react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import { menuData } from "./menu";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebookF, faWhatsapp,  } from "@fortawesome/free-brands-svg-icons";
 
 export default function SecondHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -20,10 +22,9 @@ export default function SecondHeader() {
   return (
     <header className="sticky top-0 w-full bg-white shadow-md z-50">
       <div className="container mx-auto py-4 flex justify-between items-center px-10">
-        {/* Logo */}
-        <Link href="/" className="text-2xl font-bold text-black">
-          a
-        </Link>
+        <div>
+          
+        </div>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-8 text-black font-medium relative">

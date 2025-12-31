@@ -6,6 +6,7 @@ import RoomsWelcomeSection from "@/components/User/Amenities/Rooms/RoomsWelcomeS
 import RoomsWhyChooseUs from "@/components/User/Amenities/Rooms/RoomsWhyChooseUs";
 import WhyChooseRooms from "@/components/User/Amenities/Rooms/WhyChooseRooms";
 import AmenitiesSlider from "@/components/User/Home/AmenitiesHighlights";
+import PackageSwiper from "@/components/User/Packages/PackageSwiper";
 
 export default function RoomsPage() {
   return (
@@ -22,8 +23,8 @@ export default function RoomsPage() {
         <RoomsWelcomeSection />
         <RoomsWhyChooseUs />
         <RoomsGallerySection />
-        <AmenitiesSlider />
         <RoomAmenities />
+        <PackageSwiper />
         <RoomsContact />
       </div>
     </>

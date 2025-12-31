@@ -74,7 +74,7 @@ export default function ContactPage() {
               <p className="text-2xl  font-semibold text-black leading-tight text-shadow-sm">Contact Number</p>
               <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
                 <Link href="tel:+918589996642" className="hover:text-blue-600">
-                  +91 858 999 6642
+                  +91 97456 66642
                 </Link>
               </p>
               <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
@@ -88,10 +88,10 @@ export default function ContactPage() {
               <p className="text-2xl  font-semibold text-black leading-tight text-shadow-sm">Email</p>
               <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
                 <Link
-                  href="mailto:contact@msenclave.com"
+                  href="mailto:msenclaveresort@gmail.com"
                   className="hover:text-blue-600"
                 >
-                  contact@msenclave.com
+                  msenclaveresort@gmail.com
                 </Link>
               </p>
             </div>

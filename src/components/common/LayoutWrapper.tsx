@@ -8,6 +8,7 @@ import Preloader from "@/components/common/Preloader";
 import { Toaster } from "react-hot-toast";
 import Footer from "./Footer";
 import SplashCursor from "./SplashCursor";
+import WhatsAppFixed from "./WhatsAppFixed";
 
 export default function LayoutWrapper({
   children,
@@ -50,6 +51,7 @@ export default function LayoutWrapper({
         <>
           {isAdmin ? <AdminHeader /> : <Header />}
           <SplashCursor />
+          <WhatsAppFixed />
           {children}
           <Footer />
         </>

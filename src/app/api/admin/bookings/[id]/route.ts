@@ -49,6 +49,10 @@ export async function DELETE(
 
     const { id } = await params;
 
+    console.log("id");
+    console.log(id);
+    
+
     const deletedBooking = await Booking.findByIdAndDelete(id);
     if (!deletedBooking)
       return NextResponse.json({ error: "Booking not found" }, { status: 404 });

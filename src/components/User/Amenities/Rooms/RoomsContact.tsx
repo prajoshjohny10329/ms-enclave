@@ -67,7 +67,7 @@ export default function RoomsWhyChooseUs() {
             ></motion.div>
             <div className="grid">
               <MotionLink
-                href="tel:+91 858 999 6642"
+                href="tel:+91 97456 66642"
                 ref={lintRef}
                 variants={fadeRight}
                 initial="hidden"
@@ -75,7 +75,7 @@ export default function RoomsWhyChooseUs() {
                 transition={{ duration: 1.4 }}
                 className="px-6 py-1  text-black font-dm text-lg font-bold hover:text-red-700 "
               >
-                +91 858 999 6642
+                +91 97456 66642
               </MotionLink>
               <MotionLink
                 href="tel:+91 994 500 4857"
@@ -110,7 +110,7 @@ export default function RoomsWhyChooseUs() {
               transition={{ duration: 1.4 }}
               className="mt-4 ml-8 inline-block px-12 hover:bg-red-500 shadow-lg py-3 bg-gray-950 text-white"
             >
-              Contact Us
+              Select A Package
             </MotionLink>
           </div>
         </div>

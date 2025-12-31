@@ -15,15 +15,10 @@ import PackageSwiper from "@/components/User/Packages/PackageSwiper";
 export default function Home() {
   return (
    <>
-   <HeroSlider />
-   <HomeAboutSection />
-   <VideoHeroSection />
-   <AmenitiesSlider />
-   <RoomsPreviewSection />
-   <PartyHall />
-   <HomeVideoSection />
-   <PackageSwiper />
-   <HomeGallery />
+   <AboutUsSection />
+   <ReasonsTimeline />
+   <BookNowSection />
+   <SecondGallery />
    </> 
   );
 }

@@ -50,6 +50,9 @@ export async function GET(req: Request) {
     );
 
     const availableRooms = Math.max(totalRooms - bookedRooms, 0);
+    console.log("totalRooms, bookedRooms, availableRooms");
+    console.log(totalRooms, bookedRooms, availableRooms);
+    
 
     return NextResponse.json({
       totalRooms: totalRooms ,

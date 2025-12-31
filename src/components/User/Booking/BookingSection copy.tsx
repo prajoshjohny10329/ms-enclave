@@ -11,7 +11,7 @@ import RoomHighlights from "./RoomHighlights";
 import Link from "next/link";
 import toast from "react-hot-toast";
 
-export default function BookingSection() {
+export default function BookingSection1() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const { slug } = useParams();
@@ -36,28 +36,12 @@ export default function BookingSection() {
   const [roomsNeeded, setRoomsNeeded] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const fetchAvailability = async (date: string, nights: number) => {
-    if (!pkg?._id) return;
-
-    const res = await axios.get("/api/bookings/availability", {
-      params: {
-        packageId: pkg._id,
-        checkIn: date,
-        nights,
-      },
-    });
-    setMaxAvailableRooms(res.data.availableRooms);
-    console.log(res.data.availableRooms);
-  };
-
-  const [maxAvailableRooms, setMaxAvailableRooms] = useState(0);
-
-  useEffect(() => {
-    fetchAvailability(form.date, Number(nights));
-  }, []);
+  const [maxAvailableRooms, setMaxAvailableRooms] = useState(10);
 
   const noRooms: boolean = maxAvailableRooms === 0;
   const currentPath = window.location.pathname + window.location.search;
+
+  console.log(noRooms);
 
   useEffect(() => {
     if (!(window as any).Razorpay) {
@@ -68,9 +52,9 @@ export default function BookingSection() {
     }
   }, []);
 
-  useEffect(() => {
-    if (status === "unauthenticated") router.push("/login");
-  }, [status, router]);
+  //   useEffect(() => {
+  //     if (status === "unauthenticated") router.push("/login");
+  //   }, [status, router]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -78,7 +62,7 @@ export default function BookingSection() {
         const res = await axios.get(`/api/packages/${slug}`);
         setPkg(res.data.data);
         if (pkg?._id || form.date || nights) {
-          // fetchAvailability(form.date, Number(nights));
+          fetchAvailability(form.date, Number(nights));
         }
 
         setLoading(false);
@@ -180,6 +164,21 @@ export default function BookingSection() {
     }
   };
 
+  const fetchAvailability = async (date: string, nights: number) => {
+    if (!pkg?._id) return;
+
+    const res = await axios.get("/api/bookings/availability", {
+      params: {
+        packageId: pkg._id,
+        checkIn: date,
+        nights,
+      },
+    });
+    setMaxAvailableRooms(res.data.availableRooms);
+    console.log(res.data.availableRooms);
+    
+  };
+
   const getCheckoutDate = (checkIn: string, nights: number) => {
     const date = new Date(checkIn);
     date.setDate(date.getDate() + nights);
@@ -248,7 +247,7 @@ export default function BookingSection() {
 
     // 🔥 Select price based on nationality
     // const price =
-    const price = pkg.indianPrice;
+    const price = pkg.indianPrice
 
     // 🔥 Calculate base price using nights
     const baseAmount = rooms * price * nights;
@@ -274,7 +273,7 @@ export default function BookingSection() {
 
     if (roomsNeeded > 0) {
       // 🔥 Choose price based on nationality
-      const price = pkg.indianPrice;
+      const price = pkg.indianPrice
 
       // 🔥 Calculate base amount with nights
       const baseAmount = roomsNeeded * price * value;
@@ -428,19 +427,7 @@ export default function BookingSection() {
               />
 
               <p className="text-lg font-semibold font-dm text-center">
-                {maxAvailableRooms > 0 ? (
-                  <span className="text-green-600">
-                    Available Rooms {maxAvailableRooms}
-                  </span>
-                ) : (
-                  <span className="text-red-600">
-                    <span className="text-lg"> No rooms available. </span>{" "}
-                    <br />
-                    <span className="text-sm">
-                      Kindly Asking, Please change dates or contact us.
-                    </span>
-                  </span>
-                )}
+                Available Rooms {maxAvailableRooms}
               </p>
 
               <div className="flex justify-between">
@@ -580,7 +567,7 @@ export default function BookingSection() {
                   {/* Determine price & currency */}
                   {(() => {
                     // const isIndian = session.user.nationality === "India";
-                    const isIndian = true;
+                    const isIndian = true
                     const price = isIndian ? pkg.indianPrice : pkg.foreignPrice;
                     const currency = isIndian ? "₹" : "$";
                     const baseAmount = roomsNeeded * price * nights;
