@@ -31,7 +31,7 @@ export default function CalendarAvailabilityPage() {
         `/api/admin/calendar-availability?year=${year}&month=${month}`
       );
       setData(res.data);
-      console.log("fixer 1");
+      console.log("fixer 2");
       console.log(res.data);
       
     } catch (err) {

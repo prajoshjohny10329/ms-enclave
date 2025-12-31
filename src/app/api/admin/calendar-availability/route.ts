@@ -13,38 +13,32 @@ export async function GET(req: Request) {
   const settings = await RoomSettings.findOne();
   const totalRooms = settings?.totalRooms || 0;
 
-  // ✅ Month range in UTC (IMPORTANT)
-  const start = new Date(Date.UTC(year, month, 1, 0, 0, 0));
-  const end = new Date(Date.UTC(year, month + 1, 0, 23, 59, 59, 999));
+   // Start and end dates of the month
+  const start = new Date(year, month, 1);
+  start.setHours(0, 0, 0, 0); // normalize to midnight
+
+  const end = new Date(year, month + 1, 1); // last day of month
+  end.setHours(23, 59, 59, 999); // include full day
 
   const bookings = await Booking.find({
     status: { $ne: "cancelled" },
-    checkInDate: { $lt: end },
-    checkOutDate: { $gt: start },
+    checkInDate: { $lte: end },
+    checkOutDate: { $gte: start },
   });
 
-  const days: Record<string, { booked: number; available: number }> = {};
+  const days: any = {};
 
-  for (
-    let d = new Date(start);
-    d <= end;
-    d.setUTCDate(d.getUTCDate() + 1)
-  ) {
+  for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
     const day = new Date(d);
-
     const booked = bookings
       .filter(
-        b =>
-          new Date(b.checkInDate) < day &&
-          new Date(b.checkOutDate) > day
+        b => b.checkInDate < day && b.checkOutDate > day
       )
       .reduce((s, b) => s + b.roomsNeeded, 0);
 
-    const key = day.toISOString().split("T")[0]; // YYYY-MM-DD (UTC)
-
-    days[key] = {
+    days[day.toISOString().slice(0, 10)] = {
       booked,
-      available: Math.max(totalRooms - booked, 0),
+      available: totalRooms - booked,
     };
   }
 
