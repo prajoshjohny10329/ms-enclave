@@ -17,9 +17,8 @@ export async function GET(req: Request) {
   const start = new Date(year, month, 1);
   start.setHours(0, 0, 0, 0); // normalize to midnight
 
-  const end = new Date(year, month + 1, 0); // last day of month
+  const end = new Date(year, month + 1, 1); // last day of month
   end.setHours(23, 59, 59, 999); // include full day
-
 
   const bookings = await Booking.find({
     status: { $ne: "cancelled" },
