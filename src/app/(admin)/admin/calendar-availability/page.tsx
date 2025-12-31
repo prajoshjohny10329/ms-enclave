@@ -31,17 +31,20 @@ export default function CalendarAvailabilityPage() {
         `/api/admin/calendar-availability?year=${year}&month=${month}`
       );
       setData(res.data);
+      console.log("fixer 1");
       console.log(res.data);
+      
     } catch (err) {
       console.error("Failed to load availability", err);
     }
     setLoading(false);
   };
 
+  // ⚠️ Month structure stays LOCAL (UI only)
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const firstDay = new Date(year, month, 1).getDay(); // 0 = Sun
 
-  const getStatusColor = (available: number, day: number) => {
+  const getStatusColor = (available: number) => {
     if (available <= 0) return "bg-red-500";
     if (available <= 5) return "bg-yellow-400";
     return "bg-green-500";
@@ -74,8 +77,8 @@ export default function CalendarAvailabilityPage() {
   const handleMouseUp = (e: React.MouseEvent) => {
     if (dragStartX.current !== null) {
       const diff = e.clientX - dragStartX.current;
-      if (diff > 50) prevMonth(); // dragged right
-      if (diff < -50) nextMonth(); // dragged left
+      if (diff > 50) prevMonth();
+      if (diff < -50) nextMonth();
     }
     dragStartX.current = null;
   };
@@ -83,14 +86,13 @@ export default function CalendarAvailabilityPage() {
   return (
     <div className="max-w-6xl mx-auto p-6">
       <h1 className="text-3xl font-bold text-black mb-6 text-center">
-  {new Date(year, month).toLocaleString("default", {
-    month: "long",
-    year: "numeric",
-  })}
-</h1>
+        {new Date(year, month).toLocaleString("default", {
+          month: "long",
+          year: "numeric",
+        })}
+      </h1>
 
-
-      {/* Month Controls with arrows */}
+      {/* Month Controls */}
       <div className="flex items-center gap-4 mb-6">
         <button
           onClick={prevMonth}
@@ -155,10 +157,11 @@ export default function CalendarAvailabilityPage() {
           {/* Days */}
           {Array.from({ length: daysInMonth }).map((_, i) => {
             const day = i + 1;
-            const dateKey = `${year}-${String(month + 1).padStart(
-              2,
-              "0"
-            )}-${String(day).padStart(2, "0")}`;
+
+            // ✅ UTC-safe key (MATCHES API)
+            const date = new Date(Date.UTC(year, month, day));
+            const dateKey = date.toISOString().split("T")[0];
+
             const info = data[dateKey];
 
             return (
@@ -166,15 +169,14 @@ export default function CalendarAvailabilityPage() {
                 href={`/admin/calendar-availability/${dateKey}`}
                 key={dateKey}
                 className={`rounded-lg p-3 text-white shadow ${getStatusColor(
-                  info?.available ?? 0,
-                  day
+                  info?.available ?? 0
                 )}`}
               >
                 <div className="font-bold">{day}</div>
-
-                {/* Show booked/available info, default to 0 if missing */}
                 <p className="text-xs mt-1">Booked: {info?.booked ?? 0}</p>
-                <p className="text-xs">Available: {info?.available ?? 0}</p>
+                <p className="text-xs">
+                  Available: {info?.available ?? 0}
+                </p>
               </Link>
             );
           })}
