@@ -43,11 +43,11 @@ export default function HeroSlider() {
   >
     <div className="px-4 mx-auto max-w-screen-xl text-center">
       
-      <h1 className="mb-4 text-5xl md:text-6xl font-extrabold leading-tight text-white text-shadow-lg mt-28">
+      <h1 className="mb-4 text-5xl md:text-6xl font-extrabold leading-tight text-white text-shadow-sm mt-28">
         Experience Kerala<span> ’ </span>s Timeless Heritage
       </h1>
 
-      <p className="mb-8 text-lg text-white font-medium text-shadow-lg">
+      <p className="mb-8 text-lg text-white font-medium text-shadow-sm">
         Discover the perfect blend of tradition, nature, and comfort at
         M.S. Enclave Heritage Resort.
       </p>
@@ -96,7 +96,7 @@ export default function HeroSlider() {
           <div className="relative w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden">
             <iframe
               className="w-full h-full"
-              src="https://www.youtube.com/embed/V-9kJAyMFco?autoplay=1"
+              src="https://www.youtube.com/embed/va9W1NfJ4D4?autoplay=1"
               title="M.S. Enclave Experience"
               allow="autoplay; encrypted-media"
               allowFullScreen

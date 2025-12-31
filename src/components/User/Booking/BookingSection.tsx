@@ -41,8 +41,6 @@ export default function BookingSection() {
   const noRooms: boolean = maxAvailableRooms === 0;
   const currentPath = window.location.pathname + window.location.search;
 
-  console.log(noRooms);
-
   useEffect(() => {
     if (!(window as any).Razorpay) {
       const script = document.createElement("script");
@@ -52,9 +50,9 @@ export default function BookingSection() {
     }
   }, []);
 
-  //   useEffect(() => {
-  //     if (status === "unauthenticated") router.push("/login");
-  //   }, [status, router]);
+    useEffect(() => {
+      if (status === "unauthenticated") router.push("/login");
+    }, [status, router]);
 
   useEffect(() => {
     const loadData = async () => {

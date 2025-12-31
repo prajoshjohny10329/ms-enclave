@@ -49,7 +49,7 @@ export const menuData: Menu[] = [
         id: 36,
         title: "Party hall",
         newTab: false,
-        path: "/amenities",
+        path: "/amenities/party-hall",
       },
       {
         id: 39,

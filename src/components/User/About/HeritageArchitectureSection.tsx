@@ -51,7 +51,7 @@ function AnimatedCounter({ value, label, suffix }: CounterProps) {
         {suffix || ""}
       </span>
 
-      <span className="text-sm md:text-base text-white text-shadow-lg font-dm capitalize mt-2 block drop-shadow-[1px_1px_1px_rgba(0,0,0)]">
+      <span className="text-sm md:text-base text-white text-shadow-sm font-dm capitalize mt-2 block drop-shadow-[1px_1px_1px_rgba(0,0,0)]">
         {label}
       </span>
     </div>
@@ -82,7 +82,7 @@ export default function HeritageArchitectureSection() {
             Experience Kerala’s Architectural Splendor
           </h2>
 
-          <h3 className="text-xl md:text-2xl text-white font-bold mb-6 font-dm text-shadow-lg drop-shadow-[1px_1px_1px_rgba(0,0,0)]">
+          <h3 className="text-xl md:text-2xl text-white font-bold mb-6 font-dm text-shadow-sm drop-shadow-[1px_1px_1px_rgba(0,0,0)]">
             Timeless Design with Modern Comforts
           </h3>
 

@@ -2,7 +2,6 @@
 
 import Breadcrumb from "@/components/common/Breadcrumb";
 import PackagesSection from "@/components/User/Packages/PackagesSection";
-import PackagesSectionNew from "@/components/User/Packages/PackagesSectionNew";
 
 export default function PackagesPage() {
   return (
@@ -13,7 +12,7 @@ export default function PackagesPage() {
         items={[{ label: "Our Packages", href: "/packages" }]}
       />
       <PackagesSection />
-      <PackagesSectionNew />
+      {/* <PackagesSectionNew /> */}
 
     </section>
   );

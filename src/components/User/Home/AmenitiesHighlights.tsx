@@ -58,7 +58,7 @@ From luxurious rooms and a sparkling swimming pool to kids’ play areas and ser
                       fill
                       className="object-cover"
                     />
-                    <h3 className="text-white text-shadow-lg bottom-0 absolute font-semibold text-center p-4">
+                    <h3 className="text-white text-shadow-sm bottom-0 absolute font-semibold text-center p-4">
                     {item.title}
                   </h3>
                   </div>

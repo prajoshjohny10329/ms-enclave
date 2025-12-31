@@ -17,7 +17,7 @@ const fadeLeft = {
 
 const MotionLink = motion(Link);
 
-const PreviewSection = () => {
+const PartyHall = () => {
   const mainImgRef = useRef(null);
   const overlapImgRef = useRef(null);
   const titleRef = useRef(null);
@@ -31,7 +31,7 @@ const PreviewSection = () => {
   const btnInView = useInView(btnRef, { amount: 0.3 });
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-15 bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-2">
 
         {/* LEFT IMAGE AREA */}
@@ -41,16 +41,16 @@ const PreviewSection = () => {
           initial="hidden"
           animate={mainImgInView ? "visible" : "hidden"}
           transition={{ duration: 1 }}
-          className="relative h-[450px] lg:h-[600px] w-full"
+          className="relative lg:h-[600px] w-full"
         >
           {/* Main Image */}
           <div className="rounded-lg overflow-hidden shadow-xl">
             <Image
-              src="/images/home/ms-slider-2.webp"
+              src="/temp/part-hall-tep.jpg"
               alt="Luxury Stay"
               width={700}
               height={500}
-              className="w-full h-auto object-cover"
+              className="w-full h-auto object-cover md:h-[520px]"
             />
           </div>
 
@@ -63,13 +63,13 @@ const PreviewSection = () => {
             transition={{ duration: 1.2 }}
             className="absolute -right-10 top-1/3 hidden lg:block"
           >
-            <div className="rounded-lg overflow-hidden shadow-xl">
+            <div className="rounded-lg overflow-hidden shadow-xl ">
               <Image
-                src="/images/temp/pro.jpg"
+                src="/temp/part-hall-tep.jpg"
                 alt="Interior"
                 width={220}
                 height={260}
-                className="object-cover"
+                className="object-cover h-[300px]"
               />
             </div>
           </motion.div>
@@ -77,15 +77,25 @@ const PreviewSection = () => {
 
         {/* RIGHT CONTENT */}
         <div className="px-6 lg:px-24 flex flex-col justify-center gap-6">
+          <motion.p
+            ref={titleRef}
+            variants={fadeRight}
+            initial="hidden"
+            animate={titleInView ? "visible" : "hidden"}
+            transition={{ duration: 1 }}
+            className="text-4xl md:text-5xl font-semibold text-gray-200 leading-tight font-playfair"
+          >
+            Party Hall
+          </motion.p>
           <motion.h2
             ref={titleRef}
             variants={fadeRight}
             initial="hidden"
             animate={titleInView ? "visible" : "hidden"}
             transition={{ duration: 1 }}
-            className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm"
+            className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm mt-[-15px]"
           >
-            Comfortable & Spacious Rooms
+            An Elegant Venue for Your Special Moments
           </motion.h2>
 
           <motion.p
@@ -103,15 +113,15 @@ const PreviewSection = () => {
           </motion.p>
 
           <MotionLink
-            href="/packages"
+            href="/amentias/party-hall"
             ref={btnRef}
             variants={fadeRight}
             initial="hidden"
             animate={btnInView ? "visible" : "hidden"}
             transition={{ duration: 1.3 }}
           >
-            <button className="mt-3 inline-block px-6 py-3 bg-gray-950 text-white rounded-md hover:bg-gray-900 hover:text-white">
-              BOOK YOUR STAY NOW
+            <button className="mt-6 inline-block px-10 rounded shadow-lg py-3 bg-gray-950 text-white ">
+              Explore Our Party Hall
             </button>
           </MotionLink>
         </div>
@@ -121,4 +131,4 @@ const PreviewSection = () => {
   );
 };
 
-export default PreviewSection;
+export default PartyHall;

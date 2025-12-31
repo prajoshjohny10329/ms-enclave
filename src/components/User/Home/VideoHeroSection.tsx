@@ -77,11 +77,11 @@ export default function VideoHeroSection() {
 
       {/* ✨ Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4 mt-20">
-        <h2 className="text-white text-4xl md:text-6xl font-bold tracking-wide text-shadow-lg">
+        <h2 className="text-white text-4xl md:text-6xl font-bold tracking-wide text-shadow-sm">
           Step Into Kerala ’ s  Heritage Paradise
         </h2>
 
-        <p className="mt-4 text-md text-white font-medium text-shadow-lg max-w-5xl font-dm ">
+        <p className="mt-4 text-md text-white font-medium text-shadow-sm max-w-5xl font-dm ">
           Watch our short video to immerse yourself in the serene beauty of M.S. Enclave Heritage Resort.
 From lush green landscapes and traditional Kerala architecture to modern comforts and leisure amenities, our resort offers the perfect escape for families, couples, and nature lovers.
         </p>
