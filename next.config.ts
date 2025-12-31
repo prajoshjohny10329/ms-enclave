@@ -11,10 +11,6 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "lh3.googleusercontent.com", // For Google profile images
       },
-      {
-        protocol: "https",
-        hostname: "developers.google.com", // For Google profile images
-      },
     ],
   },
 };

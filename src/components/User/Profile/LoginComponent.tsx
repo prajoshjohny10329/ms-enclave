@@ -99,10 +99,12 @@ export default function LoginComponent() {
                 onClick={() => signIn("google")}
                 className="flex items-center gap-3 bg-white border border-gray-300 px-6 py-3 rounded-full shadow hover:shadow-md transition"
               >
-                <img
-                  src="https://developers.google.com/identity/images/g-logo.png"
+                <Image
+                  src="/images/icon/g-logo.png"
                   alt="Google"
                   className="w-5 h-5"
+                  width={5}
+                  height={5}
                 />
                 <span className="text-black font-dm font-black text-md">
                   Continue with Google
