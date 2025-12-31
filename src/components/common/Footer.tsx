@@ -46,9 +46,19 @@ export default function Footer() {
               <li className="hover:font-bold hover:text-white"><Link href="/contact">Contact</Link></li>
             </ul>
           </div>
+          {/* QUICK LINKS */}
+          <div>
+            <h4 className="font-semibold mb-4">Quick Links</h4>
+            <ul className="space-y-3 text-gray-300  text-sm font-dm">
+              <li className="hover:font-bold hover:text-white"><Link href="/">My Profile</Link></li>
+              <li className="hover:font-bold hover:text-white"><Link href="/my-booking">My Bookings</Link></li>
+              <li className="hover:font-bold hover:text-white"><Link href="/about-us">About US</Link></li>
+              <li className="hover:font-bold hover:text-white"><Link href="/amenities">Amentias</Link></li>
+            </ul>
+          </div>
 
           {/* SUPPORT */}
-          <div>
+          {/* <div>
             <h4 className="font-semibold mb-4">Support</h4>
             <ul className="space-y-3 text-gray-300  text-sm font-dm">
               <li className="hover:font-bold hover:text-white"><Link href="#">Help Center</Link></li>
@@ -56,7 +66,7 @@ export default function Footer() {
               <li className="hover:font-bold hover:text-white"><Link href="#">Terms & Conditions</Link></li>
               <li className="hover:font-bold hover:text-white"><Link href="#">Cancellation Policy</Link></li>
             </ul>
-          </div>
+          </div> */}
 
           {/* CONTACT */}
           <div>

@@ -21,7 +21,7 @@ export const menuData: Menu[] = [
     submenu: [
       {
         id: 21,
-        title: "Explore Our Gallery",
+        title: "Our Gallery",
         newTab: false,
         path: "/gallery",
       }

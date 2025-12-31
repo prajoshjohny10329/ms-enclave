@@ -118,7 +118,7 @@ export default function ProfilePage() {
           >
             <Image
               src={booking.packageId?.image || "/default-room.jpg"}
-              alt={booking.packageId.packageName || "Room"}
+              alt={booking.packageId?.packageName || "Room"}
               width={120}
               height={80}
               className="rounded-lg"
@@ -126,13 +126,13 @@ export default function ProfilePage() {
 
             <div className="flex-1">
               <h2 className="font-semibold text-lg">
-                {booking.roomId?.name || "Room"}
+                {booking.packageId?.packageName || "Room"}
               </h2>
               <p>
-                {new Date(booking.fromDate).toLocaleDateString()} →{" "}
-                {new Date(booking.toDate).toLocaleDateString()}
+                {new Date(booking.checkInDate).toLocaleDateString()} →{" "}
+                {new Date(booking.checkOutDate).toLocaleDateString()}
               </p>
-              <p>Guests: {booking.guests}</p>
+              <p>Guests: {booking.adults+booking.children}</p>
               <p className="font-semibold">Total: ₹{booking.totalPrice}</p>
               <p className="mt-1">
                 Status:{" "}

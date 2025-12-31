@@ -18,7 +18,6 @@ const fadeLeft = {
   visible: { x: 0, opacity: 1 },
 };
 
-const MotionLink = motion(Link);
 
 export default function LoginComponent() {
   const { data: session } = useSession();
