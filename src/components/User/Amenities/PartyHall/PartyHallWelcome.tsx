@@ -93,12 +93,6 @@ export default function PartyHallWelcome() {
           </div>
           
         </div>
-
-                <PartyHallHighlights beds={0} bedType={""} maxAdults={0} maxChildren={0} roomSize={""} />
-        
-
-        
-
       </div>
     </section>
   );

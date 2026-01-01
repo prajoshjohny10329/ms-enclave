@@ -37,7 +37,10 @@ export default function UserProfile() {
   const [isEditing, setIsEditing] = useState(true);
 
   useEffect(() => {
-    if (status === "unauthenticated") router.push("/login");
+    if (status === "unauthenticated") {
+      toast.error('Please Log In')
+      router.push("/login");
+    }
 
     if (session?.user) {
       const { name, phone, nationality, address, image } = session.user as any;
