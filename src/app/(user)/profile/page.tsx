@@ -1,195 +1,161 @@
 "use client";
 
-import { useSession } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import Breadcrumb from "@/components/common/Breadcrumb";
-import NationalitySelector from "@/components/common/NationalitySelector";
-import toast from "react-hot-toast";
-import { Bars } from "react-loader-spinner";
+import { useState } from "react";
+import {
+  Menu,
+  X,
+  User,
+  CalendarCheck,
+  LogOut,
+} from "lucide-react";
 
-interface Profile {
-  name: string;
-  phone: string;
-  nationality: string;
-  address: string;
-}
+import UserProfile from "@/components/User/Profile/UserProfile";
+import MyBookings from "@/components/User/Profile/MyBookings";
 
-export default function ProfilePage() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl");
+export default function UserDashboard() {
+  const [activeTab, setActiveTab] = useState<"profile" | "bookings">("profile");
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [bookingCount, setBookingCount] = useState(0);
 
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [form, setForm] = useState<Profile>({
-    name: "",
-    phone: "",
-    nationality: "",
-    address: "",
-  });
-
-  const [isEditing, setIsEditing] = useState(true);
-
-  useEffect(() => {
-    if (status === "unauthenticated") router.push("/login");
-
-    if (session?.user) {
-      const { name, phone, nationality, address } = session.user as any;
-
-      if (phone || nationality || address) {
-        setProfile({ name, phone, nationality, address });
-        setIsEditing(false);
-      } else {
-        setForm({
-          name: name || "",
-          phone: "",
-          nationality: "",
-          address: "",
-        });
-      }
-    }
-  }, [status, session, router]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleTabChange = (tab: "profile" | "bookings") => {
+    setActiveTab(tab);
+    setMobileOpen(false);
   };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!session?.user?.email) return;
-
-    try {
-      const { data } = await axios.post("/api/profile", {
-        email: session.user.email,
-        ...form,
-      });
-
-      session.user.id = data.user._id.toString();
-      session.user.phone = data.user.phone || "";
-      session.user.nationality = data.user.nationality || "India";
-      session.user.address = data.user.address || "";
-
-      setProfile(form);
-      setIsEditing(false);
-      router.push(callbackUrl || "/profile");
-
-      toast.success("Profile Edited successfully");
-    } catch (error) {
-      toast.loading("Profile Edited Error");
-    }
-  };
-
-  const handleEdit = () => {
-    if (profile) setForm(profile);
-    setIsEditing(true);
-  };
-
-  if (status === "loading")
-    return (
-      <div className="min-h-[500px] flex flex-col items-center justify-center gap-4">
-        <Bars
-          height="80"
-          width="80"
-          color="#000"
-          ariaLabel="bars-loading"
-          visible={true}
-        />
-        <p className="text-md text-black text-shadow-md animate-pulse">
-          Please wait, loading...
-        </p>
-      </div>
-    );
 
   return (
-    <>
-      <Breadcrumb
-        heading="Your Profile"
-        bgImage="/images/home/ms-slider-1.webp"
-        items={[{ label: "Profile", href: "/profile" }]}
-      />
+    <section className="bg-gray-50">
+      {/* ================= MOBILE HEADER ================= */}
+      <div className="lg:hidden flex items-center justify-between px-4 py-4 text-black bg-transparent sticky top-0 z-40">
+        <button onClick={() => setMobileOpen(true)} className="bg-blue-600 p-2 text-white rounded shadow ">
+          <Menu size={30} />
+        </button>
+        <div />
+      </div>
 
-      <div className="max-w-lg mx-auto mt-10 bg-white p-6 rounded-xl shadow">
-        {isEditing ? (
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-4 text-black"
-          >
-            <input
-              type="text"
-              name="name"
-              placeholder="Full Name"
-              value={form.name}
-              onChange={handleChange}
-              className="border p-2 rounded"
-              required
-            />
+      <div className="mx-auto grid grid-cols-1 lg:grid-cols-10">
 
-            <input
-              type="text"
-              name="phone"
-              placeholder="Phone Number"
-              value={form.phone}
-              onChange={handleChange}
-              className="border p-2 rounded"
-              required
-            />
+        {/* ================= DESKTOP SIDEBAR ================= */}
+        <aside className="hidden lg:flex lg:col-span-2 bg-white border-r px-6 py-10 flex-col justify-between h-[78vh]">
+          <ul className="space-y-3 font-dm">
+            <li>
+              <button
+                onClick={() => setActiveTab("profile")}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition
+                  ${
+                    activeTab === "profile"
+                      ? "bg-blue-600 text-white"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+              >
+                <User size={18} />
+                Your Profile
+              </button>
+            </li>
 
-            {/* ⭐ Nationality Dropdown */}
+            <li>
+              <button
+                onClick={() => setActiveTab("bookings")}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-lg font-medium transition
+                  ${
+                    activeTab === "bookings"
+                      ? "bg-blue-600 text-white"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+              >
+                <div className="flex items-center gap-3">
+                  <CalendarCheck size={18} />
+                  Your Bookings
+                </div>
+
+                {bookingCount > 0 && (
+                  <span className="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
+                    {bookingCount}
+                  </span>
+                )}
+              </button>
+            </li>
+          </ul>
+
+          <button className="flex items-center gap-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50">
+            <LogOut size={18} />
+            Logout
+          </button>
+        </aside>
+
+        {/* ================= MAIN CONTENT ================= */}
+        <main className="col-span-1 max-w-6xl md:col-span-8 px-4 md:px-6 py-6 h-[78vh] overflow-scroll">
+          {activeTab === "profile" && <UserProfile />}
+          {activeTab === "bookings" && <MyBookings onCountChange={setBookingCount} />}
+        </main>
+      </div>
+
+      {/* ================= MOBILE SIDEBAR ================= */}
+      {mobileOpen && (
+        <>
+          {/* Overlay */}
+          <div
+            className="fixed inset-0 bg-black/40 z-40"
+            onClick={() => setMobileOpen(false)}
+          />
+
+          {/* Drawer */}
+          <aside className="fixed top-0 left-0 h-full w-72 bg-white z-50 p-6 text-black flex flex-col justify-between animate-slideIn">
             <div>
-              <label className="block mb-1 font-medium text-gray-700">
-                Nationality
-              </label>
-              <NationalitySelector
-                value={form.nationality}
-                onChange={(label) => {
-                  setForm({ ...form, nationality: label });
-                }}
-              />
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-lg font-semibold">Menu</h2>
+                <button onClick={() => setMobileOpen(false)}>
+                  <X size={22} />
+                </button>
+              </div>
+
+              <ul className="space-y-3">
+                <li>
+                  <button
+                    onClick={() => handleTabChange("profile")}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg font-medium
+                      ${
+                        activeTab === "profile"
+                          ? "bg-blue-600 text-white"
+                          : "text-gray-700 hover:bg-gray-100"
+                      }`}
+                  >
+                    <User size={18} />
+                    Your Profile
+                  </button>
+                </li>
+
+                <li>
+                  <button
+                    onClick={() => handleTabChange("bookings")}
+                    className={`w-full flex items-center justify-between px-4 py-3 rounded-lg font-medium
+                      ${
+                        activeTab === "bookings"
+                          ? "bg-blue-600 text-white"
+                          : "text-gray-700 hover:bg-gray-100"
+                      }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <CalendarCheck size={18} />
+                      Your Bookings
+                    </div>
+
+                    {bookingCount > 0 && (
+                      <span className="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
+                        {bookingCount}
+                      </span>
+                    )}
+                  </button>
+                </li>
+              </ul>
             </div>
 
-            <input
-              type="text"
-              name="address"
-              placeholder="Address"
-              value={form.address}
-              onChange={handleChange}
-              className="border p-2 rounded"
-              required
-            />
-
-            <button
-              type="submit"
-              className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded"
-            >
-              Save & Continue
+            <button className="flex items-center gap-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50">
+              <LogOut size={18} />
+              Logout
             </button>
-          </form>
-        ) : (
-          <div className="space-y-3 text-gray-700">
-            <p>
-              <strong>Name:</strong> {profile?.name}
-            </p>
-            <p>
-              <strong>Phone:</strong> {profile?.phone}
-            </p>
-            <p>
-              <strong>Nationality:</strong> {profile?.nationality}
-            </p>
-            <p>
-              <strong>Address:</strong> {profile?.address}
-            </p>
-
-            <button
-              onClick={handleEdit}
-              className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded"
-            >
-              Edit
-            </button>
-          </div>
-        )}
-      </div>
-    </>
+          </aside>
+        </>
+      )}
+    </section>
   );
 }

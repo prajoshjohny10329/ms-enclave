@@ -55,7 +55,7 @@ export default function ActivitiesSwiper() {
     <section className="relative py-20 overflow-hidden">
       {/* 🔹 BLURRED BACKGROUND IMAGE */}
       <div
-        className="absolute inset-0 bg-cover bg-center scale-110 blur-[4px] transition-all duration-700"
+        className="absolute inset-0 bg-cover bg-center scale-110 blur-xs transition-all duration-700"
         style={{
           backgroundImage: `url(${activities[activeIndex].image})`,
         }}
