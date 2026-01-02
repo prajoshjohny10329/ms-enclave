@@ -5,7 +5,7 @@ const RoomSettingsSchema = new Schema(
     totalRooms: {
       type: Number,
       required: true,
-      default: 10,
+      default: 8,
     },
     heroImage: {
       type: String,

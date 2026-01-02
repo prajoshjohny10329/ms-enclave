@@ -2,9 +2,13 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function RoomSettingsPage() {
-  const [totalRooms, setTotalRooms] = useState<number>(10);
+  const [totalRooms, setTotalRooms] = useState<number>(8);
+  const router = useRouter();
+  
 
   const [heroImage, setHeroImage] = useState<string>("");
   const [heroUploading, setHeroUploading] = useState(false);
@@ -91,16 +95,24 @@ export default function RoomSettingsPage() {
       uploadedGallery = [...gallery, ...uploads];
     }
 
-    await axios.put("/api/admin/room-settings", {
+    const res = await axios.put("/api/admin/room-settings", {
       totalRooms,
       heroImage,
       gallery: uploadedGallery,
     });
 
-    alert("Room settings updated!");
-    setGalleryPreview([]);
-    setGalleryFiles([]);
-  };
+     const data = res.data; // Axios auto-parsed
+
+    if (data.success) {
+      toast.success("Room Updated Successfully!");
+      setGalleryPreview([]);
+      setGalleryFiles([]);
+      router.push("/admin/room");
+    } else {
+      toast.error(data.message || "Room Not Updated");
+    }
+  } 
+    
 
   // Drag & Drop handler
   const handleDrop = (e: any) => {

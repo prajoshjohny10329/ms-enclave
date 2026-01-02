@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 type GalleryImage = {
   url: string;
@@ -122,10 +123,11 @@ export default function EditPackagePage() {
   // ------------------------------------
   // SUBMIT UPDATE
   // ------------------------------------
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    setUploading(true);
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setUploading(true);
 
+  try {
     let uploadedGallery: GalleryImage[] = [];
 
     for (const file of newGalleryFiles) {
@@ -136,17 +138,33 @@ export default function EditPackagePage() {
       });
     }
 
-    await axios.put(`/api/packages/edit/${id}`, {
+    const res = await axios.put(`/api/packages/edit/${id}`, {
       ...formData,
-      amenities: formData.amenities.split(",").map((a) => a.trim()),
+      amenities: formData.amenities.split(",").map(a => a.trim()),
       images: [...gallery, ...uploadedGallery], // ✅ updated gallery
-      removedImages, // ✅ send removed images
+      removedImages, // ✅ removed images
     });
 
+    const data = res.data; // ✅ Axios response
+
+    console.log(data);
+
+    if (data.success) {
+      toast.success("Package Updated Successfully!");
+      router.push(`/admin/packages/${data.data.slug}`);
+    } else {
+      toast.error(data.message || "Package Not Updated");
+    }
+  } catch (error: any) {
+    console.error(error);
+    toast.error(
+      error.response?.data?.message || "Something went wrong"
+    );
+  } finally {
     setUploading(false);
-    alert("Package Updated Successfully!");
-    router.push("/admin/packages");
-  };
+  }
+};
+
 
   if (loading) return <p className="p-10">Loading...</p>;
 

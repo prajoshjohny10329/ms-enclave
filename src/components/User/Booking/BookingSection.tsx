@@ -46,6 +46,8 @@ export default function BookingSection() {
         nights,
       },
     });
+    console.log(res.data);
+    
     setMaxAvailableRooms(res.data.availableRooms);
     console.log(res.data.availableRooms);
   };

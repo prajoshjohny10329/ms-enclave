@@ -17,7 +17,8 @@ export async function PUT(req: Request) {
       new: true,
       upsert: true,
     });
-    return NextResponse.json(updated);
+    return NextResponse.json({data:updated, success: true });
+   
   } catch (err) {
     return NextResponse.json({ error: "Failed to update" }, { status: 500 });
   }
