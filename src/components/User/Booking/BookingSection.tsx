@@ -10,6 +10,7 @@ import Amenities from "./Amenities";
 import RoomHighlights from "./RoomHighlights";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { validateUserProfile } from "@/utils/validateUserProfile";
 
 export default function BookingSection() {
   const { data: session, status } = useSession();
@@ -24,6 +25,7 @@ export default function BookingSection() {
   const [nights, setNights] = useState(1);
 
   const today = new Date().toISOString().split("T")[0];
+  const [user, setUser] = useState({})
   const [form, setForm] = useState({
     fullName: "",
     email: "",
@@ -47,16 +49,16 @@ export default function BookingSection() {
       },
     });
     console.log(res.data);
-    
+
     setMaxAvailableRooms(res.data.availableRooms);
     console.log(res.data.availableRooms);
   };
 
   const [maxAvailableRooms, setMaxAvailableRooms] = useState(0);
 
-  useEffect(() => {
-    fetchAvailability(form.date, Number(nights));
-  }, []);
+  // useEffect(() => {
+  //   fetchAvailability(form.date, Number(nights));
+  // }, []);
 
   const noRooms: boolean = maxAvailableRooms === 0;
   const currentPath = window.location.pathname + window.location.search;
@@ -74,18 +76,20 @@ export default function BookingSection() {
     if (status === "unauthenticated") router.push("/login");
   }, [status, router]);
 
+  // Loader Function
   useEffect(() => {
     const loadData = async () => {
       try {
         const res = await axios.get(`/api/packages/${slug}`);
         setPkg(res.data.data);
         if (pkg?._id || form.date || nights) {
-          // fetchAvailability(form.date, Number(nights));
+          fetchAvailability(form.date, Number(nights));
         }
-
         setLoading(false);
 
         if (session?.user) {
+          setUser(session.user)
+          validateUserProfile(session.user);
           setForm((prev) => ({
             ...prev,
             fullName: session.user.name || "",

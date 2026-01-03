@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 export default function RoomSettingsPage() {
   const [totalRooms, setTotalRooms] = useState<number>(8);
   const router = useRouter();
-  
 
   const [heroImage, setHeroImage] = useState<string>("");
   const [heroUploading, setHeroUploading] = useState(false);
@@ -32,7 +31,7 @@ export default function RoomSettingsPage() {
   useEffect(() => {
     axios.get("/api/admin/room-settings").then((res) => {
       if (res.data) {
-        setTotalRooms(res.data.totalRooms || 10);
+        setTotalRooms(res.data.totalRooms || 8);
         setHeroImage(res.data.heroImage || "");
         setGallery(res.data.gallery || []);
       }
@@ -42,17 +41,13 @@ export default function RoomSettingsPage() {
 
   // Delete from Cloudinary
   const deleteFromCloudinary = async (url: string) => {
-  await axios.post("/api/admin/delete-image", {
-    imageUrl: url   // <-- important for DB delete
-  });
-};
-
+    await axios.post("/api/admin/delete-image", {
+      imageUrl: url, // <-- important for DB delete
+    });
+  };
 
   // Upload Image
-  const uploadImage = async (
-    file: File,
-    setProg?: (n: number) => void
-  ) => {
+  const uploadImage = async (file: File, setProg?: (n: number) => void) => {
     if (setProg) setProg(0);
     const form = new FormData();
     form.append("file", file);
@@ -76,9 +71,7 @@ export default function RoomSettingsPage() {
     await deleteFromCloudinary(oldUrl);
     const newUrl = await uploadImage(file, setProgress);
 
-    setGallery((prev) =>
-      prev.map((img) => (img === oldUrl ? newUrl : img))
-    );
+    setGallery((prev) => prev.map((img) => (img === oldUrl ? newUrl : img)));
 
     setReplaceLoading(false);
     setProgress(0);
@@ -101,7 +94,7 @@ export default function RoomSettingsPage() {
       gallery: uploadedGallery,
     });
 
-     const data = res.data; // Axios auto-parsed
+    const data = res.data; // Axios auto-parsed
 
     if (data.success) {
       toast.success("Room Updated Successfully!");
@@ -111,8 +104,7 @@ export default function RoomSettingsPage() {
     } else {
       toast.error(data.message || "Room Not Updated");
     }
-  } 
-    
+  };
 
   // Drag & Drop handler
   const handleDrop = (e: any) => {
@@ -161,10 +153,7 @@ export default function RoomSettingsPage() {
         <label className="font-semibold">Hero Image</label>
 
         {heroImage && (
-          <img
-            src={heroImage}
-            className="rounded mb-3 h-40 object-cover"
-          />
+          <img src={heroImage} className="rounded mb-3 h-40 object-cover" />
         )}
 
         <input
@@ -190,7 +179,6 @@ export default function RoomSettingsPage() {
         <div className="grid grid-cols-3 gap-3 mt-2">
           {gallery.map((img, i) => (
             <div key={i} className="relative group">
-
               <img
                 src={img}
                 onClick={() => setZoomIndex(i)}
@@ -234,10 +222,7 @@ export default function RoomSettingsPage() {
             className="fixed inset-0 bg-black/80 flex items-center justify-center z-[9999]"
             onClick={() => setZoomIndex(null)}
           >
-            <div
-              className="relative"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <div className="relative" onClick={(e) => e.stopPropagation()}>
               <img
                 src={gallery[zoomIndex]}
                 className="max-w-[90vw] max-h-[80vh] rounded shadow-lg"
@@ -265,9 +250,7 @@ export default function RoomSettingsPage() {
               {zoomIndex < gallery.length - 1 && (
                 <button
                   onClick={() =>
-                    setZoomIndex((i) =>
-                      i! < gallery.length - 1 ? i! + 1 : i
-                    )
+                    setZoomIndex((i) => (i! < gallery.length - 1 ? i! + 1 : i))
                   }
                   className="absolute right-[-60px] top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white text-3xl px-3 py-2 rounded"
                 >

@@ -3,11 +3,10 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X, User } from "lucide-react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import { menuData } from "./menu";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebookF, faWhatsapp,  } from "@fortawesome/free-brands-svg-icons";
+import LoginButton from "@/components/User/Profile/LoginButton";
 
 export default function SecondHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -74,12 +73,7 @@ export default function SecondHeader() {
         {/* User Section */}
         <div className="flex items-center gap-4">
           {!session ? (
-            <button
-              onClick={() => signIn("google")}
-              className="bg-black text-white text-md px-9 py-2 font-extrabold rounded-sm shadow hover:bg-red-700"
-            >
-              Login
-            </button>
+            <LoginButton />
           ) : (
             <div className="relative">
               <button

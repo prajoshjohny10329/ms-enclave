@@ -19,13 +19,13 @@ export default function RoomRules() {
         <Rule
           icon={faClock}
           title="Check-in Time"
-          description="From 3:00 PM"
+          description="From 6:00 AM"
         />
 
         <Rule
           icon={faDoorClosed}
           title="Check-out Time"
-          description="By 11:00 AM"
+          description="By 6:00 AM"
         />
 
         <Rule

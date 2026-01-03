@@ -9,7 +9,7 @@ type DayAvailability = {
   available: number;
 };
 
-export default function CalendarAvailabilityPage() {
+export default function UserCalendarAvailability() {
   const today = new Date();
 
   const [year, setYear] = useState(today.getFullYear());
@@ -41,9 +41,9 @@ export default function CalendarAvailabilityPage() {
   const firstDay = new Date(year, month, 1).getDay(); // 0 = Sun
 
   const getStatusColor = (available: number, day: number) => {
-    if (available <= 0) return "bg-red-500";
-    if (available <= 5) return "bg-yellow-400";
-    return "bg-green-500";
+    if (available <= 0) return "text-red-500";
+    if (available <= 5) return "text-yellow-500";
+    return "text-black";
   };
 
   // Month navigation
@@ -80,50 +80,27 @@ export default function CalendarAvailabilityPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-black mb-6 text-center">
+    <div className="max-w-6xl mx-auto p-6 shadow-i">
+      
+
+      {/* Month Controls with arrows */}
+      <div className="flex items-center justify-center gap-4 mb-6 font-dm">
+        <button
+          onClick={prevMonth}
+          className="p-2 rounded bg-white hover:bg-gray-300"
+        >
+          ◀
+        </button>
+<h1 className="text-xl font-bold text-black text-center">
         {new Date(year, month).toLocaleString("default", {
           month: "long",
           year: "numeric",
         })}
       </h1>
 
-      {/* Month Controls with arrows */}
-      <div className="flex items-center gap-4 mb-6">
-        <button
-          onClick={prevMonth}
-          className="p-2 rounded bg-black hover:bg-gray-300"
-        >
-          ◀
-        </button>
-
-        <select
-          value={month}
-          onChange={(e) => setMonth(Number(e.target.value))}
-          className="border rounded p-2 text-black"
-        >
-          {Array.from({ length: 12 }).map((_, i) => (
-            <option key={i} value={i}>
-              {new Date(0, i).toLocaleString("default", { month: "long" })}
-            </option>
-          ))}
-        </select>
-
-        <select
-          value={year}
-          onChange={(e) => setYear(Number(e.target.value))}
-          className="border rounded p-2 text-black"
-        >
-          {Array.from({ length: 5 }).map((_, i) => (
-            <option key={i} value={today.getFullYear() - 2 + i}>
-              {today.getFullYear() - 2 + i}
-            </option>
-          ))}
-        </select>
-
         <button
           onClick={nextMonth}
-          className="p-2 rounded bg-black hover:bg-gray-300"
+          className="p-2 rounded bg-white hover:bg-gray-300"
         >
           ▶
         </button>
@@ -135,12 +112,12 @@ export default function CalendarAvailabilityPage() {
       ) : (
         <div
           ref={calendarRef}
-          className="grid grid-cols-7 gap-2 text-center select-none"
+          className="grid grid-cols-7 gap-2 text-center select-none font-dm"
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
         >
           {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (
-            <div key={d} className="font-semibold text-gray-600">
+            <div key={d} className="font-semibold text-black">
               {d}
             </div>
           ))}
@@ -160,27 +137,22 @@ export default function CalendarAvailabilityPage() {
             const info = data[dateKey];
 
             return (
-              <Link
-                href={`/admin/calendar-availability/${dateKey}`}
+              <div
                 key={dateKey}
-                className={`rounded-lg p-3 text-white shadow ${getStatusColor(
+                className={`rounded-lg p-3 text-black shadow ${getStatusColor(
                   info?.available ?? 0,
                   day
                 )}`}
               >
-                <div className="font-bold">{day}</div>
-
-                {/* Show booked/available info, default to 0 if missing */}
-                <p className="text-xs mt-1">Booked: {info?.booked ?? 0}</p>
-                <p className="text-xs">Available: {info?.available ?? 0}</p>
-              </Link>
+                <div className="font-bold text-shadow-sm">{day}</div>
+              </div>
             );
           })}
         </div>
       )}
 
       {/* Legend */}
-      <div className="mt-8 flex gap-6 text-sm">
+      <div className="mt-8 flex gap-6 text-sm text-black font-dm">
         <div className="flex items-center gap-2">
           <span className="w-4 h-4 bg-green-500 rounded"></span>
           Available
@@ -191,7 +163,7 @@ export default function CalendarAvailabilityPage() {
         </div>
         <div className="flex items-center gap-2">
           <span className="w-4 h-4 bg-red-500 rounded"></span>
-          Fully Booked / Last Day
+          Fully Booked
         </div>
       </div>
     </div>

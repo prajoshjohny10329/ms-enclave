@@ -6,12 +6,16 @@ export async function POST(req: Request) {
   await connectDB();
   const { email, name, phone, nationality, address } = await req.json();
 
+    console.log(email, name, phone, nationality, address);
+
+
   try {
     const updatedUser = await User.findOneAndUpdate(
       { email },
       { name, phone, nationality, address },
       { new: true }
     );
+    
     return NextResponse.json({ success: true, user: updatedUser });
   } catch (error) {
     console.error(error);

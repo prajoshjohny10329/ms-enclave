@@ -3,7 +3,7 @@
 import Breadcrumb from "@/components/common/Breadcrumb";
 import BookingSection from "@/components/User/Booking/BookingSection";
 
-export default function PackagesPage() {
+export default function PackageBookingPage() {
   return (
     <section>
       <Breadcrumb

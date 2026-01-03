@@ -8,6 +8,9 @@ export async function GET(req: Request) {
   try {
     await connectDB();
 
+    console.log('called');
+    
+
     const { searchParams } = new URL(req.url);
     const packageId = searchParams.get("packageId");
     const checkIn = searchParams.get("checkIn");
@@ -26,7 +29,7 @@ export async function GET(req: Request) {
 
     const pkg = await Package.findById(packageId);
     if (!pkg) {
-      return NextResponse.json({ message: "Package not found" }, { status: 404 });
+     return NextResponse.json({ message: "Package not found" }, { status: 404 });
     }
 
     const settings = await RoomSettings.findOne();

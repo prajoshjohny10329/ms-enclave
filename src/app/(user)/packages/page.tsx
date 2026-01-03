@@ -12,7 +12,6 @@ export default function PackagesPage() {
         items={[{ label: "Our Packages", href: "/packages" }]}
       />
       <PackagesSection />
-      {/* <PackagesSectionNew /> */}
 
     </section>
   );

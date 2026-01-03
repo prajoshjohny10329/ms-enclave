@@ -13,7 +13,7 @@ export async function GET(req: Request) {
   const settings = await RoomSettings.findOne();
   const totalRooms = settings?.totalRooms || 0;
 
-   // Start and end dates of the month
+  // Start and end dates of the month
   const start = new Date(year, month, 1);
   start.setHours(0, 0, 0, 0); // normalize to midnight
 

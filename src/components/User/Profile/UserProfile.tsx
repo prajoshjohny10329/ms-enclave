@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { Bars } from "react-loader-spinner";
 import Loader from "@/components/common/Loader";
 import Image from "next/image";
+import { validateUserProfile } from "@/utils/validateUserProfile";
 
 interface Profile {
   name: string;
@@ -43,10 +44,13 @@ export default function UserProfile() {
     }
 
     if (session?.user) {
+      validateUserProfile(session.user);
+
       const { name, phone, nationality, address, image } = session.user as any;
 
       if (phone || nationality || address) {
         setProfile({ name, phone, nationality, address, image });
+        
         setIsEditing(false);
       } else {
         setForm({
@@ -54,7 +58,7 @@ export default function UserProfile() {
           phone: "",
           nationality: "",
           address: "",
-          image: "",
+          image: image,
         });
       }
     }
@@ -68,11 +72,19 @@ export default function UserProfile() {
     e.preventDefault();
     if (!session?.user?.email) return;
 
+    console.log(session.user.email);
+    
+
     try {
       const { data } = await axios.post("/api/profile", {
         email: session.user.email,
         ...form,
       });
+      console.log("session.user.id");
+
+      console.log(data);
+      
+
 
       session.user.id = data.user._id.toString();
       session.user.phone = data.user.phone || "";
@@ -85,6 +97,8 @@ export default function UserProfile() {
 
       toast.success("Profile Edited successfully");
     } catch (error) {
+      console.log(error);
+      
       toast.loading("Profile Edited Error");
     }
   };
@@ -112,7 +126,7 @@ export default function UserProfile() {
                 Update your personal information below
               </p>
               <Image
-                src={profile?.image || "/images/default-avatar.png"}
+                src={form.image || "/images/default-avatar.png"}
                 alt="Profile image"
                 width={70}
                 height={70}
@@ -184,6 +198,7 @@ export default function UserProfile() {
             {/* ACTIONS */}
             <div className="flex justify-end gap-4 pt-4">
               <button
+              onClick={() => setIsEditing(false)}
                 type="button"
                 className="px-6 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 transition"
               >
@@ -208,7 +223,7 @@ export default function UserProfile() {
                 Update your personal information below
               </p>
               <Image
-                src={profile?.image || "/images/default-avatar.png"}
+                src={profile?.image || ""}
                 alt="Profile image"
                 width={70}
                 height={70}
@@ -216,7 +231,7 @@ export default function UserProfile() {
               />
             </div>
             <div className="overflow-x-auto max-w-3xl font-dm ">
-              <table className="w-full border-collapse">
+              <table className="w-full ">
                 <tbody className="divide-y">
                   <tr className="hover:bg-gray-50 transition">
                     <td className="py-4 font-bold text-lg text-gray-950 font-dm w-1/3">
