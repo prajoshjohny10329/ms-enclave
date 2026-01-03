@@ -94,30 +94,36 @@ useEffect(() => {
 
   return (
     <div>
-      <div className="mb-7 flex justify-between items-center">
-        <div>
-          <h1 className="text-4xl font-bold mb-3  text-shadow-sm">
-            {pkg.packageName}
-          </h1>
-          <p className="text-gray-800 text-2xl text-shadow-sm">
-            ₹{pkg.indianPrice} / Night
-          </p>
-        </div>
-        <div>
-          {session?.user ? (
-            <Link href={`/booking/${pkg.slug}`} className="bg-black text-white text-md px-10 py-4 font-extrabold rounded-sm shadow hover:font-black hover:shadow-lg hover:bg-green-600">
-              Book Now
-            </Link>
-          ) : (
-            <div>
-              <LoginButton />
-              <p className=" text-red-500 pl-1  text-xs mt-2 text-center font-dm font-medium ">
-                Login to Book You Room
-              </p>
-            </div>
-          )}
-        </div>
+      <div className="mb-7 flex flex-col gap-6 md:flex-row md:justify-between md:items-center">
+  <div>
+    <h1 className="text-4xl font-bold mb-2 md:mb-3 text-shadow-sm">
+      {pkg.packageName}
+    </h1>
+
+    <p className="text-2xl text-gray-800 text-shadow-sm">
+      ₹{pkg.indianPrice} / Night
+    </p>
+  </div>
+
+  <div className="flex flex-col items-start md:items-end">
+    {session?.user ? (
+      <Link
+        href={`/booking/${pkg.slug}`}
+        className="bg-black text-white text-md px-8 md:px-10 py-3 md:py-4 font-extrabold rounded-sm shadow hover:font-black hover:shadow-lg hover:bg-green-600 transition"
+      >
+        Book Now
+      </Link>
+    ) : (
+      <div className="text-center md:text-right">
+        <LoginButton />
+        <p className="text-red-500 text-xs mt-2 font-dm font-medium">
+          Login to Book Your Room
+        </p>
       </div>
+    )}
+  </div>
+</div>
+
       <div>
         <div className="relative w-full h-96 overflow-hidden rounded-md transition">
           <Image

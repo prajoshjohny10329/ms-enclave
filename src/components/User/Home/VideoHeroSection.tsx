@@ -69,7 +69,7 @@ export default function VideoHeroSection() {
         preload="metadata"
         onCanPlay={() => setVideoLoaded(true)}
       >
-        <source src="/temp/6.mp4" type="video/mp4" />
+        <source src="/video/ms-enclave-heritage-resort-palakkad.mp4" type="video/mp4" />
       </video>
 
       {/* 🌑 Overlay */}

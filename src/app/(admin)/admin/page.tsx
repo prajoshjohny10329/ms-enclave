@@ -1,8 +1,18 @@
+import UserCalendarAvailability from "@/components/User/Booking/UserCalendarAvailability";
+
 export default function AdminHome() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold">Dashboard</h1>
-      <p className="mt-2">Welcome to the admin dashboard!</p>
-    </div>
+    <section>
+      <div className="max-w-6xl mx-auto p-6  py-20 grid  md:grid-cols-10 gap-10">
+        <div className="md:col-span-6">
+
+        </div>
+        
+        <div className="md:col-span-4 shadow-md">
+          <UserCalendarAvailability />
+        </div>
+      
+      </div>
+    </section>
   );
 }
