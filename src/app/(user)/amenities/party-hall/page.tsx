@@ -28,9 +28,9 @@ export default function PartyHallPage() {
     <section>
         <Breadcrumb
                 heading="Our Party Hall"
-                bgImage="/temp/part-hall-tep.jpg"   // ⭐ background image
+                bgImage="/images/common/ms-enclave-31.webp"   // ⭐ background image
                 items={[
-                  { label: "Party Hall", href: "/amentias/party-hall" }
+                  { label: "Party Hall", href: "/amenities/party-hall" }
                 ]}
               />
         <PartyHallWelcome />

@@ -1,4 +1,5 @@
 import Breadcrumb from "@/components/common/Breadcrumb";
+import AmenitiesSection from "@/components/User/About/AmenitiesSection";
 
 export default function AmenitiesPage() {
   return (
@@ -9,8 +10,8 @@ export default function AmenitiesPage() {
         items={[{ label: "Our Amenities", href: "/amenities" }]}
       />
 
-      <div className="max-w-6xl mx-auto px-6 py-16">
-        {/* Page content here */}
+      <div className="">
+        <AmenitiesSection />
       </div>
     </>
   );

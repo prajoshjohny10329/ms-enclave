@@ -43,7 +43,7 @@ export default function PartyHallWelcome() {
          className="relative w-full h-full rounded-md min-h-[500px] pb-5">
 
           <Image
-            src="/temp/part-hall-tep.jpg"
+            src="/images/common/ms-enclave-31.webp"
             alt="M.S. Enclave Heritage Resort Palakkad"
             fill
             className="object-cover rounded-tr-[35px] rounded-bl-[35px] shadow-md pb-2 pr-2"

@@ -22,7 +22,7 @@ export default function WhyChoosePartyHall() {
       <div className="w-full h-full flex relative items-center">
         {/* BACKGROUND IMAGE */}
         <Image
-          src="/temp/part-hall-tep.jpg"
+          src="/images/common/ms-enclave-31.webp"
           alt="Kerala Heritage Architecture"
           fill
           priority

@@ -11,8 +11,10 @@ import RoomHighlights from "./RoomHighlights";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { validateUserProfile } from "@/utils/validateUserProfile";
+import BookingCalender from "./BookingCalender";
 
-export default function BookingSection() {
+export default function BookingSectionDummy() {
+  
   const { data: session, status } = useSession();
   const router = useRouter();
   const { slug } = useParams();
@@ -48,19 +50,10 @@ export default function BookingSection() {
         nights,
       },
     });
-
-    console.log(date);
-    
-
     setMaxAvailableRooms(res.data.availableRooms);
-    console.log(res.data.availableRooms);
   };
 
   const [maxAvailableRooms, setMaxAvailableRooms] = useState(0);
-
-  // useEffect(() => {
-  //   fetchAvailability(form.date, Number(nights));
-  // }, []);
 
   const noRooms: boolean = maxAvailableRooms === 0;
   const currentPath = window.location.pathname + window.location.search;
@@ -104,7 +97,7 @@ export default function BookingSection() {
     if (slug) loadData();
   }, [slug, session]);
 
-  // Load fetchAvailability
+  // Load FetchAvailability
   useEffect(() => {
   if (pkg?._id && form.date && nights) {
     fetchAvailability(form.date, Number(nights));
@@ -207,6 +200,9 @@ export default function BookingSection() {
 
     const updated = { ...form, [name]: value };
 
+    console.log(updated);
+    
+
     const adults = Number(name === "adults" ? value : form.adults);
     const children = Number(name === "children" ? value : form.children);
 
@@ -221,6 +217,11 @@ export default function BookingSection() {
       );
       return;
     }
+
+    if (name === "date") {
+      fetchAvailability(value, nights);
+    }
+
     setWarning("");
     setForm(updated);
     calculateBooking(updated);
@@ -318,12 +319,19 @@ export default function BookingSection() {
   // ---------- SUBMIT ----------
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    
     setMessage("");
     const checkInDate = new Date(form.date);
     const checkOutDate = new Date(checkInDate);
     checkOutDate.setDate(checkOutDate.getDate() + nights);
 
     if (!session?.user?.id) return router.push("/login");
+    if (!session?.user?.phone) {
+      toast.error("Please add your phone number");
+      return router.push(
+        `/profile?callbackUrl=${encodeURIComponent(currentPath)}`
+      );
+    }
 
     if (!totalPrice) {
       console.log("Enter");
@@ -331,35 +339,34 @@ export default function BookingSection() {
       return;
     }
 
-    console.log('handel');
-    console.log(form);
-    
+    try {
+      const res = await axios.post("/api/bookings", {
+        ...form,
+        userId: session.user.id,
+        packageId: pkg._id,
+        roomsNeeded,
+        totalPrice,
+        nights,
+        checkInDate,
+        checkOutDate,
+        status: "pending",
+      });
 
-    // try {
-    //   const res = await axios.post("/api/bookings", {
-    //     ...form,
-    //     userId: session.user.id,
-    //     packageId: pkg._id,
-    //     roomsNeeded,
-    //     totalPrice,
-    //     nights,
-    //     checkInDate,
-    //     checkOutDate,
-    //     status: "pending",
-    //   });
+      const booking = res.data;
 
-    //   const booking = res.data;
+      console.log(booking);
+      
 
-    //   if (session.user.nationality === "India") {
-    //     await handleRazorpayPayment(booking);
-    //   } else {
-    //     await handleRazorpayPayment(booking);
-    //     // await handleStripePayment(booking);
-    //   }
-    // } catch (err) {
-    //   console.error(err);
-    //   setMessage("❌ Booking failed.");
-    // }
+      // if (session.user.nationality === "India") {
+      //   await handleRazorpayPayment(booking);
+      // } else {
+      //   await handleRazorpayPayment(booking);
+      //   // await handleStripePayment(booking);
+      // }
+    } catch (err) {
+      console.error(err);
+      setMessage("❌ Booking failed.");
+    }
   };
 
   if (loading) return <p className="p-10">Loading package...</p>;
@@ -423,15 +430,19 @@ export default function BookingSection() {
             <form onSubmit={handleSubmit} className="space-y-4 font-dm">
               <p className="text-lg font-bold mt-4 font-dm ">Select Date</p>
 
-              <input
-                name="date"
-                type="date"
-                value={form.date}
-                onChange={handleChange}
-                placeholder="Select Date"
-                required
-                className="w-full p-3 border rounded"
-              />
+              <div className="md:col-span-4 rounded-xl bg-white">
+  <BookingCalender
+    onDateSelect={(date) => handleChange({ target: { name: "date", value: date } })}
+  />
+</div>
+
+{/* Display selected date */}
+<p className="mt-2 font-dm text-lg text-center">
+  {form.date
+    ? `Selected Check-in: ${new Date(form.date).toDateString()}`
+    : "Please select a date"}
+</p>
+
 
               <p className="text-lg font-semibold font-dm text-center">
                 {maxAvailableRooms > 0 ? (

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Loader from "@/components/common/Loader";
+import FullPageLoader from "@/components/common/FullPageLoader";
 
 export default function RoomSettingsPage() {
   const [totalRooms, setTotalRooms] = useState<number>(8);
@@ -41,13 +43,18 @@ export default function RoomSettingsPage() {
 
   // Delete from Cloudinary
   const deleteFromCloudinary = async (url: string) => {
+    setUploading(true);
+
     await axios.post("/api/admin/delete-image", {
       imageUrl: url, // <-- important for DB delete
     });
+    setUploading(false);
   };
 
   // Upload Image
   const uploadImage = async (file: File, setProg?: (n: number) => void) => {
+    setUploading(true);
+
     if (setProg) setProg(0);
     const form = new FormData();
     form.append("file", file);
@@ -61,10 +68,12 @@ export default function RoomSettingsPage() {
     });
 
     return res.data.secure_url;
+    setUploading(false);
   };
 
   // Replace image
   const replaceImage = async (oldUrl: string, file: File) => {
+    setUploading(true);
     setReplaceLoading(true);
     setProgress(0);
 
@@ -75,10 +84,12 @@ export default function RoomSettingsPage() {
 
     setReplaceLoading(false);
     setProgress(0);
+    setUploading(false);
   };
 
   // Save settings
   const saveSettings = async () => {
+    setUploading(true);
     let uploadedGallery = [...gallery];
 
     if (galleryFiles.length > 0) {
@@ -104,11 +115,14 @@ export default function RoomSettingsPage() {
     } else {
       toast.error(data.message || "Room Not Updated");
     }
+    setUploading(false);
   };
 
   // Drag & Drop handler
   const handleDrop = (e: any) => {
     e.preventDefault();
+    setUploading(true);
+
     const files = Array.from(e.dataTransfer.files) as File[];
 
     const previews = files.map((f) => URL.createObjectURL(f));
@@ -116,9 +130,12 @@ export default function RoomSettingsPage() {
     setGalleryFiles((prev) => [...prev, ...files]);
 
     setDragActive(false);
+    setUploading(false);
   };
 
-  if (loading) return <p className="p-5">Loading...</p>;
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="max-w-3xl mx-auto p-6 text-black">
@@ -294,12 +311,32 @@ export default function RoomSettingsPage() {
       <button
         onClick={saveSettings}
         disabled={uploading}
-        className={`mt-6 px-4 py-2 text-white rounded ${
-          uploading ? "bg-gray-400" : "bg-blue-600"
+        className={`mt-6 px-6 py-2 text-white rounded flex items-center justify-center gap-2 transition ${
+          uploading
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-blue-600 hover:bg-blue-700"
         }`}
       >
-        Save Settings
+        {uploading ? (
+          <>
+            <Spinner />
+            Updating...
+          </>
+        ) : (
+          "Save Settings"
+        )}
       </button>
+      <>
+        {uploading && <FullPageLoader text="Updating Room Settings..." />}
+
+        <div className="max-w-3xl mx-auto p-6 text-black">
+          {/* existing content */}
+        </div>
+      </>
     </div>
   );
 }
+
+const Spinner = () => (
+  <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+);

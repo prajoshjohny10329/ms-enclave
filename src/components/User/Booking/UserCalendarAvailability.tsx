@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Link from "next/link";
+import Loader from "@/components/common/Loader";
 
 type DayAvailability = {
   booked: number;
@@ -50,7 +51,7 @@ export default function UserCalendarAvailability() {
 
     return () => clearTimeout(timer);
   }
-}, [selectedDate, selectedAvailability]);
+  }, [selectedDate, selectedAvailability]);
 
 
 
@@ -102,17 +103,22 @@ export default function UserCalendarAvailability() {
     dragStartX.current = null;
   };
 
-  const handleDaySelect = (
-  dateKey: string,
-  available: number = 0,
-  isPast?: boolean
-) => {
-  if (isPast) return;
+    const handleDaySelect = (
+    dateKey: string,
+    available: number = 0,
+    isPast?: boolean
+      ) => {
+        if (isPast) return;
 
-  setSelectedDate(dateKey);
-  setSelectedAvailability(available);
-};
+      setSelectedDate(dateKey);
+      setSelectedAvailability(available);
+    };
 
+      if (loading) {
+        return (
+          <Loader />
+        );
+      }
 
   return (
     <div className="max-w-6xl mx-auto p-6 shadow-i">

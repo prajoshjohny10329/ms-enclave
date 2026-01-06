@@ -46,7 +46,7 @@ const PartyHall = () => {
           {/* Main Image */}
           <div className="rounded-lg overflow-hidden shadow-xl">
             <Image
-              src="/temp/part-hall-tep.jpg"
+              src="/images/common/ms-enclave-31.webp"
               alt="Luxury Stay"
               width={700}
               height={500}
@@ -65,7 +65,7 @@ const PartyHall = () => {
           >
             <div className="rounded-lg overflow-hidden shadow-xl ">
               <Image
-                src="/temp/part-hall-tep.jpg"
+                src="/images/common/ms-enclave-31.webp"
                 alt="Interior"
                 width={220}
                 height={260}
@@ -113,7 +113,7 @@ const PartyHall = () => {
           </motion.p>
 
           <MotionLink
-            href="/amentias/party-hall"
+            href="/amenities/party-hall"
             ref={btnRef}
             variants={fadeRight}
             initial="hidden"
