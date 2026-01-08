@@ -13,8 +13,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="mt-20">
-
+    <footer>
       {/* ================= MAIN FOOTER ================= */}
       <div className="bg-black text-white mt-20 rounded-t-3xl">
         <div className="max-w-6xl mx-auto px-6 py-16 grid gap-10 md:grid-cols-4">

@@ -27,6 +27,7 @@
     "next-auth": "^4.24.13",
     "razorpay": "^2.9.6",
     "react": "19.2.0",
+    "react-confetti": "^6.4.0",
     "react-country-flag": "^3.1.0",
     "react-datepicker": "^8.9.0",
     "react-dom": "19.2.0",
@@ -35,6 +36,7 @@
     "react-loader-spinner": "^8.0.0",
     "react-select": "^5.10.2",
     "react-select-country-list": "^2.2.3",
+    "react-use": "^17.6.0",
     "stripe": "^19.3.1",
     "swiper": "^12.0.3",
     "yet-another-react-lightbox": "^3.27.0"
