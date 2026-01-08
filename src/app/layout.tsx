@@ -97,7 +97,7 @@ export const metadata: Metadata = {
     siteName: "M.S. Enclave Heritage Resort",
     images: [
       {
-        url: "/images/seo/og-image.jpg",
+        url: "/images/seo/home.webp",
         width: 1200,
         height: 630,
         alt: "M.S. Enclave Heritage Resort Palakkad",
@@ -112,7 +112,7 @@ export const metadata: Metadata = {
     title: "M.S. Enclave Heritage Resort | Palakkad",
     description:
       "Heritage-style resort in Palakkad offering peaceful stays, modern comforts, and authentic Kerala hospitality.",
-    images: ["/images/seo/og-image.jpg"],
+    images: ["/images/seo/home.webp"],
   },
 
   robots: {
@@ -128,13 +128,13 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-32x32.png",
-    apple: "/apple-touch-icon.png",
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
   },
 
   verification: {
-    google: "GOOGLE_SEARCH_CONSOLE_CODE", // replace when available
+    // google: "GOOGLE_SEARCH_CONSOLE_CODE", // replace when available
   },
 };
 
