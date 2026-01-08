@@ -4,11 +4,10 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { motion, useInView } from "framer-motion";
-import Confetti from "react-confetti";
-import { useWindowSize } from "react-use";
 
 import "swiper/css";
 import toast from "react-hot-toast";
+import ConfettiOverlay from "@/components/common/ConfettiOverlay";
 
 /* ================= ANIMATIONS ================= */
 
@@ -29,7 +28,6 @@ export default function ContactFormSection() {
 
   /* 🔹 CONFETTI */
   const [showConfetti, setShowConfetti] = useState(false);
-  const { width, height } = useWindowSize();
 
   /* 🔹 ANIMATION REFS */
   const imageRef = useRef(null);
@@ -108,15 +106,9 @@ export default function ContactFormSection() {
     <section className="relative py-20 overflow-hidden">
       {/* 🎉 CONFETTI */}
       {showConfetti && (
-  <div className="fixed inset-0 z-9999 pointer-events-none">
-    <Confetti
-      width={width}
-      height={height}
-      numberOfPieces={350}
-      recycle={false}
-      gravity={0.25}
-    />
-  </div>
+  <ConfettiOverlay show={showConfetti} />
+
+
 )}
 
 
@@ -233,7 +225,7 @@ export default function ContactFormSection() {
                 </label>
                 <textarea
                   name="message"
-                  rows={3}
+                  rows={2}
                   value={formData.message}
                   placeholder="Write your message..."
                   className={inputClass}

@@ -12,6 +12,7 @@ import HomeGallery from "@/components/User/Home/HomeGallery";
 import PartyHall from "@/components/User/Home/PartyHall";
 import PackageSwiper from "@/components/User/Packages/PackageSwiper";
 import ActivitiesSwiper from "@/components/User/Home/ActivitiesSwiper";
+import ContactFormSection from "@/components/User/Home/ContactFormSection";
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
    <PackageSwiper />
    <ActivitiesSwiper />
    <HomeGallery />
+   <ContactFormSection />
    </> 
   );
 }
