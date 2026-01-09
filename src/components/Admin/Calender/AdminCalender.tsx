@@ -116,7 +116,7 @@ export default function AdminCalender() {
           onMouseUp={handleMouseUp}
         >
           {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (
-            <div key={d} className="font-semibold text-black text-sm bg-white rounded py-1 shadow">
+            <div key={d} className="font-semibold text-black text-sm bg-white rounded py-1 shadow ">
               {d}
             </div>
           ))}
@@ -139,7 +139,7 @@ export default function AdminCalender() {
               <Link
                 href={`/admin/calendar-availability/${dateKey}`}
                 key={dateKey}
-                className={`rounded-lg p-3 relative text-black bg-white hover:bg-blue-500 shadow `}
+                className={"block rounded-lg p-3 relative text-black bg-white hover:bg-blue-500 shadow "}
               >
                 <div className="font-bold">{day}</div>
                 <div className={` h-3 w-3 absolute top-2 right-2 rounded-full ${getStatusColor(
@@ -166,7 +166,7 @@ export default function AdminCalender() {
         </div>
         <div className="flex items-center gap-2">
           <span className="w-4 h-4 bg-red-500 rounded"></span>
-          Fully Booked / Last Day
+          Fully Booked
         </div>
       </div>
     </div>

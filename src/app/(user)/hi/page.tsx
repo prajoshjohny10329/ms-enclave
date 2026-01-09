@@ -1,5 +1,4 @@
 import AdminCalender from '@/components/Admin/Calender/AdminCalender'
-import GalleryGrid from '@/components/User/Gallery/GalleryGrid'
 
 const page = () => {
   return (
