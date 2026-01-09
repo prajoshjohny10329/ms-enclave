@@ -52,7 +52,8 @@ export default function HomeAboutSection() {
 
         {/* Right Content */}
         <div className="flex items-center px-6 md:px-16 mt-10">
-          <div className="space-y-6">
+          <div className="">
+            
             <motion.h1
             ref={titleRef}
             variants={fadeRight}
@@ -60,8 +61,17 @@ export default function HomeAboutSection() {
             animate={titleInView ? "visible" : "hidden"}
             transition={{ duration: 1 }} 
             className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm">
-              Welcome to M.S. Enclave Heritage Resort
+            M.S. Enclave Heritage Resort
             </motion.h1>
+            <motion.h2
+            ref={titleRef}
+            variants={fadeRight}
+            initial="hidden"
+            animate={titleInView ? "visible" : "hidden"}
+            transition={{ duration: 1 }} 
+            className="text-3xl md:text-4xl font-semibold text-black leading-tight mb-2">
+            Situated in Palakkad, Kerala
+            </motion.h2>
 
             <motion.p
             ref={textRef}
@@ -70,7 +80,8 @@ export default function HomeAboutSection() {
             animate={textInView ? "visible" : "hidden"}
             transition={{ duration: 1 }}
              className="text-gray-950 font-medium text-md leading-relaxed font-dm">
-              Nestled in the peaceful surroundings of Mannuparambil, Paruthipully, Palakkad, M.S. Enclave Heritage Resort blends traditional Kerala architecture with modern comfort. Designed for families, couples, and nature lovers, our resort offers a calm and refreshing escape from everyday life.
+Delve into the traditional ambience with the convenience of modernity at our brand new resort.
+Nestled next to the paddy fields of Palakkad with a breath taking view of the village called Paruthipully.
             </motion.p>
             <MotionLink
             href="/about-us"

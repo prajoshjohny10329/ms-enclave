@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import axios from "axios";
+import ConfettiOverlay from "@/components/common/ConfettiOverlay";
+import toast from "react-hot-toast";
+import AdminBreadcrumb from "@/components/common/AdminHeader/AdminBreadcrumb";
 
 /* ================= MAIN PAGE ================= */
 
@@ -12,6 +15,7 @@ export default function DayAvailabilityPage() {
   const [loading, setLoading] = useState(true);
   const [summary, setSummary] = useState<any>(null);
   const [bookings, setBookings] = useState<any[]>([]);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const [roomsToBook, setRoomsToBook] = useState(1);
   const [clientName, setClientName] = useState("");
@@ -80,7 +84,7 @@ export default function DayAvailabilityPage() {
 
   const handleAdminBooking = async () => {
     if (!clientName || !phone || !selectedPackage) {
-      alert("Please fill all fields");
+      toast.error("Please fill all fields");
       return;
     }
 
@@ -93,7 +97,8 @@ export default function DayAvailabilityPage() {
       totalPrice,
     });
 
-    alert("Room booked successfully");
+    setShowConfetti(true);
+    toast.success("Room booked successfully");
 
     setClientName("");
     setPhone("");
@@ -110,11 +115,19 @@ export default function DayAvailabilityPage() {
   /* ================= UI ================= */
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">
-        📅 Availability for {date}
-      </h1>
+    <section>
+      {/* 🎉 CONFETTI */}
+   {showConfetti && (
+  <ConfettiOverlay show={showConfetti} />
 
+
+)}
+<AdminBreadcrumb
+        heading={`Availability ${date}`}
+        bgImage="/images/common/ms-enclave-31.webp" // ⭐ background image
+        items={[{ label: "All Packages", href: "/amenities/party-hall" }]}
+      />
+    <div className="max-w-6xl mx-auto p-6">
       {/* SUMMARY */}
       <div className="grid grid-cols-3 gap-6 mb-10">
         <SummaryCard title="Total Rooms" value={summary.totalRooms} />
@@ -241,6 +254,7 @@ export default function DayAvailabilityPage() {
         />
       )}
     </div>
+    </section>
   );
 }
 

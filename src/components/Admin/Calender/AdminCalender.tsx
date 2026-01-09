@@ -2,26 +2,20 @@
 
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import Loader from "@/components/common/Loader";
+import Link from "next/link";
 
 type DayAvailability = {
   booked: number;
   available: number;
 };
 
-export default function UserCalendarAvailability() {
+export default function AdminCalender() {
   const today = new Date();
-  today.setHours(0, 0, 0, 0); // ✅ normalize today
 
   const [year, setYear] = useState(today.getFullYear());
   const [month, setMonth] = useState(today.getMonth()); // 0-11
   const [data, setData] = useState<Record<string, DayAvailability>>({});
   const [loading, setLoading] = useState(false);
-
-  const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const [selectedAvailability, setSelectedAvailability] = useState<
-    number | null
-  >(null);
 
   const calendarRef = useRef<HTMLDivElement>(null);
   const dragStartX = useRef<number | null>(null);
@@ -43,30 +37,13 @@ export default function UserCalendarAvailability() {
     fetchAvailability();
   }, [year, month]);
 
-  useEffect(() => {
-    if (selectedDate && selectedAvailability !== null) {
-      const timer = setTimeout(() => {
-        setSelectedDate(null);
-        setSelectedAvailability(null);
-      }, 2000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [selectedDate, selectedAvailability]);
-
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const firstDay = new Date(year, month, 1).getDay(); // 0 = Sun
 
-  const getStatusColor = (available: number) => {
+  const getStatusColor = (available: number, day: number) => {
     if (available <= 0) return "bg-red-500";
     if (available <= 7) return "bg-yellow-400";
     return "bg-green-500";
-  };
-
-  const isPastDate = (year: number, month: number, day: number) => {
-    const date = new Date(year, month, day);
-    date.setHours(0, 0, 0, 0);
-    return date < today;
   };
 
   // Month navigation
@@ -96,39 +73,24 @@ export default function UserCalendarAvailability() {
   const handleMouseUp = (e: React.MouseEvent) => {
     if (dragStartX.current !== null) {
       const diff = e.clientX - dragStartX.current;
-      if (diff > 50) prevMonth();
-      if (diff < -50) nextMonth();
+      if (diff > 50) prevMonth(); // dragged right
+      if (diff < -50) nextMonth(); // dragged left
     }
     dragStartX.current = null;
   };
 
-  const handleDaySelect = (
-    dateKey: string,
-    available: number = 0,
-    isPast?: boolean
-  ) => {
-    if (isPast) return;
-
-    setSelectedDate(dateKey);
-    setSelectedAvailability(available);
-  };
-
-  if (loading) {
-    return <Loader />;
-  }
-
   return (
-    <div className="max-w-6xl mx-auto p-6 shadow-i">
+    <div className="mx-auto p-6 shadow font-dm rounded-xl bg-gray-50">
       {/* Month Controls */}
       <div className="flex items-center justify-center gap-4 mb-6 font-dm">
         <button
           onClick={prevMonth}
-          className="p-2 rounded bg-white hover:bg-gray-300 "
+          className="p-2 rounded bg-white text-black hover:bg-gray-300 hover:text-white"
         >
           ◀
         </button>
 
-        <h1 className="text-xl font-bold text-black text-center">
+        <h1 className="text-xl font-black text-black text-center">
           {new Date(year, month).toLocaleString("default", {
             month: "long",
             year: "numeric",
@@ -137,7 +99,7 @@ export default function UserCalendarAvailability() {
 
         <button
           onClick={nextMonth}
-          className="p-2 rounded bg-white hover:bg-gray-300"
+          className="p-2 rounded bg-white text-black hover:bg-gray-300 hover:text-white"
         >
           ▶
         </button>
@@ -149,12 +111,12 @@ export default function UserCalendarAvailability() {
       ) : (
         <div
           ref={calendarRef}
-          className="grid grid-cols-7 gap-2 text-center select-none font-dm"
+          className="grid grid-cols-7 gap-2 text-center select-none"
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
         >
           {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (
-            <div key={d} className="font-semibold text-black">
+            <div key={d} className="font-semibold text-black text-sm bg-white rounded py-1 shadow">
               {d}
             </div>
           ))}
@@ -172,54 +134,28 @@ export default function UserCalendarAvailability() {
               "0"
             )}-${String(day).padStart(2, "0")}`;
             const info = data[dateKey];
-            const past = isPastDate(year, month, day);
 
             return (
-              <div
+              <Link
+                href={`/admin/calendar-availability/${dateKey}`}
                 key={dateKey}
-                className={`relative rounded-lg p-3 text-black shadow cursor-pointer ${
-                  past ? "opacity-40 cursor-not-allowed" : ""
-                } text-black`}
-                onMouseEnter={() =>
-                  handleDaySelect(dateKey, info?.available, past)
-                }
-                onClick={() => handleDaySelect(dateKey, info?.available, past)}
+                className={`rounded-lg p-3 relative text-black bg-white hover:bg-blue-500 shadow `}
               >
-                <div className="font-bold text-shadow-sm">{day}</div>
-                <div
-                  className={`absolute top-2 right-2 rounded-full ${getStatusColor(
-                    info?.available ?? 0
-                  )} ${
-                  past ? "bg-white" : ""
-                }`}
-                  style={{ height: "7px", width: "7px" }}
-                ></div>
-              </div>
+                <div className="font-bold">{day}</div>
+                <div className={` h-3 w-3 absolute top-2 right-2 rounded-full ${getStatusColor(
+                  info?.available ?? 0,
+                  day
+              )}`} style={{height:'10px', width:"10px"}}></div>
+
+                <p className="text-xs">Available: {info?.available ?? 0}</p>
+              </Link>
             );
           })}
         </div>
       )}
 
-      {/* Availability info */}
-      {selectedDate && selectedAvailability !== null && (
-        <div
-          className={`mt-4 p-3 rounded text-center font-dm transition
-      ${
-        selectedAvailability > 0
-          ? "bg-green-100 text-green-800"
-          : "bg-red-100 text-red-800"
-      }`}
-        >
-          {selectedAvailability > 0
-            ? `${selectedAvailability} rooms available on ${new Date(
-                selectedDate
-              ).toDateString()}`
-            : `No rooms available on ${new Date(selectedDate).toDateString()}`}
-        </div>
-      )}
-
       {/* Legend */}
-      <div className="mt-8 flex gap-6 text-sm text-black font-dm">
+      <div className="mt-8 flex gap-6 text-sm text-black">
         <div className="flex items-center gap-2">
           <span className="w-4 h-4 bg-green-500 rounded"></span>
           Available
@@ -230,7 +166,7 @@ export default function UserCalendarAvailability() {
         </div>
         <div className="flex items-center gap-2">
           <span className="w-4 h-4 bg-red-500 rounded"></span>
-          Fully Booked
+          Fully Booked / Last Day
         </div>
       </div>
     </div>
