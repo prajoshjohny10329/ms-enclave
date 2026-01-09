@@ -1,0 +1,299 @@
+export const galleryImages = [
+  {
+    src: "/images/common/ms-enclave-1.webp",
+    category: "Nature",
+    alt: "Nature View",
+  },
+  {
+    src: "/images/common/ms-enclave-2.webp",
+    category: "Nature",
+    alt: "Nature View",
+  },
+  {
+    src: "/images/common/ms-enclave-3.webp",
+    category: "Nature",
+    alt: "Nature View",
+  },
+  {
+    src: "/images/common/ms-enclave-4.webp",
+    category: "Nature",
+    alt: "Nature View",
+  },
+  {
+    src: "/images/common/ms-enclave-5.webp",
+    category: "Nature",
+    alt: "Nature View",
+  },
+  {
+    src: "/images/common/ms-enclave-6.webp",
+    category: "Nature",
+    alt: "Nature View",
+  },
+  {
+    src: "/images/common/ms-enclave-7.webp",
+    category: "Nature",
+    alt: "Nature View",
+  },
+  {
+    src: "/images/common/ms-enclave-8.webp",
+    category: "Nature",
+    alt: "Nature View",
+  },
+  {
+    src: "/images/common/ms-enclave-9.webp",
+    category: "Nature",
+    alt: "Nature View",
+  },
+  {
+    src: "/images/common/ms-enclave-10.webp",
+    category: "Nature",
+    alt: "Nature View",
+  },
+  {
+    src: "/images/common/ms-enclave-11.webp",
+    category: "Pool",
+    alt: "Swimming Pool View",
+  },
+//   hi 
+  {
+    src: "/images/common/ms-enclave-12.webp",
+    category: "Garden",
+    alt: "Garden View",
+  },
+  {
+    src: "/images/common/ms-enclave-13.webp",
+    category: "Interior",
+    alt: "Interior View",
+  },
+  {
+    src: "/images/common/ms-enclave-14.webp",
+    category: "Interior",
+    alt: "Interior View",
+  },
+  {
+    src: "/images/common/ms-enclave-15.webp",
+    category: "Exterior",
+    alt: "Exterior View",
+  },
+  {
+    src: "/images/common/ms-enclave-16.webp",
+    category: "Garden",
+    alt: "Garden View",
+  },
+  {
+    src: "/images/common/ms-enclave-17.webp",
+    category: "Pool",
+    alt: "Swimming Pool View",
+  },
+  {
+    src: "/images/common/ms-enclave-18.webp",
+    category: "Exterior",
+    alt: "Exterior View",
+  },
+  {
+    src: "/images/common/ms-enclave-19.webp",
+    category: "Garden",
+    alt: "Garden View",
+  },
+  {
+    src: "/images/common/ms-enclave-20.webp",
+    category: "Garden",
+    alt: "Garden View",
+  },
+  {
+    src: "/images/common/ms-enclave-21.webp",
+    category: "Interior",
+    alt: "Interior View",
+  },
+  {
+    src: "/images/common/ms-enclave-22.webp",
+    category: "Interior",
+    alt: "Interior View",
+  },
+  {
+    src: "/images/common/ms-enclave-23.webp",
+    category: "Garden",
+    alt: "Garden View",
+  },
+  {
+    src: "/images/common/ms-enclave-24.webp",
+    category: "Room",
+    alt: "Room View",
+  },
+  {
+    src: "/images/common/ms-enclave-25.webp",
+    category: "Room",
+    alt: "Room View",
+  },
+  {
+    src: "/images/common/ms-enclave-26.webp",
+    category: "Room",
+    alt: "Room View",
+  },
+  {
+    src: "/images/common/ms-enclave-27.webp",
+    category: "Room",
+    alt: "Room View",
+  },
+  {
+    src: "/images/common/ms-enclave-28.webp",
+    category: "Garden",
+    alt: "Garden View",
+  },
+  {
+    src: "/images/common/ms-enclave-29.webp",
+    category: "Garden",
+    alt: "Garden View",
+  },
+  {
+    src: "/images/common/ms-enclave-30.webp",
+    category: "Interior",
+    alt: "Interior View",
+  },
+  {
+    src: "/images/common/ms-enclave-31.webp",
+    category: "Party Hall",
+    alt: "Party Hall View",
+  },
+  {
+    src: "/images/common/ms-enclave-32.webp",
+    category: "Party Hall",
+    alt: "Party Hall View",
+  },
+  {
+    src: "/images/common/ms-enclave-33.webp",
+    category: "Lift",
+    alt: "Lift View",
+  },
+  {
+    src: "/images/common/ms-enclave-34.webp",
+    category: "Nature",
+    alt: "Nature View",
+  },
+  {
+    src: "/images/common/ms-enclave-35.webp",
+    category: "Nature",
+    alt: "Nature View",
+  },
+  {
+    src: "/images/common/ms-enclave-36.webp",
+    category: "Nature",
+    alt: "Nature View",
+  },
+  {
+    src: "/images/common/ms-enclave-37.webp",
+    category: "pool",
+    alt: "Swimming Pool View",
+  },
+  {
+    src: "/images/common/ms-enclave-38.webp",
+    category: "Exterior",
+    alt: "Exterior View",
+  },
+  {
+    src: "/images/common/ms-enclave-39.webp",
+    category: "Interior",
+    alt: "Interior View",
+  },
+  {
+    src: "/images/common/ms-enclave-40.webp",
+    category: "Interior",
+    alt: "Interior View",
+  },
+  {
+    src: "/images/common/ms-enclave-41.webp",
+    category: "Exterior",
+    alt: "Exterior View",
+  },
+  {
+    src: "/images/common/ms-enclave-42.webp",
+    category: "Exterior",
+    alt: "Exterior View",
+  },
+  {
+    src: "/images/common/ms-enclave-43.webp",
+    category: "Exterior",
+    alt: "Exterior View",
+  },
+  {
+    src: "/images/common/ms-enclave-44.webp",
+    category: "Interior",
+    alt: "Interior View",
+  },
+  {
+    src: "/images/common/ms-enclave-45.webp",
+    category: "Party Hall",
+    alt: "Party Hall View",
+  },
+  {
+    src: "/images/common/ms-enclave-46.webp",
+    category: "Garden",
+    alt: "Garden View",
+  },
+  {
+    src: "/images/common/ms-enclave-47.webp",
+    category: "Exterior",
+    alt: "Exterior View",
+  },
+  {
+    src: "/images/common/ms-enclave-48.webp",
+    category: "Exterior",
+    alt: "Exterior View",
+  },
+  {
+    src: "/images/common/ms-enclave-49.webp",
+    category: "Exterior",
+    alt: "Exterior View",
+  },
+  {
+    src: "/images/common/ms-enclave-50.webp",
+    category: "Exterior",
+    alt: "Exterior View",
+  },
+  {
+    src: "/images/common/ms-enclave-51.webp",
+    category: "Exterior",
+    alt: "Exterior View",
+  },
+  {
+    src: "/images/common/ms-enclave-52.webp",
+    category: "Exterior",
+    alt: "Exterior View",
+  },
+  {
+    src: "/images/common/ms-enclave-53.webp",
+    category: "Exterior",
+    alt: "Exterior View",
+  },
+  {
+    src: "/images/common/ms-enclave-54.webp",
+    category: "Exterior",
+    alt: "Exterior View",
+  },
+  {
+    src: "/images/common/ms-enclave-55.webp",
+    category: "pool",
+    alt: "Swimming Pool View",
+  },
+  {
+    src: "/images/common/ms-enclave-56.webp",
+    category: "Interior",
+    alt: "Interior View",
+  },
+  {
+    src: "/images/common/ms-enclave-57.webp",
+    category: "Exterior",
+    alt: "Exterior View",
+  },
+  {
+    src: "/images/common/ms-enclave-58.webp",
+    category: "Interior",
+    alt: "Interior View",
+  },
+  {
+    src: "/images/common/ms-enclave-59.webp",
+    category: "Room",
+    alt: "Room View",
+  },
+  
+];

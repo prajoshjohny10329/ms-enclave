@@ -5,6 +5,8 @@ import Image from "next/image";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Breadcrumb from "@/components/common/Breadcrumb";
+import GalleryIntroduction from "@/components/User/Gallery/GalleryIntroduction";
+import GalleryGrid from "@/components/User/Gallery/GalleryGrid";
 
 const galleryImages = [
   {
@@ -143,63 +145,8 @@ export default function GallerySection() {
         bgImage="/images/home/ms-slider-1.webp"
         items={[{ label: "Gallery", href: "/gallery" }]}
       />
-      <div className="py-20 ">
-        <div className="max-w-7xl mx-auto px-4 ">
-          {/* Section Heading */}
-
-          <h2 className=" p-4 font-montserrat text-2xl md:text-4xl text-black text-center">
-  Five Reasons Why It’s Worth Going  <br />
-  <span className="font-playfair italic">
-    to journey with us
-  </span>
-</h2>
-
-
-          {/* Gallery Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {shuffledImages.map((img, i) => (
-              <figure
-                key={i}
-                className="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer"
-                onClick={() => {
-                  setIndex(i);
-                  setOpen(true);
-                }}
-              >
-                {/* Image */}
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  width={600}
-                  height={400}
-                  className="w-full h-[260px] object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-
-                {/* Overlay */}
-                <figcaption className="absolute inset-0 bg-black/40 flex items-end p-4 opacity-0 group-hover:opacity-100 transition">
-                  <span className="text-white text-sm font-medium">
-                    {img.alt}
-                  </span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-
-        {/* Lightbox */}
-        <Lightbox
-          open={open}
-          close={() => setOpen(false)}
-          index={index}
-          slides={galleryImages.map((img) => ({
-            src: img.src,
-            alt: img.alt,
-          }))}
-          styles={{
-            container: { backgroundColor: "rgba(15, 15, 16, 0.95)" }, // 👈 change background here
-          }}
-        />
-      </div>
+      <GalleryIntroduction />
+      <GalleryGrid />
     </section>
   );
 }
