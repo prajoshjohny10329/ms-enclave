@@ -1,131 +1,231 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
-import Image from "next/image";
 import Link from "next/link";
+
+const STATUS_TABS = ["all", "paid", "pending", "cancelled"];
 
 export default function AdminBookingsPage() {
   const [bookings, setBookings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // filters
+  const [search, setSearch] = useState("");
+  const [status, setStatus] = useState("all");
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
+
   useEffect(() => {
     const fetchBookings = async () => {
-      try {
-        const res = await axios.get("/api/admin/bookings");
-        setBookings(res.data);
-        console.log(res.data);
-      } catch (err) {
-        console.error("Failed to load bookings:", err);
-      } finally {
-        setLoading(false);
-      }
+      const res = await axios.get("/api/admin/bookings");
+      setBookings(res.data);
+      setLoading(false);
     };
-
     fetchBookings();
   }, []);
 
-  if (loading) return <p className="text-center mt-10">Loading bookings...</p>;
-  if (bookings.length === 0)
-    return <p className="text-center mt-10">No bookings found.</p>;
+  // ================= FILTER LOGIC =================
+  const filteredBookings = useMemo(() => {
+    return bookings.filter((b) => {
+      const userName =
+        b.userId?.name || b.clientName || "";
+      const phone =
+        b.phone || b.userId?.phone || "";
+
+      const matchSearch =
+        userName.toLowerCase().includes(search.toLowerCase()) ||
+        phone.includes(search);
+
+      const matchStatus =
+        status === "all" ? true : b.status === status;
+
+      const bookingDate = new Date(b.createdAt).getTime();
+      const matchFrom =
+        !fromDate || bookingDate >= new Date(fromDate).getTime();
+      const matchTo =
+        !toDate || bookingDate <= new Date(toDate).getTime();
+
+      return matchSearch && matchStatus && matchFrom && matchTo;
+    });
+  }, [bookings, search, status, fromDate, toDate]);
+
+  // ================= STATUS UPDATE =================
+  const updateStatus = async (id: string, newStatus: string) => {
+    try {
+      await axios.patch(`/api/admin/bookings/${id}/status`, {
+        status: newStatus,
+      });
+      setBookings((prev) =>
+        prev.map((b) =>
+          b._id === id ? { ...b, status: newStatus } : b
+        )
+      );
+    } catch {
+      alert("Failed to update status");
+    }
+  };
+
+  if (loading) return <p className="p-10">Loading…</p>;
 
   return (
-    <div className="max-w-6xl mx-auto mt-10 p-4 text-black">
-      <h1 className="text-2xl font-bold mb-6">All Bookings</h1>
+    <div className="max-w-7xl mx-auto p-6 text-black">
+      <h1 className="text-3xl font-bold mb-6">Bookings</h1>
 
-      <div className="grid gap-4">
-        {bookings.map((booking) => (
-          <div
-            key={booking._id}
-            className="p-4 border rounded-xl shadow-sm bg-white flex gap-4"
+      {/* ================= FILTER BAR ================= */}
+      <div className="bg-white rounded-xl shadow p-4 mb-6 grid md:grid-cols-4 gap-4">
+        <input
+          placeholder="Search name or phone"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="border px-3 py-2 rounded"
+        />
+
+        <input
+          type="date"
+          value={fromDate}
+          onChange={(e) => setFromDate(e.target.value)}
+          className="border px-3 py-2 rounded"
+        />
+
+        <input
+          type="date"
+          value={toDate}
+          onChange={(e) => setToDate(e.target.value)}
+          className="border px-3 py-2 rounded"
+        />
+
+        <button
+          onClick={() => {
+            setSearch("");
+            setFromDate("");
+            setToDate("");
+            setStatus("all");
+          }}
+          className="bg-gray-100 rounded px-3 py-2"
+        >
+          Clear Filters
+        </button>
+      </div>
+
+      {/* ================= STATUS TABS ================= */}
+      <div className="flex gap-3 mb-4">
+        {STATUS_TABS.map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setStatus(tab)}
+            className={`px-4 py-2 rounded-full text-sm font-medium ${
+              status === tab
+                ? "bg-blue-600 text-white"
+                : "bg-gray-100 text-gray-700"
+            }`}
           >
-            <Image
-              src={booking.packageId?.image || "/default-room.jpg"}
-              alt={booking.packageId?.packageName || "Room"}
-              width={120}
-              height={80}
-              className="rounded-lg"
-            />
-
-            <div className="flex-1">
-              <h2 className="font-semibold text-lg">
-                {booking.packageId?.packageName || "Room"}
-              </h2>
-              <p>
-                {new Date(booking.checkInDate).toLocaleDateString()} →{" "}
-                {new Date(booking.checkOutDate).toLocaleDateString()} {"  "}
-                {`( ${booking.nights} Nights )`}
-              </p>
-              <p>Guests: {booking.adults+booking.children}</p>
-              <p>Total: ₹{booking.totalPrice}</p>
-              <p>
-                Status:{" "}
-                <span
-                  className={`font-semibold ${
-                    booking.status === "pending"
-                      ? "text-orange-500"
-                      : booking.status === "paid"
-                      ? "text-green-500"
-                      : "text-red-500"
-                  }`}
-                >
-                  {booking.status.toUpperCase()}
-                </span>
-              </p>
-              <p>
-                User: {booking.userId?.name || booking.userId} | Email:{" "}
-                {booking.userId?.email}
-              </p>
-              <p>
-                Payment Method:{booking.paymentMethod}
-              </p>
-              <Link
-                href={`/admin/bookings/${booking._id}`}
-                className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
-              >
-                View
-              </Link>
-            </div>
-            <div className="flex-1">
-              <h2 className="font-semibold text-lg">
-                {booking.packageId?.packageName || "Room"}
-              </h2>
-              <p>
-                {new Date(booking.checkInDate).toLocaleDateString()} →{" "}
-                {new Date(booking.checkOutDate).toLocaleDateString()} {"  "}
-                {`( ${booking.nights} Nights )`}
-              </p>
-              <p>Guests: {booking.guests+booking.children}</p>
-              <p>Total: ₹{booking.totalPrice}</p>
-              <p>
-                Status:{" "}
-                <span
-                  className={`font-semibold ${
-                    booking.status === "pending"
-                      ? "text-orange-500"
-                      : booking.status === "paid"
-                      ? "text-green-500"
-                      : "text-red-500"
-                  }`}
-                >
-                  {booking.status.toUpperCase()}
-                </span>
-              </p>
-              <p>
-                User: {booking.userId?.name || booking.userId} | Email:{" "}
-                {booking.userId?.email}
-              </p>
-              <p>
-                Payment Method:{" "}
-                {booking.razorpayPaymentId
-                  ? "Razorpay"
-                  : booking.stripeSessionId
-                  ? "Stripe"
-                  : "N/A"}
-              </p>
-            </div>
-          </div>
+            {tab.toUpperCase()}
+          </button>
         ))}
+      </div>
+
+      {/* ================= TABLE ================= */}
+      <div className="overflow-x-auto bg-white rounded-xl shadow">
+        <table className="min-w-full text-sm">
+          <thead className="bg-gray-100 text-gray-700">
+            <tr>
+              <th className="p-3 text-left">Package</th>
+              <th className="p-3">Guest</th>
+              <th className="p-3">Dates</th>
+              <th className="p-3">Total</th>
+              <th className="p-3">Status</th>
+              <th className="p-3">Payment</th>
+              <th className="p-3">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {filteredBookings.map((b) => (
+              <tr
+                key={b._id}
+                className="border-t hover:bg-gray-50"
+              >
+                <td className="p-3 font-medium">
+                  {b.packageId?.packageName}
+                </td>
+
+                <td className="p-3">
+                  <p>{b.userId?.name || b.clientName || "Guest"}</p>
+                  <p className="text-xs text-gray-500">{b.phone}</p>
+                </td>
+
+                <td className="p-3">
+                  {new Date(b.checkInDate).toLocaleDateString()} →{" "}
+                  {new Date(b.checkOutDate).toLocaleDateString()}
+                </td>
+
+                <td className="p-3 font-semibold">
+                  ₹{b.totalPrice}
+                </td>
+
+                {/* STATUS BADGE */}
+                <td className="p-3">
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs ${
+                      b.status === "paid"
+                        ? "bg-green-100 text-green-700"
+                        : b.status === "pending"
+                        ? "bg-orange-100 text-orange-700"
+                        : "bg-red-100 text-red-700"
+                    }`}
+                  >
+                    {b.status.toUpperCase()}
+                  </span>
+                </td>
+
+                <td className="p-3">
+                  {b.paymentMethod ||
+                    (b.razorpayPaymentId
+                      ? "Razorpay"
+                      : "N/A")}
+                </td>
+
+                {/* ACTIONS */}
+                <td className="p-3 flex gap-2">
+                  <select
+                    value={b.status}
+                    onChange={(e) =>
+                      updateStatus(b._id, e.target.value)
+                    }
+                    className="border px-2 py-1 rounded text-xs"
+                  >
+                    <option value="pending">Pending</option>
+                    <option value="paid">Paid</option>
+                    <option value="cancelled">Cancelled</option>
+                  </select>
+
+                  <Link
+                    href={`/admin/bookings/${b._id}`}
+                    className="text-blue-600 text-xs underline"
+                  >
+                    View
+                  </Link>
+
+                  <button
+                    onClick={() =>
+                      window.open(`/admin/bookings/${b._id}/invoice`)
+                    }
+                    className="text-xs text-gray-600 underline"
+                  >
+                    Invoice
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        {filteredBookings.length === 0 && (
+          <p className="p-6 text-center text-gray-500">
+            No bookings found
+          </p>
+        )}
       </div>
     </div>
   );

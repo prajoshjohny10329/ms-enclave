@@ -331,35 +331,35 @@ export default function BookingSection() {
       return;
     }
 
-    console.log('handel');
-    console.log(form);
+    // console.log('handel');
+    // console.log(form);
     
 
-    // try {
-    //   const res = await axios.post("/api/bookings", {
-    //     ...form,
-    //     userId: session.user.id,
-    //     packageId: pkg._id,
-    //     roomsNeeded,
-    //     totalPrice,
-    //     nights,
-    //     checkInDate,
-    //     checkOutDate,
-    //     status: "pending",
-    //   });
+    try {
+      const res = await axios.post("/api/bookings", {
+        ...form,
+        userId: session.user.id,
+        packageId: pkg._id,
+        roomsNeeded,
+        totalPrice,
+        nights,
+        checkInDate,
+        checkOutDate,
+        status: "pending",
+      });
 
-    //   const booking = res.data;
+      const booking = res.data;
 
-    //   if (session.user.nationality === "India") {
-    //     await handleRazorpayPayment(booking);
-    //   } else {
-    //     await handleRazorpayPayment(booking);
-    //     // await handleStripePayment(booking);
-    //   }
-    // } catch (err) {
-    //   console.error(err);
-    //   setMessage("❌ Booking failed.");
-    // }
+      if (session.user.nationality === "India") {
+        await handleRazorpayPayment(booking);
+      } else {
+        await handleRazorpayPayment(booking);
+        // await handleStripePayment(booking);
+      }
+    } catch (err) {
+      console.error(err);
+      setMessage("❌ Booking failed.");
+    }
   };
 
   if (loading) return <p className="p-10">Loading package...</p>;

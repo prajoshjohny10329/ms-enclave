@@ -24,6 +24,9 @@ export async function GET(req: NextRequest) {
       })
     );
 
+    console.log(detailedBookings);
+    
+
     return NextResponse.json(detailedBookings);
   } catch (err) {
     console.error(err);

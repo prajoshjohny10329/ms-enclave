@@ -4,8 +4,6 @@ import RoomsContact from "@/components/User/Amenities/Rooms/RoomsContact";
 import RoomsGallerySection from "@/components/User/Amenities/Rooms/RoomsGallerySection";
 import RoomsWelcomeSection from "@/components/User/Amenities/Rooms/RoomsWelcomeSection";
 import RoomsWhyChooseUs from "@/components/User/Amenities/Rooms/RoomsWhyChooseUs";
-import WhyChooseRooms from "@/components/User/Amenities/Rooms/WhyChooseRooms";
-import AmenitiesSlider from "@/components/User/Home/AmenitiesHighlights";
 import PackageSwiper from "@/components/User/Packages/PackageSwiper";
 
 export default function RoomsPage() {
