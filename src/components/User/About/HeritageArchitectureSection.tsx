@@ -64,7 +64,7 @@ export default function HeritageArchitectureSection() {
       <div className="w-full h-full flex relative items-center">
         {/* BACKGROUND IMAGE */}
       <Image
-        src="/images/common/ms-enclave-17.webp"
+        src="/images/common/ms-enclave-34.webp"
         alt="Kerala Heritage Architecture"
         fill
         priority
