@@ -83,7 +83,7 @@ export const metadata: Metadata = {
 
   category: "Hospitality & Travel",
 
-  metadataBase: new URL("https://www.msenclave.com"),
+  metadataBase: new URL("https://www.msheritageresort.com"),
 
   alternates: {
     canonical: "/",
@@ -93,7 +93,7 @@ export const metadata: Metadata = {
     title: "M.S. Enclave Heritage Resort | Heritage Stay in Palakkad",
     description:
       "Experience comfort, tradition, and tranquility at M.S. Enclave Heritage Resort, Palakkad. Ideal for family stays, leisure trips, and peaceful retreats.",
-    url: "https://www.msenclave.com",
+    url: "https://www.msheritageresort.com",
     siteName: "M.S. Enclave Heritage Resort",
     images: [
       {

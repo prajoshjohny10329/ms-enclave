@@ -32,7 +32,7 @@ export default function BookingDetailsPage() {
       .finally(() => setLoading(false));
   }, [id, router]);
 
-  const fetChData =() =>{
+  const fetChData = () => {
     axios
       .get(`/api/admin/bookings/${id}`)
       .then((res) => setBooking(res.data))
@@ -41,7 +41,7 @@ export default function BookingDetailsPage() {
         router.push("/my-bookings");
       })
       .finally(() => setLoading(false));
-  }
+  };
 
   const handleDelete = async () => {
     if (!confirm("Are you sure you want to delete this booking?")) return;
@@ -101,10 +101,10 @@ export default function BookingDetailsPage() {
               razorpayOrderId: response.razorpay_order_id,
               razorpaySignature: response.razorpay_signature,
             });
-            setShowConfetti(true)
+            setShowConfetti(true);
             toast.success("Payment successful!");
             setTimeout(() => {
-              setShowConfetti(false)
+              setShowConfetti(false);
             }, 4000);
             router.refresh(); // refresh to update status
           },
@@ -139,12 +139,8 @@ export default function BookingDetailsPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10 text-black">
-         {/* 🎉 CONFETTI */}
-         {showConfetti && (
-        <ConfettiOverlay show={showConfetti} />
-      
-      
-      )}
+      {/* 🎉 CONFETTI */}
+      {showConfetti && <ConfettiOverlay show={showConfetti} />}
       {/* HEADER */}
       <div className="flex justify-between items-start mb-6">
         <div>
