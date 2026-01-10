@@ -106,7 +106,8 @@ export default function BookingDetailsPage() {
             setTimeout(() => {
               setShowConfetti(false);
             }, 4000);
-            router.refresh(); // refresh to update status
+            // router.refresh(); // refresh to update status
+            fetChData()
           },
           theme: { color: "#3399cc" },
         };
