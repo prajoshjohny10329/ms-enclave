@@ -87,19 +87,16 @@ export default function HeritageArchitectureSection() {
           </h3>
 
           <p className=" leading-relaxed text-md md:text-lg font-dm text-white font-medium text-shadow-md drop-shadow-[1px_1px_1px_rgba(0,0,0)]">
-            Our resort showcases authentic Kerala-style architecture with
-            sloping tiled roofs, wooden carvings, and open courtyards. Each
-            corner reflects the elegance of traditional craftsmanship while
-            offering modern amenities for a comfortable stay.
+            Inspired by the timeless architecture of Kerala, our resort is designed in the traditional Naalukettu style — a four-winged structure embracing a serene central courtyard (Nadumuttam). This design invites natural light, gentle breezes, and the calming rhythm of nature into every space. Rooted in Kerala’s heritage and Vastu wisdom, the Naalukettu reflects a way of life that values balance, community, and tranquility, offering guests an authentic and soulful retreat.
           </p>
         </div>
 
         {/* COUNTERS */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
+        {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
           {counters.map((item, index) => (
             <AnimatedCounter key={index} {...item} />
           ))}
-        </div>
+        </div> */}
       </div>
       </div>
     </section>
