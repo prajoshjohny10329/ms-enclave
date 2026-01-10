@@ -17,7 +17,7 @@ export default function ConfettiOverlay({
   if (!show) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] pointer-events-none">
+    <div className="fixed inset-0 z-9999 pointer-events-none">
       <Confetti
         width={width}
         height={height}

@@ -137,6 +137,8 @@ export default function BookingDetailsPage() {
         <div className="grid md:grid-cols-2 gap-4 text-sm">
           <p><strong>Total Price:</strong> ₹{booking.totalPrice}</p>
           <p><strong>Payment Method:</strong> {booking.paymentMethod || "Online"}</p>
+          <p><strong>razorpayOrderId:</strong> {booking.razorpayOrderId || ""}</p>
+          <p><strong>razorpayPaymentId:</strong> {booking.razorpayPaymentId || ""}</p>
           <p><strong>Booking Date:</strong> {new Date(booking.createdAt).toLocaleString()}</p>
         </div>
       </div>
@@ -159,7 +161,7 @@ export default function BookingDetailsPage() {
         <button
           onClick={handleDelete}
           disabled={deleting}
-          className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50"
+          className="px-4 py-2 bg-red-500 text-white rounded-lg"
         >
           {deleting ? "Deleting..." : "Delete Booking"}
         </button>

@@ -5,6 +5,8 @@ import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import ConfettiOverlay from "@/components/common/ConfettiOverlay";
+import toast from "react-hot-toast";
 
 export default function BookingDetailsPage() {
   const { data: session } = useSession();
@@ -13,6 +15,8 @@ export default function BookingDetailsPage() {
 
   const [booking, setBooking] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const [loadingPayment, setLoadingPayment] = useState<string | null>(null);
 
   useEffect(() => {
@@ -27,6 +31,32 @@ export default function BookingDetailsPage() {
       })
       .finally(() => setLoading(false));
   }, [id, router]);
+
+  const fetChData =() =>{
+    axios
+      .get(`/api/admin/bookings/${id}`)
+      .then((res) => setBooking(res.data))
+      .catch(() => {
+        alert("Failed to load booking");
+        router.push("/my-bookings");
+      })
+      .finally(() => setLoading(false));
+  }
+
+  const handleDelete = async () => {
+    if (!confirm("Are you sure you want to delete this booking?")) return;
+    try {
+      setDeleting(true);
+      await axios.delete(`/api/bookings/${id}`);
+      alert("Booking deleted successfully");
+      router.push("/admin/bookings");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to delete booking");
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   // Handle payment for a booking
   const handlePayment = async (booking: any) => {
@@ -71,7 +101,11 @@ export default function BookingDetailsPage() {
               razorpayOrderId: response.razorpay_order_id,
               razorpaySignature: response.razorpay_signature,
             });
-            alert("Payment successful!");
+            setShowConfetti(true)
+            toast.success("Payment successful!");
+            setTimeout(() => {
+              setShowConfetti(false)
+            }, 4000);
             router.refresh(); // refresh to update status
           },
           theme: { color: "#3399cc" },
@@ -79,7 +113,7 @@ export default function BookingDetailsPage() {
 
         const rzp = new (window as any).Razorpay(options);
         rzp.open();
-        router.push("/my-bookings");
+        // router.push("/my-bookings");
       } else {
         // Stripe flow
         const res = await axios.post("/api/payments/stripe", {
@@ -91,8 +125,7 @@ export default function BookingDetailsPage() {
         if (res.data.url) window.location.href = res.data.url;
       }
     } catch (err) {
-      console.error("Payment failed:", err);
-      alert("Payment could not be initiated. Please try again.");
+      toast.error("Payment could not be initiated. Please try again.");
     } finally {
       setLoadingPayment(null);
     }
@@ -106,6 +139,12 @@ export default function BookingDetailsPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10 text-black">
+         {/* 🎉 CONFETTI */}
+         {showConfetti && (
+        <ConfettiOverlay show={showConfetti} />
+      
+      
+      )}
       {/* HEADER */}
       <div className="flex justify-between items-start mb-6">
         <div>
@@ -246,6 +285,13 @@ export default function BookingDetailsPage() {
             >
               Back to My Bookings
             </button>
+            {/* <button
+          onClick={handleDelete}
+          disabled={deleting}
+          className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50"
+        >
+          {deleting ? "Deleting..." : "Delete Booking"}
+        </button> */}
           </div>
         </div>
       </div>

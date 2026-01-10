@@ -6,6 +6,8 @@ import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { LayoutGrid, List } from "lucide-react";
+import toast from "react-hot-toast";
+import ConfettiOverlay from "@/components/common/ConfettiOverlay";
 
 export default function MyBookingsPage() {
   const { data: session, status } = useSession();
@@ -13,6 +15,8 @@ export default function MyBookingsPage() {
 
   const [bookings, setBookings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showConfetti, setShowConfetti] = useState(false);
+
   const [loadingPayment, setLoadingPayment] = useState<string | null>(null);
 
   const [view, setView] = useState<"card" | "list">("card");
@@ -39,8 +43,77 @@ export default function MyBookingsPage() {
     }
   }, [status, session?.user?.id]);
 
+  // Handle payment for a booking
   const handlePayment = async (booking: any) => {
-    // keep your existing payment logic
+    if (!session?.user) return;
+    setLoadingPayment(booking._id);
+
+    try {
+      const nationality = session.user.nationality;
+      if (nationality) {
+        // Razorpay flow
+        const res = await axios.post("/api/payments/razorpay", {
+          amount: booking.totalPrice,
+          currency: "INR",
+          bookingId: booking._id,
+          user: {
+            name: session.user.name,
+            email: session.user.email,
+            contact: session.user.phone || "",
+          },
+        });
+
+        const order = res.data;
+
+        const options = {
+          key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+          amount: order.amount,
+          currency: order.currency,
+          name: "MS Enclave Resort Palakkad",
+          description: `Booking #${booking._id}`,
+          order_id: order.id,
+          prefill: {
+            name: session.user.name,
+            email: session.user.email,
+            contact: session.user.phone || "",
+          },
+          handler: async function (response: any) {
+            // Confirm payment backend
+            await axios.post("/api/bookings/confirm-payment", {
+              bookingId: booking._id,
+              paymentMethod: "razorpay",
+              razorpayPaymentId: response.razorpay_payment_id,
+              razorpayOrderId: response.razorpay_order_id,
+              razorpaySignature: response.razorpay_signature,
+            });
+            setShowConfetti(true)
+            toast.success("Payment successful!");
+            setTimeout(() => {
+              setShowConfetti(false)
+            }, 4000);
+            router.refresh(); // refresh to update status
+          },
+          theme: { color: "#3399cc" },
+        };
+
+        const rzp = new (window as any).Razorpay(options);
+        rzp.open();
+        router.push("/my-bookings");
+      } else {
+        // Stripe flow
+        const res = await axios.post("/api/payments/stripe", {
+          amount: booking.totalPrice,
+          currency: "USD",
+          bookingId: booking._id,
+        });
+
+        if (res.data.url) window.location.href = res.data.url;
+      }
+    } catch (err) {
+      toast.error("Payment could not be initiated. Please try again.");
+    } finally {
+      setLoadingPayment(null);
+    }
   };
 
   if (loading)
@@ -51,6 +124,10 @@ export default function MyBookingsPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10 text-black">
+      {/* 🎉 CONFETTI */}
+               {showConfetti && (
+              <ConfettiOverlay show={showConfetti} />
+            )}
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">My Bookings</h1>

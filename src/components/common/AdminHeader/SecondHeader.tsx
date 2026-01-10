@@ -6,6 +6,7 @@ import { Menu, X, User } from "lucide-react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import { menuData } from "./adminMenu";
+import ReloadButton from "../ReloadButton";
 
 export default function SecondHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -21,54 +22,50 @@ export default function SecondHeader() {
     <header className="sticky top-0 w-full bg-white shadow-md z-50">
       <div className="container mx-auto py-4 flex justify-between items-center px-10">
         {/* Logo */}
-        <Link href="/" className="text-2xl font-bold text-black">
-          a
-        </Link>
+        <ReloadButton />
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-8 text-black font-medium relative">
-  {menuData.map((item) => (
-    <div key={item.id} className="group relative">
+          {menuData.map((item) => (
+            <div key={item.id} className="group relative">
+              {/* Main Link */}
+              <Link
+                href={item.path}
+                target={item.newTab ? "_blank" : "_self"}
+                className="hover:text-blue-600"
+              >
+                {item.title} {item.submenu ? " ▾" : ""}
+              </Link>
 
-      {/* Main Link */}
-      <Link
-        href={item.path}
-        target={item.newTab ? "_blank" : "_self"}
-        className="hover:text-blue-600"
-      >
-        {item.title} {item.submenu ? " ▾" : ""}
-      </Link>
+              {item.submenu && (
+                <>
+                  {/* FIX: Invisible hover buffer to fill mt-5 gap */}
+                  <div className="absolute left-0 top-full w-full h-5"></div>
 
-      {item.submenu && (
-        <>
-          {/* FIX: Invisible hover buffer to fill mt-5 gap */}
-          <div className="absolute left-0 top-full w-full h-5"></div>
-
-          {/* Dropdown */}
-          <div
-            className="
+                  {/* Dropdown */}
+                  <div
+                    className="
               absolute left-0 top-full mt-5
               w-48 bg-white shadow-lg rounded-lg
               hidden group-hover:flex flex-col
             "
-          >
-            {item.submenu.map((sub) => (
-              <Link
-                key={sub.id}
-                href={sub.path}
-                target={sub.newTab ? "_blank" : "_self"}
-                className="px-4 py-2 hover:bg-gray-100"
-              >
-                {sub.title}
-              </Link>
-            ))}
-          </div>
-        </>
-      )}
-    </div>
-  ))}
-</nav>
-
+                  >
+                    {item.submenu.map((sub) => (
+                      <Link
+                        key={sub.id}
+                        href={sub.path}
+                        target={sub.newTab ? "_blank" : "_self"}
+                        className="px-4 py-2 hover:bg-gray-100"
+                      >
+                        {sub.title}
+                      </Link>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          ))}
+        </nav>
 
         {/* User Section */}
         <div className="flex items-center gap-4">
