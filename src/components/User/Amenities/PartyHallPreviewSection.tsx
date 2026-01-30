@@ -22,8 +22,6 @@ const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
 
-const MotionLink = motion(Link);
-
 export default function PartyHallPreviewSection() {
   const imgRef = useRef<HTMLDivElement | null>(null);
   const titleRef = useRef<HTMLHeadingElement | null>(null);

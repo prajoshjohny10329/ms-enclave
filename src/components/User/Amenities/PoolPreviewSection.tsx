@@ -3,7 +3,7 @@
 import { motion, useInView, AnimatePresence, PanInfo } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { ChevronDown, ChevronLeft, ChevronRight, X } from "lucide-react";
+import {ChevronLeft, ChevronRight, X } from "lucide-react";
 import Link from "next/link";
 
 const fadeRight = {
