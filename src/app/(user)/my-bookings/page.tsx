@@ -13,6 +13,7 @@ export default function MyBookingsPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [bookings, setBookings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -44,6 +45,7 @@ export default function MyBookingsPage() {
   }, [status, session?.user?.id]);
 
   // Handle payment for a booking
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handlePayment = async (booking: any) => {
     if (!session?.user) return;
     setLoadingPayment(booking._id);
@@ -77,6 +79,7 @@ export default function MyBookingsPage() {
             email: session.user.email,
             contact: session.user.phone || "",
           },
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           handler: async function (response: any) {
             // Confirm payment backend
             await axios.post("/api/bookings/confirm-payment", {
@@ -95,7 +98,7 @@ export default function MyBookingsPage() {
           },
           theme: { color: "#3399cc" },
         };
-
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const rzp = new (window as any).Razorpay(options);
         rzp.open();
         router.push("/my-bookings");
@@ -109,6 +112,7 @@ export default function MyBookingsPage() {
 
         if (res.data.url) window.location.href = res.data.url;
       }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       toast.error("Payment could not be initiated. Please try again.");
     } finally {
@@ -160,7 +164,7 @@ export default function MyBookingsPage() {
       {/* CONTENT */}
       {view === "card" ? (
         /* ---------------- CARD VIEW ---------------- */
-        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {bookings.map((booking) => (
             <div
               key={booking._id}

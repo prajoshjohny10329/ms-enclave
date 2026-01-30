@@ -52,20 +52,14 @@ export const menuData: Menu[] = [
         path: "/amenities/party-hall",
       },
       {
+        id: 32,
+        title: "Artificial Rain",
+        newTab: false,
+        path: "/amenities/#ArtificialRain",
+      },
+      {
         id: 39,
         title: "Swimming Pool",
-        newTab: false,
-        path: "/amenities",
-      },
-      {
-        id: 32,
-        title: "Photo shooting locations",
-        newTab: false,
-        path: "/amenities",
-      },
-      {
-        id: 33,
-        title: "Dining area",
         newTab: false,
         path: "/amenities",
       },

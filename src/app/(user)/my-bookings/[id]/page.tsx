@@ -278,7 +278,7 @@ export default function BookingDetailsPage() {
           <div className="bg-white rounded-xl shadow p-6">
             <button
               onClick={() => router.push("/my-bookings")}
-              className="w-full py-2 border rounded-lg hover:bg-gray-50"
+              className="w-full py-2 border rounded-lg text-white bg-black hover:bg-green-600"
             >
               Back to My Bookings
             </button>
