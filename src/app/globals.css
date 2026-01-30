@@ -103,6 +103,9 @@ body {
   animation: splash 500ms ease-out;
   z-index: 9999;
 }
+.theme-bg{
+ background-color:  #67120d
+}
 
 @keyframes splash {
   to {

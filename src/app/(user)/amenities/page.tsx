@@ -1,7 +1,6 @@
 import Breadcrumb from "@/components/common/Breadcrumb";
 import ArtificialRainPreviewSection from "@/components/User/Amenities/ArtificialRainPreviewSection";
-import ConferenceHallPreviewSection from "@/components/User/Amenities/ConferenceHallPreviewSection";
-import IndoorGamesPreviewSection from "@/components/User/Amenities/IndoorGamesPreviewSection";
+import PartyHallPreviewSection from "@/components/User/Amenities/PartyHallPreviewSection";
 import PoolPreviewSection from "@/components/User/Amenities/PoolPreviewSection";
 import RoomPreviewSection from "@/components/User/Amenities/RoomPreviewSection";
 
@@ -16,9 +15,8 @@ export default function AmenitiesPage() {
 
       <div className="">
         <RoomPreviewSection />
-        {/* <ConferenceHallPreviewSection />
+        <PartyHallPreviewSection />
         <PoolPreviewSection />
-        <IndoorGamesPreviewSection />*/}
         <ArtificialRainPreviewSection /> 
       </div>
     </>

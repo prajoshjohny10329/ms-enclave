@@ -3,7 +3,8 @@
 import { motion, useInView, AnimatePresence, PanInfo } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { ChevronDown, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import Link from "next/link";
 
 const fadeRight = {
   hidden: { x: 60, opacity: 0 },
@@ -20,6 +21,8 @@ const swipeConfidenceThreshold = 100;
 const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
+
+const MotionLink = motion(Link);
 
 export default function ArtificialRainPreviewSection() {
   const imgRef = useRef<HTMLDivElement | null>(null);
@@ -64,23 +67,21 @@ export default function ArtificialRainPreviewSection() {
 
   const prevSlide = () => {
     setDirection(-1);
-    setCurrentIndex((prev) =>
-      prev === 0 ? images.length - 1 : prev - 1
-    );
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
   return (
-    <div className="my-10 py-10">
-      <section className="max-w-7xl p-8 mx-auto">
-        <div className="mx-auto grid md:grid-cols-10 min-h-[500px]">
-          {/* Left Image Column */}
+    <div className="py-16 px-5 md:px-0 theme-bg">
+      <section className="max-w-7xl pt-8 mx-auto">
+        <div className="mx-auto grid md:grid-cols-10 gap-2  min-h-[500px]">
+          {/* Right Content */}
           <motion.div
             ref={imgRef}
             variants={fadeLeft}
             initial="hidden"
             animate={imgInView ? "visible" : "hidden"}
             transition={{ duration: 1 }}
-            className="relative w-full h-full rounded-md min-h-[500px] pb-5 overflow-hidden group col-span-10 md:col-span-6"
+            className="relative w-full h-full rounded-md min-h-[500px] pb-5 overflow-hidden group md:col-span-6"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
@@ -112,10 +113,7 @@ export default function ArtificialRainPreviewSection() {
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={1}
                 onDragEnd={(e, info: PanInfo) => {
-                  const swipe = swipePower(
-                    info.offset.x,
-                    info.velocity.x
-                  );
+                  const swipe = swipePower(info.offset.x, info.velocity.x);
 
                   if (swipe < -swipeConfidenceThreshold) {
                     nextSlide();
@@ -129,7 +127,7 @@ export default function ArtificialRainPreviewSection() {
                   src={images[currentIndex]}
                   alt="M.S. Enclave Heritage Resort Palakkad"
                   fill
-                  className="object-cover rounded-tr-[35px] rounded-bl-[35px] shadow-md"
+                  className="object-cover shadow-md"
                   priority
                 />
               </motion.div>
@@ -145,16 +143,14 @@ export default function ArtificialRainPreviewSection() {
                     setCurrentIndex(i);
                   }}
                   className={`w-2 h-2 rounded-full transition ${
-                    i === currentIndex
-                      ? "bg-white scale-110"
-                      : "bg-white/50"
+                    i === currentIndex ? "bg-white scale-110" : "bg-white/50"
                   }`}
                 />
               ))}
             </div>
           </motion.div>
-
-          {/* Right Content */}
+          
+          {/* Left Image Column */}
           <div className="flex items-center px-6 md:px-16 mt-10 col-span-10 md:col-span-4">
             <div className="space-y-6">
               <motion.h1
@@ -163,7 +159,7 @@ export default function ArtificialRainPreviewSection() {
                 initial="hidden"
                 animate={titleInView ? "visible" : "hidden"}
                 transition={{ duration: 1 }}
-                className="text-4xl md:text-5xl font-semibold text-black leading-tight"
+                className="text-4xl md:text-5xl font-semibold text-white leading-tight text-shadow-lg"
               >
                 Indoor Artificial Rain
               </motion.h1>
@@ -174,7 +170,7 @@ export default function ArtificialRainPreviewSection() {
                 initial="hidden"
                 animate={textInView ? "visible" : "hidden"}
                 transition={{ duration: 1 }}
-                className="text-gray-950 font-medium text-md font-dm leading-relaxed"
+                className="text-gray-50 font-medium text-md font-dm mt-3 leading-relaxed"
               >
                 Experience the joy of rainfall in a beautifully designed indoor
                 setting. Enjoy a refreshing and safe rain experience regardless
@@ -190,12 +186,17 @@ export default function ArtificialRainPreviewSection() {
                 animate={lintInView ? "visible" : "hidden"}
                 transition={{ duration: 1.4 }}
               >
-                <div className="animate-bounce text-black">
-                  <ChevronDown size={30} />
-                </div>
+                <Link
+                  href="/packages"
+                  className="mt-2 inline-block px-6 py-3 bg-gray-950 text-white"
+                >
+                  Explore Our Packages
+                </Link>
               </motion.div>
             </div>
           </div>
+
+          
         </div>
       </section>
 

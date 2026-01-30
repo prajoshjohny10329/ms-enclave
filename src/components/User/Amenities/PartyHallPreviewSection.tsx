@@ -3,7 +3,7 @@
 import { motion, useInView, AnimatePresence, PanInfo } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { ChevronDown, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import Link from "next/link";
 
 const fadeRight = {
@@ -24,7 +24,7 @@ const swipePower = (offset: number, velocity: number) => {
 
 const MotionLink = motion(Link);
 
-export default function RoomPreviewSection() {
+export default function PartyHallPreviewSection() {
   const imgRef = useRef<HTMLDivElement | null>(null);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
   const textRef = useRef<HTMLParagraphElement | null>(null);
@@ -37,14 +37,11 @@ export default function RoomPreviewSection() {
 
   // 🖼 Images
   const images = [
-    "/images/common/ms-enclave-24.webp",
-    "/images/common/ms-enclave-26.webp",
-    "/images/common/ms-enclave-27.webp",
-    "/images/common/ms-enclave-59.webp",
-    "/images/common/ms-enclave-25.webp",
-    "/images/new/ms-enclave-room-1.webp",
-    "/images/new/ms-enclave-room-2.webp",
-    "/images/new/ms-enclave-room-3.webp",
+    "/images/common/ms-enclave-31.webp",
+    "/images/common/ms-enclave-45.webp",
+    "/images/new/ms-enclave-conference-hall.webp",
+    "/images/common/ms-enclave-32.webp",
+    "/images/common/ms-enclave-33.webp",
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -71,64 +68,13 @@ export default function RoomPreviewSection() {
 
   const prevSlide = () => {
     setDirection(-1);
-    setCurrentIndex((prev) =>
-      prev === 0 ? images.length - 1 : prev - 1
-    );
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
   return (
-    <div className="py-15 px-5 md:px-0">
-      <section className="max-w-7xl pt-8 mx-auto">
+    <div className="py-16 px-5 md:px-0 theme-bg">
+      <section className="max-w-7xl mx-auto">
         <div className="mx-auto grid md:grid-cols-10 gap-2  min-h-[500px]">
-          {/* Left Image Column */}
-          <div className="flex items-center px-6 md:px-16 mt-10 md:col-span-4">
-            <div className="space-y-6">
-              <motion.h1
-                ref={titleRef}
-                variants={fadeRight}
-                initial="hidden"
-                animate={titleInView ? "visible" : "hidden"}
-                transition={{ duration: 1 }}
-                className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm"
-              >
-                Well-Furnished Rooms
-              </motion.h1>
-             
-              <motion.p
-                ref={textRef}
-                variants={fadeRight}
-                initial="hidden"
-                animate={textInView ? "visible" : "hidden"}
-                transition={{ duration: 1 }}
-                className="text-gray-950 font-medium text-md font-dm leading-relaxed"
-              >
-                Spacious rooms designed with a blend of heritage style and
-                modern comfort. Equipped with comfortable beds and clean
-                interiors for a relaxing stay. Thoughtfully arranged to provide
-                privacy and peaceful rest. Ideal for families, couples, and
-                leisure travelers.
-              </motion.p>
-
-              <motion.div
-                ref={lintRef}
-                variants={fadeRight}
-                initial="hidden"
-                animate={lintInView ? "visible" : "hidden"}
-                transition={{ duration: 1.4 }}
-              >
-                <Link
-                href="/amenities/rooms"
-                className="mt-2 inline-block px-6 py-3 bg-gray-950 text-white"
-              >
-                Explore Our Rooms
-              </Link>
-              </motion.div>
-              
-              
-            </div>
-          </div>
-          
-
           {/* Right Content */}
           <motion.div
             ref={imgRef}
@@ -136,7 +82,7 @@ export default function RoomPreviewSection() {
             initial="hidden"
             animate={imgInView ? "visible" : "hidden"}
             transition={{ duration: 1 }}
-            className="mt-10 md:mt-0 relative w-full h-full rounded-md min-h-[500px] pb-5 overflow-hidden group md:col-span-6 shadow-lg"
+            className="relative w-full h-full rounded-md min-h-[500px] pb-5 overflow-hidden group col-span-10 md:col-span-6 shadow-lg"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
@@ -168,10 +114,7 @@ export default function RoomPreviewSection() {
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={1}
                 onDragEnd={(e, info: PanInfo) => {
-                  const swipe = swipePower(
-                    info.offset.x,
-                    info.velocity.x
-                  );
+                  const swipe = swipePower(info.offset.x, info.velocity.x);
 
                   if (swipe < -swipeConfidenceThreshold) {
                     nextSlide();
@@ -201,14 +144,60 @@ export default function RoomPreviewSection() {
                     setCurrentIndex(i);
                   }}
                   className={`w-2 h-2 rounded-full transition ${
-                    i === currentIndex
-                      ? "bg-white scale-110"
-                      : "bg-white/50"
+                    i === currentIndex ? "bg-white scale-110" : "bg-white/50"
                   }`}
                 />
               ))}
             </div>
           </motion.div>
+          
+          {/* Left Image Column */}
+          <div className="flex items-center px-6 md:px-16 mt-10 col-span-10 md:col-span-4">
+            <div>
+              <motion.h2
+                ref={titleRef}
+                variants={fadeRight}
+                initial="hidden"
+                animate={titleInView ? "visible" : "hidden"}
+                transition={{ duration: 1 }}
+                className="text-4xl md:text-5xl font-semibold text-white leading-tight text-shadow-lg"
+              >
+                Party Hall
+              </motion.h2>
+
+              <motion.p
+                ref={textRef}
+                variants={fadeRight}
+                initial="hidden"
+                animate={textInView ? "visible" : "hidden"}
+                transition={{ duration: 1 }}
+                className="text-gray-50 font-medium text-md font-dm mt-3 leading-relaxed"
+              >
+                A well-designed Party hall suitable for meetings and corporate
+                gatherings. Equipped with a comfortable seating arrangement and
+                a peaceful atmosphere. Ideal for business meetings, training
+                sessions, and small conferences. Offers a professional space
+                within a calm resort environment.
+              </motion.p>
+
+              <motion.div
+                ref={lintRef}
+                variants={fadeRight}
+                initial="hidden"
+                animate={lintInView ? "visible" : "hidden"}
+                transition={{ duration: 1.4 }}
+              >
+                <Link
+                  href="/amenities/party-hall"
+                  className="inline-block px-6 py-3 bg-gray-950 mt-8 rounded text-white"
+                >
+                  More About Party Hall
+                </Link>
+              </motion.div>
+            </div>
+          </div>
+
+          
         </div>
       </section>
 

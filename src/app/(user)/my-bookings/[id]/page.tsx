@@ -13,6 +13,7 @@ export default function BookingDetailsPage() {
   const { id } = useParams();
   const router = useRouter();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [booking, setBooking] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -59,6 +60,7 @@ export default function BookingDetailsPage() {
   };
 
   // Handle payment for a booking
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handlePayment = async (booking: any) => {
     if (!session?.user) return;
     setLoadingPayment(booking._id);
@@ -92,6 +94,7 @@ export default function BookingDetailsPage() {
             email: session.user.email,
             contact: session.user.phone || "",
           },
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           handler: async function (response: any) {
             // Confirm payment backend
             await axios.post("/api/bookings/confirm-payment", {
@@ -112,6 +115,7 @@ export default function BookingDetailsPage() {
           theme: { color: "#3399cc" },
         };
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const rzp = new (window as any).Razorpay(options);
         rzp.open();
         // router.push("/my-bookings");
@@ -125,6 +129,7 @@ export default function BookingDetailsPage() {
 
         if (res.data.url) window.location.href = res.data.url;
       }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       toast.error("Payment could not be initiated. Please try again.");
     } finally {

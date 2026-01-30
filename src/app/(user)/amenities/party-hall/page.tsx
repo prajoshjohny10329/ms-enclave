@@ -1,4 +1,5 @@
 import Breadcrumb from "@/components/common/Breadcrumb";
+import PartyHallDummy from "@/components/User/Amenities/PartyHall/PartyHallDummy";
 import PartyHallGallery from "@/components/User/Amenities/PartyHall/PartyHallGallery";
 import PartyHallHighlights from "@/components/User/Amenities/PartyHall/PartyHallHighlights";
 import PartyHallWelcome from "@/components/User/Amenities/PartyHall/PartyHallWelcome";
@@ -34,6 +35,7 @@ export default function PartyHallPage() {
                 ]}
               />
         <PartyHallWelcome />
+        <PartyHallDummy />
         <WhyChoosePartyHall />
         <PartyHallGallery />
         

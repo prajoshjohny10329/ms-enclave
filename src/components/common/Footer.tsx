@@ -86,7 +86,7 @@ export default function Footer() {
         </div>
 
         {/* COPYRIGHT */}
-        <div className="border-t border-gray-800 py-6 text-center text-gray-500 text-sm">
+        <div className="border-t border-gray-800 py-6 text-center text-white font-dm text-sm">
           © {new Date().getFullYear()} M.S Enclave. All rights reserved.
         </div>
       </div>
