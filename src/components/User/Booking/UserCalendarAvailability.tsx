@@ -33,6 +33,8 @@ export default function UserCalendarAvailability() {
         `/api/admin/calendar-availability?year=${year}&month=${month}`
       );
       setData(res.data);
+      console.log(res.data);
+      
     } catch (err) {
       console.error("Failed to load availability", err);
     }
