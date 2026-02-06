@@ -1,12 +1,12 @@
 import { Menu } from "@/types/Menu";
 
 export const menuData: Menu[] = [
-  {
-    id: 0,
-    title: "Admin",
-    newTab: false,
-    path: "/admin",
-  },
+  // {
+  //   id: 0,
+  //   title: "Admin",
+  //   newTab: false,
+  //   path: "/admin",
+  // },
   {
     id: 1,
     title: "Home",
@@ -47,21 +47,21 @@ export const menuData: Menu[] = [
       },
       {
         id: 36,
-        title: "Party hall",
+        title: "Party Hall",
         newTab: false,
         path: "/amenities/party-hall",
-      },
-      {
-        id: 32,
-        title: "Artificial Rain",
-        newTab: false,
-        path: "/amenities/#ArtificialRain",
       },
       {
         id: 39,
         title: "Swimming Pool",
         newTab: false,
         path: "/amenities",
+      },
+      {
+        id: 32,
+        title: "Artificial Rain",
+        newTab: false,
+        path: "/amenities/#ArtificialRain",
       },
       {
         id: 34,
