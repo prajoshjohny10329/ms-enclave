@@ -11,6 +11,7 @@ export async function GET(
 ) {
   try {
     await connectDB();
+
     const { date } = await params;
 
     if (!date) {

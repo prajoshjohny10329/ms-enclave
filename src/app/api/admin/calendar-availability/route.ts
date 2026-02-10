@@ -3,40 +3,63 @@ import { connectDB } from "@/lib/mongodb";
 import Booking from "@/models/Booking";
 import RoomSettings from "@/models/RoomSettings";
 
+/**
+ * Normalize a date to local midnight
+ * (CRITICAL for MongoDB + Vercel timezone issues)
+ */
+function normalize(date: Date) {
+  const d = new Date(date);
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
 export async function GET(req: Request) {
   await connectDB();
 
   const { searchParams } = new URL(req.url);
-  const month = Number(searchParams.get("month")); // 0-11
+
+  // Frontend sends JS month (0–11)
+  const month = Number(searchParams.get("month"));
   const year = Number(searchParams.get("year"));
 
   const settings = await RoomSettings.findOne();
   const totalRooms = settings?.totalRooms || 0;
 
-  // Start and end dates of the month
+  // Month range
   const start = new Date(year, month, 1);
-  start.setHours(0, 0, 0, 0); // normalize to midnight
+  start.setHours(0, 0, 0, 0);
 
-  const end = new Date(year, month + 1, 1); // last day of month
-  end.setHours(23, 59, 59, 999); // include full day
+  const end = new Date(year, month + 1, 1);
+  end.setHours(0, 0, 0, 0);
 
+  // Fetch overlapping bookings
   const bookings = await Booking.find({
     status: { $ne: "cancelled" },
-    checkInDate: { $lte: end },
-    checkOutDate: { $gte: start },
+    checkInDate: { $lt: end },
+    checkOutDate: { $gt: start },
   });
 
-  const days: any = {};
+  const days: Record<string, { booked: number; available: number }> = {};
 
-  for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+  for (let d = new Date(start); d < end; d.setDate(d.getDate() + 1)) {
     const day = new Date(d);
-    const booked = bookings
-      .filter(
-        b => b.checkInDate < day && b.checkOutDate > day
-      )
-      .reduce((s, b) => s + b.roomsNeeded, 0);
+    day.setHours(0, 0, 0, 0);
 
-    days[day.toISOString().slice(0, 10)] = {
+    const booked = bookings
+      .filter(b => {
+        const checkIn = normalize(b.checkInDate);
+        const checkOut = normalize(b.checkOutDate);
+
+        // Hotel rule: [checkIn, checkOut)
+        return checkIn <= day && day < checkOut;
+      })
+      .reduce((sum, b) => sum + b.roomsNeeded, 0);
+
+    const key = `${day.getFullYear()}-${String(
+      day.getMonth() + 1
+    ).padStart(2, "0")}-${String(day.getDate()).padStart(2, "0")}`;
+
+    days[key] = {
       booked,
       available: totalRooms - booked,
     };
