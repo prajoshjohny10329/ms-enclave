@@ -41,6 +41,8 @@ export async function GET(req: Request) {
       available: totalRooms - booked,
     };
   }
+  console.log(days);
+  
 
   return NextResponse.json(days);
 }
