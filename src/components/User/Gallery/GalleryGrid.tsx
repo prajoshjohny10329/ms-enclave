@@ -1,12 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
-
 import { galleryImages } from "./galleryList";
-
 
 const IMAGES_PER_LOAD = 6;
 
@@ -14,51 +12,75 @@ export default function GalleryGrid() {
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
   const [activeCategory, setActiveCategory] = useState("All");
-  const [filteredImages, setFilteredImages] = useState(galleryImages);
   const [visibleCount, setVisibleCount] = useState(IMAGES_PER_LOAD);
 
-  // Unique categories
-  const categories = [
-    "All",
-    ...new Set(galleryImages.map((img) => img.category)),
-  ];
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
-  // Filter images by category
-  useEffect(() => {
-    if (activeCategory === "All") {
-      setFilteredImages(galleryImages);
-    } else {
-      setFilteredImages(
-        galleryImages.filter((img) => img.category === activeCategory)
-      );
-    }
+  // ✅ Categories
+  const categories = useMemo(() => {
+    return ["All", ...new Set(galleryImages.map((img) => img.category))];
+  }, []);
 
-    // Reset visible images on category change
-    setVisibleCount(IMAGES_PER_LOAD);
+  // ✅ Filtered Images
+  const filteredImages = useMemo(() => {
+    if (activeCategory === "All") return galleryImages;
+    return galleryImages.filter(
+      (img) => img.category === activeCategory
+    );
   }, [activeCategory]);
 
   const visibleImages = filteredImages.slice(0, visibleCount);
 
+  // ✅ Infinite Scroll Logic
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (
+          entries[0].isIntersecting &&
+          visibleCount < filteredImages.length
+        ) {
+          setVisibleCount((prev) => prev + IMAGES_PER_LOAD);
+        }
+      },
+      { threshold: 1 }
+    );
+
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
+    }
+
+    return () => {
+      if (loadMoreRef.current) {
+        observer.unobserve(loadMoreRef.current);
+      }
+    };
+  }, [visibleCount, filteredImages.length]);
+
   return (
-    <section className="bg-gray-50 py-20">
+    <section className="bg-gray-50 py-20 w-full">
       <div className="max-w-7xl mx-auto px-4">
 
+        {/* Title */}
         <div className="text-center pb-10">
-            <h2 className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm">View By Category</h2>
-            <p className="text-gray-950 mt-2 font-medium text-md leading-relaxed font-dm">Browse through our gallery by selecting different categories to experience every corner of M.S. Enclave Heritage Resort. From serene interiors to vibrant outdoor spaces, each section highlights the beauty and charm of our resort.</p>
+          <h2 className="text-4xl md:text-5xl font-semibold text-black">
+            View By Category
+          </h2>
         </div>
 
-        {/* 🔘 Category Filters */}
-        <div className="flex flex-wrap gap-3 justify-center mb-8">
+        {/* Category Filters */}
+        <div className="flex flex-wrap gap-3 justify-center mb-10">
           {categories.map((cat) => (
             <button
               key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition shadow text-black
+              onClick={() => {
+                setActiveCategory(cat);
+                setVisibleCount(IMAGES_PER_LOAD);
+              }}
+              className={`px-5 py-2 rounded-full text-sm font-medium transition
                 ${
                   activeCategory === cat
                     ? "bg-black text-white"
-                    : "bg-gray-100 hover:bg-gray-200"
+                    : "bg-gray-200 text-black hover:bg-gray-300"
                 }`}
             >
               {cat}
@@ -66,12 +88,12 @@ export default function GalleryGrid() {
           ))}
         </div>
 
-        {/* 🖼️ Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Gallery Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {visibleImages.map((img, i) => (
             <figure
-              key={i}
-              className="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer"
+              key={img.src}
+              className="group relative overflow-hidden rounded-xl cursor-pointer"
               onClick={() => {
                 setIndex(i);
                 setOpen(true);
@@ -80,9 +102,9 @@ export default function GalleryGrid() {
               <Image
                 src={img.src}
                 alt={img.alt}
-                width={600}
-                height={400}
-                className="w-full h-[260px] object-cover transition-transform duration-500 group-hover:scale-110"
+                width={800}
+                height={600}
+                className="w-full h-[300px] object-cover transition-transform duration-500 group-hover:scale-105"
               />
 
               <figcaption className="absolute inset-0 bg-black/40 flex items-end p-4 opacity-0 group-hover:opacity-100 transition">
@@ -94,32 +116,22 @@ export default function GalleryGrid() {
           ))}
         </div>
 
-        {/* 🔽 Load More Button */}
-        {visibleCount < filteredImages.length && (
-          <div className="flex justify-center mt-10">
-            <button
-              onClick={() =>
-                setVisibleCount((prev) => prev + IMAGES_PER_LOAD)
-              }
-              className="px-8 py-3 rounded-full bg-black text-white text-sm font-medium hover:bg-gray-800 transition"
-            >
-              Load More
-            </button>
-          </div>
-        )}
+        {/* Infinite Scroll Trigger */}
+        <div ref={loadMoreRef} className="h-10"></div>
       </div>
 
-      {/* 🔍 Lightbox */}
+      {/* Lightbox */}
       <Lightbox
         open={open}
+        controller={{ closeOnBackdropClick: true }}
         close={() => setOpen(false)}
         index={index}
-        slides={visibleImages.map((img) => ({
+        slides={filteredImages.map((img) => ({
           src: img.src,
           alt: img.alt,
         }))}
         styles={{
-          container: { backgroundColor: "rgba(15, 15, 16, 0.95)" },
+          container: { backgroundColor: "rgba(15,15,16,0.95)" },
         }}
       />
     </section>

@@ -3,7 +3,7 @@
 import { motion, useInView, AnimatePresence, PanInfo } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import {ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import Link from "next/link";
 
 const fadeRight = {
@@ -22,7 +22,7 @@ const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
 
-export default function PoolPreviewSection() {
+export default function ArtificialRainPreviewSection() {
   const imgRef = useRef<HTMLDivElement | null>(null);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
   const textRef = useRef<HTMLParagraphElement | null>(null);
@@ -35,10 +35,10 @@ export default function PoolPreviewSection() {
 
   // 🖼 Images
   const images = [
-    "/images/new/ms-enclave-out-side-with-pool.webp",
-    "/images/common/ms-enclave-17.webp",
-    "/images/common/ms-enclave-7.webp",
-    "/images/common/ms-enclave-8.webp",
+    "/images/new/ms-enclave-inside-rain.webp",
+    "/images/common/ms-enclave-30.webp",
+    "/images/common/ms-enclave-21.webp",
+    "/images/common/ms-enclave-22.webp",
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -69,56 +69,9 @@ export default function PoolPreviewSection() {
   };
 
   return (
-    <div className="py-16 px-5 md:px-0">
-      <section className="max-w-7xl mx-auto">
-        <div className="mx-auto grid md:grid-cols-10 gap-2 min-h-[500px]">
-
-          {/* Left Image Column */}
-          <div className="flex items-center px-6 md:px-16 mt-10 md:col-span-4">
-            <div className="space-y-6">
-              <motion.h2
-                ref={titleRef}
-                variants={fadeRight}
-                initial="hidden"
-                animate={titleInView ? "visible" : "hidden"}
-                transition={{ duration: 1 }}
-                className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm"
-              >
-                Swimming Pool
-              </motion.h2>
-
-              <motion.p
-                ref={textRef}
-                variants={fadeRight}
-                initial="hidden"
-                animate={textInView ? "visible" : "hidden"}
-                transition={{ duration: 1 }}
-                className="text-gray-950 font-medium text-md font-dm leading-relaxed"
-              >
-                A well-maintained swimming pool set in a calm natural
-                environment. Perfect for relaxation, refreshing swims, and
-                family enjoyment. Clean water and safe surroundings ensure a
-                pleasant experience. Ideal for both adults and children to
-                unwind.
-              </motion.p>
-
-              <motion.div
-                ref={lintRef}
-                variants={fadeRight}
-                initial="hidden"
-                animate={lintInView ? "visible" : "hidden"}
-                transition={{ duration: 1.4 }}
-              >
-                <Link
-                  href="/packages"
-                  className="mt-2 inline-block px-6 py-3 bg-gray-950 text-white"
-                >
-                  Book Your Stay Now
-                </Link>
-              </motion.div>
-            </div>
-          </div>
-
+    <div className="py-16 px-5 md:px-0 theme-bg">
+      <section className="max-w-7xl pt-8 mx-auto">
+        <div className="mx-auto grid md:grid-cols-10 gap-2  min-h-[500px]">
           {/* Right Content */}
           <motion.div
             ref={imgRef}
@@ -126,7 +79,7 @@ export default function PoolPreviewSection() {
             initial="hidden"
             animate={imgInView ? "visible" : "hidden"}
             transition={{ duration: 1 }}
-            className="relative w-full h-full rounded-md min-h-[500px] pb-5 overflow-hidden group md:col-span-6 shadow-lg"
+            className="relative w-full h-full rounded-md min-h-[500px] pb-5 overflow-hidden group md:col-span-6"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
@@ -170,7 +123,7 @@ export default function PoolPreviewSection() {
               >
                 <Image
                   src={images[currentIndex]}
-                  alt="M.S. Enclave Heritage Resort Palakkad Swimming Pool Pictures"
+                  alt="M.S. Enclave Heritage Resort Palakkad"
                   fill
                   className="object-cover shadow-md"
                   priority
@@ -195,7 +148,51 @@ export default function PoolPreviewSection() {
             </div>
           </motion.div>
           
-          
+          {/* Left Image Column */}
+          <div className="flex items-center px-6 md:px-16 mt-10 col-span-10 md:col-span-4">
+            <div className="space-y-6">
+              <motion.h1
+                ref={titleRef}
+                variants={fadeRight}
+                initial="hidden"
+                animate={titleInView ? "visible" : "hidden"}
+                transition={{ duration: 1 }}
+                className="text-4xl md:text-5xl font-semibold text-white leading-tight text-shadow-lg"
+              >
+                Indoor Artificial Rain
+              </motion.h1>
+
+              <motion.p
+                ref={textRef}
+                variants={fadeRight}
+                initial="hidden"
+                animate={textInView ? "visible" : "hidden"}
+                transition={{ duration: 1 }}
+                className="text-gray-50 font-medium text-md font-dm mt-3 leading-relaxed"
+              >
+                Experience the joy of rainfall in a beautifully designed indoor
+                setting. Enjoy a refreshing and safe rain experience regardless
+                of the weather outside. Perfect for relaxation, fun moments, and
+                unique photo opportunities. An exciting attraction for families,
+                kids, and all age groups.
+              </motion.p>
+
+              <motion.div
+                ref={lintRef}
+                variants={fadeRight}
+                initial="hidden"
+                animate={lintInView ? "visible" : "hidden"}
+                transition={{ duration: 1.4 }}
+              >
+                <Link
+                  href="/packages"
+                  className="mt-2 inline-block px-6 py-3 bg-gray-950 text-white"
+                >
+                  Explore Our Packages
+                </Link>
+              </motion.div>
+            </div>
+          </div>
 
           
         </div>

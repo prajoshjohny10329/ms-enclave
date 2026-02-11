@@ -70,7 +70,7 @@ export default function ArtificialRainPreviewSection() {
 
   return (
     <div className="py-16 px-5 md:px-0 theme-bg">
-      <section className="max-w-7xl pt-8 mx-auto">
+      <section className="max-w-7xl mx-auto">
         <div className="mx-auto grid md:grid-cols-10 gap-2  min-h-[500px]">
           {/* Right Content */}
           <motion.div
@@ -79,7 +79,7 @@ export default function ArtificialRainPreviewSection() {
             initial="hidden"
             animate={imgInView ? "visible" : "hidden"}
             transition={{ duration: 1 }}
-            className="relative w-full h-full rounded-md min-h-[500px] pb-5 overflow-hidden group md:col-span-6"
+            className="relative w-full h-full rounded-md min-h-[500px] pb-5 overflow-hidden group col-span-10 md:col-span-6 shadow-lg"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
@@ -125,7 +125,7 @@ export default function ArtificialRainPreviewSection() {
                   src={images[currentIndex]}
                   alt="M.S. Enclave Heritage Resort Palakkad"
                   fill
-                  className="object-cover shadow-md"
+                  className="object-cover"
                   priority
                 />
               </motion.div>
@@ -150,8 +150,8 @@ export default function ArtificialRainPreviewSection() {
           
           {/* Left Image Column */}
           <div className="flex items-center px-6 md:px-16 mt-10 col-span-10 md:col-span-4">
-            <div className="space-y-6">
-              <motion.h1
+            <div>
+              <motion.h2
                 ref={titleRef}
                 variants={fadeRight}
                 initial="hidden"
@@ -160,7 +160,7 @@ export default function ArtificialRainPreviewSection() {
                 className="text-4xl md:text-5xl font-semibold text-white leading-tight text-shadow-lg"
               >
                 Indoor Artificial Rain
-              </motion.h1>
+              </motion.h2>
 
               <motion.p
                 ref={textRef}
@@ -186,7 +186,7 @@ export default function ArtificialRainPreviewSection() {
               >
                 <Link
                   href="/packages"
-                  className="mt-2 inline-block px-6 py-3 bg-gray-950 text-white"
+                  className="inline-block px-6 py-3 bg-gray-950 mt-8 rounded text-white"
                 >
                   Explore Our Packages
                 </Link>
