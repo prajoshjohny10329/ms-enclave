@@ -19,13 +19,13 @@ export default function SecondHeader() {
   const toggleProfile = () => setProfileOpen(!profileOpen);
 
   return (
-    <header className="sticky top-0 w-full bg-white shadow-md z-50">
+    <header className="sticky top-0 w-full bg-white shadow-sm z-50 font-dm ">
       <div className="container mx-auto py-4 flex justify-between items-center px-10">
         {/* Logo */}
         <ReloadButton />
 
         {/* Desktop Menu */}
-        <nav className="hidden md:flex space-x-8 text-black font-medium relative">
+        <nav className="hidden md:flex space-x-8 text-black font-bold relative">
           {menuData.map((item) => (
             <div key={item.id} className="group relative">
               {/* Main Link */}
@@ -100,20 +100,6 @@ export default function SecondHeader() {
                   <div className="px-4 py-2 text-gray-800 text-sm">
                     {session.user?.name}
                   </div>
-                  <Link
-                    href="/profile"
-                    className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
-                    onClick={() => setProfileOpen(false)}
-                  >
-                    Profile
-                  </Link>
-                  <Link
-                    href="/my-bookings"
-                    className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
-                    onClick={() => setProfileOpen(false)}
-                  >
-                    Your Bookings
-                  </Link>
                   <button
                     onClick={() => {
                       signOut();

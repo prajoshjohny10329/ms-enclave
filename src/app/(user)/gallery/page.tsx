@@ -1,7 +1,6 @@
 "use client";
 import "yet-another-react-lightbox/styles.css";
 import Breadcrumb from "@/components/common/Breadcrumb";
-import GalleryIntroduction from "@/components/User/Gallery/GalleryIntroduction";
 import GalleryGrid from "@/components/User/Gallery/GalleryGrid";
 import GalleryHorizontalScrollSection from "@/components/User/Gallery/GalleryHorizontalScrollSection";
 

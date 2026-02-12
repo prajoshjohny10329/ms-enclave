@@ -9,18 +9,20 @@ import PartyHall from "@/components/User/Home/PartyHall";
 import PackageSwiper from "@/components/User/Packages/PackageSwiper";
 import ActivitiesSwiper from "@/components/User/Home/ActivitiesSwiper";
 import ContactFormSection from "@/components/User/Home/ContactFormSection";
+import PatternSection from "@/components/common/PatternSection";
 
 export default function Home() {
   return (
    <>
    <HeroSlider />
+   <PatternSection />
    <HomeAboutSection />
    <VideoHeroSection />
    <AmenitiesSlider />
    <RoomsPreviewSection />
    <PartyHall />
-   <HomeVideoSection />
    <PackageSwiper />
+   <HomeVideoSection />
    <ActivitiesSwiper />
    <HomeGallery />
    <ContactFormSection />

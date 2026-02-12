@@ -71,6 +71,7 @@ export default function BookingDetailsPage() {
       : "bg-red-100 text-red-700";
 
   return (
+   <section>
     <div className="max-w-5xl mx-auto p-6 space-y-6 text-black font-dm">
       {/* Header */}
       <div className="flex justify-between items-center">
@@ -167,5 +168,6 @@ export default function BookingDetailsPage() {
         </button>
       </div>
     </div>
+   </section> 
   );
 }

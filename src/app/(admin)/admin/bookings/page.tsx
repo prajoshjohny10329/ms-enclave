@@ -206,15 +206,7 @@ export default function AdminBookingsPage() {
                   >
                     View
                   </Link>
-
-                  <button
-                    onClick={() =>
-                      window.open(`/admin/bookings/${b._id}/invoice`)
-                    }
-                    className="text-xs text-gray-600 underline"
-                  >
-                    Invoice
-                  </button>
+                  
                 </td>
               </tr>
             ))}

@@ -31,7 +31,7 @@ const PartyHall = () => {
   const btnInView = useInView(btnRef, { amount: 0.3 });
 
   return (
-    <section className="py-15 bg-white">
+    <section className="py-15 theme-bg">
       <div className="grid grid-cols-1 lg:grid-cols-2">
 
         {/* LEFT IMAGE AREA */}
@@ -93,7 +93,7 @@ const PartyHall = () => {
             initial="hidden"
             animate={titleInView ? "visible" : "hidden"}
             transition={{ duration: 1 }}
-            className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm mt-[-15px]"
+            className="text-4xl md:text-5xl font-semibold text-amber-100 leading-tight text-shadow-sm mt-[-15px]"
           >
             An Elegant Venue for Your Special Moments
           </motion.h2>
@@ -104,7 +104,7 @@ const PartyHall = () => {
             initial="hidden"
             animate={textInView ? "visible" : "hidden"}
             transition={{ duration: 1.1 }}
-            className="text-gray-950 font-medium text-md leading-relaxed font-dm"
+            className="text-white font-medium text-md leading-relaxed font-dm"
           >
             At M.S. Enclave, we pride ourselves on providing a personalized
             and intimate experience for each guest. Our cozy rooms are
@@ -120,7 +120,7 @@ const PartyHall = () => {
             animate={btnInView ? "visible" : "hidden"}
             transition={{ duration: 1.3 }}
           >
-            <button className="mt-6 inline-block px-10 rounded shadow-lg py-3 bg-gray-950 text-white ">
+            <button className="mt-6 inline-block px-10 rounded shadow-lg py-3 bg-white text-black ">
               Explore Our Party Hall
             </button>
           </MotionLink>

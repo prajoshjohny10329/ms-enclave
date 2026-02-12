@@ -120,7 +120,7 @@ export default function UserCalendarAvailability() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto p-6 shadow-i">
+    <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded-2xl">
       {/* Month Controls */}
       <div className="flex items-center justify-center gap-4 mb-6 font-dm">
         <button

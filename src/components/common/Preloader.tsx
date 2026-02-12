@@ -8,9 +8,9 @@ export default function Preloader() {
   const location = useSmoothTyping("Paruthipully, Palakkad", 2800);
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white/80 backdrop-blur-md">
+    <section className="fixed inset-0 z-[9999] flex items-center justify-center theme-bg backdrop-blur-md">
       <div className="flex flex-col items-center gap-3 text-center">
-
+        
         <h1 className="text-black text-5xl font-semibold tracking-widest">
           {title}
         </h1>
@@ -24,6 +24,6 @@ export default function Preloader() {
         </p>
 
       </div>
-    </div>
+    </section>
   );
 }
