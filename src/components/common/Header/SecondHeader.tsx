@@ -19,22 +19,22 @@ export default function SecondHeader() {
   const toggleProfile = () => setProfileOpen(!profileOpen);
 
   return (
-    <header className="sticky top-0 w-full bg-white shadow-md z-50">
+    <header className="sticky top-0 w-full shadow-md theme-bg z-50">
       <div className="container mx-auto py-4 flex justify-between items-center px-10">
         <div>
           
         </div>
 
         {/* Desktop Menu */}
-        <nav className="hidden md:flex space-x-8 text-black font-medium relative">
+        <nav className="hidden md:flex space-x-8 text-yellow-50 font-dm font-medium text-sm relative">
   {menuData.map((item) => (
-    <div key={item.id} className="group relative">
+    <div key={item.id} className="group relative uppercase">
 
       {/* Main Link */}
       <Link
         href={item.path}
         target={item.newTab ? "_blank" : "_self"}
-        className="hover:text-blue-600"
+        className="hover:text-yellow-500"
       >
         {item.title} {item.submenu ? " ▾" : ""}
       </Link>
@@ -48,7 +48,7 @@ export default function SecondHeader() {
           <div
             className="
               absolute left-0 top-full mt-5
-              w-48 bg-white shadow-lg rounded-lg
+              w-48 theme-bg shadow-lg rounded-lg
               hidden group-hover:flex flex-col
             "
           >
@@ -57,7 +57,7 @@ export default function SecondHeader() {
                 key={sub.id}
                 href={sub.path}
                 target={sub.newTab ? "_blank" : "_self"}
-                className="px-4 py-2 hover:bg-gray-100"
+                className="px-4 py-2 hover:bg-gray-100 hover:theme-text"
               >
                 {sub.title}
               </Link>
@@ -67,7 +67,7 @@ export default function SecondHeader() {
       )}
     </div>
   ))}
-</nav>
+        </nav>
 
 
         {/* User Section */}

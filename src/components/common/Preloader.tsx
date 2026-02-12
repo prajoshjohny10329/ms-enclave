@@ -12,7 +12,7 @@ export default function Preloader() {
       {/* Center Content */}
       <div className="relative z-10 flex flex-col items-center gap-3 text-center ">
         <Image
-                      src="/ms-enclave-logo-1.PNG"
+                      src="/ms-enclave-logo1.PNG"
                       height={40}
                       width={350}
                       alt="ms-heritage-resort-palakkad-logo"
