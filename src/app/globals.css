@@ -152,13 +152,13 @@ body {
  background-color:  #7a0002;
  background-image: url("/images/brand/egg-shell.png");
   background-repeat: repeat;
-  opacity: 0.95;
+  /* opacity: 0.95; */
 }
 .theme-text{
   color: #efaf00;
 }
 .pattern-theme {
-  background-image: url("/images/brand/pattern1.png");
+  background-image: url("/images/brand/pattern2.png");
   background-repeat: repeat;
   background-size: 82px;
   height: 86px;

@@ -7,11 +7,13 @@ import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import { menuData } from "./menu";
 import LoginButton from "@/components/User/Profile/LoginButton";
+import Sidebar from "../Sidebar";
 
 export default function SecondHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [roomsOpen, setRoomsOpen] = useState<number | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { data: session } = useSession();
 
@@ -19,59 +21,62 @@ export default function SecondHeader() {
   const toggleProfile = () => setProfileOpen(!profileOpen);
 
   return (
-    <header className="sticky top-0 w-full shadow-md theme-bg z-50">
-      <div className="container mx-auto py-4 flex justify-between items-center px-10">
-        <div>
-          
+    <header className="sticky top-0 w-full shadow-md theme-bg z-50 py-3 ">
+      <div className="grid grid-cols-6 ">
+        <div className="col-span-1 hidden md:flex md:justify-center items-center">
+          <button
+          onClick={() => setIsOpen(true)}
+          className="text-2xl"
+        >
+          ☰
+        </button>
         </div>
 
         {/* Desktop Menu */}
-        <nav className="hidden md:flex space-x-8 text-yellow-50 font-dm font-medium text-sm relative">
-  {menuData.map((item) => (
-    <div key={item.id} className="group relative uppercase">
+        <nav className="hidden md:flex md:justify-center items-center col-span-4 space-x-8 text-yellow-50 font-dm font-medium text-sm relative">
+          {menuData.map((item) => (
+            <div key={item.id} className="group relative uppercase">
+              {/* Main Link */}
+              <Link
+                href={item.path}
+                target={item.newTab ? "_blank" : "_self"}
+                className="hover:text-yellow-500"
+              >
+                {item.title} {item.submenu ? " ▾" : ""}
+              </Link>
 
-      {/* Main Link */}
-      <Link
-        href={item.path}
-        target={item.newTab ? "_blank" : "_self"}
-        className="hover:text-yellow-500"
-      >
-        {item.title} {item.submenu ? " ▾" : ""}
-      </Link>
+              {item.submenu && (
+                <>
+                  {/* FIX: Invisible hover buffer to fill mt-5 gap */}
+                  <div className="absolute left-0 top-full w-full h-5"></div>
 
-      {item.submenu && (
-        <>
-          {/* FIX: Invisible hover buffer to fill mt-5 gap */}
-          <div className="absolute left-0 top-full w-full h-5"></div>
-
-          {/* Dropdown */}
-          <div
-            className="
+                  {/* Dropdown */}
+                  <div
+                    className="
               absolute left-0 top-full mt-5
               w-48 theme-bg shadow-lg rounded-lg
               hidden group-hover:flex flex-col
             "
-          >
-            {item.submenu.map((sub) => (
-              <Link
-                key={sub.id}
-                href={sub.path}
-                target={sub.newTab ? "_blank" : "_self"}
-                className="px-4 py-2 hover:bg-gray-100 hover:theme-text"
-              >
-                {sub.title}
-              </Link>
-            ))}
-          </div>
-        </>
-      )}
-    </div>
-  ))}
+                  >
+                    {item.submenu.map((sub) => (
+                      <Link
+                        key={sub.id}
+                        href={sub.path}
+                        target={sub.newTab ? "_blank" : "_self"}
+                        className="px-4 py-2 hover:bg-gray-100 hover:theme-text"
+                      >
+                        {sub.title}
+                      </Link>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          ))}
         </nav>
 
-
         {/* User Section */}
-        <div className="flex items-center gap-4">
+        <div className="col-span-1  hidden md:flex  justify-center items-center gap-4">
           {!session ? (
             <LoginButton />
           ) : (
@@ -94,7 +99,7 @@ export default function SecondHeader() {
               </button>
 
               {profileOpen && (
-                <div  className="absolute right-0 mt-2 w-44 bg-white shadow-lg  border rounded-lg overflow-hidden">
+                <div className="absolute right-0 mt-2 w-44 bg-white shadow-lg  border rounded-lg overflow-hidden">
                   <div className="px-4 py-2 text-black">
                     {session.user?.name}
                   </div>
@@ -135,6 +140,8 @@ export default function SecondHeader() {
           </button>
         </div>
       </div>
+
+      <Sidebar isOpen={isOpen} menuData={menuData} onClose={() => setIsOpen(false)} />
 
       {/* Mobile Dropdown Menu */}
       {menuOpen && (

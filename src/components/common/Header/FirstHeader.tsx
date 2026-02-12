@@ -9,9 +9,9 @@ import Link from "next/link";
 export default function TopHeader() {
   return (
     <div className="w-full pt-4 px-4 theme-bg">
-      <div className="grid  md:grid-cols-10 max-w-7xl mx-auto">
+      <div className="grid  md:grid-cols-8 max-w-7xl mx-auto">
         {/* LEFT SECTION */}
-        <div className="col-span-3 hidden md:flex justify-start items-center gap-3 text-sm">
+        <div className="col-span-2 hidden md:flex justify-start items-center gap-3 text-sm">
           <div className="flex justify-center">
             <div className="w-10 h-10 rounded-full flex items-center justify-center ">
               <FontAwesomeIcon icon={faPhone} className="text-lg text-yellow-50" />
@@ -65,7 +65,7 @@ export default function TopHeader() {
         </div>
 
         {/* RIGHT SECTION */}
-        <div className="col-span-3 hidden md:flex justify-end items-center gap-3 text-right">
+        <div className="col-span-2 hidden md:flex justify-end items-center gap-3 text-right">
           <div className="flex justify-center">
             <div className="text-right text-[15px] font-dm">
               <Link

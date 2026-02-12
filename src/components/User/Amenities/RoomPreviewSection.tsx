@@ -75,8 +75,8 @@ export default function RoomPreviewSection() {
   };
 
   return (
-    <div className="py-15 px-5 md:px-0">
-      <section className="max-w-7xl pt-8 mx-auto">
+    <section className="py-15 px-5 md:px-0 theme-bg">
+      <div className="max-w-7xl pt-8 mx-auto">
         <div className="mx-auto grid md:grid-cols-10 gap-2  min-h-[500px]">
           {/* Left Image Column */}
           <div className="flex items-center px-6 md:px-16 mt-10 md:col-span-4">
@@ -87,7 +87,7 @@ export default function RoomPreviewSection() {
                 initial="hidden"
                 animate={titleInView ? "visible" : "hidden"}
                 transition={{ duration: 1 }}
-                className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm"
+                className="text-4xl md:text-5xl font-semibold text-white leading-tight text-shadow-sm"
               >
                 Well-Furnished Rooms
               </motion.h1>
@@ -98,7 +98,7 @@ export default function RoomPreviewSection() {
                 initial="hidden"
                 animate={textInView ? "visible" : "hidden"}
                 transition={{ duration: 1 }}
-                className="text-gray-950 font-medium text-md font-dm leading-relaxed"
+                className="text-gray-50 font-medium text-md font-dm leading-relaxed"
               >
                 Spacious rooms designed with a blend of heritage style and
                 modern comfort. Equipped with comfortable beds and clean
@@ -208,7 +208,7 @@ export default function RoomPreviewSection() {
             </div>
           </motion.div>
         </div>
-      </section>
+      </div>
 
       {/* 🖼 ZOOM MODAL */}
       <AnimatePresence>
@@ -244,6 +244,6 @@ export default function RoomPreviewSection() {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </section>
   );
 }

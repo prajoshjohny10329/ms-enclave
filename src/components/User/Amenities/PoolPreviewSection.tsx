@@ -69,7 +69,7 @@ export default function PoolPreviewSection() {
   };
 
   return (
-    <div className="py-16 px-5 md:px-0">
+    <div className="py-16 px-5 md:px-0 theme-bg">
       <section className="max-w-7xl mx-auto">
         <div className="mx-auto grid md:grid-cols-10 gap-2 min-h-[500px]">
 
@@ -82,7 +82,7 @@ export default function PoolPreviewSection() {
                 initial="hidden"
                 animate={titleInView ? "visible" : "hidden"}
                 transition={{ duration: 1 }}
-                className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm"
+                className="text-4xl md:text-5xl font-semibold text-white leading-tight text-shadow-lg"
               >
                 Swimming Pool
               </motion.h2>
@@ -93,7 +93,7 @@ export default function PoolPreviewSection() {
                 initial="hidden"
                 animate={textInView ? "visible" : "hidden"}
                 transition={{ duration: 1 }}
-                className="text-gray-950 font-medium text-md font-dm leading-relaxed"
+                className="text-gray-50 font-medium text-md font-dm mt-3 leading-relaxed"
               >
                 A well-maintained swimming pool set in a calm natural
                 environment. Perfect for relaxation, refreshing swims, and

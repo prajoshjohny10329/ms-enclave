@@ -14,7 +14,7 @@ export default function PatternSection({
   opacity = 0.90,
 }: PatternSectionProps) {
   return (
-    <section className="h-30 w-full flex align-middle ">
+    <section className="h-30 w-full flex align-middle theme-bg">
         <div className={`relative w-full mt-5 ${className}`}>
       
       {/* Pattern Background */}
