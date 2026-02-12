@@ -3,18 +3,28 @@
 import { useState, useEffect, useRef } from "react"
 
 export default function SplashCursor() {
-  const mousePosition = useRef({ x: 0, y: 0 })
+  const [mounted, setMounted] = useState(false)
 
+  const mousePosition = useRef({ x: 0, y: 0 })
   const dotPosition = useRef({ x: 0, y: 0 })
   const borderDotPosition = useRef({ x: 0, y: 0 })
 
-  const [renderPos, setRenderPos] = useState({ dot: { x: 0, y: 0 }, border: { x: 0, y: 0 } })
+  const [renderPos, setRenderPos] = useState({
+    dot: { x: 0, y: 0 },
+    border: { x: 0, y: 0 },
+  })
   const [isHovering, setIsHovering] = useState(false)
 
   const DOT_SMOOTHNESS = 0.2
   const BORDER_DOT_SMOOTHNESS = 0.1
 
   useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted) return
+
     const handleMouseMove = (e: MouseEvent) => {
       mousePosition.current = { x: e.clientX, y: e.clientY }
     }
@@ -22,26 +32,42 @@ export default function SplashCursor() {
     const handleMouseEnter = () => setIsHovering(true)
     const handleMouseLeave = () => setIsHovering(false)
 
-    // Add event listeners
     window.addEventListener("mousemove", handleMouseMove)
 
-    const interactiveElements = document.querySelectorAll("a, button, img, input, textarea, select")
+    const interactiveElements = document.querySelectorAll(
+      "a, button, img, input, textarea, select"
+    )
+
     interactiveElements.forEach((element) => {
       element.addEventListener("mouseenter", handleMouseEnter)
       element.addEventListener("mouseleave", handleMouseLeave)
     })
 
-    // Animation function for smooth movement
     const animate = () => {
-      const lerp = (start: number, end: number, factor: number) => {
-        return start + (end - start) * factor
-      }
+      const lerp = (start: number, end: number, factor: number) =>
+        start + (end - start) * factor
 
-      dotPosition.current.x = lerp(dotPosition.current.x, mousePosition.current.x, DOT_SMOOTHNESS)
-      dotPosition.current.y = lerp(dotPosition.current.y, mousePosition.current.y, DOT_SMOOTHNESS)
+      dotPosition.current.x = lerp(
+        dotPosition.current.x,
+        mousePosition.current.x,
+        DOT_SMOOTHNESS
+      )
+      dotPosition.current.y = lerp(
+        dotPosition.current.y,
+        mousePosition.current.y,
+        DOT_SMOOTHNESS
+      )
 
-      borderDotPosition.current.x = lerp(borderDotPosition.current.x, mousePosition.current.x, BORDER_DOT_SMOOTHNESS)
-      borderDotPosition.current.y = lerp(borderDotPosition.current.y, mousePosition.current.y, BORDER_DOT_SMOOTHNESS)
+      borderDotPosition.current.x = lerp(
+        borderDotPosition.current.x,
+        mousePosition.current.x,
+        BORDER_DOT_SMOOTHNESS
+      )
+      borderDotPosition.current.y = lerp(
+        borderDotPosition.current.y,
+        mousePosition.current.y,
+        BORDER_DOT_SMOOTHNESS
+      )
 
       setRenderPos({
         dot: { x: dotPosition.current.x, y: dotPosition.current.y },
@@ -51,10 +77,8 @@ export default function SplashCursor() {
       requestAnimationFrame(animate)
     }
 
-    // Start animation loop
     const animationId = requestAnimationFrame(animate)
 
-    // Clean up
     return () => {
       window.removeEventListener("mousemove", handleMouseMove)
 
@@ -65,14 +89,14 @@ export default function SplashCursor() {
 
       cancelAnimationFrame(animationId)
     }
-  }, [])
+  }, [mounted])
 
-  if (typeof window === "undefined") return null
+  if (!mounted) return null
 
   return (
     <div className="pointer-events-none fixed inset-0 z-50">
       <div
-        className="absolute rounded-full dark:bg-black bg-black "
+        className="absolute rounded-full bg-black"
         style={{
           width: "8px",
           height: "8px",
@@ -83,7 +107,7 @@ export default function SplashCursor() {
       />
 
       <div
-        className="absolute rounded-full border dark:border-black border-black "
+        className="absolute rounded-full border border-black"
         style={{
           width: isHovering ? "38px" : "19px",
           height: isHovering ? "38px" : "19px",

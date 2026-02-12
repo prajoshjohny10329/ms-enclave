@@ -3,8 +3,6 @@
 import { usePathname } from "next/navigation";
 import { Header } from "./Header";
 import { AdminHeader } from "./AdminHeader";
-import { useEffect, useState } from "react";
-import Preloader from "@/components/common/Preloader";
 import { Toaster } from "react-hot-toast";
 import Footer from "./Footer";
 import SplashCursor from "./SplashCursor";
@@ -16,46 +14,19 @@ export default function LayoutWrapper({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const [loading, setLoading] = useState(true);
-
-  // 🔄 Page loader
-  useEffect(() => {
-    setLoading(true);
-
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2500); // ⬅️ better UX than 3s
-
-    return () => clearTimeout(timer);
-  }, [pathname]); // ⬅️ runs on route change
-
   const isAdmin = pathname.startsWith("/admin");
 
   return (
     <>
-      {/* 🔥 TOAST CONTAINER (GLOBAL) */}
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          duration: 3000,
-          style: {
-            background: "#fff",
-            color: "#000",
-          },
-        }}
-      />
+      <Toaster position="top-right" />
 
-      {loading && <Preloader />}
+      {isAdmin ? <AdminHeader /> : <Header />}
+      <SplashCursor />
+      <WhatsAppFixed />
 
-      {!loading && (
-        <>
-          {isAdmin ? <AdminHeader /> : <Header />}
-          <SplashCursor />
-          <WhatsAppFixed />
-          {children}
-          <Footer />
-        </>
-      )}
+      {children}
+
+      <Footer />
     </>
   );
 }
