@@ -11,11 +11,11 @@ interface PatternSectionProps {
 export default function PatternSection({
   children,
   className = "",
-  opacity = 0.80,
+  opacity = 0.90,
 }: PatternSectionProps) {
   return (
-    <section className="h-30 w-full flex align-middle theme-bg">
-        <div className={`relative w-full theme-bg mt-5 ${className}`}>
+    <section className="h-30 w-full flex align-middle ">
+        <div className={`relative w-full mt-5 ${className}`}>
       
       {/* Pattern Background */}
       <div

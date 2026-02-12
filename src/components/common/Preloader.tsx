@@ -1,29 +1,33 @@
 "use client";
 
+import Image from "next/image";
 import { useSmoothTyping } from "@/hooks/useTypingEffect";
+import PatternSection from "./PatternSection";
 
 export default function Preloader() {
-  const title = useSmoothTyping("M.S. ENCLAVE", 1500);
-  const subtitle = useSmoothTyping("HERITAGE HOME STAY", 2200);
-  const location = useSmoothTyping("Paruthipully, Palakkad", 2800);
-
+  const webAddress = useSmoothTyping("www.msheritageresort.com", 2000);
   return (
-    <section className="fixed inset-0 z-[9999] flex items-center justify-center theme-bg backdrop-blur-md">
-      <div className="flex flex-col items-center gap-3 text-center">
-        
-        <h1 className="text-black text-5xl font-semibold tracking-widest">
-          {title}
-        </h1>
-
-        <p className="text-black/80 text-xl tracking-wide uppercase text-center">
-          {subtitle}
+    <section className="fixed inset-0 z-9999 flex items-center justify-center theme-bg bg-white overflow-hidden">
+      
+      {/* Center Content */}
+      <div className="relative z-10 flex flex-col items-center gap-3 text-center ">
+        <Image
+                      src="/ms-enclave-logo-1.PNG"
+                      height={40}
+                      width={350}
+                      alt="ms-heritage-resort-palakkad-logo"
+                      className="drop-shadow-sm animate-fadeIn"
+                    />
+        <p className="theme-text text-xl mt-[-13px] tracking-wide font-light font-dm text-shadow-2xs">
+          {webAddress}
         </p>
-
-        <p className="text-black/80 text-lg tracking-wide">
-          {location}
-        </p>
-
       </div>
+
+      {/* Pattern Bottom Center */}
+      <div className="absolute bottom-14 left-1/2 -translate-x-1/2 w-full">
+        <PatternSection className="h-40 w-full"  />
+      </div>
+
     </section>
   );
 }

@@ -24,7 +24,7 @@ export default function LayoutWrapper({
 
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1000000); // ⬅️ better UX than 3s
+    }, 2500); // ⬅️ better UX than 3s
 
     return () => clearTimeout(timer);
   }, [pathname]); // ⬅️ runs on route change
