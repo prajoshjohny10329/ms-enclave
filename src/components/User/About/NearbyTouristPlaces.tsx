@@ -58,30 +58,6 @@ const places: Place[] = [
     distance: "39 km",
     mapUrl: "https://share.google/5vuhTctx39OXrnqdv",
   },
-  // {
-  //   title: "Dhoni Waterfalls",
-  //   description:
-  //     "Hidden deep within forested terrain, Dhoni Waterfalls is a refreshing nature escape. A short trek leads to this beautiful waterfall, where visitors can relax, enjoy the cool water, and soak in the serene surroundings.",
-  //   image: "/images/tourist/nelliyampathy.jpg",
-  //   distance: "26 km",
-  //   mapUrl: "https://share.google/xUSaTJ1KnwhY46M6f",
-  // },
-  // {
-  //   title: "Pothundy Dam",
-  //   description:
-  //     "Pothundy Dam is a calm and scenic destination surrounded by hills and greenery. The area is perfect for family picnics, nature walks, and boating, offering a peaceful environment away from city life.",
-  //   image: "/images/tourist/nelliyampathy.jpg",
-  //   distance: "38 km",
-  //   mapUrl: "https://share.google/xUSaTJ1KnwhY46M6f",
-  // },
-  // {
-  //   title: "Atla Waterfalls, Aaral Falls & Pallippara View Point",
-  //   description:
-  //     "These lesser-known natural attractions near Mannarkkad and Keralassery offer rugged beauty and panoramic viewpoints. The waterfalls flow through rocky terrain, while Pallippara View Point provides sweeping views of the surrounding countryside and hills.",
-  //   image: "/images/tourist/nelliyampathy.jpg",
-  //   distance: "38 km",
-  //   mapUrl: "https://share.google/xUSaTJ1KnwhY46M6f",
-  // },
   {
     title: "Palakkad Fort",
     description:
@@ -132,7 +108,7 @@ export default function NearbyTouristPlaces() {
                     src={place.image}
                     alt={place.title}
                     fill
-                    className="object-cover rounded-tr-[35px] rounded-bl-[35px] shadow-md pb-2 pr-2"
+                    className="object-cover shadow-md rounded"
                     data-swiper-parallax="-20%" // ✅ Parallax
                     priority={index === 0}
                   />
@@ -149,7 +125,7 @@ export default function NearbyTouristPlaces() {
                     {place.title}
                   </h3>
 
-                  <p className="text-white font-dm leading-relaxed text-lg  mb-6">
+                  <p className="text-white font-dm leading-relaxed text-lg">
                     {place.description}
                   </p>
 
@@ -158,7 +134,7 @@ export default function NearbyTouristPlaces() {
                     href={place.mapUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-6 inline-block px-10 rounded shadow-lg py-3 bg-white text-black hover:animate-bounce "
+                    className=" inline-block px-10 rounded shadow-lg py-3 w-[240px] bg-white text-black hover:animate-bounce "
                   >
                     View on Google Maps
                   </Link>
