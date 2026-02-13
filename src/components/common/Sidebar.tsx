@@ -4,11 +4,32 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
+/* =========================
+   TYPES
+========================= */
+
+interface SubMenuItem {
+  id: number;
+  title: string;
+  path: string;
+}
+
+interface MenuItem {
+  id: number;
+  title: string;
+  path?: string;
+  submenu?: SubMenuItem[];
+}
+
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
-  menuData: arr;
+  menuData: MenuItem[];
 }
+
+/* =========================
+   COMPONENT
+========================= */
 
 export default function Sidebar({
   isOpen,
@@ -17,11 +38,12 @@ export default function Sidebar({
 }: SidebarProps) {
   const [roomsOpen, setRoomsOpen] = useState<number | null>(null);
 
-  // Close on ESC
+  // Close sidebar on ESC key
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
+
     document.addEventListener("keydown", handleEsc);
     return () => document.removeEventListener("keydown", handleEsc);
   }, [onClose]);
@@ -37,10 +59,10 @@ export default function Sidebar({
             animate={{ opacity: 0.5 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 theme-bg backdrop-blur-sm z-40"
+            className="fixed inset-0 bg-black backdrop-blur-sm z-40"
           />
 
-          {/* Sidebar */}
+          {/* Sidebar Panel */}
           <motion.div
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
@@ -49,7 +71,7 @@ export default function Sidebar({
             className="fixed top-0 left-0 h-full w-80 theme-bg backdrop-blur-xl border-r border-white/20 shadow-2xl z-50 overflow-y-auto"
           >
             {/* Header */}
-            <div className="flex justify-between items-center p-6 border-b border-white/20 font-dm">
+            <div className="flex justify-between items-center p-6 border-b border-white/20">
               <h2 className="text-xl font-semibold text-white">Menu</h2>
               <button
                 onClick={onClose}
@@ -59,7 +81,7 @@ export default function Sidebar({
               </button>
             </div>
 
-            {/* Menu Items */}
+            {/* Navigation */}
             <motion.nav
               className="flex flex-col p-6 space-y-4 text-white"
               initial="hidden"
@@ -81,6 +103,7 @@ export default function Sidebar({
                 >
                   {item.submenu ? (
                     <>
+                      {/* Parent Button */}
                       <button
                         onClick={() =>
                           setRoomsOpen(
@@ -99,6 +122,7 @@ export default function Sidebar({
                         </span>
                       </button>
 
+                      {/* Submenu */}
                       <AnimatePresence>
                         {roomsOpen === item.id && (
                           <motion.div
@@ -108,7 +132,7 @@ export default function Sidebar({
                             transition={{ duration: 0.3 }}
                             className="ml-4 mt-2 flex flex-col space-y-2 overflow-hidden"
                           >
-                            {item.submenu.map((sub: any) => (
+                            {item.submenu.map((sub) => (
                               <Link
                                 key={sub.id}
                                 href={sub.path}
@@ -124,7 +148,7 @@ export default function Sidebar({
                     </>
                   ) : (
                     <Link
-                      href={item.path}
+                      href={item.path || "#"}
                       onClick={onClose}
                       className="hover:text-yellow-300 transition"
                     >
