@@ -17,7 +17,7 @@ interface BreadcrumbProps {
 
 export default function Breadcrumb({ heading, items, bgImage }: BreadcrumbProps) {
   return (
-    <div className="relative w-full h-64 md:h-80 flex items-center">
+    <div className="relative w-full h-64 md:h-96 flex items-center">
 
       {/* Background Image */}
       <Image
@@ -25,7 +25,7 @@ export default function Breadcrumb({ heading, items, bgImage }: BreadcrumbProps)
         alt={heading}
         fill
         priority
-        className="object-cover brightness-90 rounded-[0_0_15px_15px] drop-shadow-md"
+        className="object-cover brightness-50 rounded-[0_0_15px_15px] drop-shadow-md"
       />
 
       {/* Overlay */}

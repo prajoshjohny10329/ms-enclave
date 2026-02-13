@@ -72,21 +72,21 @@ export default function HeritageArchitectureSection() {
       />
 
       {/* OVERLAY */}
-      <div className="absolute inset-0 " />
+      <div className="absolute inset-0 bg-black/80" />
 
       {/* CONTENT */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-20 text-white ">
         {/* TEXT */}
-        <div className="max-w-3xl mb-16 ">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 font-dm drop-shadow-[3px_3px_3px_rgba(0,0,0)]">
+        <div className=" text-center">
+          <h2 className="text-5xl font-bold   mb-4 font-dm drop-shadow-[3px_3px_3px_rgba(0,0,0)]">
             Experience Kerala’s Architectural Splendor
           </h2>
 
-          <h3 className="text-xl md:text-2xl text-white font-bold mb-6 font-dm text-shadow-sm drop-shadow-[1px_1px_1px_rgba(0,0,0)]">
+          <h3 className="text-2xl text-white font-bold mb-6 font-dm text-shadow-sm drop-shadow-[1px_1px_1px_rgba(0,0,0)]">
             Timeless Design with Modern Comforts
           </h3>
 
-          <p className=" leading-relaxed text-md md:text-lg font-dm text-white font-medium text-shadow-md drop-shadow-[1px_1px_1px_rgba(0,0,0)]">
+          <p className=" leading-relaxed text-lg font-dm text-white  text-shadow-md drop-shadow-[1px_1px_1px_rgba(0,0,0)]">
             Inspired by the timeless architecture of Kerala, our resort is designed in the traditional Naalukettu style — a four-winged structure embracing a serene central courtyard (Nadumuttam). This design invites natural light, gentle breezes, and the calming rhythm of nature into every space. Rooted in Kerala’s heritage and Vastu wisdom, the Naalukettu reflects a way of life that values balance, community, and tranquility, offering guests an authentic and soulful retreat.
           </p>
         </div>

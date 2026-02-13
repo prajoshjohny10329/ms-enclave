@@ -15,6 +15,7 @@ import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 
 import Image from "next/image";
+import Link from "next/link";
 
 type Place = {
   title: string;
@@ -93,20 +94,19 @@ const places: Place[] = [
 
 export default function NearbyTouristPlaces() {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-10">
       <div className="mx-auto max-w-7xl">
         {/* TITLE */}
-        <h2 className="text-4xl md:text-5xl font-bold mb-5 text-center text-black">
+        <h2 className="text-5xl mt-3 font-semibold text-amber-100 leading-tight text-shadow-sm text-center">
           Nearby Tourist Places
         </h2>
-        <p className="text-gray-950 text-center mb-12 font-medium text-md leading-relaxed font-dm">Explore the Natural Beauty, Heritage, and Attractions Around M.S. Enclave Heritage Resort</p>
+        <p className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mb-12 mt-3 text-center">Explore the Natural Beauty, Heritage, and Attractions Around M.S. Enclave Heritage Resort</p>
 
         {/* SWIPER */}
         <Swiper
           modules={[
             Autoplay,
             Navigation,
-            Pagination,
             EffectFade,
             Parallax,
           ]}
@@ -145,23 +145,23 @@ export default function NearbyTouristPlaces() {
 
                 {/* TEXT */}
                 <div data-swiper-parallax="-100" className="px-6 flex flex-col justify-center gap-6 py-5">
-                  <h3 className="text-2xl md:text-3xl text-black  font-bold mb-3">
+                  <h3 className="text-3xl text-yellow-100 text-shadow-xl  font-bold mb-3">
                     {place.title}
                   </h3>
 
-                  <p className="text-black font-dm leading-relaxed text-md md:text-lg mb-6">
+                  <p className="text-white font-dm leading-relaxed text-lg  mb-6">
                     {place.description}
                   </p>
 
                   {/* GOOGLE MAP BUTTON */}
-                  <a
+                  <Link
                     href={place.mapUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block px-6 py-3 bg-black text-white rounded-md hover:bg-gray-800 transition"
+                    className="mt-6 inline-block px-10 rounded shadow-lg py-3 bg-white text-black hover:animate-bounce "
                   >
                     View on Google Maps
-                  </a>
+                  </Link>
                 </div>
               </div>
             </SwiperSlide>

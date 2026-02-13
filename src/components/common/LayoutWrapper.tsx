@@ -21,8 +21,8 @@ export default function LayoutWrapper({
   return (
     <div className="theme-bg">
       {/* <SmoothScroll /> */}
-      <Toaster position="top-right" />
       {isAdmin ? <AdminHeader /> : <Header />}
+      <Toaster position="top-right" />
       <SplashCursor />
       <WhatsAppFixed />
       {children}

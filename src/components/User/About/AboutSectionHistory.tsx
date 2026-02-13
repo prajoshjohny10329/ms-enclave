@@ -16,7 +16,6 @@ const fadeLeft = {
   visible: { x: 0, opacity: 1 },
 };
 
-const MotionLink = motion(Link);
 
 export default function AboutSectionHistory() {
       const imgRef = useRef(null);
@@ -30,7 +29,7 @@ export default function AboutSectionHistory() {
   const lintInView = useInView(lintRef, { amount: 0.3 });
 
   return (
-    <section className="relative py-24">
+    <section className="relative py-10">
       <div className="mx-auto grid grid-cols-1 md:grid-cols-2 min-h-[500px]">
 
         {/* Left Image Column */}
@@ -46,7 +45,7 @@ export default function AboutSectionHistory() {
             src="/images/common/ms-enclave-6.webp"
             alt="M.S. Enclave Heritage Resort Palakkad"
             fill
-            className="object-cover rounded-tr-[35px] rounded-bl-[35px] shadow-md pb-2 pr-2"
+            className="object-cover shadow-md"
             priority
           />
         </motion.div>
@@ -60,7 +59,7 @@ export default function AboutSectionHistory() {
             initial="hidden"
             animate={titleInView ? "visible" : "hidden"}
             transition={{ duration: 1 }} 
-            className="text-4xl md:text-5xl font-semibold text-gray-300 leading-tight text-shadow-sm">
+            className="text-3xl font-semibold font-dm text-gray-200 leading-tight">
               Our Story
             </motion.h2>
             <motion.h1
@@ -69,7 +68,7 @@ export default function AboutSectionHistory() {
             initial="hidden"
             animate={titleInView ? "visible" : "hidden"}
             transition={{ duration: 1 }} 
-            className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm">
+            className="text-5xl mt-3 font-semibold text-amber-100 uppercase leading-tight text-shadow-sm ">
               Where Tradition Meets Tranquility
             </motion.h1>
             
@@ -80,7 +79,7 @@ export default function AboutSectionHistory() {
             initial="hidden"
             animate={textInView ? "visible" : "hidden"}
             transition={{ duration: 1 }}
-             className="text-gray-950 font-medium text-md leading-relaxed font-dm">
+             className="text-white font-medium text-lg leading-relaxed font-dm text-shadow-lg">
               M.S. Enclave Heritage Resort was founded with the vision of bringing the charm
   of traditional Kerala hospitality to modern travelers. Nestled in the serene
   village of Paruthipully, Palakkad, our heritage resort preserves the cultural
@@ -88,17 +87,6 @@ export default function AboutSectionHistory() {
   we have become a preferred destination for families, nature lovers, and
   travelers seeking a peaceful and rejuvenating retreat in Palakkad, Kerala.
             </motion.p>
-            <motion.div
-            ref={lintRef}
-            variants={fadeRight}
-            initial="hidden"
-            animate={lintInView ? "visible" : "hidden"}
-            transition={{ duration: 1.4 }}
-          >
-            <div className="animate-bounce text-black text-shadow-2xs">
-        <ChevronDown size={30} />
-      </div>
-          </motion.div>
           </div>
         </div>
 

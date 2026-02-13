@@ -2,7 +2,6 @@ import AmenitiesSlider from "@/components/User/Home/AmenitiesHighlights";
 import HeroSlider from "@/components/User/Home/HeroSlider";
 import HomeAboutSection from "@/components/User/Home/HomeAboutSection";
 import HomeVideoSection from "@/components/User/Home/HomeVideoSection";
-import VideoHeroSection from "@/components/User/Home/VideoHeroSection";
 import RoomsPreviewSection from "@/components/User/Home/RoomsPreviewSection";
 import HomeGallery from "@/components/User/Home/HomeGallery";
 import PartyHall from "@/components/User/Home/PartyHall";
@@ -17,8 +16,6 @@ export default function Home() {
    <HeroSlider />
    <PatternSection />
    <HomeAboutSection />
-   <PatternSection />
-   <VideoHeroSection />
    <PatternSection />
    <AmenitiesSlider />
    <PatternSection />

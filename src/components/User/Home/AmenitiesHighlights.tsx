@@ -13,8 +13,6 @@ const amenities = [
   { imageUrl: "/images/new/ms-enclave-out-side-with-pool.webp", title: "Swimming Pool" },
   { imageUrl: "/images/new/ms-enclave-inside-rain.webp", title: "Artificial Rain" },
   { imageUrl: "/images/new/ms-enclave-billiards.webp", title: "Indoor Games" },
-  { imageUrl: "/images/common/ms-enclave-7.webp", title: "Fishing Zone" },
-  { imageUrl: "/images/common/ms-enclave-23.webp", title: "Walking Track" },
 ];
 
 export default function AmenitiesSlider() {
