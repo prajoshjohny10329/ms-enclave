@@ -8,35 +8,31 @@ export default function FirstVisitLoader({
 }: {
   children: React.ReactNode;
 }) {
-  const [mounted, setMounted] = useState(false);
-  const [showLoader, setShowLoader] = useState(false);
+  const [showLoader, setShowLoader] = useState(() => {
+    if (typeof window === "undefined") return true;
+
+    try {
+      const visited = sessionStorage.getItem("visited");
+      return !visited;
+    } catch {
+      return false;
+    }
+  });
 
   useEffect(() => {
-    setMounted(true);
+    if (!showLoader) return;
 
-    const hasVisited = sessionStorage.getItem("visited");
-
-    if (!hasVisited) {
-      setShowLoader(true);
-
-      const timer = setTimeout(() => {
+    const timer = setTimeout(() => {
+      try {
         sessionStorage.setItem("visited", "true");
-        setShowLoader(false);
-      }, 2500);
+      } catch {}
+      setShowLoader(false);
+    }, 2500);
 
-      return () => clearTimeout(timer);
-    }
-  }, []);
+    return () => clearTimeout(timer);
+  }, [showLoader]);
 
-  // Prevent hydration mismatch
-  if (!mounted) {
-    return null;
-  }
+  if (showLoader) return <Preloader />;
 
-  return (
-    <>
-      {showLoader && <Preloader />}
-      {!showLoader && children}
-    </>
-  );
+  return <>{children}</>;
 }
