@@ -70,7 +70,7 @@ const PackageSwiper = () => {
   /* ================= UI ================= */
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-10">
       <div className="mx-auto grid grid-cols-1 md:grid-cols-3 min-h-[500px]">
         {/* ================= HEADING ================= */}
         <motion.div
@@ -79,21 +79,22 @@ const PackageSwiper = () => {
           whileInView="visible"
           viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 1 }}
-          className="flex items-center px-6 md:px-16 mt-10"
+          className="flex items-center px-6 md:px-8 "
         >
           <div>
-            <h2 className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm">
+            <p className="text-5xl font-semibold text-gray-200 leading-tight font-playfair">Packages</p>
+            <h2 className="text-[50px] font-semibold text-amber-100 leading-tight text-shadow-xl mt-3">
               Comfortable Stays at Transparent Prices
             </h2>
-            <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
+            <p className="text-gray-50 font-medium text-lg leading-relaxed font-dm mt-2">
               Discover our room tariffs designed to offer the perfect balance of
               luxury, comfort, and value for money.
             </p>
             <Link
               href="/packages"
-              className="my-12 inline-block px-10 rounded shadow-lg py-3 bg-gray-950 text-white "
+              className="mt-6 inline-block px-10 rounded shadow-lg py-3 bg-white text-black hover:animate-bounce  "
             >
-              Our Packages
+             Explore Our Packages
             </Link>
           </div>
         </motion.div>
@@ -113,15 +114,15 @@ const PackageSwiper = () => {
             spaceBetween={20}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             breakpoints={{
-              0: { slidesPerView: 2 },
+              0: { slidesPerView: 1 },
               768: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
             }}
-            className="relative w-full h-full rounded-md"
+            className="relative w-full  rounded-md"
           >
             {packages.map((pkg, index) => (
               <SwiperSlide key={index}>
-                <div className="group bg-[#f3faf8] min-h-[500px] rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition h-full">
+                <div className="group bg-[#f3faf8] min-h-[400px] rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition h-full">
                   {/* IMAGE */}
                   <div className="relative h-72 overflow-hidden">
                     <Image
@@ -143,7 +144,7 @@ const PackageSwiper = () => {
                   </div>
 
                   {/* CONTENT */}
-                  <div className="p-5 text-black flex flex-col justify-between h-[220px]">
+                  <div className="p-5 text-black flex flex-col justify-between ">
                     <div>
                       <h2 className="text-xl font-semibold mb-2">
                         {pkg.packageName}

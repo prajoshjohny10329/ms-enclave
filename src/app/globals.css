@@ -160,6 +160,12 @@ body {
 .pattern-theme {
   background-image: url("/images/brand/pattern2.png");
   background-repeat: repeat;
-  background-size: 82px;
+  background-size: 85px;
+  height: 86px;
+}
+.pattern-preloader {
+  background-image: url("/images/brand/pattern.png");
+  background-repeat: repeat;
+  background-size: 85px;
   height: 86px;
 }

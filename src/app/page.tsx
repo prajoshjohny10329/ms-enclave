@@ -13,19 +13,28 @@ import PatternSection from "@/components/common/PatternSection";
 
 export default function Home() {
   return (
-   <>
+   <div className="overflow-x-hidden">
    <HeroSlider />
    <PatternSection />
    <HomeAboutSection />
+   <PatternSection />
    <VideoHeroSection />
+   <PatternSection />
    <AmenitiesSlider />
+   <PatternSection />
    <RoomsPreviewSection />
+   <PatternSection />
    <PartyHall />
+   <PatternSection />
    <PackageSwiper />
+   <PatternSection />
    <HomeVideoSection />
+   <PatternSection />
    <ActivitiesSwiper />
+   <PatternSection />
    <HomeGallery />
+   <PatternSection />
    <ContactFormSection />
-   </> 
+   </div> 
   );
 }

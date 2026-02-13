@@ -16,15 +16,13 @@ export default function Footer() {
   return (
     <footer>
       {/* ================= MAIN FOOTER ================= */}
-      <div className="theme-bg text-white mt-20 rounded-t-3xl">
-        <div className="max-w-6xl mx-auto px-6 py-16 grid gap-10 md:grid-cols-4">
+      <div className="theme-bg text-white rounded-t-3xl">
+        <div className="max-w-6xl mx-auto px-6 py-16 grid gap-10 lg:flex lg:justify-between">
 
           {/* BRAND */}
-          <div>
-            {/* <h3 className="text-xl font-semibold mb-4">
-              M.S. Enclave
-            </h3> */}
-            <div className="flex justify-baseline">
+          <div className="md:col-span-1 col-span-4 flex justify-center">
+            <div>
+              <div className="flex justify-baseline">
               <Image
                         src="/ms-enclave-logo.png"
                         alt="M.S. Enclave Heritage Resort  Palakkad Resort Logo"
@@ -32,66 +30,61 @@ export default function Footer() {
                         height={60}
                       />
             </div>
-            {/* <p className="text-gray-50 mt-5 text-sm leading-relaxed font-dm">
-              Experience luxury, comfort, and tradition in the heart of Kerala.
-            </p> */}
-
             <div className="flex gap-4 mt-6">
               <Social icon={faGoogle} href={'https://share.google/bNocpD9oCYBNHBtsD'} />
               <Social icon={faInstagram} href={'https://www.instagram.com/ms_enclaveheritageresort?igsh=cnI4NTdhMTFtcmp3'} />
               <Social icon={faYoutube} href={'https://youtu.be/va9W1NfJ4D4?si=fNHIGIwiklFDz9Sn'} />
               <Social icon={faWhatsapp} href={'https://api.whatsapp.com/send?phone=+919745666642&text=Hello%2C%20I%20would%20like%20to%20make%20an%20enquiry%20about%20your%20packages'} />
             </div>
+            </div>
           </div>
 
           {/* QUICK LINKS */}
-          <div>
-            <h4 className="font-semibold mb-4 ">Quick Links</h4>
-            <ul className="space-y-3 text-gray-300  text-sm font-dm">
+          <div className="md:col-span-1 col-span-4 flex justify-center">
+            <div>
+              <h4 className="font-semibold text-xl mb-4 ">Quick Links</h4>
+            <ul className="space-y-3 text-gray-100  text- font-dm">
               <li className="hover:font-bold hover:text-white"><Link href="/">Home</Link></li>
               <li className="hover:font-bold hover:text-white"><Link href="/packages">Packages</Link></li>
               <li className="hover:font-bold hover:text-white"><Link href="/amenities/rooms">Rooms</Link></li>
               <li className="hover:font-bold hover:text-white"><Link href="/contact">Contact</Link></li>
             </ul>
-          </div>
-          {/* QUICK LINKS */}
-          <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-3 text-gray-300  text-sm font-dm">
-              <li className="hover:font-bold hover:text-white"><Link href="/">My Profile</Link></li>
-              <li className="hover:font-bold hover:text-white"><Link href="/my-booking">My Bookings</Link></li>
-              <li className="hover:font-bold hover:text-white"><Link href="/about-us">About US</Link></li>
-              <li className="hover:font-bold hover:text-white"><Link href="/amenities">Amenities</Link></li>
-            </ul>
+            </div>
           </div>
 
-          {/* SUPPORT */}
-          {/* <div>
-            <h4 className="font-semibold mb-4">Support</h4>
-            <ul className="space-y-3 text-gray-300  text-sm font-dm">
-              <li className="hover:font-bold hover:text-white"><Link href="#">Help Center</Link></li>
-              <li className="hover:font-bold hover:text-white"><Link href="#">Privacy Policy</Link></li>
-              <li className="hover:font-bold hover:text-white"><Link href="#">Terms & Conditions</Link></li>
-              <li className="hover:font-bold hover:text-white"><Link href="#">Cancellation Policy</Link></li>
-            </ul>
-          </div> */}
+          {/* QUICK LINKS */}
+          <div className="md:col-span-1 col-span-4 flex justify-center">
+            <div>
+              <h4 className="font-semibold text-xl mb-4">Quick Links</h4>
+                <ul className="space-y-3 text-gray-100  text- font-dm">
+                  <li className="hover:font-bold hover:text-white"><Link href="/">My Profile</Link></li>
+                  <li className="hover:font-bold hover:text-white"><Link href="/my-booking">My Bookings</Link></li>
+                  <li className="hover:font-bold hover:text-white"><Link href="/about-us">About US</Link></li>
+                  <li className="hover:font-bold hover:text-white"><Link href="/amenities">Amenities</Link></li>
+                </ul>
+            </div>
+          </div>
 
           {/* CONTACT */}
-          <div>
-            <h4 className="font-semibold mb-4">Contact</h4>
-            <ul className="space-y-3 text-gray-300  text-sm font-dm">
-                <li><Link href={'https://maps.app.goo.gl/MvrRJ2aN9SZZsFHL7'} className="text-gray-300 hover:font-bold hover:text-white text-sm leading-relaxed font-dm">
-              Mannuparambil, Paruthipully<br />
-              Palakkad, Kerala – 678573
-            </Link></li>
-            <li><Link href={'tel:+91 97456 66642'} className="text-gray-300 hover:font-bold hover:text-white text-sm mt-3 font-dm">
-              📞 +91 97456 66642
-            </Link></li>
-            <li><Link href={'mailto:msenclaveresort@gmail.com'} className="text-gray-300 hover:font-bold hover:text-white text-sm font-dm">
-              ✉️ msenclaveresort@gmail.com
-            </Link></li>
-            </ul>
+          <div className="md:col-span-1 col-span-4 flex justify-center">
+            <div>
+              <h4 className="font-semibold text-xl mb-4">Contact</h4>
+              <ul className="space-y-3 text-gray-100  text- font-dm">
+                  <li><Link href={'https://maps.app.goo.gl/MvrRJ2aN9SZZsFHL7'} className="text-gray-100 hover:font-bold hover:text-white text- leading-relaxed font-dm">
+                Mannuparambil, Paruthipully<br />
+                Palakkad, Kerala – 678573
+              </Link></li>
+              <li><Link href={'tel:+91 97456 66642'} className="text-gray-100 hover:font-bold hover:text-white text- mt-3 font-dm">
+                +91 97456 66642
+              </Link></li>
+              <li><Link href={'mailto:msenclaveresort@gmail.com'} className="text-gray-100 hover:font-bold hover:text-white text- font-dm">
+                msenclaveresort@gmail.com
+              </Link></li>
+              </ul>
+            </div>
+            
           </div>
+
         </div>
 
         {/* COPYRIGHT */}

@@ -12,8 +12,9 @@ export default function WhatsAppFixed() {
       className="
         fixed 
         bottom-5 
-        right-5 
-        z-[9999]
+        right-15 
+        md:right-5
+        z-9999
         w-12 
         h-12 
         rounded-full 

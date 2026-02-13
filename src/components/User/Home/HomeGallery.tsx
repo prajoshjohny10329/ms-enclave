@@ -40,7 +40,7 @@ export default function HomeGallery() {
   }, []);
 
   return (
-    <section className="py-15 bg-white relative">
+    <section className="py-10 relative">
 
       {/* HEADER */}
       <motion.div
@@ -51,15 +51,15 @@ export default function HomeGallery() {
         transition={{ duration: 1 }}
         className="max-w-7xl mx-auto px-4 text-center relative"
       >
-        <h2 className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm">
+        <h2 className="text-5xl font-semibold text-yellow-100 leading-tight text-shadow-xl">
           Explore Our Resort
         </h2>
-        <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
+        <p className="text-gray-50 font-medium text-lg leading-relaxed font-dm text-shadow-xl">
           A glimpse into the beauty and serenity of M.S. Enclave Heritage Resort.
         </p>
         <Link
           href="/gallery"
-          className="mt-6 inline-block px-6 py-3 bg-gray-950 text-white "
+          className="mt-6 inline-block px-10 rounded shadow-lg py-3 bg-white text-black hover:animate-bounce  "
         >
           Explore Our Gallery
         </Link>

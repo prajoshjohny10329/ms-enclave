@@ -29,7 +29,7 @@ export default function HomeAboutSection() {
   const lintInView = useInView(lintRef, { amount: 0.3 });
 
   return (
-    <section className="relative py-24">
+    <section className="relative py-5">
       <div className="mx-auto grid grid-cols-1 md:grid-cols-2 min-h-[500px]">
 
         {/* Left Image Column */}
@@ -45,7 +45,7 @@ export default function HomeAboutSection() {
             src="/images/home/ms-slider-0.webp"
             alt="M.S. Enclave Heritage Resort Palakkad"
             fill
-            className="object-cover rounded-tr-[35px] rounded-bl-[35px] shadow-md pb-2 pr-2"
+            className="object-cover shadow-xl rounded"
             priority
           />
         </motion.div>
@@ -53,6 +53,16 @@ export default function HomeAboutSection() {
         {/* Right Content */}
         <div className="flex items-center px-6 md:px-16 mt-10">
           <div className="">
+            <motion.p
+                        ref={titleRef}
+                        variants={fadeRight}
+                        initial="hidden"
+                        animate={titleInView ? "visible" : "hidden"}
+                        transition={{ duration: 1 }}
+                        className="text-3xl font-semibold font-dm text-gray-200 leading-tight"
+                      >
+                        Welcome to
+                      </motion.p>
             
             <motion.h1
             ref={titleRef}
@@ -60,7 +70,7 @@ export default function HomeAboutSection() {
             initial="hidden"
             animate={titleInView ? "visible" : "hidden"}
             transition={{ duration: 1 }} 
-            className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm">
+            className="text-5xl mt-3 font-semibold text-amber-100 uppercase leading-tight text-shadow-sm ">
             M.S. Enclave Heritage Resort
             </motion.h1>
             <motion.h2
@@ -69,7 +79,7 @@ export default function HomeAboutSection() {
             initial="hidden"
             animate={titleInView ? "visible" : "hidden"}
             transition={{ duration: 1 }} 
-            className="text-3xl md:text-4xl font-semibold text-black leading-tight mb-2">
+            className="text-3xl font-semibold font-dm text-gray-200 leading-tight mb-2">
             Situated in Palakkad, Kerala
             </motion.h2>
 
@@ -79,7 +89,7 @@ export default function HomeAboutSection() {
             initial="hidden"
             animate={textInView ? "visible" : "hidden"}
             transition={{ duration: 1 }}
-             className="text-gray-950 font-medium text-md leading-relaxed font-dm">
+             className="text-white font-medium text-lg leading-relaxed font-dm text-shadow-lg">
 Delve into the traditional ambience with the convenience of modernity at our brand new resort.
 Nestled next to the paddy fields of Palakkad with a breath taking view of the village called Paruthipully.
             </motion.p>
@@ -90,7 +100,7 @@ Nestled next to the paddy fields of Palakkad with a breath taking view of the vi
             initial="hidden"
             animate={lintInView ? "visible" : "hidden"}
             transition={{ duration: 1.4 }}
-            className="mt-6 inline-block px-6 py-3 bg-gray-950 text-white "
+            className="mt-6 inline-block px-6 py-3 bg-black rounded text-white shadow-lg hover:animate-bounce"
           >
             Know More About Us
           </MotionLink>

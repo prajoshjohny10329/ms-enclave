@@ -33,13 +33,13 @@ export default function HeroSlider() {
         <SwiperSlide>
   <section
     style={{
-      backgroundImage: "url('/images/home/ms-slider-2.webp')",
+      backgroundImage: "url('/images/new/ms-enclave-out-side-with-pool.webp')",
       backgroundSize: "cover",
-      backgroundPosition: "center",
+      backgroundPosition: "bottom",
       height: "100vh",
       width: "100%",
     }}
-    className="contrast-125 brightness-95 flex items-center justify-center"
+    className="contrast-125 brightness-90 flex items-center justify-center"
   >
     <div className="px-4 mx-auto max-w-screen-xl text-center">
       

@@ -43,21 +43,18 @@ export default function RoomsPreviewSection() {
 
   const images = [
     "/images/common/ms-enclave-24.webp",
-    "/images/common/ms-enclave-25.webp",
     "/images/common/ms-enclave-26.webp",
     "/images/common/ms-enclave-27.webp",
     "/images/common/ms-enclave-24.webp",
-    "/images/common/ms-enclave-25.webp",
     "/images/common/ms-enclave-26.webp",
     "/images/common/ms-enclave-27.webp",
     "/images/common/ms-enclave-24.webp",
-    "/images/common/ms-enclave-25.webp",
     "/images/common/ms-enclave-26.webp",
     "/images/common/ms-enclave-27.webp",
   ];
 
   return (
-    <section className="py-15 px-0 md:px-25 bg-white">
+    <section className="py-10 px-0 md:px-2 overflow-hidden">
       <div className="flex flex-col lg:flex-row">
 
         {/* LEFT CONTENT */}
@@ -70,11 +67,14 @@ export default function RoomsPreviewSection() {
           className="flex items-center"
         >
           <div className="px-6 mb-5">
-            <h2 className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm">
+           <h2 className="text-5xl font-semibold text-gray-200 leading-tight font-playfair">
+            Our Rooms
+           </h2>
+            <p className="text-6xl font-semibold text-amber-100 leading-tight text-shadow-sm mt-2">
               Comfortable Spacious Rooms
-            </h2>
+            </p>
 
-            <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
+            <p className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm">
               Experience comfort in our thoughtfully designed rooms that reflect Kerala’s heritage style while offering modern amenities for a relaxing stay.
             </p>
 
@@ -84,7 +84,7 @@ export default function RoomsPreviewSection() {
               initial="hidden"
               animate={contentInView ? "visible" : "hidden"}
               transition={{ duration: 1.3 }}
-              className="mt-6 inline-block px-6 py-3 bg-gray-950 text-white "
+              className="mt-6 inline-block px-8 py-3 rounded-md shadow-md bg-gray-950 text-white hover:animate-bounce"
             >
               View All Rooms
             </MotionLink>

@@ -30,10 +30,10 @@ export default function HomeVideoSection() {
       {/* Background Section */}
       <section
         className="relative h-[85vh] w-full bg-cover bg-center flex items-center justify-center text-center px-4"
-        style={{ backgroundImage: "url('/images/common/ms-enclave-10.webp')" }}
+        style={{ backgroundImage: "url('/images/new/ms-enclave-drone-view.webp')" }}
       >
         {/* Overlay */}
-        <div className="absolute inset-0 "></div>
+        <div className="absolute inset-0 bg-black/50"></div>
 
         {/* Content */}
         <div className="relative z-10 max-w-2xl text-white">

@@ -31,7 +31,7 @@ const PartyHall = () => {
   const btnInView = useInView(btnRef, { amount: 0.3 });
 
   return (
-    <section className="py-15 theme-bg">
+    <section className="py-10">
       <div className="grid grid-cols-1 lg:grid-cols-2">
 
         {/* LEFT IMAGE AREA */}
@@ -46,7 +46,7 @@ const PartyHall = () => {
           {/* Main Image */}
           <div className="rounded-lg overflow-hidden shadow-xl">
             <Image
-              src="/images/common/ms-enclave-31.webp"
+              src="/images/new/ms-enclave-conference-hall.webp"
               alt="Luxury Stay"
               width={700}
               height={500}
@@ -65,7 +65,7 @@ const PartyHall = () => {
           >
             <div className="rounded-lg overflow-hidden shadow-xl ">
               <Image
-                src="/images/common/ms-enclave-31.webp"
+                src="/images/new/ms-enclave-conference-hall.webp"
                 alt="Interior"
                 width={220}
                 height={260}
@@ -77,26 +77,26 @@ const PartyHall = () => {
 
         {/* RIGHT CONTENT */}
         <div className="px-6 lg:px-24 flex flex-col justify-center gap-6">
-          <motion.p
-            ref={titleRef}
-            variants={fadeRight}
-            initial="hidden"
-            animate={titleInView ? "visible" : "hidden"}
-            transition={{ duration: 1 }}
-            className="text-4xl md:text-5xl font-semibold text-gray-200 leading-tight font-playfair"
-          >
-            Party Hall
-          </motion.p>
           <motion.h2
             ref={titleRef}
             variants={fadeRight}
             initial="hidden"
             animate={titleInView ? "visible" : "hidden"}
             transition={{ duration: 1 }}
-            className="text-4xl md:text-5xl font-semibold text-amber-100 leading-tight text-shadow-sm mt-[-15px]"
+            className="text-5xl font-semibold text-gray-200 leading-tight font-playfair"
+          >
+            Party Hall
+          </motion.h2>
+          <motion.p
+            ref={titleRef}
+            variants={fadeRight}
+            initial="hidden"
+            animate={titleInView ? "visible" : "hidden"}
+            transition={{ duration: 1 }}
+            className="text-5xl font-semibold text-amber-100 leading-tight text-shadow-sm mt-[-15px]"
           >
             An Elegant Venue for Your Special Moments
-          </motion.h2>
+          </motion.p>
 
           <motion.p
             ref={textRef}
@@ -120,7 +120,7 @@ const PartyHall = () => {
             animate={btnInView ? "visible" : "hidden"}
             transition={{ duration: 1.3 }}
           >
-            <button className="mt-6 inline-block px-10 rounded shadow-lg py-3 bg-white text-black ">
+            <button className="mt-6 inline-block px-10 rounded shadow-lg py-3 bg-white text-black hover:animate-bounce ">
               Explore Our Party Hall
             </button>
           </MotionLink>

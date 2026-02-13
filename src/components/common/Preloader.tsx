@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useSmoothTyping } from "@/hooks/useTypingEffect";
-import PatternSection from "./PatternSection";
+import PatternSectionForLoader from "./PatternSectionForLoader";
 
 export default function Preloader() {
   const webAddress = useSmoothTyping("www.msheritageresort.com", 2000);
@@ -25,7 +25,7 @@ export default function Preloader() {
 
       {/* Pattern Bottom Center */}
       <div className="absolute bottom-14 left-1/2 -translate-x-1/2 w-full">
-        <PatternSection className="h-40 w-full"  />
+        <PatternSectionForLoader className="h-40 w-full"  />
       </div>
 
     </section>
