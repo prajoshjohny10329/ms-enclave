@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import SplashCursor from "./SplashCursor";
 import WhatsAppFixed from "./WhatsAppFixed";
 import PatternSection from "./PatternSection";
+import SmoothScroll from "./SmoothScroll";
 
 export default function LayoutWrapper({
   children,
@@ -19,6 +20,7 @@ export default function LayoutWrapper({
 
   return (
     <div className="theme-bg">
+      <SmoothScroll />
       <Toaster position="top-right" />
       {isAdmin ? <AdminHeader /> : <Header />}
       <SplashCursor />

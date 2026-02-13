@@ -9,9 +9,10 @@ import "swiper/css/navigation";
 
 const amenities = [
   { imageUrl: "/images/common/ms-enclave-24.webp", title: "Well-Furnished Rooms" },
-  { imageUrl: "/images/new/ms-enclave-conference-hall.webp", title: "party Hall" },
+  { imageUrl: "/images/new/ms-enclave-conference-hall.webp", title: "Party Hall" },
   { imageUrl: "/images/new/ms-enclave-out-side-with-pool.webp", title: "Swimming Pool" },
   { imageUrl: "/images/new/ms-enclave-inside-rain.webp", title: "Artificial Rain" },
+  { imageUrl: "/images/new/ms-enclave-billiards.webp", title: "Indoor Games" },
   { imageUrl: "/images/common/ms-enclave-7.webp", title: "Fishing Zone" },
   { imageUrl: "/images/common/ms-enclave-23.webp", title: "Walking Track" },
 ];

@@ -104,7 +104,7 @@ const PartyHall = () => {
             initial="hidden"
             animate={textInView ? "visible" : "hidden"}
             transition={{ duration: 1.1 }}
-            className="text-white font-medium text-md leading-relaxed font-dm"
+            className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm"
           >
             At M.S. Enclave, we pride ourselves on providing a personalized
             and intimate experience for each guest. Our cozy rooms are
