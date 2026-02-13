@@ -20,7 +20,7 @@ export default function LayoutWrapper({
 
   return (
     <div className="theme-bg">
-      <SmoothScroll />
+      {/* <SmoothScroll /> */}
       <Toaster position="top-right" />
       {isAdmin ? <AdminHeader /> : <Header />}
       <SplashCursor />
