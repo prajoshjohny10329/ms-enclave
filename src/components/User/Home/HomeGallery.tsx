@@ -1,24 +1,17 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCoverflow, Navigation } from "swiper/modules";
 import { motion, useInView } from "framer-motion";
+import Link from "next/link";
+
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
-import Link from "next/link";
-
-const images = [
-  "/images/home/ms-slider-0.webp",
-  "/images/home/ms-slider-1.webp",
-  "/images/home/ms-slider-2.webp",
-  "/images/home/ms-slider-0.webp",
-  "/images/home/ms-slider-1.webp",
-  "/images/home/ms-slider-2.webp",
-];
+import { galleryImages } from "../Gallery/galleryList";
 
 const fadeUp = {
   hidden: { y: 60, opacity: 0 },
@@ -27,7 +20,6 @@ const fadeUp = {
 
 export default function HomeGallery() {
   const [lightbox, setLightbox] = useState<string | null>(null);
-  const [shuffledImages, setShuffledImages] = useState<string[]>([]);
 
   const headerRef = useRef(null);
   const sliderRef = useRef(null);
@@ -35,13 +27,11 @@ export default function HomeGallery() {
   const headerInView = useInView(headerRef, { amount: 0.3 });
   const sliderInView = useInView(sliderRef, { amount: 0.2 });
 
-  useEffect(() => {
-    setShuffledImages([...images].sort(() => Math.random() - 0.5));
-  }, []);
+  // ✅ shuffle + take only 10 images
+  const firstTenImages = galleryImages.slice(0, 10);
 
   return (
     <section className="py-10 relative">
-
       {/* HEADER */}
       <motion.div
         ref={headerRef}
@@ -54,12 +44,14 @@ export default function HomeGallery() {
         <h2 className="text-5xl font-semibold text-yellow-100 leading-tight text-shadow-xl">
           Explore Our Resort
         </h2>
+
         <p className="text-gray-50 font-medium text-lg leading-relaxed font-dm text-shadow-xl">
           A glimpse into the beauty and serenity of M.S. Enclave Heritage Resort.
         </p>
+
         <Link
           href="/gallery"
-          className="mt-6 inline-block px-10 rounded shadow-lg py-3 bg-white text-black hover:animate-bounce  "
+          className="mt-6 inline-block px-10 rounded shadow-lg py-3 bg-white text-black hover:animate-bounce"
         >
           Explore Our Gallery
         </Link>
@@ -100,29 +92,28 @@ export default function HomeGallery() {
           }}
           className="max-w-6xl mx-auto overflow-visible"
         >
-          {shuffledImages.map((src, i) => (
+          {firstTenImages.map((img, i) => (
             <SwiperSlide
               key={i}
               className="flex justify-center overflow-visible pointer-events-auto"
             >
               <div
-                onClick={() => setLightbox(src)}
+                onClick={() => setLightbox(img.src)}
                 className="relative cursor-pointer"
               >
-                <Image
-                  src={src}
-                  alt="Gallery image"
-                  width={600}
-                  height={400}
-                  className="
-                    rounded-2xl
-                    object-cover
-                    shadow-xl
-                    transition-transform
-                    duration-300
-                    hover:scale-[1.009]
-                  "
-                />
+                <div className="relative w-[500px] h-[320px] rounded-2xl overflow-hidden shadow-xl">
+  <Image
+    src={img.src}
+    alt={img.alt}
+    fill
+    className="
+      object-cover
+      transition-transform
+      duration-300
+      hover:scale-[1.009]
+    "
+  />
+</div>
               </div>
             </SwiperSlide>
           ))}
@@ -154,7 +145,7 @@ export default function HomeGallery() {
         </div>
       )}
 
-      {/* SEO (Hidden) */}
+      {/* SEO */}
       <div className="sr-only">
         <h3>Luxury Resort Gallery Kerala</h3>
         <p>
