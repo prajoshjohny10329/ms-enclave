@@ -25,11 +25,11 @@ export default function Breadcrumb({ heading, items, bgImage }: BreadcrumbProps)
         alt={heading}
         fill
         priority
-        className="object-cover brightness-50 rounded-[0_0_15px_15px] drop-shadow-md"
+        className="object-cover contrast-125 rounded-[0_0_15px_15px] drop-shadow-md"
       />
 
       {/* Overlay */}
-      <div className="absolute inset-0 "></div>
+      <div className="absolute inset-0 bg-black/50"></div>
 
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">
@@ -37,7 +37,7 @@ export default function Breadcrumb({ heading, items, bgImage }: BreadcrumbProps)
 
         {/* Heading */}
         {/* <h1 className="text-4xl md:text-5xl text-center font-bold text-white text-shadow-sm font-playfair"> */}
-        <h1 className="text-4xl md:text-5xl text-center font-bold text-white text-shadow-sm">
+        <h1 className="text-4xl md:text-5xl text-center font-bold text-white text-shadow-lg">
           {heading}
         </h1>
         {/* Breadcrumb */}

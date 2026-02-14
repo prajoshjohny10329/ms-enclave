@@ -10,8 +10,8 @@ export default function GallerySection() {
   return (
     <section>
       <Breadcrumb
-        heading="Experiences"
-        bgImage="/images/new/ms-enclave-inside-rain.webp"
+        heading="Explore Every Corner of M.S. Enclave"
+        bgImage="/images/new/ms-enclave-out-side-with-pool.webp"
         items={[{ label: "Gallery", href: "/gallery" }]}
       />
         
