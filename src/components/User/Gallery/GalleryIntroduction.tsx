@@ -21,10 +21,10 @@ export default function GalleryIntroduction() {
           {/* Left*/}
           <div className="p-8 md:p-12 md:col-span-2">
             <div className="text-center mb-14">
-              <h2 className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm">
+              <h2 className="text-5xl font-semibold text-yellow-100  leading-tight text-shadow-sm">
                 Moments of Serenity & Heritage
               </h2>
-              <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
+              <p className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3">
                 Discover the beauty of M.S. Enclave Heritage Resort through our curated collection of images. From traditional architecture to peaceful natural surroundings, every frame captures the charm, comfort, and warmth of an authentic Kerala retreat.
               </p>
             </div>

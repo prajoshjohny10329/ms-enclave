@@ -79,7 +79,7 @@ export default function HospitalitySection() {
             initial="hidden"
             animate={lintInView ? "visible" : "hidden"}
             transition={{ duration: 1.4 }}
-            className="mt-6 inline-block px-6 py-3 bg-gray-950 text-white rounded-md"
+            className="inline-block px-10 rounded shadow-lg py-3 bg-white text-black hover:animate-bouncerounded-md"
           >
             Know More About Us
           </MotionLink>

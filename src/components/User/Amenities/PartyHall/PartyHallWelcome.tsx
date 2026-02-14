@@ -80,7 +80,7 @@ export default function PartyHallWelcome() {
             initial="hidden"
             animate={textInView ? "visible" : "hidden"}
             transition={{ duration: 1 }}
-             className="text-gray-950 font-medium text-md leading-relaxed font-dm mt-2">
+             className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3 mt-2">
               Our Mini Party Hall at <strong>M.S. Enclave Heritage Resort</strong> is
           ideal for hosting weddings, birthday parties, engagement ceremonies,
           family functions, and corporate meetings. Designed with comfort and

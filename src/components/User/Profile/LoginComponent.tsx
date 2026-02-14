@@ -69,7 +69,7 @@ export default function LoginComponent() {
               initial="hidden"
               animate={titleInView ? "visible" : "hidden"}
               transition={{ duration: 1 }}
-              className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm"
+              className="text-5xl font-semibold text-yellow-100  leading-tight text-shadow-sm"
             >
               Sign in to Continue
             </motion.h1>
@@ -80,7 +80,7 @@ export default function LoginComponent() {
               initial="hidden"
               animate={textInView ? "visible" : "hidden"}
               transition={{ duration: 1 }}
-              className="text-gray-950 font-medium text-md leading-relaxed font-dm"
+              className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3"
             >
               Log in securely using your Google account to manage your bookings,
               view reservation details, and enjoy a smooth, hassle-free

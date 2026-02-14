@@ -102,7 +102,7 @@ export default function AmenitiesSection() {
             Discover Our Amenities
           </h2>
 
-          <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
+          <p className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3">
             {activeAmenity.description}
           </p>
 

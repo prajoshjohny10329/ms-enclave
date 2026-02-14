@@ -30,8 +30,26 @@ export default function RoomsWhyChooseUs() {
   const lintInView = useInView(lintRef, { amount: 0.3 });
 
   return (
-    <section className="relative py-15 bg-gray-50">
+    <section className="relative py-10">
       <div className="mx-auto grid grid-cols-1 md:grid-cols-2 min-h-[500px]">
+        {/* Left Image Column */}
+        <motion.div
+          ref={imgRef}
+          variants={fadeRight}
+          initial="hidden"
+          animate={imgInView ? "visible" : "hidden"}
+          transition={{ duration: 1 }}
+          className="relative w-full h-full rounded-md min-h-[500px] max-h-[500px] pb-5"
+        >
+          <Image
+            src="/images/common/ms-enclave-47.webp"
+            alt="M.S. Enclave Heritage Resort Palakkad"
+            fill
+            className="object-cover rounded-md shadow-md"
+            priority
+          />
+        </motion.div>
+        
         {/* Right Content */}
         <div className="flex items-center px-6 md:px-16 mt-10">
           <div className="space-y-6">
@@ -41,7 +59,7 @@ export default function RoomsWhyChooseUs() {
               initial="hidden"
               animate={titleInView ? "visible" : "hidden"}
               transition={{ duration: 1 }}
-              className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm"
+              className="text-5xl font-semibold text-yellow-100  leading-tight text-shadow-sm"
             >
               Booking Call-to-Action Section
             </motion.h1>
@@ -51,7 +69,7 @@ export default function RoomsWhyChooseUs() {
               initial="hidden"
               animate={textInView ? "visible" : "hidden"}
               transition={{ duration: 1 }}
-              className="text-gray-950 font-medium text-md leading-relaxed font-dm"
+              className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3"
             >
               Enjoy a calm and refreshing stay surrounded by nature at{" "}
               <strong>M.S. Enclave Heritage Resort.</strong>
@@ -73,7 +91,7 @@ export default function RoomsWhyChooseUs() {
                 initial="hidden"
                 animate={lintInView ? "visible" : "hidden"}
                 transition={{ duration: 1.4 }}
-                className="px-6 py-1  text-black font-dm text-lg font-bold hover:text-red-700 "
+                className="px-6 py-1  text-white font-dm text-lg font-bold hover:text-yellow-100 "
               >
                 +91 97456 66642
               </MotionLink>
@@ -84,7 +102,7 @@ export default function RoomsWhyChooseUs() {
                 initial="hidden"
                 animate={lintInView ? "visible" : "hidden"}
                 transition={{ duration: 1.4 }}
-                className="px-6 py-1  text-black font-dm text-lg font-bold hover:text-red-700 "
+                className="px-6 py-1  text-white font-dm text-lg font-bold hover:text-yellow-100 "
               >
                 +91 994 500 4857
               </MotionLink>
@@ -97,7 +115,7 @@ export default function RoomsWhyChooseUs() {
               initial="hidden"
               animate={lintInView ? "visible" : "hidden"}
               transition={{ duration: 1.4 }}
-              className="mt-4 ml-3 inline-block px-12 hover:bg-red-500 shadow-lg py-3 bg-gray-950 text-white"
+              className="inline-block px-10 rounded shadow-lg py-3 bg-white text-black hover:animate-bounce mr-5"
             >
               Book Now
             </MotionLink>
@@ -108,30 +126,14 @@ export default function RoomsWhyChooseUs() {
               initial="hidden"
               animate={lintInView ? "visible" : "hidden"}
               transition={{ duration: 1.4 }}
-              className="mt-4 ml-8 inline-block px-12 hover:bg-red-500 shadow-lg py-3 bg-gray-950 text-white"
+              className="inline-block px-10 rounded shadow-lg py-3 bg-white text-black hover:animate-bounce"
             >
               Select A Package
             </MotionLink>
           </div>
         </div>
 
-        {/* Left Image Column */}
-        <motion.div
-          ref={imgRef}
-          variants={fadeRight}
-          initial="hidden"
-          animate={imgInView ? "visible" : "hidden"}
-          transition={{ duration: 1 }}
-          className="relative w-full h-full rounded-md min-h-[500px] max-h-[500px] pb-5"
-        >
-          <Image
-            src="/images/common/ms-enclave-25.webp"
-            alt="M.S. Enclave Heritage Resort Palakkad"
-            fill
-            className="object-cover rounded-tl-[35px] rounded-br-[35px] shadow-md pb-2 pl-2"
-            priority
-          />
-        </motion.div>
+        
       </div>
     </section>
   );

@@ -55,7 +55,7 @@ export default function ContactPage() {
             <div>
 <h2 className="text-3xl md:text-3xl font-semibold text-black leading-tight text-shadow-sm">Get in Touch</h2>
 
-            <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
+            <p className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3">
               We’d love to hear from you. Reach out for bookings, questions, or
               resort-related inquiries.
             </p>
@@ -64,7 +64,7 @@ export default function ContactPage() {
 
             <div>
               <h2 className="text-2xl  font-semibold text-black leading-tight text-shadow-sm"> Address</h2>
-              <Link href={'https://maps.app.goo.gl/MvrRJ2aN9SZZsFHL7'} className="text-gray-950 font-medium text-md leading-relaxed font-dm">
+              <Link href={'https://maps.app.goo.gl/MvrRJ2aN9SZZsFHL7'} className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3">
                 Mannuparambil, Paruthipully <br />
                 Palakkad, Kerala 678573
               </Link>
@@ -72,12 +72,12 @@ export default function ContactPage() {
 
             <div>
               <p className="text-2xl  font-semibold text-black leading-tight text-shadow-sm">Contact Number</p>
-              <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
+              <p className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3">
                 <Link href="tel:+918589996642" className="hover:text-blue-600">
                   +91 97456 66642
                 </Link>
               </p>
-              <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
+              <p className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3">
                 <Link href="tel:+919945004857" className="hover:text-blue-600">
                   +91 994 500 4857
                 </Link>
@@ -86,7 +86,7 @@ export default function ContactPage() {
 
             <div>
               <p className="text-2xl  font-semibold text-black leading-tight text-shadow-sm">Email</p>
-              <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
+              <p className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3">
                 <Link
                   href="mailto:msenclaveresort@gmail.com"
                   className="hover:text-blue-600"

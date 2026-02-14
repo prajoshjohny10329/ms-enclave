@@ -30,7 +30,7 @@ export default function RoomAmenities() {
   const lintInView = useInView(lintRef, { amount: 0.3 });
 
   return (
-    <section className="relative py-15">
+    <section className="relative py-10">
       <div className="mx-auto grid grid-cols-1 md:grid-cols-2 min-h-[500px]">
 
         {/* Left Image Column */}
@@ -46,7 +46,7 @@ export default function RoomAmenities() {
             src="/images/common/ms-enclave-26.webp"
             alt="M.S. Enclave Heritage Resort Palakkad"
             fill
-            className="object-cover rounded-tr-[35px] rounded-bl-[35px] shadow-md pb-2 pr-2"
+            className="object-cover rounded-md shadow-md "
             priority
           />
         </motion.div>
@@ -60,7 +60,7 @@ export default function RoomAmenities() {
             initial="hidden"
             animate={titleInView ? "visible" : "hidden"}
             transition={{ duration: 1 }} 
-            className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm">
+            className="text-5xl font-semibold text-yellow-100  leading-tight text-shadow-sm">
               In-Room Amenities for a Comfortable Stay
             </motion.h1>
 
@@ -70,12 +70,10 @@ export default function RoomAmenities() {
             initial="hidden"
             animate={textInView ? "visible" : "hidden"}
             transition={{ duration: 1 }}
-             className="text-gray-950 font-medium text-md leading-relaxed font-dm">
+             className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3">
               All rooms at <strong> M.S. Enclave Heritage Resort</strong> are thoughtfully equipped with essential modern amenities to ensure a comfortable and pleasant stay. From restful bedding and climate control to clean, well-maintained facilities, every detail is designed to provide convenience, relaxation, and a homely atmosphere throughout your visit.
             </motion.p>
-            <div>
-              <Amenities />
-            </div>
+           
             <MotionLink
             href="/packages"
             ref={lintRef}
@@ -83,7 +81,7 @@ export default function RoomAmenities() {
             initial="hidden"
             animate={lintInView ? "visible" : "hidden"}
             transition={{ duration: 1.4 }}
-            className="mt-6 inline-block px-6 py-3 bg-gray-950 text-white "
+            className="inline-block px-10 rounded shadow-lg py-3 bg-white text-black hover:animate-bounce"
           >
             Select A Package
           </MotionLink>

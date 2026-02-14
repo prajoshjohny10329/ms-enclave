@@ -1,4 +1,5 @@
 import Breadcrumb from "@/components/common/Breadcrumb";
+import PatternSection from "@/components/common/PatternSection";
 import RoomAmenities from "@/components/User/Amenities/Rooms/RoomAmenities";
 import RoomsContact from "@/components/User/Amenities/Rooms/RoomsContact";
 import RoomsGallerySection from "@/components/User/Amenities/Rooms/RoomsGallerySection";
@@ -18,11 +19,17 @@ export default function RoomsPage() {
       />
 
       <div>
+        <PatternSection />
         <RoomsWelcomeSection />
+        <PatternSection />
         <RoomsWhyChooseUs />
+        <PatternSection />
         <RoomsGallerySection />
+        <PatternSection />
         <RoomAmenities />
+        <PatternSection />
         <PackageSwiper />
+        <PatternSection />
         <RoomsContact />
       </div>
     </>

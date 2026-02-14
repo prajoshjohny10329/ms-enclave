@@ -38,19 +38,19 @@ export default function RoomsGallerySection() {
   ];
 
   return (
-    <section className="py-20 px-0 md:px-25 bg-white">
+    <section className="py-10 px-0 md:px-25 ">
       <div className="flex flex-col lg:flex-row">
         <div className="flex items-center">
           <div className="px-6 mb-5">
-            <h2 className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm">
+            <h2 className="text-5xl font-semibold text-yellow-100  leading-tight text-shadow-sm">
             Comfortable & Spacious Accommodations
           </h2>
-          <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
+          <p className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mb-12 mt-3">
             Whether you are traveling with family, friends, or as a couple, our rooms are designed to suit every need. Spacious interiors, soothing surroundings, and modern conveniences ensure a comfortable stay in the heart of nature.
           </p>
           <Link
             href="/gallery"
-            className="mt-6 inline-block px-6 py-3 bg-gray-950 text-white "
+            className="inline-block px-10 rounded shadow-lg py-3 bg-white text-black hover:animate-bounce"
           >
             View All Gallery
           </Link>

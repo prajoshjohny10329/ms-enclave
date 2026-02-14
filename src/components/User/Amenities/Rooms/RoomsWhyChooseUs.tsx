@@ -30,7 +30,7 @@ export default function RoomsWhyChooseUs() {
   const lintInView = useInView(lintRef, { amount: 0.3 });
 
   return (
-    <section className="relative py-15 bg-gray-50">
+    <section className="relative py-10 ">
       <div className="mx-auto grid grid-cols-1 md:grid-cols-2 min-h-[500px]">
         {/* Right Content */}
         <div className="flex items-center px-6 md:px-16 mt-10">
@@ -41,7 +41,7 @@ export default function RoomsWhyChooseUs() {
               initial="hidden"
               animate={titleInView ? "visible" : "hidden"}
               transition={{ duration: 1 }}
-              className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm"
+              className="text-5xl font-semibold text-yellow-100  leading-tight text-shadow-sm"
             >
               Why Choose Our Rooms?
             </motion.h1>
@@ -51,7 +51,7 @@ export default function RoomsWhyChooseUs() {
               initial="hidden"
               animate={textInView ? "visible" : "hidden"}
               transition={{ duration: 1 }}
-              className="text-gray-950 font-medium text-md leading-relaxed font-dm"
+              className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3"
             >
               At M.S. Enclave Heritage Resort, we offer more than just a place
               to stay — we provide an experience rooted in Kerala’s cultural

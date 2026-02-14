@@ -47,10 +47,10 @@ useEffect(() => {
       <div className="max-w-7xl mx-auto px-4">
         {/* Heading */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-semibold text-black leading-tight text-shadow-sm">
+          <h2 className="text-5xl font-semibold text-yellow-100  leading-tight text-shadow-sm">
             A Glimpse Into Our Elegant Event Space
           </h2>
-          <p className="text-gray-950 font-medium text-md leading-relaxed font-dm">
+          <p className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3">
             Explore our Party Hall Gallery to get a visual preview of the beautifully designed indoor space at M.S. Enclave Heritage Resort.
           </p>
         </div>
