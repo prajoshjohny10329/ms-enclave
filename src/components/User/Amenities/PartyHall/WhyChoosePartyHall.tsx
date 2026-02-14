@@ -1,60 +1,100 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  useMotionValue,
-  useInView,
-  animate,
-  useMotionValueEvent,
-} from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import PartyHallHighlights from "./PartyHallHighlights";
 
-type CounterProps = {
-  value: number;
-  label: string;
-  suffix?: string;
+const fadeRight = {
+  hidden: { x: 60, opacity: 0 },
+  visible: { x: 0, opacity: 1 },
 };
 
+const fadeLeft = {
+  hidden: { x: -60, opacity: 0 },
+  visible: { x: 0, opacity: 1 },
+};
+
+const MotionLink = motion(Link);
+
 export default function WhyChoosePartyHall() {
+      const imgRef = useRef(null);
+  const titleRef = useRef(null);
+  const textRef = useRef(null);
+  const lintRef = useRef(null);
+
+  const imgInView = useInView(imgRef, { amount: 0.3 });
+  const titleInView = useInView(titleRef, { amount: 0.3 });
+  const textInView = useInView(textRef, { amount: 0.3 });
+  const lintInView = useInView(lintRef, { amount: 0.3 });
+
   return (
-    <section className=" w-full h-[650px]">
-      <div className="w-full h-full flex relative items-center">
-        {/* BACKGROUND IMAGE */}
-        <Image
-          src="/images/common/ms-enclave-31.webp"
-          alt="Kerala Heritage Architecture"
-          fill
-          priority
-          className="object-cover "
-        />
+    <section className="relative py-10">
+      <div className="mx-auto grid grid-cols-1 md:grid-cols-2 min-h-[500px]">
 
-        {/* OVERLAY */}
-        <div className="absolute inset-0 " />
-
-        {/* CONTENT */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-20 text-white ">
-          {/* TEXT */}
-          <div className="mb-16 ">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 font-dm drop-shadow-[3px_3px_3px_rgba(0,0,0)] text-center">
-              Why Choose Our Party Hall
-            </h2>
-
-            <h3 className="text-xl text-center md:text-2xl text-white font-bold mb-6 font-dm text-shadow-sm drop-shadow-[1px_1px_1px_rgba(0,0,0)]">
+        {/* Right Content */}
+        <div className="flex items-center px-6 md:px-16 mt-10">
+          <div>
+            <motion.h2
+                        ref={titleRef}
+                        variants={fadeLeft}
+                        initial="hidden"
+                        animate={titleInView ? "visible" : "hidden"}
+                        transition={{ duration: 1 }}
+                        className="text-5xl font-semibold text-gray-200 leading-tight font-playfair"
+                      >
+                        Why Choose
+                      </motion.h2>
+            <motion.p
+            ref={titleRef}
+            variants={fadeLeft}
+            initial="hidden"
+            animate={titleInView ? "visible" : "hidden"}
+            transition={{ duration: 1 }} 
+            className="text-6xl font-semibold text-amber-100 leading-tight text-shadow-sm mt-2">
               An Ideal Setting for Every Occasion
-            </h3>
+            </motion.p>
 
-            <p className=" leading-relaxed text-md md:text-lg font-dm text-white font-medium  drop-shadow-[1px_1px_1px_rgba(0,0,0)] text-center">
+            <motion.p
+            ref={textRef}
+            variants={fadeLeft}
+            initial="hidden"
+            animate={textInView ? "visible" : "hidden"}
+            transition={{ duration: 1 }}
+             className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3 mt-2">
               Whether you are planning a birthday party, engagement ceremony,
-              anniversary celebration, or a small business meeting, our party
-              hall ensures a hassle-free and enjoyable experience. The calm
-              surroundings, professional service, and modern facilities make
-              every event smooth and memorable.
-            </p>
-          </div>
+             anniversary celebration, or a small business meeting, our party
+             hall ensures a hassle-free and enjoyable experience. The calm
+             surroundings, professional service, and modern facilities make
+           every event smooth and memorable.
+            </motion.p>
 
+            
+           
+          </div>
           
         </div>
+
+        {/* Left Image Column */}
+        <motion.div
+        ref={imgRef}
+          variants={fadeRight}
+          initial="hidden"
+          animate={imgInView ? "visible" : "hidden"}
+          transition={{ duration: 1 }}
+         className="relative w-full h-full rounded-md min-h-[550px] pb-5">
+
+          <Image
+            src="/images/new/ms-enclave-conference-hall-2.webp"
+            alt="M.S. Enclave Heritage Resort Palakkad"
+            fill
+            className="object-cover rounded-md shadow-md"
+            priority
+          />
+        </motion.div>
+
+        
       </div>
     </section>
   );

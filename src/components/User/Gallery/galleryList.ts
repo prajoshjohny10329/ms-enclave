@@ -20,6 +20,11 @@ export const galleryImages = [
     category: "Party Hall",
   },
   {
+    src: "/images/new/ms-enclave-conference-hall-2.webp",
+    alt: "MS Enclave Heritage Resort Palakkad PartyHall",
+    category: "Party Hall",
+  },
+  {
     src: "/images/new/ms-enclave-inside-rain.webp",
     alt: "MS Enclave Heritage Resort Palakkad Interior Artificial Rain",
     category: "Interior",
@@ -76,6 +81,11 @@ export const galleryImages = [
   },
   {
     src: "/images/new/ms-enclave-room-1.webp",
+    alt: "MS Enclave Heritage Resort Palakkad AC Rooms Images ",
+    category: "Rooms",
+  },
+  {
+    src: "/images/new/ms-enclave-room-4.webp",
     alt: "MS Enclave Heritage Resort Palakkad AC Rooms Images ",
     category: "Rooms",
   },

@@ -30,7 +30,7 @@ export default function PartyHallWelcome() {
   const lintInView = useInView(lintRef, { amount: 0.3 });
 
   return (
-    <section className="relative py-15">
+    <section className="relative py-10">
       <div className="mx-auto grid grid-cols-1 md:grid-cols-2 min-h-[500px]">
 
         {/* Left Image Column */}
@@ -43,10 +43,10 @@ export default function PartyHallWelcome() {
          className="relative w-full h-full rounded-md min-h-[550px] pb-5">
 
           <Image
-            src="/images/common/ms-enclave-31.webp"
+            src="/images/new/ms-enclave-conference-hall.webp"
             alt="M.S. Enclave Heritage Resort Palakkad"
             fill
-            className="object-cover rounded-tr-[35px] rounded-bl-[35px] shadow-md pb-2 pr-2"
+            className="object-cover rounded-md shadow-md"
             priority
           />
         </motion.div>
@@ -54,25 +54,25 @@ export default function PartyHallWelcome() {
         {/* Right Content */}
         <div className="flex items-center px-6 md:px-16 mt-10">
           <div>
-            <motion.p
+            <motion.h2
                         ref={titleRef}
                         variants={fadeRight}
                         initial="hidden"
                         animate={titleInView ? "visible" : "hidden"}
                         transition={{ duration: 1 }}
-                        className="text-4xl md:text-5xl font-semibold  text-red-950 leading-tight font-playfair"
+                        className="text-5xl font-semibold text-gray-200 leading-tight font-playfair"
                       >
                         Party Hall
-                      </motion.p>
-            <motion.h1
+                      </motion.h2>
+            <motion.p
             ref={titleRef}
             variants={fadeRight}
             initial="hidden"
             animate={titleInView ? "visible" : "hidden"}
             transition={{ duration: 1 }} 
-            className="text-4xl md:text-5xl font-semibold mt-1 text-black leading-tight text-shadow-sm font-dm">
+            className="text-6xl font-semibold text-amber-100 leading-tight text-shadow-sm mt-2">
               A Perfect Venue for Celebrations
-            </motion.h1>
+            </motion.p>
 
             <motion.p
             ref={textRef}

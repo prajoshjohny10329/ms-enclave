@@ -1,5 +1,5 @@
 import Breadcrumb from "@/components/common/Breadcrumb";
-import PartyHallDummy from "@/components/User/Amenities/PartyHall/PartyHallDummy";
+import PatternSection from "@/components/common/PatternSection";
 import PartyHallGallery from "@/components/User/Amenities/PartyHall/PartyHallGallery";
 import PartyHallHighlights from "@/components/User/Amenities/PartyHall/PartyHallHighlights";
 import PartyHallWelcome from "@/components/User/Amenities/PartyHall/PartyHallWelcome";
@@ -29,16 +29,17 @@ export default function PartyHallPage() {
     <section>
         <Breadcrumb
                 heading="Our Party Hall"
-                bgImage="/images/common/ms-enclave-31.webp"   // ⭐ background image
+                bgImage="/images/new/ms-enclave-conference-hall.webp"   // ⭐ background image
                 items={[
                   { label: "Party Hall", href: "/amenities/party-hall" }
                 ]}
               />
+        <PatternSection />
         <PartyHallWelcome />
-        <PartyHallDummy />
+        <PatternSection />
         <WhyChoosePartyHall />
+        <PatternSection />
         <PartyHallGallery />
-        
     </section>
   );
 }
