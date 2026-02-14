@@ -22,13 +22,13 @@ export default function RoomsPage() {
         <PatternSection />
         <RoomsWelcomeSection />
         <PatternSection />
+        <PackageSwiper />
+        <PatternSection />
         <RoomsWhyChooseUs />
         <PatternSection />
         <RoomsGallerySection />
         <PatternSection />
         <RoomAmenities />
-        <PatternSection />
-        <PackageSwiper />
         <PatternSection />
         <RoomsContact />
       </div>
