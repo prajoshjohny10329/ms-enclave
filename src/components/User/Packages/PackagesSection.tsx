@@ -15,6 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useSession } from "next-auth/react";
 import { Bars } from "react-loader-spinner";
+import Loader from "@/components/common/Loader";
 
 
 export default function PackagesSection() {
@@ -37,24 +38,7 @@ export default function PackagesSection() {
     loadPackages();
   }, []);
 
-  if (loading)
-  return (
-    <div className="min-h-[500px] flex flex-col items-center justify-center gap-4">
-  <Bars
-    height="80"
-    width="80"
-    color="#000"
-    ariaLabel="bars-loading"
-    visible={true}
-  />
-  <p className="text-md text-black text-shadow-md animate-pulse">
-    Please wait, loading...
-  </p>
-</div>
-
-  );
-
-
+  if (loading) return <Loader />;
 
   return (
     <div className="max-w-6xl mx-auto py-10 px-4">
