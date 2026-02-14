@@ -83,6 +83,7 @@ export default function NearbyTouristPlaces() {
           modules={[
             Autoplay,
             Navigation,
+            Pagination,
             EffectFade,
             Parallax,
           ]}

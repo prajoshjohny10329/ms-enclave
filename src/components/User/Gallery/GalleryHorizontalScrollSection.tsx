@@ -15,7 +15,7 @@ export default function GalleryHorizontalScrollSection() {
   const [index, setIndex] = useState(0);
 
   return (
-    <section className="relative overflow-hidden bg-white pt-20 pb-20">
+    <section className="relative overflow-hidden p-10">
       <div className="relative overflow-hidden">
 
         <div className="flex animate-scroll gap-6 w-max">

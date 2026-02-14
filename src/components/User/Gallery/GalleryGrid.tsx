@@ -57,18 +57,19 @@ export default function GalleryGrid() {
   }, [visibleCount, filteredImages.length]);
 
   return (
-    <section className="bg-gray-50 py-20 w-full">
+    <section className=" py-10 w-full">
       <div className="max-w-7xl mx-auto px-4">
 
         {/* Title */}
         <div className="text-center pb-10">
-          <h2 className="text-4xl md:text-5xl font-semibold text-black">
+          <h2 className="text-5xl mt-3 font-semibold text-amber-100  leading-tight text-shadow-sm ">
             View By Category
           </h2>
+          <p className="text-white font-medium text-lg leading-relaxed font-dm text-shadow-lg mt-3">Browse our gallery through carefully organized categories to easily discover the beauty of the resort. From elegant rooms to scenic outdoor spaces, each section highlights a unique experience. Select a category below and explore moments captured across nature, comfort, and heritage.</p>
         </div>
 
         {/* Category Filters */}
-        <div className="flex flex-wrap gap-3 justify-center mb-10">
+        <div className="flex flex-wrap gap-3 justify-center mb-10 ">
           {categories.map((cat) => (
             <button
               key={cat}
@@ -76,7 +77,7 @@ export default function GalleryGrid() {
                 setActiveCategory(cat);
                 setVisibleCount(IMAGES_PER_LOAD);
               }}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition
+              className={`px-5 py-2 rounded-full text-sm font-medium transition hover:animate-bounce
                 ${
                   activeCategory === cat
                     ? "bg-black text-white"
@@ -107,7 +108,7 @@ export default function GalleryGrid() {
                 className="w-full h-[300px] object-cover transition-transform duration-500 group-hover:scale-105"
               />
 
-              <figcaption className="absolute inset-0 bg-black/40 flex items-end p-4 opacity-0 group-hover:opacity-100 transition">
+              <figcaption className="absolute inset-0 bg-black/40 flex items-end p-4 opacity-0 group-hover:opacity-100 transition font-dm">
                 <span className="text-white text-sm font-medium">
                   {img.alt}
                 </span>
