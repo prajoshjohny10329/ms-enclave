@@ -3,8 +3,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import PartyHallHighlights from "./PartyHallHighlights";
 
 const fadeRight = {
   hidden: { x: 60, opacity: 0 },
@@ -16,7 +14,6 @@ const fadeLeft = {
   visible: { x: 0, opacity: 1 },
 };
 
-const MotionLink = motion(Link);
 
 export default function WhyChoosePartyHall() {
       const imgRef = useRef(null);
