@@ -22,12 +22,12 @@ export default function RoomHighlights({
   roomSize,
 }: RoomHighlightsProps) {
   return (
-    <div className="bg-white py-10 text-black">
-      <h2 className="font-semibold mb-6 text-gray-800 text-2xl text-shadow-sm">
+    <div className="text-white">
+      <h2 className="text-3xl font-semibold text-yellow-100 font-dm  leading-tight text-shadow-sm mb-2">
         Room Highlights
       </h2>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-5">
         <Highlight
           icon={faPeopleGroup}
           title={`${maxAdults} Adults`}
@@ -77,7 +77,7 @@ function Highlight({
       </div>
 
       <p className="font-semibold font-dm">{title}</p>
-      <p className="text-gray-600 text-sm font-dm">{subtitle}</p>
+      <p className="text-yellow-100 text-sm font-dm">{subtitle}</p>
     </div>
   );
 }

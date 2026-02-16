@@ -15,6 +15,7 @@ import RoomHighlights from "../../Booking/RoomHighlights";
 import RoomRules from "../../Booking/RoomRules";
 import Amenities from "../../Booking/Amenities";
 import LoginButton from "../../Profile/LoginButton";
+import PatternSection from "@/components/common/PatternSection";
 
 type PackageDetailsProps = {
   onTitleLoad?: (title: string) => void;
@@ -96,12 +97,12 @@ useEffect(() => {
     <div>
       <div className="mb-7 flex flex-col gap-6 md:flex-row md:justify-between md:items-center">
   <div>
-    <h1 className="text-4xl font-bold mb-2 md:mb-3 text-shadow-sm">
+    <h1 className="text-5xl font-semibold text-yellow-100  leading-tight text-shadow-sm">
       {pkg.packageName}
     </h1>
 
-    <p className="text-2xl text-gray-800 text-shadow-sm">
-      ₹{pkg.indianPrice} / Night
+    <p className="text-2xl text-white font-dm text-shadow-sm">
+      ₹ {pkg.indianPrice} / Night
     </p>
   </div>
 
@@ -109,7 +110,7 @@ useEffect(() => {
     {session?.user ? (
       <Link
         href={`/booking/${pkg.slug}`}
-        className="bg-black text-white text-md px-8 md:px-10 py-3 md:py-4 font-extrabold rounded-sm shadow hover:font-black hover:shadow-lg hover:bg-green-600 transition"
+        className="mt-6 inline-block px-10 rounded shadow-lg py-3 bg-white text-black hover:animate-bounce "
       >
         Book Now
       </Link>
@@ -134,7 +135,9 @@ useEffect(() => {
           />
         </div>
 
-        <p className="text-gray-700 mt-4 font-dm text-md">{pkg.description}</p>
+        <p className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mb-12 mt-3">{pkg.description}</p>
+
+        <PatternSection />
 
         <RoomHighlights
           beds={1}

@@ -101,7 +101,7 @@ export default function HomeGallery() {
                 onClick={() => setLightbox(img.src)}
                 className="relative cursor-pointer"
               >
-                <div className="relative w-[500px] h-[320px] rounded-2xl overflow-hidden shadow-xl">
+                <div className="relative w-[500px] h-80 rounded-2xl overflow-hidden shadow-xl">
   <Image
     src={img.src}
     alt={img.alt}
