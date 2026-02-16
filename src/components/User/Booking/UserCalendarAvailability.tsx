@@ -120,26 +120,26 @@ export default function UserCalendarAvailability() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded-2xl">
+    <div className="max-w-6xl mx-auto p-6 theme-bg border-b-amber-200">
       {/* Month Controls */}
       <div className="flex items-center justify-center gap-4 mb-6 font-dm">
         <button
           onClick={prevMonth}
-          className="p-2 rounded bg-white hover:bg-gray-300 "
+          className="p-2 rounded text-white hover:animate-bounce hover:text-yellow-100 "
         >
           ◀
         </button>
 
-        <h1 className="text-xl font-bold text-black text-center">
+        <p className="text-xl font-bold text-yellow-100 text-center">
           {new Date(year, month).toLocaleString("default", {
             month: "long",
             year: "numeric",
           })}
-        </h1>
+        </p>
 
         <button
           onClick={nextMonth}
-          className="p-2 rounded bg-white hover:bg-gray-300"
+          className="p-2 rounded text-white hover:animate-bounce hover:text-yellow-100"
         >
           ▶
         </button>
@@ -156,7 +156,7 @@ export default function UserCalendarAvailability() {
           onMouseUp={handleMouseUp}
         >
           {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (
-            <div key={d} className="font-semibold text-black">
+            <div key={d} className="font-semibold text-gray-50 text-shadow-sm">
               {d}
             </div>
           ))}
@@ -179,9 +179,9 @@ export default function UserCalendarAvailability() {
             return (
               <div
                 key={dateKey}
-                className={`relative rounded-lg p-3 text-black shadow cursor-pointer ${
+                className={`relative rounded-lg p-3 text-white shadow-sm cursor-pointer ${
                   past ? "opacity-40 cursor-not-allowed" : ""
-                } text-black`}
+                } text-white`}
                 onMouseEnter={() =>
                   handleDaySelect(dateKey, info?.available, past)
                 }
@@ -192,7 +192,7 @@ export default function UserCalendarAvailability() {
                   className={`absolute top-2 right-2 rounded-full ${getStatusColor(
                     info?.available ?? 0
                   )} ${
-                  past ? "bg-white" : ""
+                  past ? "bg-transparent" : ""
                 }`}
                   style={{ height: "7px", width: "7px" }}
                 ></div>
@@ -221,7 +221,7 @@ export default function UserCalendarAvailability() {
       )}
 
       {/* Legend */}
-      <div className="mt-8 flex gap-6 text-sm text-black font-dm">
+      <div className="mt-8 flex gap-6 text-sm text-white font-dm">
         <div className="flex items-center gap-2">
           <span className="w-4 h-4 bg-green-500 rounded"></span>
           Available

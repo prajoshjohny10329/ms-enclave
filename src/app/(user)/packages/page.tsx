@@ -14,6 +14,7 @@ export default function PackagesPage() {
       />
       <PatternSection />
       <PackagesSection />
+      
 
     </section>
   );

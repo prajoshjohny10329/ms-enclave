@@ -101,12 +101,6 @@ export const galleryImages = [
   },
   // new
   {
-    src: "/images/common/ms-enclave-1.webp",
-    category: "Nature",
-    alt: "Nature View",
-  },
-  
-  {
     src: "/images/common/ms-enclave-5.webp",
     category: "Nature",
     alt: "MS Enclave Heritage Resort Palakkad Nature View",
@@ -121,42 +115,7 @@ export const galleryImages = [
     category: "Nature",
     alt: "MS Enclave Heritage Resort Palakkad Nature View",
   },
-  {
-    src: "/images/common/ms-enclave-8.webp",
-    category: "Nature",
-    alt: "MS Enclave Heritage Resort Palakkad Nature View",
-  },
-  {
-    src: "/images/common/ms-enclave-9.webp",
-    category: "Nature",
-    alt: "MS Enclave Heritage Resort Palakkad Nature View",
-  },
-  {
-    src: "/images/common/ms-enclave-10.webp",
-    category: "Nature",
-    alt: "MS Enclave Heritage Resort Palakkad Nature View",
-  },
-  {
-    src: "/images/common/ms-enclave-11.webp",
-    category: "Pool",
-    alt: "MS Enclave Heritage Resort Palakkad Swimming Pool View",
-  },
 //   hi 
-  {
-    src: "/images/common/ms-enclave-12.webp",
-    category: "Exterior",
-    alt: "MS Enclave Heritage Resort Palakkad Garden View",
-  },
-  {
-    src: "/images/common/ms-enclave-13.webp",
-    category: "Interior",
-    alt: "MS Enclave Heritage Resort Palakkad Interior View",
-  },
-  {
-    src: "/images/common/ms-enclave-14.webp",
-    category: "Interior",
-    alt: "MS Enclave Heritage Resort Palakkad Interior View",
-  },
   {
     src: "/images/common/ms-enclave-15.webp",
     category: "Exterior",
@@ -164,21 +123,6 @@ export const galleryImages = [
   },
   {
     src: "/images/common/ms-enclave-16.webp",
-    category: "Exterior",
-    alt: "MS Enclave Heritage Resort Palakkad Garden View",
-  },
-  {
-    src: "/images/common/ms-enclave-17.webp",
-    category: "Pool",
-    alt: "MS Enclave Heritage Resort Palakkad Swimming Pool View",
-  },
-  {
-    src: "/images/common/ms-enclave-18.webp",
-    category: "Exterior",
-    alt: "MS Enclave Heritage Resort Palakkad Exterior View",
-  },
-  {
-    src: "/images/common/ms-enclave-19.webp",
     category: "Exterior",
     alt: "MS Enclave Heritage Resort Palakkad Garden View",
   },
@@ -221,11 +165,6 @@ export const galleryImages = [
     src: "/images/common/ms-enclave-27.webp",
     category: "Rooms",
     alt: "MS Enclave Heritage Resort Palakkad Room View",
-  },
-  {
-    src: "/images/common/ms-enclave-28.webp",
-    category: "Exterior",
-    alt: "MS Enclave Heritage Resort Palakkad Garden View",
   },
   {
     src: "/images/common/ms-enclave-29.webp",
@@ -283,11 +222,6 @@ export const galleryImages = [
     alt: "MS Enclave Heritage Resort Palakkad Interior View",
   },
   {
-    src: "/images/common/ms-enclave-40.webp",
-    category: "Interior",
-    alt: "MS Enclave Heritage Resort Palakkad Interior View",
-  },
-  {
     src: "/images/common/ms-enclave-41.webp",
     category: "Exterior",
     alt: "MS Enclave Heritage Resort Palakkad Exterior View",
@@ -333,16 +267,6 @@ export const galleryImages = [
     alt: "MS Enclave Heritage Resort Palakkad Exterior View",
   },
   {
-    src: "/images/common/ms-enclave-50.webp",
-    category: "Exterior",
-    alt: "MS Enclave Heritage Resort Palakkad Exterior View",
-  },
-  {
-    src: "/images/common/ms-enclave-51.webp",
-    category: "Exterior",
-    alt: "MS Enclave Heritage Resort Palakkad Exterior View",
-  },
-  {
     src: "/images/common/ms-enclave-52.webp",
     category: "Exterior",
     alt: "MS Enclave Heritage Resort Palakkad Exterior View",
@@ -354,21 +278,6 @@ export const galleryImages = [
   },
   {
     src: "/images/common/ms-enclave-54.webp",
-    category: "Exterior",
-    alt: "MS Enclave Heritage Resort Palakkad Exterior View",
-  },
-  {
-    src: "/images/common/ms-enclave-55.webp",
-    category: "Pool",
-    alt: "MS Enclave Heritage Resort Palakkad Swimming Pool View",
-  },
-  {
-    src: "/images/common/ms-enclave-56.webp",
-    category: "Interior",
-    alt: "MS Enclave Heritage Resort Palakkad Interior View",
-  },
-  {
-    src: "/images/common/ms-enclave-57.webp",
     category: "Exterior",
     alt: "MS Enclave Heritage Resort Palakkad Exterior View",
   },

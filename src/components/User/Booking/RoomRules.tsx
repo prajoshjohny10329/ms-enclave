@@ -10,7 +10,7 @@ import {
 
 export default function RoomRules() {
   return (
-    <div className=" text-white">
+    <div className=" text-white py-4">
       <h2 className="text-3xl font-semibold text-yellow-100 font-dm  leading-tight text-shadow-sm mb-2">
         Our Room Rules
       </h2>
@@ -19,31 +19,31 @@ export default function RoomRules() {
         <Rule
           icon={faClock}
           title="Check-in Time"
-          description="From 6:00 AM"
+          description="From 2:00 PM"
         />
 
         <Rule
           icon={faDoorClosed}
           title="Check-out Time"
-          description="By 6:00 AM"
+          description="By 12:00 PM"
         />
 
         <Rule
-          icon={faClock}
-          title="Early / Late Check-in"
-          description="Subject to availability and may incur additional charges."
+          icon={faWaterLadder}
+          title="Swimming Pool"
+          description="Pool time  11 Am to  10 pm Proper pool dress must."
         />
 
         <Rule
           icon={faSmokingBan}
           title="Smoking Policy"
-          description="All rooms are non-smoking. A deep cleaning fee will apply if smoking occurs inside."
+          description="All rooms are non-smoking."
         />
 
         <Rule
           icon={faBed}
           title="Extra Amenities"
-          description="Requests for extra bedding, baby cots, or amenities should be made in advance."
+          description="Requests for extra bedding, baby cots, or amenities."
         />
 
         <Rule
@@ -51,11 +51,10 @@ export default function RoomRules() {
           title="Pets"
           description="Pets are not allowed."
         />
-
         <Rule
-          icon={faWaterLadder}
-          title="Swimming Pool"
-          description="Swimming pool closed from 10:00 AM to 6:00 PM."
+          icon={faClock}
+          title="Early / Late Check-in"
+          description="Subject to availability and may incur additional charges."
         />
       </ul>
     </div>

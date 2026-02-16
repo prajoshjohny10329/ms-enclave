@@ -38,7 +38,6 @@ export default function PoolPreviewSection() {
     "/images/new/ms-enclave-out-side-with-pool.webp",
     "/images/common/ms-enclave-17.webp",
     "/images/common/ms-enclave-7.webp",
-    "/images/common/ms-enclave-8.webp",
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);

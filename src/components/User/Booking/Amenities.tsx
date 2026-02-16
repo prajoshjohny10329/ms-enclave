@@ -13,8 +13,8 @@ import {
 
 export default function Amenities() {
   return (
-    <div className="bg-white py-10 text-black">
-      <h2 className="font-semibold mb-6 text-gray-800 text-2xl text-shadow-sm">
+    <div className="py-4 text-white">
+      <h2 className="text-3xl font-semibold text-yellow-100 font-dm  leading-tight text-shadow-sm mb-2">
         Explore Amenities
       </h2>
 
@@ -37,7 +37,7 @@ export default function Amenities() {
 
 function Amenity({ icon, label }: any) {
   return (
-    <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition">
+    <div className="flex items-center gap-3 p-3 rounded-lg hover:animate-bounce transition">
       <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-black">
         <FontAwesomeIcon icon={icon} />
       </div>

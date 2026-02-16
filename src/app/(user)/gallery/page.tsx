@@ -16,6 +16,7 @@ export default function GallerySection() {
       />
         
         <PatternSection />
+        <PatternSection />
       <GalleryGrid />
       <PatternSection />
       <GalleryHorizontalScrollSection />
