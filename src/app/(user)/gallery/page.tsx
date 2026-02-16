@@ -14,9 +14,7 @@ export default function GallerySection() {
         bgImage="/images/new/ms-enclave-out-side-with-pool.webp"
         items={[{ label: "Gallery", href: "/gallery" }]}
       />
-        
-        <PatternSection />
-        <PatternSection />
+      <PatternSection />
       <GalleryGrid />
       <PatternSection />
       <GalleryHorizontalScrollSection />

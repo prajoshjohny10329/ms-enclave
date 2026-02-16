@@ -90,32 +90,58 @@ export default function GalleryGrid() {
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {visibleImages.map((img, i) => (
-            <figure
-              key={img.src}
-              className="group relative overflow-hidden rounded-xl cursor-pointer"
-              onClick={() => {
-                setIndex(i);
-                setOpen(true);
-              }}
-            >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                width={800}
-                height={600}
-                className="w-full h-[300px] object-cover transition-transform duration-500 group-hover:scale-105"
-              />
+        {/* Gallery Grid - Masonry Style */}
+<div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+  {visibleImages.map((img, i) => (
+    <figure
+      key={img.src}
+      className="
+        group
+        relative
+        overflow-hidden
+        rounded-xl
+        cursor-pointer
+        break-inside-avoid
+      "
+      onClick={() => {
+        setIndex(i);
+        setOpen(true);
+      }}
+    >
+      <Image
+        src={img.src}
+        alt={img.alt}
+        width={800}
+        height={600}
+        className="
+          w-full
+          h-auto
+          object-cover
+          transition-transform
+          duration-500
+          group-hover:scale-105
+        "
+      />
 
-              <figcaption className="absolute inset-0 bg-black/40 flex items-end p-4 opacity-0 group-hover:opacity-100 transition font-dm">
-                <span className="text-white text-sm font-medium">
-                  {img.alt}
-                </span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+      <figcaption
+        className="
+          absolute inset-0
+          bg-black/40
+          flex items-end
+          p-4
+          opacity-0
+          group-hover:opacity-100
+          transition
+          font-dm
+        "
+      >
+        <span className="text-white text-sm font-medium">
+          {img.alt}
+        </span>
+      </figcaption>
+    </figure>
+  ))}
+</div>
 
         {/* Infinite Scroll Trigger */}
         <div ref={loadMoreRef} className="h-10"></div>

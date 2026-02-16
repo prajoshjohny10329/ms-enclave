@@ -1,7 +1,6 @@
 import Breadcrumb from "@/components/common/Breadcrumb";
 import PatternSection from "@/components/common/PatternSection";
 import AboutSectionHistory from "@/components/User/About/AboutSectionHistory";
-import AmenitiesSection from "@/components/User/About/AmenitiesSection";
 import HeritageArchitectureSection from "@/components/User/About/HeritageArchitectureSection";
 import NearbyTouristPlaces from "@/components/User/About/NearbyTouristPlaces";
 import VideoHeroSection from "@/components/User/Home/VideoHeroSection";

@@ -3,7 +3,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
 const fadeRight = {
   hidden: { x: 60, opacity: 0 },
@@ -15,18 +14,15 @@ const fadeLeft = {
   visible: { x: 0, opacity: 1 },
 };
 
-const MotionLink = motion(Link);
 
 export default function PartyHallWelcome() {
       const imgRef = useRef(null);
   const titleRef = useRef(null);
   const textRef = useRef(null);
-  const lintRef = useRef(null);
 
   const imgInView = useInView(imgRef, { amount: 0.3 });
   const titleInView = useInView(titleRef, { amount: 0.3 });
   const textInView = useInView(textRef, { amount: 0.3 });
-  const lintInView = useInView(lintRef, { amount: 0.3 });
 
   return (
     <section className="relative py-10">
@@ -79,7 +75,7 @@ export default function PartyHallWelcome() {
             initial="hidden"
             animate={textInView ? "visible" : "hidden"}
             transition={{ duration: 1 }}
-             className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3 mt-2">
+             className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3">
               Our Mini Party Hall at <strong>M.S. Enclave Heritage Resort</strong> is
           ideal for hosting weddings, birthday parties, engagement ceremonies,
           family functions, and corporate meetings. Designed with comfort and

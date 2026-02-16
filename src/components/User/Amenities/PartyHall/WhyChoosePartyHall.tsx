@@ -19,12 +19,10 @@ export default function WhyChoosePartyHall() {
       const imgRef = useRef(null);
   const titleRef = useRef(null);
   const textRef = useRef(null);
-  const lintRef = useRef(null);
 
   const imgInView = useInView(imgRef, { amount: 0.3 });
   const titleInView = useInView(titleRef, { amount: 0.3 });
   const textInView = useInView(textRef, { amount: 0.3 });
-  const lintInView = useInView(lintRef, { amount: 0.3 });
 
   return (
     <section className="relative py-10">
@@ -59,7 +57,7 @@ export default function WhyChoosePartyHall() {
             initial="hidden"
             animate={textInView ? "visible" : "hidden"}
             transition={{ duration: 1 }}
-             className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3 mt-2">
+             className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3">
               Whether you are planning a birthday party, engagement ceremony,
              anniversary celebration, or a small business meeting, our party
              hall ensures a hassle-free and enjoyable experience. The calm

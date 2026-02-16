@@ -1,5 +1,42 @@
 export const galleryImages = [
   {
+    src: "/images/activities/ms-enclave-palakkad-post-luxury-heritage-stay.webp",
+    alt: "MS Enclave Heritage Resort Palakkad Poster Luxury Heritage Stay",
+    category: "Posts,",
+  },
+  {
+    src: "/images/activities/ms-enclave-palakkad-post-golden-hour-by-the-pool.webp",
+    alt: "MS Enclave Heritage Resort Palakkad Poster Golden Hour By the Pool",
+    category: "Posts",
+  },
+  {
+    src: "/images/activities/ms-enclave-palakkad-activity2.webp",
+    alt: "MS Enclave Heritage Resort Palakkad Poster Cultural Roots",
+    category: "Posts",
+  },
+  {
+    src: "/images/activities/ms-enclave-palakkad-activity-cycling.webp",
+    alt: "MS Enclave Heritage Resort Palakkad Activity Cycling",
+    category: "Posts",
+  },
+  {
+    src: "/images/activities/ms-enclave-palakkad-activity-fishing.webp",
+    alt: "MS Enclave Heritage Resort Palakkad Activity Fishing",
+    category: "Posts",
+  },
+  {
+    src: "/images/activities/ms-enclave-palakkad-activity-nature-walk.webp",
+    alt: "MS Enclave Heritage Resort Palakkad Activity Nature Walk",
+    category: "Posts",
+  },
+  {
+    src: "/images/activities/ms-enclave-palakkad-activity-village-experience.webp",
+    alt: "MS Enclave Heritage Resort Palakkad Activity Village Experience",
+    category: "Posts",
+  },
+  //post
+
+  {
     src: "/images/new/ms-enclave-drone-view.webp",
     alt: "MS Enclave Heritage Resort Palakkad Drone View",
     category: "Exterior",
