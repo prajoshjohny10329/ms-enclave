@@ -12,7 +12,7 @@ export default function PackageSinglePage() {
     <Breadcrumb
             heading="Book Now"
             bgImage="/images/common/ms-enclave-17.webp" 
-            items={[{ label: "Our Amenities", href: "/amenities" }]}
+            items={[{ label: "Our Packages", href: "/packages" }]}
           />
     <PatternSection />
     <section>

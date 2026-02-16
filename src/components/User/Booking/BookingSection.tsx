@@ -217,7 +217,7 @@ export default function BookingSection() {
 
     if (roomsNeeded > maxAvailableRooms) {
       setWarning(
-        "Maximum room availability reached. Please contact M.S. Enclave."
+        "Maximum Online Room Availability Reached. Please contact M.S. Enclave +91 974 566 6642"
       );
       return;
     }
@@ -366,19 +366,19 @@ export default function BookingSection() {
   if (!pkg) return <p className="p-10 text-red-600">Package not found.</p>;
 
   return (
-    <div className="max-w-6xl mx-auto p-6  text-gray-900 py-20">
+    <div className="max-w-6xl mx-auto p-6  py-20">
       {/* Heading SIDE */}
       <div className="mb-7">
-        <h1 className="text-4xl font-bold mb-3  text-shadow-sm">
+        <h1 className="text-5xl font-semibold text-yellow-100  leading-tight text-shadow-sm">
           {pkg.packageName}
         </h1>
         {session?.user ? (
-          <p className="text-gray-800 text-2xl text-shadow-sm">
+          <p className="text-2xl text-white font-dm text-shadow-sm">
             ₹{pkg.indianPrice} / Night
           </p>
         ) : (
           <div>
-            <p className="text-gray-800 text-2xl text-shadow-sm">
+            <p className="text-2xl text-white font-dm text-shadow-sm">
               ₹{pkg.indianPrice} / Night
             </p>
             <p className=" text-red-500 pl-1  text-lg  font-dm font-medium ">
@@ -390,7 +390,7 @@ export default function BookingSection() {
 
       <div className="grid  md:grid-cols-10 gap-10">
         {/* LEFT SIDE */}
-        <div className="md:col-span-6">
+        <div className="md:col-span-6 order-2 md:order-1">
           <div className="relative w-full h-96 overflow-hidden rounded-md transition">
             <Image
               src={pkg.image}
@@ -400,7 +400,7 @@ export default function BookingSection() {
             />
           </div>
 
-          <p className="text-gray-700 mt-4 font-dm text-md">
+          <p className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mb-12 mt-3">
             {pkg.description}
           </p>
 
@@ -416,12 +416,12 @@ export default function BookingSection() {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="md:col-span-4 rounded-xl  bg-white ">
-          <div className="shadow-lg bg-red p-6 sticky top-20">
-            <h2 className="text-2xl font-semibold mb-4">Booking Form</h2>
+        <div className="md:col-span-4 rounded-xl order-1 md:order-2">
+          <div className="shadow-2xl bg-red rounded-xl border-amber-100 p-6 sticky top-20">
+            <h2 className="text-3xl font-semibold text-yellow-100 font-dm  leading-tight text-shadow-sm mb-2">Booking Form</h2>
 
             <form onSubmit={handleSubmit} className="space-y-4 font-dm">
-              <p className="text-lg font-bold mt-4 font-dm ">Select Date</p>
+              <p className="text-lg text-shadow-lg text-yellow-100 font-bold mt-4 font-dm ">Select Date</p>
 
               <input
                 name="date"
@@ -430,13 +430,13 @@ export default function BookingSection() {
                 onChange={handleChange}
                 placeholder="Select Date"
                 required
-                className="w-full p-3 border rounded"
+                className="w-full p-3 border-b rounded"
               />
 
               <p className="text-lg font-semibold font-dm text-center">
                 {maxAvailableRooms > 0 ? (
-                  <span className="text-green-600">
-                    Available Rooms {maxAvailableRooms}
+                  <span className="text-green-400">
+                    {maxAvailableRooms}  Rooms Available
                   </span>
                 ) : (
                   <span className="text-red-600">
@@ -450,74 +450,96 @@ export default function BookingSection() {
               </p>
 
               <div className="flex justify-between">
-                <p className="text-lg font-bold mt-4 font-dm ">
+                <p className="text-lg text-shadow-lg text-yellow-100 font-bold mt-4 font-dm ">
                   Person Details
                 </p>
                 <Link
                   href={`/profile?callbackUrl=${encodeURIComponent(
                     currentPath
                   )}`}
-                  className="text-md shadow hover:bg-blue-700 font-bold bg-blue-800 rounded text-white px-4 py-1 mt-4 font-dm"
+                  className="text-md shadow hover:animate-bounce font-bold bg-white rounded text-black text-shadow-md px-4 py-1 mt-4 font-dm"
                 >
                   Edit
                 </Link>
               </div>
 
-              <input
-                name="fullName"
-                value={form.fullName}
-                disabled
-                className="w-full p-3 border rounded bg-gray-100 cursor-not-allowed"
-              />
+              <div className="space-y-1">
 
-              <input
-                name="email"
-                value={form.email}
-                disabled
-                className="w-full p-3 border rounded bg-gray-100 cursor-not-allowed"
-              />
+  <div className="grid grid-cols-3 items-center gap-3">
+    <label className="text-gray-50 font-normal">Full Name</label>
+    <input
+      name="fullName"
+      value={form.fullName}
+      disabled
+      className="col-span-2 w-full font-medium p-3 rounded cursor-not-allowed"
+    />
+  </div>
 
-              <input
-                name="email"
-                value={session?.user?.nationality}
-                disabled
-                className="w-full p-3 border rounded bg-gray-100 cursor-not-allowed"
-              />
+  <div className="grid grid-cols-3 items-center gap-3">
+    <label className="text-gray-50 font-normal">Email</label>
+    <input
+      name="email"
+      value={form.email}
+      disabled
+      className="col-span-2 w-full font-medium p-3 rounded cursor-not-allowed"
+    />
+  </div>
 
-              <input
-                name="phone"
-                value={form.phone}
-                disabled
-                className="w-full p-3 border rounded bg-gray-100 cursor-not-allowed"
-                required
-              />
+  <div className="grid grid-cols-3 items-center gap-3">
+    <label className="text-gray-50 font-normal">Nationality</label>
+    <input
+      name="nationality"
+      value={session?.user?.nationality}
+      disabled
+      className="col-span-2 w-full font-medium p-3 rounded cursor-not-allowed"
+    />
+  </div>
 
-              <p className="text-lg font-bold mt-4 font-dm ">
+  <div className="grid grid-cols-3 items-center gap-3">
+    <label className="text-gray-50 font-normal">Phone</label>
+    <input
+      name="phone"
+      value={form.phone}
+      disabled
+      className="col-span-2 w-full font-medium p-3 rounded cursor-not-allowed"
+      required
+    />
+  </div>
+
+</div>
+
+              <p className="text-lg text-shadow-lg text-yellow-100 font-bold mt-6 font-dm ">
                 Add Your Booking Details
               </p>
 
-              <input
-                name="adults"
-                type="number"
-                min="1"
-                disabled={noRooms}
-                value={form.adults}
-                onChange={handleChange}
-                placeholder="Adults"
-                required
-                className="w-full p-3 border rounded"
-              />
+              <div className="grid grid-cols-3 items-center gap-3">
+  <label className="text-white font-medium">Adults</label>
+  <input
+    name="adults"
+    type="number"
+    min="1"
+    disabled={noRooms}
+    value={form.adults}
+    onChange={handleChange}
+    placeholder="Number of Adults"
+    required
+    className="col-span-2 w-full p-3 border-b rounded"
+  />
+</div>
 
-              <input
-                name="children"
-                type="number"
-                min="0"
-                disabled={noRooms}
-                value={form.children}
-                onChange={handleChange}
-                placeholder="Children"
-                className="w-full p-3 border rounded"
-              />
+<div className="grid grid-cols-3 items-center gap-3">
+  <label className="text-white font-medium">Children</label>
+  <input
+    name="children"
+    type="number"
+    min="0"
+    disabled={noRooms}
+    value={form.children}
+    onChange={handleChange}
+    placeholder="Number of Children"
+    className="col-span-2 w-full p-3 border-b rounded"
+  />
+</div>
 
               {warning && (
                 <p className="text-red-600 bg-red-100 p-2 rounded mt-2 text-sm">
@@ -527,7 +549,7 @@ export default function BookingSection() {
 
               {/* Stay Type */}
               <div className="space-y-2">
-                <p className="text-lg font-bold mt-4 font-dm">Stay Duration</p>
+                <p className="text-lg text-shadow-lg text-yellow-100 font-bold mt-6 font-dm ">Stay Duration</p>
 
                 <label className="flex items-center gap-2">
                   <input
@@ -578,7 +600,7 @@ export default function BookingSection() {
               )}
 
               {roomsNeeded > 0 && session?.user && (
-                <div className="bg-gray-100 p-4 rounded-lg border">
+                <div className="bg-gray-100/5 p-4 rounded-lg shadow-2xl">
                   <p>
                     <strong>Rooms Needed:</strong> {roomsNeeded}
                   </p>
@@ -620,10 +642,10 @@ export default function BookingSection() {
               <button
                 type="submit"
                 disabled={noRooms}
-                className={`w-full py-3 rounded-lg text-white ${
+                className={`w-full py-3 rounded-lg text-white mt-2 ${
                   noRooms
                     ? "bg-red-600 cursor-not-allowed"
-                    : "bg-blue-600 hover:bg-blue-700"
+                    : "bg-blue-600 hover:bg-blue-700 hover:animate-bounce"
                 }`}
               >
                 {noRooms ? "No Rooms Available for Booking" : "Submit Booking"}
