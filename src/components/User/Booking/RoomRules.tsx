@@ -10,12 +10,12 @@ import {
 
 export default function RoomRules() {
   return (
-    <div className="bg-white py-10 text-black">
-      <h2 className="font-semibold mb-6 text-gray-800 text-2xl text-shadow-sm">
+    <div className=" text-white">
+      <h2 className="text-3xl font-semibold text-yellow-100 font-dm  leading-tight text-shadow-sm mb-2">
         Our Room Rules
       </h2>
 
-      <ul className="space-y-4">
+      <ul className="space-y-6 mt-5 ml-3">
         <Rule
           icon={faClock}
           title="Check-in Time"
@@ -73,7 +73,7 @@ function Rule({ icon, title, description }: any) {
 
       <div>
         <p className="font-semibold font-dm">{title}</p>
-        <p className="text-gray-600 text-sm font-dm">{description}</p>
+        <p className="text-yellow-100 text-sm font-dm">{description}</p>
       </div>
     </li>
   );

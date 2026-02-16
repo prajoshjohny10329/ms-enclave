@@ -1,11 +1,9 @@
 import Breadcrumb from "@/components/common/Breadcrumb";
 import PatternSection from "@/components/common/PatternSection";
 import PartyHallGallery from "@/components/User/Amenities/PartyHall/PartyHallGallery";
-import PartyHallHighlights from "@/components/User/Amenities/PartyHall/PartyHallHighlights";
 import PartyHallWelcome from "@/components/User/Amenities/PartyHall/PartyHallWelcome";
 import WhyChoosePartyHall from "@/components/User/Amenities/PartyHall/WhyChoosePartyHall";
 import type { Metadata } from "next";
-import Image from "next/image";
 
 
 export const metadata: Metadata = {

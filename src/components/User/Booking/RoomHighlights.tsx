@@ -22,7 +22,7 @@ export default function RoomHighlights({
   roomSize,
 }: RoomHighlightsProps) {
   return (
-    <div className="text-white">
+    <div className="text-white py-8">
       <h2 className="text-3xl font-semibold text-yellow-100 font-dm  leading-tight text-shadow-sm mb-2">
         Room Highlights
       </h2>
