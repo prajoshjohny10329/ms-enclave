@@ -69,39 +69,53 @@ export default function UserProfile() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!session?.user?.email) return;
+  e.preventDefault();
 
-    console.log(session.user.email);
-    
+  if (!session?.user?.email) return;
 
-    try {
-      const { data } = await axios.post("/api/profile", {
-        email: session.user.email,
-        ...form,
-      });
-      console.log("session.user.id");
+  // ✅ VALIDATION START
+  if (!form.name.trim()) {
+    toast.error("Name is required");
+    return;
+  }
 
-      console.log(data);
-      
+  if (form.phone.trim().length < 10) {
+    toast.error("Phone number must be at least 10 digits");
+    return;
+  }
 
+  if (!form.nationality.trim()) {
+    toast.error("Please select nationality");
+    return;
+  }
 
-      session.user.id = data.user._id.toString();
-      session.user.phone = data.user.phone || "";
-      session.user.nationality = data.user.nationality || "India";
-      session.user.address = data.user.address || "";
+  if (form.address.trim().length < 5) {
+    toast.error("Address must be at least 5 characters");
+    return;
+  }
+  // ✅ VALIDATION END
 
-      setProfile(form);
-      setIsEditing(false);
-      router.push(callbackUrl || "/profile");
+  try {
+    const { data } = await axios.post("/api/profile", {
+      email: session.user.email,
+      ...form,
+    });
 
-      toast.success("Profile Edited successfully");
-    } catch (error) {
-      console.log(error);
-      
-      toast.loading("Profile Edited Error");
-    }
-  };
+    session.user.id = data.user._id.toString();
+    session.user.phone = data.user.phone || "";
+    session.user.nationality = data.user.nationality || "India";
+    session.user.address = data.user.address || "";
+
+    setProfile(form);
+    setIsEditing(false);
+    router.push(callbackUrl || "/profile");
+
+    toast.success("Profile Edited successfully");
+  } catch (error) {
+    console.log(error);
+    toast.error("Profile Edited Error");
+  }
+};
 
   const handleEdit = () => {
     if (profile) setForm(profile);
@@ -112,19 +126,22 @@ export default function UserProfile() {
 
   return (
     <>
-      <div className="mx-auto bg-white p-10  text-black">
+      <div className="mx-auto px-0 md:px-10 shadow-2xl">
         {isEditing ? (
           <form
             onSubmit={handleSubmit}
-            className="bg-white rounded-2xl shadow-lg p-8 mx-auto space-y-6 text-black font-dm"
+            className="rounded-2xl shadow-lg p-8 mx-auto space-y-6  font-dm"
           >
-            <div>
-              <h2 className="text-2xl md:text-3xl font-semibold text-black leading-tight text-shadow-sm">
+            <div className="text-center">
+              <h2 className="text-5xl font-semibold text-yellow-100  leading-tight text-shadow-sm">
                 Personal Details
               </h2>
-              <p className="text-gray-950 font-medium text-lg leading-relaxed mb-8 font-dm">
-                Update your personal information below
+              <p className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mb-12 mt-3">
+                View and update your personal details, contact information, and preferences to ensure a smooth and personalized resort experience.
               </p>
+            </div>
+            {/* NAME */}
+            <div>
               <Image
                 src={form.image || "/images/default-avatar.png"}
                 alt="Profile image"
@@ -132,11 +149,7 @@ export default function UserProfile() {
                 height={70}
                 className="rounded-full my-5"
               />
-            </div>
-
-            {/* NAME */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-lg font-medium text-yellow-100  mb-1">
                 Full Name
               </label>
               <input
@@ -145,14 +158,18 @@ export default function UserProfile() {
                 placeholder="Enter your full name"
                 value={form.name}
                 onChange={handleChange}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                className="w-full border-b border-gray-300 text-lg font-semibold px-4 py-2
+                            focus:outline-none
+                            focus:border-b-2
+                            focus:border-yellow-100
+                            "
                 required
               />
             </div>
 
             {/* PHONE */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-lg font-medium text-yellow-100  mb-1">
                 Phone Number
               </label>
               <input
@@ -161,17 +178,23 @@ export default function UserProfile() {
                 placeholder="Enter your phone number"
                 value={form.phone}
                 onChange={handleChange}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                className="w-full border-b border-gray-300 text-lg font-semibold px-4 py-2
+                            focus:outline-none
+                            focus:border-b-2
+                            focus:border-yellow-100"
                 required
               />
             </div>
 
             {/* NATIONALITY */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-lg font-medium text-yellow-100  mb-1">
                 Nationality
               </label>
-              <div className="border border-gray-300 rounded-lg px-2 py-1 focus-within:ring-2 focus-within:ring-blue-500">
+              <div className="w-full border-b border-gray-300 text-lg font-semibold px-4 py-2
+focus:outline-none
+focus:border-b-2
+focus:border-yellow-100">
                 <NationalitySelector
                   value={form.nationality}
                   onChange={(label) => setForm({ ...form, nationality: label })}
@@ -181,7 +204,7 @@ export default function UserProfile() {
 
             {/* ADDRESS */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-lg font-medium text-yellow-100  mb-1">
                 Address
               </label>
               <textarea
@@ -189,8 +212,11 @@ export default function UserProfile() {
                 placeholder="Enter your address"
                 value={form.address}
                 onChange={handleChange}
-                rows={3}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none"
+                rows={2}
+                className="w-full border-b border-gray-300 text-lg font-semibold px-4 py-2
+                            focus:outline-none
+                            focus:border-b-2
+                            focus:border-yellow-100 resize-none"
                 required
               />
             </div>
@@ -200,7 +226,7 @@ export default function UserProfile() {
               <button
               onClick={() => setIsEditing(false)}
                 type="button"
-                className="px-6 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 transition"
+                className="px-6 py-2 rounded-lg border blgder-gray-300 text-yellow-100  hover:bg-gray-100 transition"
               >
                 Cancel
               </button>
@@ -215,94 +241,90 @@ export default function UserProfile() {
           </form>
         ) : (
           <div className="space-y-3 text-black  text-lg">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-semibold text-black leading-tight text-shadow-sm">
+            <div className="text-center">
+              <h2 className="text-5xl font-semibold text-yellow-100  leading-tight text-shadow-sm">
                 Personal Details
               </h2>
-              <p className="text-gray-950 font-medium text-lg leading-relaxed mb-8 font-dm">
-                Update your personal information below
+              <p className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3">
+                View and update your personal details, contact information, and preferences to ensure a smooth and personalized resort experience.
               </p>
-              <Image
-                src={profile?.image || ""}
-                alt="Profile image"
-                width={70}
-                height={70}
-                className="rounded-full my-5"
-              />
             </div>
-            <div className="overflow-x-auto max-w-3xl font-dm ">
-              <table className="w-full ">
-                <tbody className="divide-y">
-                  <tr className="hover:bg-gray-50 transition">
-                    <td className="py-4 font-bold text-lg text-gray-950 font-dm w-1/3">
-                      Name
-                    </td>
-                    <td className="py-4 text-lg text-gray-950 font-light font-dm">
-                      {profile?.name || "-"}
-                    </td>
-                    <td className="py-4 text-left">
-                      <button
-                        onClick={handleEdit}
-                        className="text-gray-500 underline hover:text-blue-600"
-                      >
-                        Edit
-                      </button>
-                    </td>
-                  </tr>
+            <div className="font-dm px-4 sm:px-10">
 
-                  <tr className="hover:bg-gray-50 transition">
-                    <td className="py-4 font-bold text-lg text-gray-950 font-dm">
-                      Phone Number
-                    </td>
-                    <td className="py-4 text-lg text-gray-950 font-light font-dm">
-                      {profile?.phone || "-"}
-                    </td>
-                    <td className="py-4 text-left">
-                      <button
-                        onClick={handleEdit}
-                        className="text-gray-500 underline hover:text-blue-600"
-                      >
-                        Edit
-                      </button>
-                    </td>
-                  </tr>
+  {/* TOP SECTION */}
+  <div className="flex flex-col md:flex-row md:items-center md:justify-between">
 
-                  <tr className="hover:bg-gray-50 transition">
-                    <td className="py-4 font-bold text-lg text-gray-950 font-dm">
-                      Nationality
-                    </td>
-                    <td className="py-4 text-lg text-gray-950 font-light font-dm">
-                      {profile?.nationality || "-"}
-                    </td>
-                    <td className="py-4 text-left">
-                      <button
-                        onClick={handleEdit}
-                        className="text-gray-500 underline hover:text-blue-600"
-                      >
-                        Edit
-                      </button>
-                    </td>
-                  </tr>
+    {/* Profile Image */}
+    <Image
+      src={profile?.image || ""}
+      alt="Profile image"
+      width={70}
+      height={70}
+      className="rounded-full my-5"
+    />
 
-                  <tr className="hover:bg-gray-50 transition">
-                    <td className="py-4 font-bold text-lg text-gray-950 font-dm">
-                      Address
-                    </td>
-                    <td className="py-4 text-lg text-gray-950 font-light font-dm">
-                      {profile?.address || "-"}
-                    </td>
-                    <td className="py-4 text-left">
-                      <button
-                        onClick={handleEdit}
-                        className="text-gray-500 underline hover:text-blue-600"
-                      >
-                        Edit
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+    {/* Edit Button */}
+    <button
+      onClick={handleEdit}
+      className="
+        mt-3 md:mt-0
+        px-5 py-2
+        rounded
+        bg-white text-black font-semibold
+        hover:bg-blue-600 hover:text-white
+        transition
+        self-start md:self-auto
+      "
+    >
+      Edit Profile
+    </button>
+
+  </div>
+
+  {/* TABLE DETAILS */}
+  <table className="w-full">
+    <tbody className="divide-y divide-yellow-50/10 px-10">
+
+      <tr className="hover:shadow-lg transition">
+        <td className="py-4 text-lg text-white font-light w-1/3">
+          Name
+        </td>
+        <td className="py-4 text-lg text-white font-medium">
+          {profile?.name || "-"}
+        </td>
+      </tr>
+
+      <tr className="hover:shadow-lg transition">
+        <td className="py-4 text-lg text-white font-light">
+          Phone Number
+        </td>
+        <td className="py-4 text-lg text-white font-medium">
+          {profile?.phone || "-"}
+        </td>
+      </tr>
+
+      <tr className="hover:shadow-lg transition">
+        <td className="py-4 text-lg text-white font-light">
+          Nationality
+        </td>
+        <td className="py-4 text-lg text-white font-medium">
+          {profile?.nationality || "-"}
+        </td>
+      </tr>
+
+      <tr className="hover:shadow-lg transition">
+        <td className="py-4 text-lg text-white font-light">
+          Address
+        </td>
+        <td className="py-4 text-lg text-white font-medium">
+          {profile?.address || "-"}
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>
           </div>
         )}
       </div>

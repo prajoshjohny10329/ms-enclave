@@ -22,7 +22,16 @@ export default function LayoutWrapper({
     <div className="theme-bg">
       {/* <SmoothScroll /> */}
       {isAdmin ? <AdminHeader /> : <Header />}
-      <Toaster position="top-right" />
+      <Toaster position="top-right" 
+      toastOptions={{
+    className: "font-dm",
+    style: {
+      background: "#7a0002", // or your theme color
+      color: "#fff",
+      border: "1px solid rgb(251, 246, 192)", // golden border
+    },
+  }}
+  />
       <SplashCursor />
       <WhatsAppFixed />
       {children}
