@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import ConfettiOverlay from "@/components/common/ConfettiOverlay";
 import toast from "react-hot-toast";
+import Loader from "@/components/common/Loader";
 
 export default function BookingDetailsPage() {
   const { data: session } = useSession();
@@ -110,7 +111,7 @@ export default function BookingDetailsPage() {
               setShowConfetti(false);
             }, 4000);
             // router.refresh(); // refresh to update status
-            fetChData()
+            fetChData();
           },
           theme: { color: "#3399cc" },
         };
@@ -129,7 +130,7 @@ export default function BookingDetailsPage() {
 
         if (res.data.url) window.location.href = res.data.url;
       }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       toast.error("Payment could not be initiated. Please try again.");
     } finally {
@@ -137,166 +138,175 @@ export default function BookingDetailsPage() {
     }
   };
 
-  if (loading)
-    return <p className="text-center mt-20 text-gray-500">Loading…</p>;
-
-  if (!booking)
-    return <p className="text-center mt-20 text-gray-500">Booking not found</p>;
-
   return (
     <div className="max-w-6xl mx-auto px-4 py-10 text-black">
       {/* 🎉 CONFETTI */}
       {showConfetti && <ConfettiOverlay show={showConfetti} />}
       {/* HEADER */}
-      <div className="flex justify-between items-start mb-6">
-        <div>
-          <h1 className="text-3xl font-bold">{booking.package?.packageName}</h1>
-          <p className="text-sm text-gray-600 mt-1">
-            Booking ID: {booking._id}
-          </p>
-        </div>
-
-        <span
-          className={`px-4 py-1 rounded-full text-sm font-semibold ${
-            booking.status === "paid"
-              ? "bg-green-100 text-green-700"
-              : booking.status === "pending"
-              ? "bg-orange-100 text-orange-700"
-              : "bg-red-100 text-red-700"
-          }`}
-        >
-          {booking.status.toUpperCase()}
-        </span>
-      </div>
-
-      {/* IMAGE */}
-      <div className="relative w-full h-72 rounded-2xl overflow-hidden shadow mb-8">
-        <Image
-          src={booking.package?.image || "/default-room.jpg"}
-          alt="Room"
-          fill
-          className="object-cover"
-        />
-      </div>
-
-      {/* CONTENT GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* LEFT CONTENT */}
-        <div className="md:col-span-2 space-y-6">
-          {/* Booking Info */}
-          <div className="bg-white rounded-xl shadow p-6">
-            <h2 className="font-semibold text-lg mb-4">Booking Information</h2>
-
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <p>
-                <strong>Check-in:</strong>
-                <br />
-                {new Date(booking.checkInDate).toLocaleDateString()}
-              </p>
-              <p>
-                <strong>Check-out:</strong>
-                <br />
-                {new Date(booking.checkOutDate).toLocaleDateString()}
-              </p>
-              <p>
-                <strong>Nights:</strong>
-                <br />
-                {booking.nights}
-              </p>
-              <p>
-                <strong>Guests:</strong>
-                <br />
-                {booking.adults + booking.children}
-              </p>
-              <p>
-                <strong>Rooms:</strong>
-                <br />
-                {booking.roomsNeeded}
-              </p>
-              <p>
-                <strong>Payment:</strong>
-                <br />
-                {booking.paymentMethod || "Pending"}
+      {loading ? (
+        <Loader />
+      ) : !booking ? (
+        <p className="text-white text-center font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3">
+          Booking not found
+        </p>
+      ) : (
+        <section className="py-10">
+          <div className="flex justify-between items-start mb-6">
+            <div>
+              <h1 className="text-5xl font-semibold text-amber-100 leading-tight text-shadow-sm mt-[-15px]">
+                {booking.package?.packageName}
+              </h1>
+              <p className="text-sm text-gray-50 font-dm mt-1">
+                Booking ID: {booking._id}
               </p>
             </div>
-          </div>
 
-          {/* Guest Info */}
-          <div className="bg-white rounded-xl shadow p-6">
-            <h2 className="font-semibold text-lg mb-4">Guest Details</h2>
-
-            <div className="text-sm space-y-2 capitalize">
-              <p>
-                <strong>Name:</strong>{" "}
-                {booking.user?.name || booking.clientName}
-              </p>
-              <p>
-                <strong>Email:</strong> {booking.user?.email || "N/A"}
-              </p>
-              <p>
-                <strong>Phone:</strong> {booking.phone || booking.user?.phone}
-              </p>
-              <p>
-                <strong>Nationality:</strong>{" "}
-                {booking.user?.nationality || "N/A"}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* RIGHT SUMMARY */}
-        <div className="space-y-6">
-          {/* Price Summary */}
-          <div className="bg-white rounded-xl shadow p-6">
-            <h2 className="font-semibold text-lg mb-4">Price Summary</h2>
-
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span>Room Price</span>
-                <span>₹{booking.totalPrice}</span>
-              </div>
-              <div className="flex justify-between text-gray-500">
-                <span>Taxes & Fees</span>
-                <span>Included</span>
-              </div>
-
-              <hr className="my-2" />
-
-              <div className="flex justify-between font-bold text-lg">
-                <span>Total</span>
-                <span>₹{booking.totalPrice}</span>
-              </div>
-            </div>
-
-            {booking.status === "pending" && (
-              <button
-                onClick={() => handlePayment(booking)}
-                disabled={loadingPayment === booking._id}
-                className="w-full mt-4 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700"
-              >
-                {loadingPayment ? "Processing..." : "Pay Now"}
-              </button>
-            )}
-          </div>
-
-          {/* Actions */}
-          <div className="bg-white rounded-xl shadow p-6">
-            <button
-              onClick={() => router.push("/my-bookings")}
-              className="w-full py-2 border rounded-lg text-white bg-black hover:bg-green-600"
+            <span
+              className={`px-4 py-1 rounded-full text-sm font-semibold ${
+                booking.status === "paid"
+                  ? "bg-green-100 text-green-700"
+                  : booking.status === "pending"
+                    ? "bg-orange-100 text-orange-700"
+                    : "bg-red-100 text-red-700"
+              }`}
             >
-              Back to My Bookings
-            </button>
-            {/* <button
+              {booking.status.toUpperCase()}
+            </span>
+          </div>
+
+          {/* IMAGE */}
+          <div className="relative w-full h-72 rounded-2xl overflow-hidden shadow mb-8">
+            <Image
+              src={booking.package?.image || "/default-room.jpg"}
+              alt="Room"
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          {/* CONTENT GRID */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* LEFT CONTENT */}
+            <div className="md:col-span-2 space-y-6 font-dm">
+              {/* Booking Info */}
+              <div className="border border-white/10 bg-black/5 shadow-xl font-dm p-6 text-white">
+                <h2 className="font-semibold text-xl mb-4 text-yellow-100">
+                  Booking Information
+                </h2>
+
+                <div className="grid grid-cols-2 gap-4 text-md">
+                  <p>
+                    <strong>Check-in:</strong>
+                    <br />
+                    {new Date(booking.checkInDate).toLocaleDateString()}
+                  </p>
+                  <p>
+                    <strong>Check-out:</strong>
+                    <br />
+                    {new Date(booking.checkOutDate).toLocaleDateString()}
+                  </p>
+                  <p>
+                    <strong>Nights:</strong>
+                    <br />
+                    {booking.nights}
+                  </p>
+                  <p>
+                    <strong>Guests:</strong>
+                    <br />
+                    {booking.adults + booking.children}
+                  </p>
+                  <p>
+                    <strong>Rooms:</strong>
+                    <br />
+                    {booking.roomsNeeded}
+                  </p>
+                  <p>
+                    <strong>Payment:</strong>
+                    <br />
+                    {booking.paymentMethod || "Pending"}
+                  </p>
+                </div>
+              </div>
+
+              {/* Guest Info */}
+              <div className="border border-white/10 bg-black/5 shadow-xl font-dm p-6 text-white">
+                <h2 className="font-semibold text-xl mb-4 text-yellow-100">Guest Details</h2>
+
+                <div className="text-md space-y-2 capitalize">
+                  <p>
+                    <strong>Name:</strong>{" "}
+                    {booking.user?.name || booking.clientName}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {booking.user?.email || "N/A"}
+                  </p>
+                  <p>
+                    <strong>Phone:</strong>{" "}
+                    {booking.phone || booking.user?.phone}
+                  </p>
+                  <p>
+                    <strong>Nationality:</strong>{" "}
+                    {booking.user?.nationality || "N/A"}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT SUMMARY */}
+            <div className="space-y-6">
+              {/* Price Summary */}
+              <div className="border border-white/10 bg-black/5 shadow-xl font-dm p-6 text-white">
+                <h2 className="font-semibold text-xl text-yellow-100 mb-4">Price Summary</h2>
+
+                <div className="space-y-2 text-md">
+                  <div className="flex justify-between">
+                    <span>Room Price</span>
+                    <span>₹{booking.totalPrice}</span>
+                  </div>
+                  <div className="flex justify-between text-gray-100">
+                    <span>Taxes & Fees</span>
+                    <span>Included</span>
+                  </div>
+
+                  <hr className="my-2" />
+
+                  <div className="flex justify-between font-bold text-lg">
+                    <span>Total</span>
+                    <span>₹{booking.totalPrice}</span>
+                  </div>
+                </div>
+
+                {booking.status === "pending" && (
+                  <button
+                    onClick={() => handlePayment(booking)}
+                    disabled={loadingPayment === booking._id}
+                    className="w-full mt-4 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700"
+                  >
+                    {loadingPayment ? "Processing..." : "Pay Now"}
+                  </button>
+                )}
+              </div>
+
+              {/* Actions */}
+              <div className="border border-white/10 bg-black/5 shadow-xl font-dm rounded-xl p-6">
+                <button
+                  onClick={() => router.push("/my-bookings")}
+                  className="w-full py-2 rounded-lg text-white bg-black hover:bg-green-600"
+                >
+                  Back to My Bookings
+                </button>
+                {/* <button
           onClick={handleDelete}
           disabled={deleting}
           className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50"
         >
           {deleting ? "Deleting..." : "Delete Booking"}
         </button> */}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </section>
+      )}
     </div>
   );
 }

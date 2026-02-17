@@ -107,8 +107,6 @@ export default function MyBookings({ onCountChange }: Props) {
     }
   };
 
-  
-
   return (
   <div className="max-w-4xl mx-auto mt-10 text-white ">
     <h1 className="text-5xl font-semibold text-yellow-100 text-center leading-tight text-shadow-sm">Booking History</h1>
@@ -132,13 +130,15 @@ export default function MyBookings({ onCountChange }: Props) {
       shadow-xl
       font-dm"
           >
-            <Image
-              src={booking.packageId?.image || "/default-room.jpg"}
-              alt={booking.packageId?.packageName || "Room"}
-              width={120}
-              height={80}
-              className="w-full md:w-[160px] h-[120px] relative shrink-0"
-            />
+            {/* IMAGE */}
+<div className="relative w-full md:w-[260px] h-[180px] shrink-0">
+  <Image
+    src={booking.packageId?.image || "/default-room.jpg"}
+    alt={booking.packageId?.packageName || "Room"}
+    fill
+    className="object-cover rounded-xl"
+  />
+</div>
 
             <div className="flex-1 flex flex-col justify-between">
               <h2 className="font-semibold text-lg">
