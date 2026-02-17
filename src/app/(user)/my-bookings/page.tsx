@@ -127,14 +127,14 @@ export default function MyBookingsPage() {
     return <p className="text-center mt-20 text-gray-500">No bookings found</p>;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10 text-black">
+    <div className="max-w-6xl mx-auto px-4 py-10 text-black font-dm">
       {/* 🎉 CONFETTI */}
                {showConfetti && (
               <ConfettiOverlay show={showConfetti} />
             )}
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">My Bookings</h1>
+        <h1 className="text-5xl font-semibold text-yellow-100  leading-tight text-shadow-sm">My Bookings</h1>
 
         {/* View Toggle */}
         <div className="flex gap-2 bg-gray-100 p-1 rounded-lg">

@@ -126,11 +126,11 @@ export default function UserProfile() {
 
   return (
     <>
-      <div className="mx-auto px-0 md:px-10 shadow-2xl">
+      <div className="mx-auto px-0 md:px-10">
         {isEditing ? (
           <form
             onSubmit={handleSubmit}
-            className="rounded-2xl shadow-lg p-8 mx-auto space-y-6  font-dm"
+            className="rounded-2xl shadow-lg p-8 mx-auto space-y-6 font-dm"
           >
             <div className="text-center">
               <h2 className="text-5xl font-semibold text-yellow-100  leading-tight text-shadow-sm">

@@ -29,10 +29,10 @@ export default function UserDashboard() {
       <PatternSection />
       <section className="py-10">
         {/* ================= MOBILE HEADER ================= */}
-        <div className="lg:hidden flex items-center justify-between px-4 py-4 text-black bg-transparent sticky top-0 z-40">
+        <div className="lg:hidden flex items-center top-1/4 justify-between px-4 py-4 text-black bg-transparent sticky  z-40">
           <button
             onClick={() => setMobileOpen(true)}
-            className="bg-blue-600 p-2 text-white rounded shadow "
+            className="p-4 md:p-5 text-yellow-100 rounded-2xl theme-bg border border-white/10 bg-black/5 shadow-xl"
           >
             <Menu size={30} />
           </button>
@@ -41,7 +41,7 @@ export default function UserDashboard() {
 
         <div className="mx-auto grid grid-cols-1 lg:grid-cols-10">
           {/* ================= DESKTOP SIDEBAR ================= */}
-          <aside className="hidden ml-2 shadow-2xl lg:flex lg:col-span-2 px-6 py-10 flex-col justify-between">
+          <aside className="hidden ml-2 sticky top-20 theme-bg shadow-2xl lg:flex lg:col-span-2 px-6 py-10 flex-col justify-between">
             <ul className="space-y-3 font-dm">
               <li>
                 <button
@@ -94,7 +94,7 @@ export default function UserDashboard() {
           </aside>
 
           {/* ================= MAIN CONTENT ================= */}
-          <main className="col-span-1 max-w-6xl md:col-span-8 px-4 md:px-6 py-6 h-[78vh] overflow-scroll">
+          <main className="col-span-1 max-w-6xl md:col-span-8 px-4 md:px-6 py-6 h-[78vh] overflow-scroll shadow-2xl ml-5">
             {activeTab === "profile" && <UserProfile />}
             {activeTab === "bookings" && (
               <MyBookings onCountChange={setBookingCount} />
@@ -107,16 +107,16 @@ export default function UserDashboard() {
           <>
             {/* Overlay */}
             <div
-              className="fixed inset-0 bg-black/40 z-40"
+              className="fixed inset-0  z-40"
               onClick={() => setMobileOpen(false)}
             />
 
             {/* Drawer */}
-            <aside className="fixed top-0 left-0 h-full w-72 z-50 p-6 text-black flex flex-col justify-between animate-slideIn">
+            <aside className="fixed top-0 left-0 h-screen w-72 z-50 p-6 theme-bg text-black/5 flex flex-col font-dm justify-between animate-slideIn">
               <div>
                 <div className="flex items-center justify-between mb-8">
                   <h2 className="text-lg font-semibold">Menu</h2>
-                  <button onClick={() => setMobileOpen(false)}>
+                  <button className="text-white text-lg font-bold text-shadow-2xs" onClick={() => setMobileOpen(false)}>
                     <X size={22} />
                   </button>
                 </div>
@@ -128,8 +128,8 @@ export default function UserDashboard() {
                       className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg font-medium
                       ${
                         activeTab === "profile"
-                          ? "bg-blue-600 text-white"
-                          : "text-gray-700 hover:bg-gray-100"
+                          ? "bg-yellow-100 text-black font-bold text-shadow-2xl shadow-lg"
+                          : "bg-white text-black font-bold text-shadow-2xl shadow-lg hover:bg-yellow-100 hover:text-black hover:animate-bounce"
                       }`}
                     >
                       <User size={18} />
@@ -143,8 +143,8 @@ export default function UserDashboard() {
                       className={`w-full flex items-center justify-between px-4 py-3 rounded-lg font-medium
                       ${
                         activeTab === "bookings"
-                          ? "bg-blue-600 text-white"
-                          : "text-gray-700 hover:bg-gray-100"
+                          ? "bg-yellow-100 text-black font-bold text-shadow-2xl shadow-lg"
+                          : "bg-white text-black font-bold text-shadow-2xl shadow-lg hover:bg-yellow-100 hover:text-black hover:animate-bounce"
                       }`}
                     >
                       <div className="flex items-center gap-3">

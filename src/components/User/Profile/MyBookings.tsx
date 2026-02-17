@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Loader from "@/components/common/Loader";
 
 type Props = {
   onCountChange: (count: number) => void;
@@ -106,38 +107,55 @@ export default function MyBookings({ onCountChange }: Props) {
     }
   };
 
-  if (loading) return <p className="text-center mt-10">Loading bookings...</p>;
-  if (bookings.length === 0)
-    return <p className="text-center mt-10">No bookings yet.</p>;
+  
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 text-black">
-      <h1 className="text-2xl font-bold mb-6">My Bookings</h1>
+  <div className="max-w-4xl mx-auto mt-10 text-white ">
+    <h1 className="text-5xl font-semibold text-yellow-100 text-center leading-tight text-shadow-sm">Booking History</h1>
 
+    {loading ? (
+      <Loader />
+    ) : bookings.length === 0 ? (
+      <p className="text-white text-center font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3">No bookings yet.</p>
+    ) : (
       <div className="grid gap-6">
+        <p className="text-white text-center font-medium text-lg text-shadow-lg leading-relaxed font-dm mt-3">Access your past and upcoming stays at M.S. Enclave Heritage Resort. Manage reservations and revisit your memorable experiences.</p>
         {bookings.map((booking) => (
           <div
             key={booking._id}
-            className="p-4 border rounded-xl shadow-sm bg-white flex gap-4 items-center"
+            className="flex flex-col md:flex-row
+      gap-4
+      p-4 md:p-5
+      rounded-2xl
+      border border-white/10
+      bg-black/5
+      shadow-xl
+      font-dm"
           >
             <Image
               src={booking.packageId?.image || "/default-room.jpg"}
               alt={booking.packageId?.packageName || "Room"}
               width={120}
               height={80}
-              className="rounded-lg"
+              className="w-full md:w-[160px] h-[120px] relative shrink-0"
             />
 
-            <div className="flex-1">
+            <div className="flex-1 flex flex-col justify-between">
               <h2 className="font-semibold text-lg">
                 {booking.packageId?.packageName || "Room"}
               </h2>
+
               <p>
                 {new Date(booking.checkInDate).toLocaleDateString()} →{" "}
                 {new Date(booking.checkOutDate).toLocaleDateString()}
               </p>
-              <p>Guests: {booking.adults+booking.children}</p>
-              <p className="font-semibold">Total: ₹{booking.totalPrice}</p>
+
+              <p>Guests: {booking.adults + booking.children}</p>
+
+              <p className="font-semibold">
+                Total: ₹{booking.totalPrice}
+              </p>
+
               <p className="mt-1">
                 Status:{" "}
                 <span
@@ -153,25 +171,43 @@ export default function MyBookings({ onCountChange }: Props) {
                 </span>
               </p>
 
-              {booking.status === "pending" && (
-                <button
-                  onClick={() => handlePayment(booking)}
-                  disabled={loadingPayment === booking._id}
-                  className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
-                >
-                  {loadingPayment === booking._id ? "Processing..." : "Pay Now"}
-                </button>
-              )}
-              <button
-                onClick={() => router.push(`/my-bookings/${booking._id}`)}
-                className="mt-2 ml-2 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
-              >
-                View
-              </button>
+              {/* ACTIONS */}
+      <div className="flex flex-wrap gap-3 mt-4">
+        {booking.status === "pending" && (
+          <button
+            onClick={() => handlePayment(booking)}
+            disabled={loadingPayment === booking._id}
+            className="
+              px-4 py-2
+              bg-blue-600 text-white
+              rounded-lg
+              text-sm font-semibold
+              hover:bg-blue-700
+              disabled:opacity-50
+            "
+          >
+            {loadingPayment === booking._id ? "Processing..." : "Pay Now"}
+          </button>
+        )}
+
+        <button
+          onClick={() => router.push(`/my-bookings/${booking._id}`)}
+          className="
+            px-4 py-2
+            bg-white text-black
+            rounded-lg
+            text-sm font-semibold
+            hover:bg-gray-200
+          "
+        >
+          View Details
+        </button>
+      </div>
             </div>
           </div>
         ))}
       </div>
-    </div>
-  );
+    )}
+  </div>
+);
 }
