@@ -55,19 +55,18 @@ export default function AdminBookingPreview() {
   if (loading) return <Loader />;
 
   return (
-    <div className="max-w-7xl mx-auto p-6 shadow-lg text-black font-dm rounded-2xl bg-white">
-      <div className="flex justify-between">
-
-        <h1 className="text-2xl font-bold mb-6">Bookings</h1>
+    <div className="max-w-7xl mx-auto p-6 shadow-2xl text-white font-dm rounded-2xl border border-yellow-100/10">
+      <div className="flex justify-between py-3">
+        <h1 className="text-3xl font-semibold text-yellow-100 font-dm  leading-tight text-shadow-sm mb-2">Bookings</h1>
         <Link href={'/admin/bookings/'}
-         className="bg-red-700 text-white px-7 py-2 rounded-md text-sm h-8 hover:bg-red-600" >View All</Link>
+         className="bg-white text-black px-7 py-2 rounded-md text-sm h-8 shadow-lg text-center font-semibold hover:bg-yellow-100 hover:animate-bounce" >View All</Link>
       </div>
 
 
       {/* ================= TABLE ================= */}
-      <div className="overflow-x-auto bg-white rounded-xl shadow">
+      <div className="overflow-x-auto shadow-2xl rounded-xl ">
         <table className="min-w-full text-sm">
-          <thead className="bg-red-700 text-white">
+          <thead className=" text-white">
             <tr>
               <th className="p-3">Guest</th>
               <th className="p-3">Dates</th>

@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function TopHeader() {
   return (
-    <div className="w-full theme-bg py-4 px-4 border-b">
+    <div className="w-full theme-bg py-4 px-4">
       <div className="grid  md:grid-cols-10 max-w-7xl mx-auto">
         {/* LEFT SECTION */}
         <div className="col-span-3 hidden md:flex justify-start items-center gap-3 text-sm">

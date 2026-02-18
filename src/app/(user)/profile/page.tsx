@@ -116,7 +116,10 @@ export default function UserDashboard() {
               <div>
                 <div className="flex items-center justify-between mb-8">
                   <h2 className="text-lg font-semibold">Menu</h2>
-                  <button className="text-white text-lg font-bold text-shadow-2xs" onClick={() => setMobileOpen(false)}>
+                  <button
+                    className="text-white text-lg font-bold text-shadow-2xs"
+                    onClick={() => setMobileOpen(false)}
+                  >
                     <X size={22} />
                   </button>
                 </div>

@@ -15,7 +15,6 @@ import RoomHighlights from "../../Booking/RoomHighlights";
 import RoomRules from "../../Booking/RoomRules";
 import Amenities from "../../Booking/Amenities";
 import LoginButton from "../../Profile/LoginButton";
-import PatternSection from "@/components/common/PatternSection";
 
 type PackageDetailsProps = {
   onTitleLoad?: (title: string) => void;
@@ -137,8 +136,6 @@ export default function PackageDetails({ onTitleLoad }: PackageDetailsProps) {
         <p className="text-white font-medium text-lg text-shadow-lg leading-relaxed font-dm mb-12 mt-3">
           {pkg.description}
         </p>
-
-        <PatternSection />
 
         <RoomHighlights
           beds={1}

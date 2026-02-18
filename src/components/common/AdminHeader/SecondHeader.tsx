@@ -3,15 +3,16 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X, User } from "lucide-react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import { menuData } from "./adminMenu";
-import ReloadButton from "../ReloadButton";
+import LoginButton from "@/components/User/Profile/LoginButton";
+import Sidebar from "../Sidebar";
 
 export default function SecondHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [roomsOpen, setRoomsOpen] = useState<number | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { data: session } = useSession();
 
@@ -19,20 +20,26 @@ export default function SecondHeader() {
   const toggleProfile = () => setProfileOpen(!profileOpen);
 
   return (
-    <header className="sticky top-0 w-full bg-white shadow-sm z-50 font-dm ">
-      <div className="container mx-auto py-4 flex justify-between items-center px-10">
-        {/* Logo */}
-        <ReloadButton />
+    <header className="sticky top-0 w-full shadow-md theme-bg z-50 py-3 ">
+      <div className="grid grid-cols-6 ">
+        <div className="col-span-1 mt-[-100px] md:mt-0 flex justify-center items-center">
+          <button
+          onClick={() => setIsOpen(true)}
+          className="text-4xl md:text-gray-50 text-yellow-500 md:text-3xl  hover:animate-bounce "
+        >
+          ☰
+        </button>
+        </div>
 
         {/* Desktop Menu */}
-        <nav className="hidden md:flex space-x-8 text-black font-bold relative">
+        <nav className="hidden md:flex md:justify-center items-center col-span-4 space-x-8 text-yellow-50 font-dm font-medium text-sm relative">
           {menuData.map((item) => (
-            <div key={item.id} className="group relative">
+            <div key={item.id} className="group relative uppercase">
               {/* Main Link */}
               <Link
                 href={item.path}
                 target={item.newTab ? "_blank" : "_self"}
-                className="hover:text-blue-600"
+                className="hover:text-yellow-500"
               >
                 {item.title} {item.submenu ? " ▾" : ""}
               </Link>
@@ -46,7 +53,7 @@ export default function SecondHeader() {
                   <div
                     className="
               absolute left-0 top-full mt-5
-              w-48 bg-white shadow-lg rounded-lg
+              w-48 theme-bg shadow-lg rounded-lg
               hidden group-hover:flex flex-col
             "
                   >
@@ -55,7 +62,7 @@ export default function SecondHeader() {
                         key={sub.id}
                         href={sub.path}
                         target={sub.newTab ? "_blank" : "_self"}
-                        className="px-4 py-2 hover:bg-gray-100"
+                        className="px-4 py-2 hover:bg-gray-100 hover:text-amber-600"
                       >
                         {sub.title}
                       </Link>
@@ -68,51 +75,42 @@ export default function SecondHeader() {
         </nav>
 
         {/* User Section */}
-        <div className="flex items-center gap-4">
+        <div className="col-span-1  hidden md:flex  justify-center items-center gap-4">
           {!session ? (
-            <button
-              onClick={() => signIn("google")}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-            >
-              Login
-            </button>
-          ) : (
-            <div className="relative">
-              <button
-                onClick={toggleProfile}
-                className="flex items-center focus:outline-none"
-              >
-                {session.user?.image ? (
-                  <Image
-                    src={session.user.image}
-                    alt="Profile"
-                    width={36}
-                    height={36}
-                    className="rounded-full border"
-                  />
-                ) : (
-                  <User className="w-8 h-8 text-black" />
-                )}
-              </button>
+  <LoginButton />
+) : (
+  <div className="relative group">
+    <button className="flex items-center focus:outline-none">
+      {session.user?.image ? (
+        <Image
+          src={session.user.image}
+          alt="Profile"
+          width={36}
+          height={36}
+          className="rounded-full border"
+        />
+      ) : (
+        <User className="w-8 h-8 text-black" />
+      )}
+    </button>
 
-              {profileOpen && (
-                <div className="absolute right-0 mt-2 w-44 bg-white shadow-lg border rounded-lg overflow-hidden">
-                  <div className="px-4 py-2 text-gray-800 text-sm">
-                    {session.user?.name}
-                  </div>
-                  <button
-                    onClick={() => {
-                      signOut();
-                      setProfileOpen(false);
-                    }}
-                    className="w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100"
-                  >
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
+    {/* Hover buffer wrapper (IMPORTANT FIX) */}
+    <div className="absolute right-0 top-full w-44 pt-2 z-50">
+      <div className="theme-bg shadow-lg font-dm text-yellow-50 font-medium uppercase text-sm rounded-lg overflow-hidden hidden group-hover:block">
+        <div className="px-4 py-2 text-white font-bold text-shadow-md ">
+          {session.user?.name}
+        </div>
+
+        <button
+          onClick={() => signOut()}
+          className="w-full text-left px-4 py-2 uppercase hover:bg-gray-100 hover:text-amber-600"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 
           {/* Mobile Menu Button */}
           <button
@@ -124,53 +122,7 @@ export default function SecondHeader() {
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
-      {menuOpen && (
-        <nav className="md:hidden bg-white border-t border-gray-200">
-          <div className="flex flex-col items-center py-3 space-y-2">
-            {menuData.map((item) => (
-              <div key={item.id} className="w-full text-center">
-                {/* Toggle if submenu exists */}
-                {item.submenu ? (
-                  <>
-                    <button
-                      onClick={() =>
-                        setRoomsOpen(roomsOpen === item.id ? null : item.id)
-                      }
-                      className="text-black hover:text-blue-600 w-full"
-                    >
-                      {item.title} ▾
-                    </button>
-
-                    {roomsOpen === item.id && (
-                      <div className="flex flex-col items-center space-y-2">
-                        {item.submenu.map((sub) => (
-                          <Link
-                            key={sub.id}
-                            href={sub.path}
-                            onClick={toggleMenu}
-                            className="text-black hover:text-blue-600  text-sm"
-                          >
-                            {sub.title}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <Link
-                    href={item.path}
-                    onClick={toggleMenu}
-                    className="text-black hover:text-blue-600"
-                  >
-                    {item.title}
-                  </Link>
-                )}
-              </div>
-            ))}
-          </div>
-        </nav>
-      )}
+      <Sidebar isOpen={isOpen} menuData={menuData} onClose={() => setIsOpen(false)} />
     </header>
   );
 }
